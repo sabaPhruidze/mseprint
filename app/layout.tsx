@@ -1,15 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
+import localFont from "next/font/local";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const interBold = localFont({
+  src: "../public/fonts/Inter_18pt-Bold.woff2",
+  variable: "--font-inter-bold",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const interExtraBold = localFont({
+  src: "../public/fonts/Inter_18pt-ExtraBold.woff2",
+  variable: "--font-inter-extrabold",
+});
+
+const interExtraLight = localFont({
+  src: "../public/fonts/Inter_18pt-ExtraLight.woff2",
+  variable: "--font-inter-extralight",
+});
+
+const interLight = localFont({
+  src: "../public/fonts/Inter_18pt-Light.woff2",
+  variable: "--font-inter-light",
+});
+
+const interMedium = localFont({
+  src: "../public/fonts/Inter_18pt-Medium.woff2",
+  variable: "--font-inter-medium",
 });
 
 export const metadata: Metadata = {
@@ -53,28 +68,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <p
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          saba
-        </p>
-        <p>saba</p>
-        <p
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          saba
-        </p>
-        <p
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          saba
-        </p>
-        <p
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          saba
-        </p>
+      <body
+        className={` ${interBold.variable}
+    ${interExtraBold.variable}
+    ${interExtraLight.variable}
+    ${interLight.variable}
+    ${interMedium.variable}`}
+      >
+        <p className="font-inter-bold">saba</p>
+
+        <p className="font-inter-light">saba</p>
+        <p className="font-inter-extralight">saba</p>
         {children}
       </body>
     </html>
