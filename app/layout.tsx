@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/images/main-page-images/offset-printing.avif",
         width: 1200,
         height: 630,
         alt: "MSE Printing Services",
