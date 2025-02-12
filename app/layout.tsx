@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg", // Make sure to add your OG image
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "MSE Printing Services",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   // alternates: {
   //   canonical: "/",
   // },
-  verification: {
-    google: "your-google-verification-code", // Add your Google verification code here
-  },
+  // verification: {
+  //   google: "your-google-verification-code", // Add your Google verification code here
+  // },
 };
 export default function RootLayout({
   children,
