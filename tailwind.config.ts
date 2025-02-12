@@ -9,8 +9,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        lightGray: "#f7f8f9",
+        mediumGray: "#c3c3c39d",
+        darkGray: "#454343",
+        red: "#ff0000",
+        purple: "#aa7eca",
+        white: "#FFFFFF",
+        black: "#000000",
+        transparent: "rgba(0, 0, 0, 0)",
+        mediumBlue: "#1d6a8c",
       },
       fontFamily: {
         'inter-bold': ['var(--font-inter-bold)'],
