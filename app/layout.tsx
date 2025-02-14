@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import localFont from "next/font/local";
-import Header from "@/components/Header";
+
+import Header from "@/components/Header/Header";
+import { getDataPattern } from "@/lib/getDataPattern";
 import Footer from "@/components/Footer";
 
 const interBold = localFont({
@@ -63,7 +65,7 @@ export const metadata: Metadata = {
   //   google: "your-google-verification-code", // Add your Google verification code here
   // },
 };
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
