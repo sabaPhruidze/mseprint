@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import localFont from "next/font/local";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const interBold = localFont({
   src: "../public/fonts/Inter_18pt-Bold.woff2",
@@ -73,13 +75,11 @@ export default function RootLayout({
     ${interExtraBold.variable}
     ${interExtraLight.variable}
     ${interLight.variable}
-    ${interMedium.variable}`}
+    ${interMedium.variable} min-h-screen flex flex-col`}
       >
-        <p className="font-inter-bold">saba</p>
-
-        <p className="font-inter-light">saba</p>
-        <p className="font-inter-extralight">saba</p>
-        {children}
+        <Header />
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );
