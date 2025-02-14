@@ -1,6 +1,4 @@
-// Header/Header.tsx
-// No "use client" if it doesn't need interactive, client-side behavior
-import GetHeaderLogo from "./GetHeaderLogo";
+import GetHeaderLogo from "./HeaderLogo";
 import GetHeaderMenu from "./GetHeaderMenu";
 
 export default function Header() {
