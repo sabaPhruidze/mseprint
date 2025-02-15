@@ -26,6 +26,9 @@ export default {
         'inter-extralight': ['var(--font-inter-extralight)'],
         'inter-medium': ['var(--font-inter-medium)'],
       },
+      screens: {
+        "screen-size-26": "2600px", 
+      },
     },
   },
   plugins: [],

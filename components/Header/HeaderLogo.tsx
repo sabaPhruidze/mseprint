@@ -6,7 +6,7 @@ export default function HeaderLogo() {
   return (
     <Link
       href="/"
-      className="inline-flex items-center justify-center cursor-pointer h-[70%] 
+      className="inline-flex items-center justify-center cursor-pointer screen-size-26:h-[70%] h-[60%] 
                 "
     >
       <Image

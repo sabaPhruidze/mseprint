@@ -17,7 +17,7 @@ const GetHeaderRegister: React.FC<GetHeaderRegisterProps> = ({
           <li key={item.id}>
             <Link
               href={item.path || "/"}
-              className="text-3xl font-semibold hover:underline"
+              className="font-semibold hover:underline screen-size-26:text-3xl text-2xl"
               aria-label={`Go to ${item.page}`}
             >
               {item.page}
