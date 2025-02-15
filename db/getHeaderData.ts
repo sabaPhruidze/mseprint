@@ -19,7 +19,7 @@ export const getHeaderData = async () => {
       allPagesData: allPagesData ?? [], 
     };
   } catch (error) {
-    console.error("Error fetching header data:", error);
+    
     return {
       headerMenuData: [],
       headerEffectiveTextData: [],

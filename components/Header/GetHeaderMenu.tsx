@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { pagePathTypes } from "@/types/commonTypes";
 
@@ -9,13 +7,13 @@ interface GetHeaderMenuProps {
 
 const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {
   return (
-    <nav role="navigation" aria-label="Main navigation">
-      <ul className="flex gap-6">
+    <nav role="navigation" aria-label="Main navigation" className="h-[100%]">
+      <ul className="flex gap-6 h-full">
         {menuData.map((item) => (
-          <li key={item.id}>
+          <li key={item.id} className="h-[100%] flex items-stretch">
             <Link
               href={item.path || "/"}
-              className="hover:underline font-bold transition-all duration-200 screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl screen-size-5:text-2xl text-md"
+              className="h-[100%] flex items-center px-0 hover:bg-white hover:text-black underline font-bold transition-all duration-200 screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl screen-size-5:text-2xl text-md"
               aria-label={`Go to ${item.page}`}
               style={{ color: getMenuColor(item.page) }}
             >
@@ -30,7 +28,6 @@ const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {
 
 export default GetHeaderMenu;
 
-// ✅ Function to get menu colors
 function getMenuColor(page: string): string {
   switch (page) {
     case "Products & Services":
