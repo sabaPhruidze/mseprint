@@ -1,23 +1,30 @@
+import React from "react";
 import GetHeaderLogo from "./HeaderLogo";
-import { GetHeaderMenu } from "./GetHeaderMenu";
-import {
-  headerEffectiveTextTypes,
-  HeaderMenuTypes,
-} from "@/types/Header/HeaderTypes";
+import GetHeaderMenu from "./GetHeaderMenu";
+import GetHeaderRegister from "./GetHeaderRegister";
 import GetHeaderEffectiveText from "./GetHeaderEffectiveText";
+import { headerEffectiveTextTypes } from "@/types/Header/headerTypes";
+import { pagePathTypes } from "@/types/commonTypes";
 
-export default function Header({
+interface HeaderProps {
+  headerMenuData: pagePathTypes[];
+  headerEffectiveTextData: headerEffectiveTextTypes[];
+  headerRegisterData: pagePathTypes[];
+}
+
+const Header: React.FC<HeaderProps> = ({
   headerMenuData,
   headerEffectiveTextData,
-}: {
-  headerMenuData: HeaderMenuTypes[];
-  headerEffectiveTextData: headerEffectiveTextTypes[];
-}) {
+  headerRegisterData,
+}) => {
   return (
     <header>
       <GetHeaderLogo />
       <GetHeaderEffectiveText effectiveTextData={headerEffectiveTextData} />
       <GetHeaderMenu menuData={headerMenuData} />
+      <GetHeaderRegister registerData={headerRegisterData} />
     </header>
   );
-}
+};
+
+export default Header;

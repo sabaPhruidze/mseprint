@@ -3,11 +3,13 @@
 import Link from "next/link";
 import { pagePathTypes } from "@/types/commonTypes";
 
-interface GetHeaderMenuProps {
-  menuData: pagePathTypes[];
+interface GetHeaderRegisterProps {
+  registerData: pagePathTypes[];
 }
 
-const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {
+const GetHeaderRegister: React.FC<GetHeaderRegisterProps> = ({
+  registerData,
+}) => {
   return (
     <nav
       className="header-navigation"
@@ -15,7 +17,7 @@ const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {
       aria-label="Main navigation"
     >
       <ul className="flex gap-4">
-        {menuData.map((item) => (
+        {registerData.map((item) => (
           <li key={item.id}>
             <Link
               href={item.path || "/"}
@@ -31,4 +33,4 @@ const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {
   );
 };
 
-export default GetHeaderMenu;
+export default GetHeaderRegister;

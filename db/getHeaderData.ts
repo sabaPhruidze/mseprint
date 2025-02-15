@@ -1,19 +1,26 @@
 import { getDataPattern } from "@/lib/supabaseClient";
-import { HeaderMenuTypes,headerEffectiveTextTypes } from "@/types/Header/HeaderTypes";
+import { headerEffectiveTextTypes } from "@/types/Header/headerTypes";
+import { pagePathTypes } from "@/types/commonTypes";
 
-export const getHeaderMenuData = async () => {
+export const getHeaderData = async () => {
   try {
-    return await getDataPattern<HeaderMenuTypes>("header_menu");
+    const [headerMenuData, headerEffectiveTextData, headerRegisterData] = await Promise.all([
+      getDataPattern<pagePathTypes>("header_menu"),
+      getDataPattern<headerEffectiveTextTypes>("header_effective_text"),
+      getDataPattern<pagePathTypes>("header_register"),
+    ]);
+
+    return {
+      headerMenuData: headerMenuData ?? [], // Ensures it never returns `undefined`
+      headerEffectiveTextData: headerEffectiveTextData ?? [],
+      headerRegisterData: headerRegisterData ?? [],
+    };
   } catch (error) {
-    console.error("Error fetching header menu data:", error);
-    return []; 
-  }
-};
-export const getHeaderEffectiveTextData = async () => {
-  try {
-    return await getDataPattern<headerEffectiveTextTypes>("header_effective_text");
-  } catch (error) {
-    console.error("Error fetching header menu data:", error);
-    return []; 
+    console.error("Error fetching header data:", error);
+    return {
+      headerMenuData: [],
+      headerEffectiveTextData: [],
+      headerRegisterData: [],
+    }; // Ensures it always returns arrays
   }
 };
