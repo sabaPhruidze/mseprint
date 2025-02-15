@@ -27,20 +27,19 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
   }, [query, searchEngineData]);
 
   return (
-    <div className="relative w-64">
-      <div className="flex items-center border border-gray-300 rounded-md p-2 bg-white">
+    <div className="relative w-96">
+      <div className="flex items-center border border-gray-300 rounded-md p-4 bg-white h-16">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search..."
-          className="w-full outline-none text-black p-2"
+          className="w-full h-full outline-none text-black p-3 text-xl"
         />
-        <button onClick={handleSearch} className="p-2">
+        <button onClick={handleSearch} className="p-3">
           <Search className="h-5 w-5 text-gray-500" />
         </button>
       </div>
-
       {results.length > 0 && <SearchResults results={results} />}
     </div>
   );

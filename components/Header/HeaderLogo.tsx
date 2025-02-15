@@ -6,15 +6,14 @@ export default function HeaderLogo() {
   return (
     <Link
       href="/"
-      className="inline-flex items-center justify-center cursor-pointer
-                 max-w-[25%] md:max-w-[20%] lg:max-w-[30%] xl:max-w-[25%] 2xl:max-w-[20%] 
-                 sm:max-w-[90%] sm:mb-2"
+      className="inline-flex items-center justify-center cursor-pointer h-[70%] 
+                "
     >
       <Image
         src={logo}
         alt="Header Logo"
         priority
-        className="object-contain w-full h-auto"
+        className="object-contain w-full h-full"
       />
     </Link>
   );

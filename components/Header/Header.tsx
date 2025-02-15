@@ -22,22 +22,11 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <header className="w-full h-[200px] bg-black text-white flex items-center justify-between px-8  max-w-[3000px] mx-auto">
-      {/* Left: Logo */}
-      <div className="flex items-center gap-4">
-        <GetHeaderLogo />
-        <GetHeaderEffectiveText effectiveTextData={headerEffectiveTextData} />
-      </div>
-
-      {/* Center: Navigation Menu */}
-      <div className="flex gap-6 text-lg font-bold">
-        <GetHeaderMenu menuData={headerMenuData} />
-      </div>
-
-      {/* Right: Sign-in & Search */}
-      <div className="flex items-center gap-6">
-        <GetHeaderRegister registerData={headerRegisterData} />
-        <SearchEngine searchEngineData={allPagesData} />
-      </div>
+      <GetHeaderLogo />
+      <GetHeaderEffectiveText effectiveTextData={headerEffectiveTextData} />
+      <GetHeaderMenu menuData={headerMenuData} />
+      <GetHeaderRegister registerData={headerRegisterData} />
+      <SearchEngine searchEngineData={allPagesData} />
     </header>
   );
 };
