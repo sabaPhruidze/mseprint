@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 
 import Header from "@/components/Header/Header";
 import { getHeaderData } from "@/db/getHeaderData";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/Footer";
 
 const interBold = localFont({
   src: "../public/fonts/Inter_18pt-Bold.woff2",
