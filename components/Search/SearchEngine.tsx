@@ -6,13 +6,12 @@ import { pagePathTypes } from "@/types/commonTypes";
 import { Search } from "lucide-react";
 
 interface GetSearchEngineProps {
-  searchEngineData: pagePathTypes[]; // ✅ Using searchEngineData from props
+  searchEngineData: pagePathTypes[];
 }
 
 const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<pagePathTypes[]>([]);
-  const [loading, setLoading] = useState(false);
 
   const handleSearch = useCallback(() => {
     if (query.trim().length === 0) {
@@ -20,25 +19,22 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
       return;
     }
 
-    setLoading(true);
-
-    const filteredResults = searchEngineData.filter((item) =>
-      item.page.toLowerCase().includes(query.toLowerCase())
+    setResults(
+      searchEngineData.filter((item) =>
+        item.page.toLowerCase().includes(query.toLowerCase())
+      )
     );
-
-    setResults(filteredResults);
-    setLoading(false);
   }, [query, searchEngineData]);
 
   return (
-    <div className="relative w-full max-w-md">
-      <div className="flex items-center border border-gray-300 rounded-lg p-2">
+    <div className="relative w-64">
+      <div className="flex items-center border border-gray-300 rounded-md p-2 bg-white">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search..."
-          className="w-full outline-none p-2"
+          className="w-full outline-none text-black p-2"
         />
         <button onClick={handleSearch} className="p-2">
           <Search className="h-5 w-5 text-gray-500" />

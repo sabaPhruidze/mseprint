@@ -11,17 +11,13 @@ const GetHeaderRegister: React.FC<GetHeaderRegisterProps> = ({
   registerData,
 }) => {
   return (
-    <nav
-      className="header-navigation"
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      <ul className="flex gap-4">
+    <nav role="navigation" aria-label="Register navigation">
+      <ul className="flex items-center gap-4">
         {registerData.map((item) => (
           <li key={item.id}>
             <Link
               href={item.path || "/"}
-              className="hover:underline"
+              className="text-lg font-semibold hover:underline"
               aria-label={`Go to ${item.page}`}
             >
               {item.page}
