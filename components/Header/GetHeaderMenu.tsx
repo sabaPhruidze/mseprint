@@ -1,17 +1,32 @@
-import { getDataPattern } from "@/lib/getDataPattern";
+import { HeaderMenuTypes } from "@/types/Header/HeaderTypes";
 
-export default async function GetHeaderMenu() {
-  const menuData = await getDataPattern("header_menu");
-
-  return (
-    <nav>
-      <ul>
-        {menuData.map((item) => (
-          <li key={item.id}>
-            <a href={item.path}>{item.page}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
+export function GetHeaderMenu({ menuData }: { menuData: HeaderMenuTypes[] }) {
+  try {
+    return (
+      <nav
+        className="header-navigation"
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <ul className="flex gap-4">
+          {menuData.map((item) => (
+            <li key={item.id}>{item.page}</li>
+          ))}
+        </ul>
+      </nav>
+    );
+  } catch (error) {
+    // Fallback UI for error state
+    return (
+      <nav
+        className="header-navigation"
+        role="navigation"
+        aria-label="Main navigation"
+      >
+        <ul className="flex gap-4">
+          <li></li>
+        </ul>
+      </nav>
+    );
+  }
 }

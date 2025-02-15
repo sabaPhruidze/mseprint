@@ -1,12 +1,16 @@
 import GetHeaderLogo from "./HeaderLogo";
-import GetHeaderMenu from "./GetHeaderMenu";
+import { GetHeaderMenu } from "./GetHeaderMenu";
+import { HeaderMenuTypes } from "@/types/Header/HeaderTypes";
 
-export default function Header() {
+export default function Header({
+  headerMenuData,
+}: {
+  headerMenuData: HeaderMenuTypes[];
+}) {
   return (
     <header>
-      {/* Each subcomponent is also a server component, so they can fetch & render data */}
       <GetHeaderLogo />
-      <GetHeaderMenu />
+      <GetHeaderMenu menuData={headerMenuData} />
     </header>
   );
 }

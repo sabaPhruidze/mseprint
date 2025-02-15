@@ -7,9 +7,10 @@ export default function HeaderLogo() {
       <Image
         src={logo}
         alt="Header Logo"
-        width={800}
-        height={500}
-        className="object-contain"
+        width={800} 
+        height={500} 
+        priority 
+        className="object-contain w-full h-auto" 
       />
     </div>
   );

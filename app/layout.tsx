@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import localFont from "next/font/local";
 
 import Header from "@/components/Header/Header";
-import { getDataPattern } from "@/lib/getDataPattern";
+import { getHeaderData } from "@/db/getHeaderData";
 import Footer from "@/components/Footer";
 
 const interBold = localFont({
@@ -70,6 +70,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const headerMenuData = await getHeaderData();
   return (
     <html lang="en">
       <body
@@ -79,7 +80,7 @@ export default async function RootLayout({
     ${interLight.variable}
     ${interMedium.variable} min-h-screen flex flex-col`}
       >
-        <Header />
+        <Header headerMenuData={headerMenuData} />
         <main className="flex-grow">{children}</main>
         <Footer />
       </body>
