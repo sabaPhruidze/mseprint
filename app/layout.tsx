@@ -71,6 +71,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const headerData = await getHeaderData();
+
   return (
     <html lang="en">
       <body
