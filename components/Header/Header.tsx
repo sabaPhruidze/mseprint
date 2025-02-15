@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({
   allPagesData,
 }) => {
   return (
-    <header className="w-full h-[200px] bg-black text-white flex items-center justify-between px-8  max-w-[3000px] mx-auto">
+    <header className="w-full bg-black text-white flex items-center justify-between screen-size-5:px-8 px-0  max-w-[3000px] mx-auto flex-col screen-size-13:flex-row screen-size-18:h-[200px] screen-size-13:h-[150px] h-[350px] screen-size-13:py-0 py-10">
       <GetHeaderLogo />
       <GetHeaderEffectiveText effectiveTextData={headerEffectiveTextData} />
       <GetHeaderMenu menuData={headerMenuData} />

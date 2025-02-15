@@ -15,7 +15,7 @@ const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {
           <li key={item.id}>
             <Link
               href={item.path || "/"}
-              className="hover:underline font-bold transition-all duration-200 screen-size-26:text-3xl text-2xl"
+              className="hover:underline font-bold transition-all duration-200 screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl screen-size-5:text-2xl text-md"
               aria-label={`Go to ${item.page}`}
               style={{ color: getMenuColor(item.page) }}
             >

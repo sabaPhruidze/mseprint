@@ -1,14 +1,16 @@
-import { createClient } from '@supabase/supabase-js';
-import { cache } from 'react';
+import { createClient } from "@supabase/supabase-js";
+import { cache } from "react";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error("Missing Supabase environment variables! Check .env.local");
+  console.error("❌ Missing Supabase environment variables! Check .env.local");
+  throw new Error("Supabase URL or API key is undefined.");
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
 
 
 export const getDataPattern = cache(async <T>(tableName: string): Promise<T[]> => {

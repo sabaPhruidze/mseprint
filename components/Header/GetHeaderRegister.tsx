@@ -11,13 +11,17 @@ const GetHeaderRegister: React.FC<GetHeaderRegisterProps> = ({
   registerData,
 }) => {
   return (
-    <nav role="navigation" aria-label="Register navigation">
+    <nav
+      role="navigation"
+      aria-label="Register navigation"
+      className="screen-size-13:hidden screen-size-15:flex"
+    >
       <ul className="flex items-center gap-4">
         {registerData.map((item) => (
           <li key={item.id}>
             <Link
               href={item.path || "/"}
-              className="font-semibold hover:underline screen-size-26:text-3xl text-2xl"
+              className="font-semibold hover:underline screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl text-2xl"
               aria-label={`Go to ${item.page}`}
             >
               {item.page}
