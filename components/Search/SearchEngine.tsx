@@ -26,9 +26,14 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
     );
   }, [query, searchEngineData]);
 
+  // A helper to reset results
+  const handleReset = () => {
+    setResults([]);
+  };
+
   return (
     <div className="relative screen-size-23:w-96 screen-size-13:w-80 w-[360px]">
-      <div className="flex items-center border border-gray-300 rounded-md p-4 bg-white screen-size-23:h-16 h-14 ">
+      <div className="flex items-center border border-gray-300 rounded-md p-4 bg-white screen-size-23:h-16 h-14">
         <input
           type="text"
           value={query}
@@ -40,7 +45,9 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
           <Search className="h-5 w-5 text-gray-500" />
         </button>
       </div>
-      {results.length > 0 && <SearchResults results={results} />}
+      {results.length > 0 && (
+        <SearchResults results={results} onReset={handleReset} />
+      )}
     </div>
   );
 };
