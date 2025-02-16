@@ -10,7 +10,7 @@ export const getHeaderData = async () => {
       getDataPattern<headerEffectiveTextTypes>("header_effective_text"),
       getDataPattern<pagePathTypes>("header_register"),
       getDataPattern<pagePathTypes>("all_pages_data"),
-      getDataPattern<pagePathTypes>("request_quote_send_a_file") 
+      getDataPattern<pagePathTypes>("header_request_quote_send_a_file") 
     ]);
 
     return {

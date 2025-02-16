@@ -3,79 +3,95 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import offset_printing_image from "@/public/images/header-images/offset_printing.avif";
+import Image from "next/image";
+import { carouselTypes } from "@/types/Home/homeTypes";
+import Head from "next/head";
 
-const images = [
-  {
-    src: offset_printing_image,
-    title: "First Slide",
-    description: "Nulla vitae elit libero, a pharetra augue mollis interdum.",
-  },
-  {
-    src: offset_printing_image,
-    title: "Second Slide",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    src: offset_printing_image,
-    title: "Third Slide",
-    description:
-      "Praesent commodo cursus magna, vel scelerisque nisl consectetur.",
-  },
-];
+interface CarouselProps {
+  carouselData: carouselTypes[];
+  pathname: string;
+}
 
-const Carousel: React.FC = () => {
+const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Ensure it's only displayed on the homepage
+  if (pathname !== "/" || !carouselData || carouselData.length === 0)
+    return null;
+
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
   };
 
   const prevSlide = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+      (prevIndex) => (prevIndex - 1 + carouselData.length) % carouselData.length
     );
   };
 
   return (
-    <div
-      className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
-      style={{ height: "400px" }}
-    >
-      <div className="relative h-full">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={images[currentIndex].title}
-            src={images[currentIndex].src.src}
-            alt={images[currentIndex].title}
-            className="w-full h-full object-cover"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          />
-        </AnimatePresence>
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center text-white">
-          <h3 className="text-xl font-semibold">
-            {images[currentIndex].title}
-          </h3>
-          <p className="text-sm">{images[currentIndex].description}</p>
+    <>
+      {/* SEO Optimization */}
+      <Head>
+        <title>Best Printing Services | MSE Print</title>
+        <meta
+          name="description"
+          content="Top-quality commercial printing, digital printing, signs, and mailing solutions. Stand out with MSE Print!"
+        />
+        <meta name="robots" content="index, follow" />
+      </Head>
+
+      <div
+        className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
+        style={{ height: "400px" }}
+      >
+        <div className="relative w-full h-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={carouselData[currentIndex].title}
+              className="absolute w-full h-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Image
+                src={`/images/${carouselData[currentIndex].image_filename}`}
+                alt={`Printing Service: ${carouselData[currentIndex].title}`}
+                fill
+                style={{ objectFit: "cover" }}
+                priority={currentIndex === 0} // First image loads eagerly, others lazy-load
+                loading={currentIndex === 0 ? "eager" : "lazy"}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Accessible Overlay Text */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center text-white bg-black/50 p-3 rounded-md">
+            <h3 className="text-xl font-semibold">
+              {carouselData[currentIndex].title}
+            </h3>
+            <p className="text-sm">{carouselData[currentIndex].description}</p>
+          </div>
         </div>
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
+          aria-label="Previous Slide"
+        >
+          <ChevronLeft size={24} />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
+          aria-label="Next Slide"
+        >
+          <ChevronRight size={24} />
+        </button>
       </div>
-      {/* Navigation Buttons */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
-      >
-        <ChevronLeft size={24} />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
-      >
-        <ChevronRight size={24} />
-      </button>
-    </div>
+    </>
   );
 };
 
