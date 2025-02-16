@@ -13,6 +13,7 @@ interface HeaderProps {
   headerEffectiveTextData: headerEffectiveTextTypes[];
   headerRegisterData: pagePathTypes[];
   allPagesData: pagePathTypes[];
+  requestQuoteSendAFileData: pagePathTypes[];
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -20,6 +21,7 @@ const Header: React.FC<HeaderProps> = ({
   headerEffectiveTextData,
   headerRegisterData,
   allPagesData,
+  requestQuoteSendAFileData,
 }) => {
   return (
     <header>
@@ -30,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({
         <GetHeaderRegister registerData={headerRegisterData} />
         <SearchEngine searchEngineData={allPagesData} />
       </div>
-      <GetHeaderRQSF />
+      <GetHeaderRQSF rqsafData={requestQuoteSendAFileData} />
     </header>
   );
 };
