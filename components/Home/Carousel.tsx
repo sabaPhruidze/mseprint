@@ -39,8 +39,8 @@ const Carousel: React.FC = () => {
 
   return (
     <div
-      className="relative w-full max-w-full mx-auto overflow-hidden rounded-lg shadow-lg"
-      style={{ height: "300px" }}
+      className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
+      style={{ height: "400px" }}
     >
       <div className="relative h-full">
         <AnimatePresence mode="wait">
@@ -65,13 +65,13 @@ const Carousel: React.FC = () => {
       {/* Navigation Buttons */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-200"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
       >
         <ChevronLeft size={24} />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white text-black p-3 rounded-full shadow-md hover:bg-gray-200"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
       >
         <ChevronRight size={24} />
       </button>

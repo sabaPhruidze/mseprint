@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC } from "react";
 import { pagePathTypes } from "@/types/commonTypes";
 import Link from "next/link";
 
@@ -7,13 +7,19 @@ interface GetRequestQuoteSendAFileProps {
 }
 
 const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
-  const links = useMemo(
-    () =>
-      rqsafData.map((item) => (
+  return (
+    <nav
+      className="
+        w-full h-12 bg-purple flex items-center screen-size-13:justify-end justify-center px-4 
+      "
+      role="navigation"
+      aria-label="Request a Quote and Order Navigation"
+    >
+      {rqsafData.map((item) => (
         <Link
           key={item.id}
           href={item.path || "/"}
-          prefetch={false}
+          prefetch
           className="
             text-white
             border
@@ -28,24 +34,13 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
             hover:border-0
             focus:scale-95
             transition-all
+            duration-500
           "
-          aria-label={`Navigate to ${item.page}`} // Improves accessibility for screen readers
+          aria-label={`Navigate to ${item.page}`}
         >
           {item.page}
         </Link>
-      )),
-    [rqsafData]
-  );
-
-  return (
-    <nav
-      className="
-        w-full h-12 bg-purple flex items-center screen-size-13:justify-end justify-center px-4
-      "
-      role="navigation"
-      aria-label="Request a Quote and Order Navigation"
-    >
-      {links}
+      ))}
     </nav>
   );
 };
