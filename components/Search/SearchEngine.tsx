@@ -32,7 +32,7 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
   };
 
   return (
-    <div className="relative screen-size-23:w-96 screen-size-13:w-80 w-[360px]">
+    <div className="relative screen-size-23:w-96 screen-size-13:w-80 w-[360px] screen-size-13:mt-0 mt-5">
       <div className="flex items-center border border-gray-300 rounded-md p-4 bg-white screen-size-23:h-16 h-14">
         <input
           type="text"
