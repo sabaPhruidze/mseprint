@@ -35,6 +35,7 @@ export default {
         "screen-size-16": "1650px", 
         "screen-size-15": "1550px", 
         "screen-size-13": "1300px", 
+        "screen-size-10": "1000px", 
         "screen-size-5": "570px", 
       },
     },

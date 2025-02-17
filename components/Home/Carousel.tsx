@@ -66,8 +66,8 @@ const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
             </motion.div>
           </AnimatePresence>
           <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center screen-size-13:items-start items-center screen-size-13:text-left text-center text-white">
-            <div className="screen-size-23:w-[1200px] w-[800px] ml-20">
-              <p className="mt-4 screen-size-23:text-2xl text-xl screen-size-13:text-left text-center mb-2 leading-relaxed">
+            <div className="screen-size-23:w-[1200px] screen-size-10:w-[800px] w-[280px] screen-size-13:ml-20 ml-0">
+              <p className="screen-size-5:mt-4 mt-0 screen-size-23:text-2xl screen-size-10:text-xl screen-size-5:text-md text-sm screen-size-13:text-left text-center mb-2 leading-relaxed">
                 {carouselData[currentIndex].description}
               </p>
               <Link href={carouselData[currentIndex].path}>
@@ -75,7 +75,7 @@ const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
                   Learn more...
                 </span>
               </Link>
-              <h3 className="mt-6 screen-size-15:text-[50px] text-[36px] font-extrabold screen-size-13:text-left text-center drop-shadow-md leading-tight">
+              <h3 className="mt-6 screen-size-15:text-[50px] screen-size-10:text-[36px] text-[24px] font-extrabold screen-size-13:text-left text-center drop-shadow-md leading-tight">
                 {carouselData[currentIndex].title}
               </h3>
             </div>
