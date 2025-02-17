@@ -4,17 +4,20 @@ import { cache } from "react";
 
 const sql = neon(process.env.DATABASE_URL!);
 
-// Cache the function for better performance in Next.js
-export const getDataPattern = cache(async <T extends Record<string, any>>(
+export const getDataPattern = cache(async <T extends object>(
   tableName: string,
   limit: number = 100
 ): Promise<T[]> => {
   try {
-    // Corrected SQL query (Avoids using sql(tableName) incorrectly)
-    const query = `SELECT * FROM ${tableName} ORDER BY id LIMIT ${limit}`;
-    const data: Record<string, any>[] = await sql(query);
+ 
+    const query = `SELECT * FROM ${tableName} ORDER BY id LIMIT $1`;
+    const rawData: unknown = await sql(query, [limit]); 
 
-    return data as T[];
+    if (!Array.isArray(rawData)) {
+      throw new Error("Invalid data received from database");
+    }
+
+    return rawData as T[]; 
   } catch (error) {
     console.error(`Error fetching ${tableName}:`, error);
     throw new Error(`Database error: ${error}`);

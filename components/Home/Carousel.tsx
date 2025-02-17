@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { carouselTypes } from "@/types/Home/homeTypes";
 import Head from "next/head";
 
@@ -15,7 +16,6 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Ensure it's only displayed on the homepage
   if (pathname !== "/" || !carouselData || carouselData.length === 0)
     return null;
 
@@ -31,7 +31,6 @@ const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
 
   return (
     <>
-      {/* SEO Optimization */}
       <Head>
         <title>Best Printing Services | MSE Print</title>
         <meta
@@ -46,6 +45,7 @@ const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
         style={{ height: "400px" }}
       >
         <div className="relative w-full h-full">
+          <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
           <AnimatePresence mode="wait">
             <motion.div
               key={carouselData[currentIndex].title}
@@ -60,22 +60,28 @@ const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
                 alt={`Printing Service: ${carouselData[currentIndex].title}`}
                 fill
                 style={{ objectFit: "cover" }}
-                priority={currentIndex === 0} // First image loads eagerly, others lazy-load
+                priority={currentIndex === 0}
                 loading={currentIndex === 0 ? "eager" : "lazy"}
               />
             </motion.div>
           </AnimatePresence>
-
-          {/* Accessible Overlay Text */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-center text-white bg-black/50 p-3 rounded-md">
-            <h3 className="text-xl font-semibold">
-              {carouselData[currentIndex].title}
-            </h3>
-            <p className="text-sm">{carouselData[currentIndex].description}</p>
+          <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center screen-size-13:items-start items-center screen-size-13:text-left text-center text-white">
+            <div className="screen-size-23:w-[1200px] w-[800px] ml-20">
+              <p className="mt-4 screen-size-23:text-2xl text-xl screen-size-13:text-left text-center mb-2 leading-relaxed">
+                {carouselData[currentIndex].description}
+              </p>
+              <Link href={carouselData[currentIndex].path}>
+                <span className="inline-block bg-white text-black px-6 py-3 mt-3 rounded-full font-medium hover:bg-gray-200 transition text-left w-fit">
+                  Learn more...
+                </span>
+              </Link>
+              <h3 className="mt-6 screen-size-15:text-[50px] text-[36px] font-extrabold screen-size-13:text-left text-center drop-shadow-md leading-tight">
+                {carouselData[currentIndex].title}
+              </h3>
+            </div>
           </div>
         </div>
 
-        {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
           className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
