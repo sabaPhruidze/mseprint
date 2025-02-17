@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/images/header-images/logo.avif";
+import SEOImage from "../common/SEOImage";
+import { SEOImageProps } from "@/types/commonTypes";
 
-export default function HeaderLogo() {
+const GetHeaderLogo = ({ LogoData }: { LogoData: SEOImageProps }) => {
   return (
     <Link
       href="/"
@@ -17,4 +19,5 @@ export default function HeaderLogo() {
       />
     </Link>
   );
-}
+};
+export default GetHeaderLogo;
