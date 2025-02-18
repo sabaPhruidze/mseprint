@@ -9,6 +9,9 @@ const SEOImage: React.FC<SEOImageProps> = ({
   geoData,
   priority = false,
   loading = "lazy",
+  sizes,
+  width,
+  height,
 }) => {
   const structuredData = {
     "@context": "http://schema.org",
@@ -51,9 +54,11 @@ const SEOImage: React.FC<SEOImageProps> = ({
           src={src}
           alt={alt}
           priority={priority}
-          loading={loading}
-          fill
-          className="object-contain w-full h-full"
+          loading={priority ? undefined : loading}
+          width={width}
+          height={height}
+          sizes={sizes}
+          className="object-cover w-full h-full"
         />
       </div>
     </>

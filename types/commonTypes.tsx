@@ -18,4 +18,7 @@ export interface SEOImageProps {
   geoData?: GeoData;
   priority?: boolean;
   loading?: "eager" | "lazy";
+  sizes?: string;
+  width: number;
+  height: number;
 }
