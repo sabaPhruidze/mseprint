@@ -4,9 +4,9 @@ export interface pagePathTypes {
   path?: string;
   content?: string;
 }
-interface GeoData {
-  latitude: string;
-  longitude: string;
+export interface GeoData {
+  latitude: number;
+  longitude: number;
   location: string;
   addressRegion?: string;
 }
@@ -19,6 +19,7 @@ export interface SEOImageProps {
   priority?: boolean;
   loading?: "eager" | "lazy";
   sizes?: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
+  fill?: boolean;
 }

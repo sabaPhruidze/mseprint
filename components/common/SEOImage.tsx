@@ -12,6 +12,7 @@ const SEOImage: React.FC<SEOImageProps> = ({
   sizes,
   width,
   height,
+  fill,
 }) => {
   const structuredData = {
     "@context": "http://schema.org",
@@ -55,9 +56,8 @@ const SEOImage: React.FC<SEOImageProps> = ({
           alt={alt}
           priority={priority}
           loading={priority ? undefined : loading}
-          width={width}
-          height={height}
           sizes={sizes}
+          {...(fill ? { fill: true } : { width, height })}
           className="object-cover w-full h-full"
         />
       </div>
