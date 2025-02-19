@@ -15,6 +15,9 @@ export interface SEOImageProps {
   src: string;
   alt: string;
   name: string;
+  id?: number;
+  path?: string;
+  description?: string;
   geoData?: GeoData;
   priority?: boolean;
   loading?: "eager" | "lazy";
