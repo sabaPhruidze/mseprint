@@ -1,6 +1,6 @@
 import Link from "next/link";
 import SEOImage from "../common/SEOImage";
-import { SEOImageProps } from "@/types/commonTypes";
+import { SEOImageProps } from "../../types/commonTypes";
 
 const GetHeaderLogo = ({ LogoData }: { LogoData: SEOImageProps }) => {
   return (

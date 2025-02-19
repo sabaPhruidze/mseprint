@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { pagePathTypes } from "@/types/commonTypes";
+import { pagePathTypes } from "../../types/commonTypes";
 
 interface GetHeaderMenuProps {
   menuData: pagePathTypes[];

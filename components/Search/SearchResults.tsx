@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { pagePathTypes } from "@/types/commonTypes";
+import { pagePathTypes } from "../../types/commonTypes";
 
 interface SearchResultsProps {
   results: pagePathTypes[];

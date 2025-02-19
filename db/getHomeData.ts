@@ -1,5 +1,5 @@
-import { getDataPattern } from "@/lib/supabaseClient";
-import { SEOImageProps } from "@/types/commonTypes";
+import { getDataPattern } from "../lib/supabaseClient";
+import { SEOImageProps } from "../types/commonTypes";
 
 export const getHomeData = async (pathname: string = "/") => {
   if (pathname !== "/") {

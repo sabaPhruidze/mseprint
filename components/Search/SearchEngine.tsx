@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import SearchResults from "./SearchResults";
-import { pagePathTypes } from "@/types/commonTypes";
+import { pagePathTypes } from "../../types/commonTypes";
 import { Search } from "lucide-react";
 
 interface GetSearchEngineProps {

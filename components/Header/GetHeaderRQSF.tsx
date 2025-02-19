@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { pagePathTypes } from "@/types/commonTypes";
+import { pagePathTypes } from "../../types/commonTypes";
 import Link from "next/link";
 
 interface GetRequestQuoteSendAFileProps {
