@@ -4,7 +4,7 @@ import GetHeaderMenu from "./GetHeaderMenu";
 import GetHeaderRegister from "./GetHeaderRegister";
 import GetHeaderEffectiveText from "./GetHeaderEffectiveText";
 import SearchEngine from "../Search/SearchEngine";
-import { headerEffectiveTextTypes } from "@/types/Header/headerTypes";
+import { headerEffectiveTextTypes } from "../../types/Header/headerTypes";
 import { pagePathTypes, SEOImageProps } from "@/types/commonTypes";
 import GetHeaderRQSF from "./GetHeaderRQSF";
 

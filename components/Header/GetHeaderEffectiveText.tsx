@@ -1,4 +1,4 @@
-import { headerEffectiveTextTypes } from "@/types/Header/headerTypes";
+import { headerEffectiveTextTypes } from "../../types/Header/headerTypes";
 import React from "react";
 
 const GetHeaderEffectiveText = ({
