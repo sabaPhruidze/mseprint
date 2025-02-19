@@ -1,9 +1,12 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { headerEffectiveTextTypes } from "../types/Header/headerTypes";
 import { pagePathTypes } from "../types/commonTypes";
 import { SEOImageProps } from "../types/commonTypes";
 
-
+interface headerEffectiveTextTypes {
+  id: number;
+  text: string;
+  circle?: string; 
+}
 export const getHeaderData = async () => {
   try {
     const [headerMenuData, headerEffectiveTextData, headerRegisterData, allPagesData,requestQuoteSendAFileData,headerLogoData] = await Promise.all([
@@ -14,7 +17,7 @@ export const getHeaderData = async () => {
       getDataPattern<pagePathTypes>("header_request_quote_send_a_file") ,
       getDataPattern<SEOImageProps>("header_logo")
     ]);
-// ss
+
     return {
       headerMenuData: headerMenuData ?? [],
       headerEffectiveTextData: headerEffectiveTextData ?? [],
