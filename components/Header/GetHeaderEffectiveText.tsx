@@ -7,7 +7,7 @@ const GetHeaderEffectiveText = ({
   effectiveTextData: headerEffectiveTextTypes[];
 }) => {
   return (
-    <div className="hidden screen-size-20:flex text-white font-bold items-center justify-center text-center screen-size-26:text-3xl text-2xl">
+    <div className="font-inter-extrabold hidden screen-size-20:flex text-white font-bold items-center justify-center text-center screen-size-26:text-3xl text-2xl">
       {effectiveTextData.map((item, index) => (
         <React.Fragment key={item.id}>
           <span className="skew-x-[-15deg] italic">{item.text}</span>

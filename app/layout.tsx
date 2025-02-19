@@ -79,7 +79,7 @@ export default async function RootLayout({
     ${interExtraBold.variable}
     ${interExtraLight.variable}
     ${interLight.variable}
-    ${interMedium.variable} min-h-screen flex flex-col`}
+    ${interMedium.variable} min-h-screen flex flex-col font-inter-medium`}
       >
         <Header {...headerData} />
         <main className="flex-grow">{children}</main>

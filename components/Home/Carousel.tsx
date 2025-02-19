@@ -63,7 +63,7 @@ const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
               {carouselData[currentIndex].description}
             </p>
             <Link href={carouselData[currentIndex].path || "/"}>
-              <span className="inline-block bg-white text-black px-6 py-3 mt-3 rounded-full font-medium hover:bg-gray-200 transition text-left w-fit">
+              <span className="font-inter-extrabold inline-block bg-white text-black px-6 py-3 mt-3 rounded-full font-medium hover:bg-gray-200 transition text-left w-fit">
                 Learn more...
               </span>
             </Link>

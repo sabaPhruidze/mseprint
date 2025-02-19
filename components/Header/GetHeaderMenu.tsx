@@ -13,7 +13,7 @@ const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {
           <li key={item.id} className="h-[100%] flex items-stretch">
             <Link
               href={item.path || "/"}
-              className="h-[100%] flex items-center px-0 hover:bg-white hover:text-black underline font-bold screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl screen-size-5:text-2xl text-md transition-all duration-700"
+              className="font-inter-extrabold h-[100%] flex items-center px-0 hover:bg-white hover:text-black underline font-bold screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl screen-size-5:text-2xl text-md transition-all duration-700"
               aria-label={`Go to ${item.page}`}
               style={{ color: getMenuColor(item.page) }}
             >

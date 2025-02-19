@@ -35,6 +35,7 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
             focus:scale-95
             transition-all
             duration-500
+            font-inter-extrabold
           "
           aria-label={`Navigate to ${item.page}`}
         >
