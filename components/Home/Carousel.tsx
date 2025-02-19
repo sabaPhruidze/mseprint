@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import SEOImage from "../common/SEOImage";
 import Link from "next/link";
 
-import { SEOImageProps } from "@/types/commonTypes";
+import { SEOImageProps } from "../../types/commonTypes";
 
 interface CarouselProps {
   carouselData: SEOImageProps[];

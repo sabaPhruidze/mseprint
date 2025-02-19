@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Head from "next/head";
-import { SEOImageProps } from "@/types/commonTypes";
+import { SEOImageProps } from "../../types/commonTypes";
 
 const SEOImage: React.FC<SEOImageProps> = ({
   src,

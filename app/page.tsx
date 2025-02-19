@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Carousel from "@/components/Home/Carousel";
-import { SEOImageProps } from "@/types/commonTypes";
-import { getHomeData } from "@/db/getHomeData";
+import Carousel from "../components/Home/Carousel";
+import { SEOImageProps } from "../types/commonTypes";
+import { getHomeData } from "../db/getHomeData";
 import { usePathname } from "next/navigation";
 import Head from "next/head";
 const Home: React.FC = () => {
