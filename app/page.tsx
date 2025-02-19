@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Carousel from "@/components/Home/Carousel";
-import { carouselTypes } from "@/types/Home/homeTypes";
+import { SEOImageProps } from "@/types/commonTypes";
 import { getHomeData } from "@/db/getHomeData";
 import { usePathname } from "next/navigation";
 import Head from "next/head";
 const Home: React.FC = () => {
-  const [carouselData, setCarouselData] = useState<carouselTypes[]>([]);
+  const [carouselData, setCarouselData] = useState<SEOImageProps[]>([]);
   const pathname = usePathname();
 
   useEffect(() => {

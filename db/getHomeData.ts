@@ -1,5 +1,5 @@
 import { getDataPattern } from "@/lib/supabaseClient";
-import { carouselTypes } from "@/types/Home/homeTypes";
+import { SEOImageProps } from "@/types/commonTypes";
 
 export const getHomeData = async (pathname: string = "/") => {
   if (pathname !== "/") {
@@ -8,7 +8,7 @@ export const getHomeData = async (pathname: string = "/") => {
 
   try {
     
-    const carouselData = await getDataPattern<carouselTypes>("home_carousel");
+    const carouselData = await getDataPattern<SEOImageProps>("home_carousel");
     return { carouselData };
   } catch (error) {
     return { carouselData: [] };

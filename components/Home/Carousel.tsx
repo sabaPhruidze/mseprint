@@ -50,7 +50,7 @@ const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}
-              priority={Boolean(carouselData[currentIndex].priority)}
+              priority={carouselData[currentIndex].priority}
               loading={carouselData[currentIndex].priority ? undefined : "lazy"}
               sizes={carouselData[currentIndex].sizes}
               fill
