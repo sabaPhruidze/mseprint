@@ -14,7 +14,7 @@ export const getHeaderData = async () => {
       getDataPattern<pagePathTypes>("header_request_quote_send_a_file") ,
       getDataPattern<SEOImageProps>("header_logo")
     ]);
-
+// ss
     return {
       headerMenuData: headerMenuData ?? [],
       headerEffectiveTextData: headerEffectiveTextData ?? [],
