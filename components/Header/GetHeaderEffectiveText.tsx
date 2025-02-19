@@ -1,6 +1,10 @@
-import { headerEffectiveTextTypes } from "../../types/Header/headerTypes";
 import React from "react";
 
+export interface headerEffectiveTextTypes {
+  id: number;
+  text: string;
+  circle?: string;
+}
 const GetHeaderEffectiveText = ({
   effectiveTextData,
 }: {

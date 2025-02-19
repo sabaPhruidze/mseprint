@@ -1,4 +1,3 @@
-import React from "react";
 import GetHeaderLogo from "./GetHeaderLogo";
 import GetHeaderMenu from "./GetHeaderMenu";
 import GetHeaderRegister from "./GetHeaderRegister";
