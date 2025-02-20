@@ -1,5 +1,5 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { headerEffectiveTextTypes } from "../types/Header/headerTypes";
+import { headerEffectiveTextTypes} from "../types/Header/headerTypes"
 import { pagePathTypes } from "../types/commonTypes";
 import { SEOImageProps } from "../types/commonTypes";
 

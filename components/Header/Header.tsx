@@ -13,7 +13,7 @@ interface HeaderProps {
   headerRegisterData: pagePathTypes[];
   allPagesData: pagePathTypes[];
   requestQuoteSendAFileData: pagePathTypes[];
-  headerLogoData: SEOImageProps[]; // Fix: Ensure it's treated as an array
+  headerLogoData: SEOImageProps[];
 }
 
 const Header: React.FC<HeaderProps> = ({
