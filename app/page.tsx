@@ -2,10 +2,13 @@ import Carousel from "../components/Home/Carousel";
 import { getHomeData } from "../db/getHomeData";
 import Head from "next/head";
 import Cards from "components/Home/Cards";
+import { getHeaderData } from "../db/getHeaderData";
 import HeroSection from "components/Home/HeroSection";
+import CTASection from "components/Home/CTASection";
 
 const Home = async () => {
   const data = await getHomeData("/");
+  const headerData = await getHeaderData();
   return (
     <>
       <Head>
@@ -16,6 +19,7 @@ const Home = async () => {
         />
         <meta name="robots" content="index, follow" />
       </Head>
+
       <div>
         <Carousel carouselData={data.carouselData} />
         <div className="flex flex-col lg:flex-row gap-6 p-4">
@@ -25,6 +29,8 @@ const Home = async () => {
           />
         </div>
         <HeroSection heroSection={data.heroSection} />
+        <CTASection rqsafData={headerData.requestQuoteSendAFileData} />
+
         <h1 className="text-mediumBlue">Hello, this is a light gray heading</h1>
         <p className="font-inter-bold">saba</p>
         <p className="font-inter-light">saba</p>

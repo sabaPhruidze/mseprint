@@ -2,18 +2,18 @@ import React, { FC } from "react";
 import { PagePathTypes } from "../../types/commonTypes";
 import Link from "next/link";
 
-interface GetRequestQuoteSendAFileProps {
+interface CTASectionProps {
   rqsafData: PagePathTypes[];
 }
 
-const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
+const CTASection: FC<CTASectionProps> = ({ rqsafData }) => {
   return (
     <nav
       className="
-        w-full h-16 bg-purple flex items-center screen-size-13:justify-end justify-center px-4 
+       my-[50px] w-full h-20 bg-gray-300 flex items-center justify-center px-4
       "
       role="navigation"
-      aria-label="Request a Quote and Order Navigation"
+      aria-label="Call To Action Navigation"
     >
       {rqsafData.map((item) => (
         <Link
@@ -21,21 +21,22 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
           href={item.path || "/"}
           prefetch
           className="
+            bg-red
             text-white
-            border
-            border-white
-            rounded-lg
-            px-4
-            py-2
+            border-2
+            border-red
+            rounded-full
+            px-6
+            py-3
             mx-2
-            no-underline
-            hover:bg-white
-            hover:text-black
-            hover:border-0
-            focus:scale-95
-            transition-all
-            duration-500
             font-inter-extrabold
+            transition-all
+            duration-300
+            hover:bg-red-700
+            hover:border-red-700
+            focus:scale-95
+            text-center
+            hover:scale-105
           "
           aria-label={`Navigate to ${item.page}`}
         >
@@ -46,4 +47,4 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
   );
 };
 
-export default GetHeaderRQSF;
+export default CTASection;
