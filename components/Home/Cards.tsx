@@ -1,14 +1,13 @@
 import React from "react";
 import { SEOImageProps, TitleContentTypes } from "../../types/commonTypes";
+import { homeSpecialityCardsTypes } from "../../types/Home/homeTypes";
 import Specialities from "./Specialities";
 import Card from "./Card";
 
-interface CardsProps {
-  cardsData: SEOImageProps[];
-  homeSpecialities: TitleContentTypes[];
-}
-
-const Cards: React.FC<CardsProps> = ({ cardsData, homeSpecialities }) => {
+const Cards: React.FC<homeSpecialityCardsTypes> = ({
+  cardsData,
+  homeSpecialities,
+}) => {
   if (!cardsData || cardsData.length === 0) {
     return <p className="text-center text-gray-500">No cards available.</p>;
   }

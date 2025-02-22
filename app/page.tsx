@@ -2,6 +2,7 @@ import Carousel from "../components/Home/Carousel";
 import { getHomeData } from "../db/getHomeData";
 import Head from "next/head";
 import Cards from "components/Home/Cards";
+import HeroSection from "components/Home/HeroSection";
 
 const Home = async () => {
   const data = await getHomeData("/");
@@ -23,6 +24,7 @@ const Home = async () => {
             homeSpecialities={data.homeSpecialities}
           />
         </div>
+        <HeroSection />
         <h1 className="text-mediumBlue">Hello, this is a light gray heading</h1>
         <p className="font-inter-bold">saba</p>
         <p className="font-inter-light">saba</p>
