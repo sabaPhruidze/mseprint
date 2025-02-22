@@ -13,7 +13,7 @@ const Specialities: React.FC<SpecialitiesProps> = ({ specialities }) => {
   }
 
   return (
-    <div className="p-6 shadow-lg flex flex-col items-start text-left">
+    <div className="p-6 flex flex-col items-start text-left">
       {specialities.map((speciality, index) => (
         <div key={index} className="w-full">
           <h2 className="text-xl font-bold mb-4 text-center">
