@@ -11,7 +11,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
   if (!heroSection) return null;
 
   return (
-    <section className="relative w-full h-[500px] flex items-center justify-start text-white overflow-hidden screen-size-18:pl-[50px] pl:[20px]">
+    <section
+      aria-labelledby="hero-heading"
+      className="relative w-full h-[500px] flex items-center justify-start text-white overflow-hidden screen-size-18:pl-[50px] pl-[20px]"
+    >
       <div className="absolute inset-0">
         <SEOImage
           src={`/images/${heroSection.src}`}
@@ -24,12 +27,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
           fill
         />
       </div>
-
       <div className="absolute inset-0 bg-black/50"></div>
       <div className="relative z-10 max-w-[1200px] px-6 text-center md:text-left">
-        <h1 className="text-3xl font-extrabold md:text-5xl screen-size-5:text-4xl">
+        <h2
+          id="hero-heading"
+          className="text-3xl font-extrabold md:text-5xl screen-size-5:text-4xl"
+        >
           {heroSection.alt}
-        </h1>
+        </h2>
         <p className="mt-4 max-w-[700px] text-sm screen-size-5:text-lg screen-size-18:text-xl">
           {heroSection.description}
         </p>
@@ -37,6 +42,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
         {heroSection.path && (
           <Link
             href={heroSection.path}
+            aria-label={`Learn more about ${heroSection.alt}`}
             className="inline-block mt-6 px-6 py-3 text-lg font-semibold text-black bg-white rounded-full transition-all hover:bg-opacity-90"
           >
             Learn More...
