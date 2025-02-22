@@ -18,9 +18,9 @@ const Cards: React.FC<CardsProps> = ({ cardsData, homeSpecialities }) => {
       aria-labelledby="cards-section"
       className="flex flex-col lg:flex-row gap-6 items-center screen-size-18:max-w-[1850px] mx-auto"
     >
-      <h2 id="cards-section" className="sr-only">
+      <h1 id="cards-section" className="sr-only">
         Featured Products & Services
-      </h2>
+      </h1>
       <div className="lg:w-1/3 flex justify-center">
         <Specialities specialities={homeSpecialities} />
       </div>

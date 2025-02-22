@@ -16,10 +16,10 @@ const Specialities: React.FC<SpecialitiesProps> = ({ specialities }) => {
     <div className="p-6 flex flex-col items-start text-left">
       {specialities.map((speciality, index) => (
         <div key={index} className="w-full">
-          <h2 className="text-xl font-bold mb-4 text-center">
+          <h1 className="text-3xl font-bold mb-4 text-center font-inter-extrabold">
             {speciality.title}
-          </h2>
-          <ul className="list-disc pl-5 text-gray-700 text-center">
+          </h1>
+          <ul className="list-disc pl-5 text-gray-700 text-center font-inter-medium">
             {speciality.content.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}

@@ -26,10 +26,14 @@ const Card: React.FC<CardProps> = ({ card }) => {
         </div>
 
         {/* Card Content */}
-        <div className="p-4 flex-grow flex flex-col justify-between">
+        <div className="p-4 flex-grow flex flex-col justify-between ">
           <div>
-            <h2 className="text-lg font-semibold">{card.alt}</h2>
-            <p className="text-gray-700">{card.description}</p>
+            <h1 className="text-lg font-semibold font-inter-extrabold">
+              {card.alt}
+            </h1>
+            <p className="text-gray-700 font-inter-medium">
+              {card.description}
+            </p>
           </div>
         </div>
       </div>
