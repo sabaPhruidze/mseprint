@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   //   canonical: "/",
   // },
   // verification: {
-  //   google: "your-google-verification-code", // Add your Google verification code here
+  //   google: "your-google-verification-code",
   // },
 };
 export default async function RootLayout({
