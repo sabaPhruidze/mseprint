@@ -2,16 +2,16 @@
 
 import { useState, useCallback } from "react";
 import SearchResults from "./SearchResults";
-import { pagePathTypes } from "../../types/commonTypes";
+import { PagePathTypes } from "../../types/commonTypes";
 import { Search } from "lucide-react";
 
 interface GetSearchEngineProps {
-  searchEngineData: pagePathTypes[];
+  searchEngineData: PagePathTypes[];
 }
 
 const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<pagePathTypes[]>([]);
+  const [results, setResults] = useState<PagePathTypes[]>([]);
 
   const handleSearch = useCallback(() => {
     if (query.trim().length === 0) {

@@ -4,15 +4,15 @@ import GetHeaderRegister from "./GetHeaderRegister";
 import GetHeaderEffectiveText from "./GetHeaderEffectiveText";
 import SearchEngine from "../Search/SearchEngine";
 import { headerEffectiveTextTypes } from "../../types/Header/headerTypes";
-import { pagePathTypes, SEOImageProps } from "../../types/commonTypes";
+import { PagePathTypes, SEOImageProps } from "../../types/commonTypes";
 import GetHeaderRQSF from "./GetHeaderRQSF";
 
 interface HeaderProps {
-  headerMenuData: pagePathTypes[];
+  headerMenuData: PagePathTypes[];
   headerEffectiveTextData: headerEffectiveTextTypes[];
-  headerRegisterData: pagePathTypes[];
-  allPagesData: pagePathTypes[];
-  requestQuoteSendAFileData: pagePathTypes[];
+  headerRegisterData: PagePathTypes[];
+  allPagesData: PagePathTypes[];
+  requestQuoteSendAFileData: PagePathTypes[];
   headerLogoData: SEOImageProps[];
 }
 

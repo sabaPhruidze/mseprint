@@ -1,4 +1,4 @@
-export interface pagePathTypes {
+export interface PagePathTypes {
   id: number;
   page: string;
   path?: string;
@@ -25,4 +25,9 @@ export interface SEOImageProps {
   width?: number;
   height?: number;
   fill?: boolean;
+}
+
+export interface TitleContentTypes {
+  title: string;
+  content: string[];
 }

@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { pagePathTypes } from "../../types/commonTypes";
+import { PagePathTypes } from "../../types/commonTypes";
 
 interface SearchResultsProps {
-  results: pagePathTypes[];
+  results: PagePathTypes[];
   onReset: () => void;
   ariaLabel?: string;
 }

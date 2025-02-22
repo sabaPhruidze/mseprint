@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { pagePathTypes } from "../../types/commonTypes";
+import { PagePathTypes } from "../../types/commonTypes";
 
 interface GetHeaderMenuProps {
-  menuData: pagePathTypes[];
+  menuData: PagePathTypes[];
 }
 
 const GetHeaderMenu: React.FC<GetHeaderMenuProps> = ({ menuData }) => {

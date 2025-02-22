@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import { pagePathTypes } from "../../types/commonTypes";
+import { PagePathTypes } from "../../types/commonTypes";
 import Link from "next/link";
 
 interface GetRequestQuoteSendAFileProps {
-  rqsafData: pagePathTypes[];
+  rqsafData: PagePathTypes[];
 }
 
 const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {

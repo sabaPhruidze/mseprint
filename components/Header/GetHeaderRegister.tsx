@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { pagePathTypes } from "../../types/commonTypes";
+import { PagePathTypes } from "../../types/commonTypes";
 
 interface GetHeaderRegisterProps {
-  registerData: pagePathTypes[];
+  registerData: PagePathTypes[];
 }
 
 const GetHeaderRegister: React.FC<GetHeaderRegisterProps> = ({
