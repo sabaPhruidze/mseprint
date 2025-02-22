@@ -28,6 +28,7 @@ export interface SEOImageProps {
 }
 
 export interface TitleContentTypes {
+  id: number;
   title: string;
   content: string[];
 }
