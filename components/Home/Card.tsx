@@ -19,7 +19,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
             geoData={card.geoData}
             priority={card.priority}
             loading={card.priority ? undefined : "lazy"}
-            sizes="400px auto"
+            sizes={card.sizes}
             fill
           />
         </div>
