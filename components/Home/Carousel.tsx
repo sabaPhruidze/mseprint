@@ -4,12 +4,10 @@ import { SEOImageProps } from "../../types/commonTypes";
 
 interface CarouselProps {
   carouselData: SEOImageProps[];
-  pathname: string;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ carouselData, pathname }) => {
-  if (pathname !== "/" || !carouselData || carouselData.length === 0)
-    return null;
+const Carousel: React.FC<CarouselProps> = ({ carouselData }) => {
+  if (!carouselData || carouselData.length === 0) return null;
 
   return <ClientCarousel carouselData={carouselData} />;
 };

@@ -1,22 +1,11 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Carousel from "../components/Home/Carousel";
 import { SEOImageProps } from "../types/commonTypes";
 import { getHomeData } from "../db/getHomeData";
-import { usePathname } from "next/navigation";
 import Head from "next/head";
-const Home: React.FC = () => {
-  const [carouselData, setCarouselData] = useState<SEOImageProps[]>([]);
-  const pathname = usePathname();
+import Cards from "components/Home/Cards";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getHomeData("/");
-      setCarouselData(data.carouselData);
-    };
-    fetchData();
-  }, []);
+const Home = async () => {
+  const data = await getHomeData("/");
 
   return (
     <>
@@ -29,7 +18,8 @@ const Home: React.FC = () => {
         <meta name="robots" content="index, follow" />
       </Head>
       <div>
-        <Carousel carouselData={carouselData} pathname={pathname} />{" "}
+        <Carousel carouselData={data.carouselData} />
+        <Cards cardsData={data.cardsData} />
         <h1 className="text-mediumBlue">Hello, this is a light gray heading</h1>
         <p className="font-inter-bold">saba</p>
         <p className="font-inter-light">saba</p>

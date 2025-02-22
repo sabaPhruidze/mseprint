@@ -24,7 +24,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
       (prevIndex) => (prevIndex - 1 + carouselData.length) % carouselData.length
     );
   };
-
   return (
     <div
       className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
