@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import localFont from "next/font/local";
-
 import Header from "../components/Header/Header";
 import { getHeaderData } from "../db/getHeaderData";
+import { getFooterData } from "../db/GetFooterData";
 import Footer from "../components/Footer/Footer";
 
 const interBold = localFont({
@@ -45,44 +45,38 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/main-page-images/offset-printing.avif",
+        url: "/images/main-page-images/offset-printing.webp",
         width: 1200,
         height: 630,
         alt: "MSE Printing Services",
       },
     ],
   },
-  // twitter: {
-  //   card: "summary_large_image",
-  //   title: "MSE Printing | Commercial Printing & Direct Mail Services",
-  //   description:
-  //     "Full-service commercial printing company specializing in offset printing, digital printing, and direct mail services.",
-  // },
-  // alternates: {
-  //   canonical: "/",
-  // },
-  // verification: {
-  //   google: "your-google-verification-code",
-  // },
 };
+
 export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   const headerData = await getHeaderData();
+  const footerData = await getFooterData();
+
+  const singleFooterData =
+    footerData.footerTopData.length > 0 ? footerData.footerTopData[0] : null;
   return (
     <html lang="en">
       <body
         className={` ${interBold.variable}
-    ${interExtraBold.variable}
-    ${interExtraLight.variable}
-    ${interLight.variable}
-    ${interMedium.variable} min-h-screen flex flex-col font-inter-medium`}
+          ${interExtraBold.variable}
+          ${interExtraLight.variable}
+          ${interLight.variable}
+          ${interMedium.variable} 
+          min-h-screen flex flex-col font-inter-medium`}
       >
         <Header {...headerData} />
         <main className="flex-grow">{children}</main>
-        <Footer />
+        {singleFooterData && <Footer footerTopData={singleFooterData} />}
       </body>
     </html>
   );
