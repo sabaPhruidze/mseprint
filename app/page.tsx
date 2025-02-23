@@ -19,7 +19,6 @@ const Home = async () => {
         />
         <meta name="robots" content="index, follow" />
       </Head>
-
       <div>
         <Carousel carouselData={data.carouselData} />
         <div className="flex flex-col lg:flex-row gap-6 p-4">
@@ -30,11 +29,10 @@ const Home = async () => {
         </div>
         <HeroSection heroSection={data.heroSection} />
         <CTASection rqsafData={headerData.requestQuoteSendAFileData} />
-
-        <h1 className="text-mediumBlue">Hello, this is a light gray heading</h1>
+        {/* <h1 className="text-mediumBlue">Hello, this is a light gray heading</h1>
         <p className="font-inter-bold">saba</p>
         <p className="font-inter-light">saba</p>
-        <p className="font-inter-extralight">saba</p>
+        <p className="font-inter-extralight">saba</p> */}
       </div>
     </>
   );

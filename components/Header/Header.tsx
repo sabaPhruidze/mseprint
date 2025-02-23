@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({
   requestQuoteSendAFileData,
   headerLogoData,
 }) => {
-  const logoData = headerLogoData.length > 0 ? headerLogoData[0] : null; // Fix: Ensure it's a single object
+  const logoData = headerLogoData.length > 0 ? headerLogoData[0] : null;
 
   return (
     <header>
