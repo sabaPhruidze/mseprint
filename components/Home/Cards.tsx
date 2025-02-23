@@ -1,5 +1,4 @@
 import React from "react";
-import { SEOImageProps, TitleContentTypes } from "../../types/commonTypes";
 import { homeSpecialityCardsTypes } from "../../types/Home/homeTypes";
 import Specialities from "./Specialities";
 import Card from "./Card";
