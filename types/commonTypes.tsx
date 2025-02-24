@@ -32,3 +32,10 @@ export interface TitleContentTypes {
   title: string;
   content: string[];
 }
+
+export interface ServicesPathTypes {
+  id: number;
+  parent_id?: number;
+  title: string;
+  path: string;
+}

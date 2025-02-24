@@ -62,8 +62,6 @@ export default async function RootLayout({
   const headerData = await getHeaderData();
   const footerData = await getFooterData();
 
-  const singleFooterData =
-    footerData.footerTopData.length > 0 ? footerData.footerTopData[0] : null;
   return (
     <html lang="en">
       <body
@@ -76,7 +74,7 @@ export default async function RootLayout({
       >
         <Header {...headerData} />
         <main className="flex-grow">{children}</main>
-        {singleFooterData && <Footer footerTopData={singleFooterData} />}
+        <Footer {...footerData} />
       </body>
     </html>
   );
