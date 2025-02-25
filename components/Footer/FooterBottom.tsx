@@ -33,15 +33,18 @@ const FooterBottom: React.FC<FooterBottomProps> = ({ footerBottomData }) => {
         screen-size-15:justify-between
       "
     >
-      <a
-        href={address.path}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-white hover:underline text-lg font-semibold"
-      >
-        {address.page}
-      </a>
-      <div className="mt-3 screen-size-15:mt-0">
+      <address className="not-italic">
+        <a
+          href={address.path}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-white hover:underline text-lg font-semibold"
+        >
+          {address.page}
+        </a>
+      </address>
+
+      <nav className="mt-3 screen-size-15:mt-0">
         <ul className="flex flex-wrap justify-center screen-size-15:justify-start items-center space-x-4">
           {pages.map((page) => (
             <li key={page.id}>
@@ -54,7 +57,7 @@ const FooterBottom: React.FC<FooterBottomProps> = ({ footerBottomData }) => {
             </li>
           ))}
         </ul>
-      </div>
+      </nav>
     </div>
   );
 };
