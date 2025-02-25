@@ -45,14 +45,17 @@ export default function FooterContent({
 
           return (
             <div key={category.id} className="p-4 text-center ">
-              <h2 className="text-xl font-bold mb-2">
+              <h2 className="text-xl font-bold mb-2 hover:underline hover:scale-110 transition duration-800">
                 <Link href={`/${category.path}`}>{category.title}</Link>
               </h2>
 
               {subItems.length > 0 && (
                 <ul className="list-none space-y-1">
                   {subItems.map((sub) => (
-                    <li key={sub.id}>
+                    <li
+                      key={sub.id}
+                      className="hover:underline hover:scale-110 transition duration-800"
+                    >
                       <Link href={`/${sub.path}`}>{sub.title}</Link>
                     </li>
                   ))}
