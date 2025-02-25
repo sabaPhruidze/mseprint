@@ -51,7 +51,6 @@ export default function FooterContent({
           {topLevel.map((category, index) => {
             const visibilityClass =
               index > 0 ? `hidden ${breakpoints[index]}:block` : "";
-
             const subItems = footerContentData.filter(
               (sub) =>
                 sub.parent_id === category.id &&
@@ -67,8 +66,17 @@ export default function FooterContent({
                 itemType="http://schema.org/SiteNavigationElement"
               >
                 <h2 className="text-xl font-bold mb-2">
-                  <Link href={`/${category.path}`} itemProp="url">
-                    <span itemProp="name">{category.title}</span>
+                  <Link
+                    href={`/${category.path}`}
+                    itemProp="url"
+                    className="group hover:underline"
+                  >
+                    <span
+                      className="inline-block transition duration-800 group-hover:scale-110 group-hover:underline"
+                      itemProp="name"
+                    >
+                      {category.title}
+                    </span>
                   </Link>
                 </h2>
 
@@ -80,8 +88,17 @@ export default function FooterContent({
                         itemScope
                         itemType="http://schema.org/SiteNavigationElement"
                       >
-                        <Link href={`/${sub.path}`} itemProp="url">
-                          <span itemProp="name">{sub.title}</span>
+                        <Link
+                          href={`/${sub.path}`}
+                          itemProp="url"
+                          className="group hover:underline"
+                        >
+                          <span
+                            className="inline-block transition duration-800 group-hover:scale-110 group-hover:underline"
+                            itemProp="name"
+                          >
+                            {sub.title}
+                          </span>
                         </Link>
                       </li>
                     ))}
