@@ -19,15 +19,14 @@ const Footer: React.FC<FooterProps> = ({
   footerContentData,
   footerBottomData,
 }) => {
-  console.log(footerBottomData[0].data.footer_bottom);
   return (
-    <div>
+    <footer>
       {footerTopData.length > 0 && (
         <FooterTop footerTopData={footerTopData[0]} />
       )}
       <FooterContent footerContentData={footerContentData} />
       <FooterBottom footerBottomData={footerBottomData} />
-    </div>
+    </footer>
   );
 };
 

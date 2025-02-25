@@ -1,3 +1,5 @@
+"use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ServicesPathTypes } from "../../types/commonTypes";
 
@@ -12,6 +14,39 @@ export default function FooterContent({
     return <p>No footer content available.</p>;
   }
 
+  const [numColumns, setNumColumns] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1920) {
+        setNumColumns(8);
+      } else if (width >= 1680) {
+        setNumColumns(7);
+      } else if (width >= 1440) {
+        setNumColumns(6);
+      } else if (width >= 1280) {
+        setNumColumns(5);
+      } else if (width >= 1024) {
+        setNumColumns(4);
+      } else if (width >= 768) {
+        setNumColumns(3);
+      } else if (width >= 640) {
+        setNumColumns(2);
+      } else {
+        setNumColumns(1);
+      }
+    };
+
+    // Set initial value
+    handleResize();
+    // Update on resize
+    window.addEventListener("resize", handleResize);
+    // Cleanup listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Filter top-level categories
   const topLevel = footerContentData.filter(
     (item) =>
       item.parent_id === null &&
@@ -19,38 +54,16 @@ export default function FooterContent({
       item.title !== "Graphic Design"
   );
 
-  const breakpoints = [
-    "",
-    "screen-size-5",
-    "screen-size-10",
-    "screen-size-13",
-    "screen-size-15",
-    "screen-size-18",
-    "screen-size-20",
-    "screen-size-23",
-  ];
+  // Limit the number of categories to display based on numColumns
+  const visibleCategories = topLevel.slice(0, numColumns);
 
   return (
-    <footer className="border-t border-gray-300">
+    <div className="border-t border-gray-300">
       <nav aria-label="Footer Navigation">
-        <div
-          className="
-            grid
-            grid-cols-1
-            screen-size-4:grid-cols-1
-            screen-size-5:grid-cols-2
-            screen-size-10:grid-cols-3
-            screen-size-13:grid-cols-4
-            screen-size-15:grid-cols-5
-            screen-size-18:grid-cols-6
-            screen-size-20:grid-cols-7
-            screen-size-23:grid-cols-8
-            divide-x divide-gray-300
-          "
-        >
-          {topLevel.map((category, index) => {
-            const visibilityClass =
-              index > 0 ? `hidden ${breakpoints[index]}:block` : "";
+        {/* Use flexbox to ensure single row with hidden overflow */}
+        <div className="flex flex-nowrap overflow-hidden">
+          {visibleCategories.map((category) => {
+            // Filter sub-items for each category
             const subItems = footerContentData.filter(
               (sub) =>
                 sub.parent_id === category.id &&
@@ -61,7 +74,7 @@ export default function FooterContent({
             return (
               <div
                 key={category.id}
-                className={`p-4 text-center ${visibilityClass}`}
+                className="flex-1 p-4 text-center min-w-0" // min-w-0 prevents flex items from overflowing
                 itemScope
                 itemType="http://schema.org/SiteNavigationElement"
               >
@@ -79,7 +92,6 @@ export default function FooterContent({
                     </span>
                   </Link>
                 </h2>
-
                 {subItems.length > 0 && (
                   <ul className="list-none space-y-1">
                     {subItems.map((sub) => (
@@ -109,6 +121,6 @@ export default function FooterContent({
           })}
         </div>
       </nav>
-    </footer>
+    </div>
   );
 }
