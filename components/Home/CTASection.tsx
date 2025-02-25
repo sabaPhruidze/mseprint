@@ -26,7 +26,7 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData }) => {
             border-2
             border-red
             rounded-full
-            px-6
+            px-2
             py-3
             mx-2
             font-inter-extrabold
@@ -37,6 +37,7 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData }) => {
             focus:scale-95
             text-center
             hover:scale-105
+            screen-size-4:px-6
           "
           aria-label={`Navigate to ${item.page}`}
         >
