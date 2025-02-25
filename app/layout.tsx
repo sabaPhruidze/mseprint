@@ -61,7 +61,6 @@ export default async function RootLayout({
 }) {
   const headerData = await getHeaderData();
   const footerData = await getFooterData();
-
   return (
     <html lang="en">
       <body

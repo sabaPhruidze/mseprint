@@ -5,8 +5,10 @@ export interface footerTopTypes {
   second: SEOImageProps[];
 }
 export interface footerBottomTypes {
-  footer_bottom: {
-    address: PagePathTypes;
-    pages: PagePathTypes[];
+  data: {
+    footer_bottom: {
+      address: PagePathTypes;
+      pages: PagePathTypes[];
+    };
   };
 }
