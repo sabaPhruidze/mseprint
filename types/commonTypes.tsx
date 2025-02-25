@@ -4,6 +4,7 @@ export interface PagePathTypes {
   path?: string;
   content?: string;
 }
+
 export interface GeoData {
   latitude: number;
   longitude: number;
