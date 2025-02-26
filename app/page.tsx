@@ -18,6 +18,7 @@ const Home = async () => {
           content="Top-quality commercial printing, digital printing, signs, and mailing solutions. Stand out with MSE Print!"
         />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.mseprinting.com/" />
       </Head>
       <div>
         <Carousel carouselData={data.carouselData} />
