@@ -15,7 +15,7 @@ const GetHeaderLogo = ({ LogoData }: { LogoData: SEOImageProps }) => {
           name={LogoData.name}
           geoData={LogoData.geoData}
           priority={LogoData.priority}
-          sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 600px"
+          sizes={LogoData.sizes}
           fill={true}
         />
       </div>

@@ -54,9 +54,10 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               priority={carouselData[currentIndex].priority}
               loading={carouselData[currentIndex].priority ? undefined : "lazy"}
               sizes={carouselData[currentIndex].sizes}
-              width={1200}
-              height={600}
-              fill
+              width={700}
+              height={200}
+              fill={true}
+              objectFit="cover"
             />
           </motion.div>
         </AnimatePresence>

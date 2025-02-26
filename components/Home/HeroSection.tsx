@@ -25,6 +25,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
           loading={heroSection.priority ? undefined : "lazy"}
           sizes={heroSection.sizes}
           fill
+          objectFit="cover"
         />
       </div>
       <div className="absolute inset-0 bg-black/50"></div>
