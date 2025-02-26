@@ -58,7 +58,6 @@ const SEOImage: React.FC<SEOImageProps> = ({
           loading={priority ? undefined : loading}
           sizes={sizes}
           {...(fill ? { fill: true } : { width, height })}
-          className="object-cover w-full h-full"
         />
       </div>
     </>

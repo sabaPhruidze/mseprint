@@ -1,6 +1,6 @@
 import React from "react";
 import { footerTopTypes } from "../../types/Footer/footerTypes";
-import SEOImageD from "../common/SEOImageD";
+import SEOImage from "../common/SEOImage";
 
 interface FooterTopProps {
   footerTopData: footerTopTypes;
@@ -51,7 +51,7 @@ const FooterTop: React.FC<FooterTopProps> = ({ footerTopData }) => {
                 "invert(100%) sepia(7%) saturate(7500%) hue-rotate(165deg) brightness(120%) contrast(106%)",
             }}
           >
-            <SEOImageD
+            <SEOImage
               src={`images/footer-images/${icon.src}`}
               alt={icon.alt}
               name={icon.alt}
