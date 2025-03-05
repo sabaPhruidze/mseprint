@@ -23,6 +23,6 @@
       "@types/*": ["types/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types", "src", "pages", "components"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types", "src", "pages", "components", ".next/types/app/(category)/direct-mail-mailing-services/page.tsx"],
   "exclude": ["node_modules"]
 }
