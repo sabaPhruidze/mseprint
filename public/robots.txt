@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.mseprinting.com/
+
+# Sitemaps
+Sitemap: https://www.mseprinting.com/sitemap.xml
