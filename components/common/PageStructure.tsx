@@ -52,49 +52,50 @@ export default function PageStructure({ pageData }: PageStructureProps) {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-15:text-left text-center">
-        {/* Why Choose Offset Printing */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
-          {pageData.why_choose_offset_printing_heading}
-        </h2>
-        <div className="relative float-right ml-4 mb-4 w-full max-w-[360px] sm:max-w-[600px] aspect-[3.5/1]">
-          <SEOImage
-            src={`/images/${pageData.second_image_src}`}
-            alt={pageData.second_image_alt}
-            name={pageData.second_image_name}
-            geoData={pageData.second_image_geodata}
-            priority={pageData.second_image_priority}
-            loading={pageData.second_image_priority ? undefined : "lazy"}
-            sizes="500px auto"
-            width={500}
-            height={500}
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-15:text-left text-center">
+          {/* Why Choose Offset Printing */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+            {pageData.why_choose_offset_printing_heading}
+          </h2>
+          <div className="md:float-right w-full md:max-w-[600px] md:ml-4 mb-4">
+            <SEOImage
+              src={`/images/${pageData.second_image_src}`}
+              alt={pageData.second_image_alt}
+              name={pageData.second_image_name}
+              geoData={pageData.second_image_geodata}
+              priority={pageData.second_image_priority}
+              loading={pageData.second_image_priority ? undefined : "lazy"}
+              sizes="(max-width: 768px) 100vw, 600px"
+              width={500}
+              height={500}
+            />
+          </div>
+          {/* FLOATING IMAGE + TEXT WRAP */}
+          <div className="text-darkGray mt-4 ">
+            <p>{pageData.why_choose_offset_printing_paragraph_1}</p>
+            <p className="mt-2">
+              {pageData.why_choose_offset_printing_paragraph_2}
+            </p>
+          </div>
+          {/* END FLOATING IMAGE + TEXT WRAP */}
+
+          {/* Custom Offset Printing Services */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
+            {pageData.custom_offset_printing_services_heading}
+          </h2>
+          <p className="mt-4 text-darkGray">
+            {pageData.custom_offset_printing_services_paragraph}
+          </p>
+
+          {/* What We Offer */}
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
+            {pageData.what_we_offer_heading}
+          </h3>
+          <ul
+            className="list-disc list-inside mt-2 space-y-2 text-darkGray"
+            dangerouslySetInnerHTML={{ __html: pageData.what_we_offer_list }}
           />
         </div>
-        {/* FLOATING IMAGE + TEXT WRAP */}
-        <div className="relative w-full text-darkGray mt-4 text-left">
-          <p>{pageData.why_choose_offset_printing_paragraph_1}</p>
-          <p className="mt-2">
-            {pageData.why_choose_offset_printing_paragraph_2}
-          </p>
-        </div>
-        {/* END FLOATING IMAGE + TEXT WRAP */}
-
-        {/* Custom Offset Printing Services */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
-          {pageData.custom_offset_printing_services_heading}
-        </h2>
-        <p className="mt-4 text-darkGray">
-          {pageData.custom_offset_printing_services_paragraph}
-        </p>
-
-        {/* What We Offer */}
-        <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
-          {pageData.what_we_offer_heading}
-        </h3>
-        {/* If your DB field 'what_we_offer_list' includes <Link> tags as HTML, use dangerouslySetInnerHTML. */}
-        <ul
-          className="list-disc list-inside mt-2 space-y-2 text-darkGray"
-          dangerouslySetInnerHTML={{ __html: pageData.what_we_offer_list }}
-        />
 
         {/* Advanced Features */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">

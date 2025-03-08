@@ -1,6 +1,6 @@
 import React from "react";
 import { getPageStructureData } from "db/getPageStructureData";
-import PageStructure from "components/common/PageStructure"; // Adjust the import path as needed
+import PageStructure from "components/common/PageStructure";
 
 const CommercialOffsetPrinting = async () => {
   const data = await getPageStructureData();
