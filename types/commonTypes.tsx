@@ -74,7 +74,7 @@ export interface PageStructureTypes {
   bulk_printing_subheading: string;
   bulk_printing_paragraph: PagePathTypes[];
   convenient_printing_heading: string;
-  convenient_printing_list: string;
+  convenient_printing_list: PagePathTypes[];
   how_to_get_started_heading: string;
   how_to_get_started_list: string;
   why_trust_us_heading: string;

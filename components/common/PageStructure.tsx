@@ -100,11 +100,10 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           </ul>
         </div>
 
-        {/* Advanced Features */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
           {pageData.advanced_features_heading}
         </h2>
-        <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 ">
+        <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 ">
           {pageData.customization_finishing_subheading}
         </h3>
         <p className="mt-2 text-darkGray">
@@ -119,11 +118,11 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           ))}
         </ul>
 
-        <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
+        <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
           {pageData.bulk_printing_subheading}
         </h3>
         <p className="mt-2 text-darkGray">
-          {pageData.bulk_printing_paragraph?.map((segment) => (
+          {pageData.bulk_printing_paragraph.map((segment) => (
             <>
               {segment.content}
               {segment.page && (
@@ -132,19 +131,33 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 </strong>
               )}
             </>
-          )) || <span>No bulk printing information available.</span>}
+          ))}
         </p>
 
         {/* Convenient Printing Services */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
           {pageData.convenient_printing_heading}
         </h2>
-        <ul
-          className="list-disc list-inside mt-2 space-y-2 text-darkGray"
-          dangerouslySetInnerHTML={{
-            __html: pageData.convenient_printing_list,
-          }}
-        />
+        <ul className="list-disc space-y-2 pl-5 text-lg">
+          {pageData.convenient_printing_list.map((item, index) => (
+            <li key={item.id} itemScope itemType="https://schema.org/ListItem">
+              {item.page && <strong>{item.page}: </strong>}
+              {item.content && <span>{item.content}</span>}
+
+              {/* Prevents inline duplicate content */}
+              {!item.content &&
+                index < pageData.convenient_printing_list.length - 1 && (
+                  <>
+                    {pageData.convenient_printing_list[index + 1].content && (
+                      <span>
+                        {pageData.convenient_printing_list[index + 1].content}
+                      </span>
+                    )}
+                  </>
+                )}
+            </li>
+          ))}
+        </ul>
 
         {/* How to Get Started */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
