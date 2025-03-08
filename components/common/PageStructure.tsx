@@ -10,7 +10,6 @@ interface PageStructureProps {
 export default function PageStructure({ pageData }: PageStructureProps) {
   return (
     <div>
-      {/* Hero Section */}
       <section
         className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
         aria-labelledby="offset-printing-heading"
@@ -50,11 +49,9 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         </div>
       </section>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-15:text-left text-center">
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-15:text-left text-center">
-          {/* Why Choose Offset Printing */}
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+      <div className="container mx-auto sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-15:text-left text-center">
+        <div className="container py-8 max-w-[1500px] screen-size-15:text-left text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
             {pageData.why_choose_offset_printing_heading}
           </h2>
           <div className="md:float-right md:max-w-[600px] md:ml-2 ml-0">
@@ -66,21 +63,17 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               priority={pageData.second_image_priority}
               loading={pageData.second_image_priority ? undefined : "lazy"}
               sizes={pageData.second_image_sizes}
-              width={600} // Adjust based on actual image width
-              height={400} // Adjust based on actual image height
+              width={600}
+              height={400}
             />
           </div>
-
-          {/* FLOATING IMAGE + TEXT WRAP */}
           <div className="text-darkGray mt-4 ">
             <p>{pageData.why_choose_offset_printing_paragraph_1}</p>
             <p className="mt-2">
               {pageData.why_choose_offset_printing_paragraph_2}
             </p>
           </div>
-          {/* END FLOATING IMAGE + TEXT WRAP */}
 
-          {/* Custom Offset Printing Services */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
             {pageData.custom_offset_printing_services_heading}
           </h2>
@@ -88,21 +81,30 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             {pageData.custom_offset_printing_services_paragraph}
           </p>
 
-          {/* What We Offer */}
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
             {pageData.what_we_offer_heading}
           </h3>
-          <ul
-            className="list-disc list-inside mt-2 space-y-2 text-darkGray"
-            dangerouslySetInnerHTML={{ __html: pageData.what_we_offer_list }}
-          />
+          <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+            {pageData.what_we_offer_list.map((item) => (
+              <li key={item.id} className="text-darkGray">
+                <Link
+                  href={item.path || "/"}
+                  className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                  aria-label={`Learn more about ${item.page}`}
+                >
+                  {item.page}
+                </Link>
+                <span className="text-darkGray"> - {item.content}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Advanced Features */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
           {pageData.advanced_features_heading}
         </h2>
-        <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
+        <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 ">
           {pageData.customization_finishing_subheading}
         </h3>
         <p className="mt-2 text-darkGray">

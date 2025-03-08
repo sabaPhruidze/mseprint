@@ -66,7 +66,7 @@ export interface PageStructureTypes {
   custom_offset_printing_services_heading: string;
   custom_offset_printing_services_paragraph: string;
   what_we_offer_heading: string;
-  what_we_offer_list: string;
+  what_we_offer_list: PagePathTypes[];
   advanced_features_heading: string;
   customization_finishing_subheading: string;
   customization_finishing_paragraph: string;
