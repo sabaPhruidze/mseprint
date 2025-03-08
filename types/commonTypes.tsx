@@ -76,9 +76,9 @@ export interface PageStructureTypes {
   convenient_printing_heading: string;
   convenient_printing_list: PagePathTypes[];
   how_to_get_started_heading: string;
-  how_to_get_started_list: string;
+  how_to_get_started_list: PagePathTypes[];
   why_trust_us_heading: string;
-  why_trust_us_list: string;
+  why_trust_us_list: PagePathTypes[];
   faqs_heading: string;
   faq_1_question: string;
   faq_1_answer: string;

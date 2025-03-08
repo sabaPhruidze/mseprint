@@ -9,7 +9,7 @@ interface PageStructureProps {
 
 export default function PageStructure({ pageData }: PageStructureProps) {
   return (
-    <div>
+    <div className="text-lg">
       <section
         className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
         aria-labelledby="offset-printing-heading"
@@ -40,7 +40,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               <Link
                 href={pageData.hero_section_cta_link}
                 aria-label={`Request a Quote: ${pageData.hero_section_cta_text}`}
-                className="inline-block bg-[#ff0015] text-white text-lg font-bold border-none rounded-[10px] px-8 py-5 transition duration-300 ease-in-out hover:bg-[#ff0015] hover:text-white focus:scale-90"
+                className="inline-block bg-[#ff0015] text-white font-bold border-none rounded-[10px] px-8 py-5 transition duration-300 ease-in-out hover:bg-[#ff0015] hover:text-white focus:scale-90"
               >
                 {pageData.hero_section_cta_text}
               </Link>
@@ -135,26 +135,14 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         </p>
 
         {/* Convenient Printing Services */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-15:text-left">
           {pageData.convenient_printing_heading}
         </h2>
-        <ul className="list-disc space-y-2 pl-5 text-lg">
+        <ul className="list-disc space-y-2 pl-5">
           {pageData.convenient_printing_list.map((item, index) => (
-            <li key={item.id} itemScope itemType="https://schema.org/ListItem">
+            <li key={item.id} className="text-darkGray">
               {item.page && <strong>{item.page}: </strong>}
               {item.content && <span>{item.content}</span>}
-
-              {/* Prevents inline duplicate content */}
-              {!item.content &&
-                index < pageData.convenient_printing_list.length - 1 && (
-                  <>
-                    {pageData.convenient_printing_list[index + 1].content && (
-                      <span>
-                        {pageData.convenient_printing_list[index + 1].content}
-                      </span>
-                    )}
-                  </>
-                )}
             </li>
           ))}
         </ul>
@@ -163,19 +151,28 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
           {pageData.how_to_get_started_heading}
         </h2>
-        <ol
-          className="list-decimal list-inside mt-2 space-y-2 text-darkGray"
-          dangerouslySetInnerHTML={{ __html: pageData.how_to_get_started_list }}
-        />
-
+        <ol className="list-decimal list-inside mt-2 space-y-2 text-darkGray">
+          {pageData.how_to_get_started_list.map((step) => (
+            <li key={step.id}>
+              {<strong itemProp="name">{step.page}: </strong>}
+              {<span itemProp="text">{step.content}</span>}
+            </li>
+          ))}
+        </ol>
         {/* Why Trust Us */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
           {pageData.why_trust_us_heading}
         </h2>
-        <ul
-          className="list-disc list-inside mt-2 space-y-2 text-darkGray"
-          dangerouslySetInnerHTML={{ __html: pageData.why_trust_us_list }}
-        />
+        <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+          {pageData.why_trust_us_list.map((item) => (
+            <li key={item.id}>
+              {item.page && <strong itemProp="name">✅ {item.page}: </strong>}
+              {item.content && (
+                <span itemProp="description">{item.content}</span>
+              )}
+            </li>
+          ))}
+        </ul>
 
         {/* FAQs */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
@@ -183,7 +180,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         </h2>
         {/* FAQ #1 */}
         <div className="mt-4">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black screen-size-15:text-left">
+          <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
             {pageData.faq_1_question}
           </h3>
           <p className="mt-2 text-darkGray">{pageData.faq_1_answer}</p>
@@ -191,7 +188,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
 
         {/* FAQ #2 */}
         <div className="mt-4">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black screen-size-15:text-left">
+          <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
             {pageData.faq_2_question}
           </h3>
           <p className="mt-2 text-darkGray">{pageData.faq_2_answer}</p>
@@ -199,7 +196,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
 
         {/* FAQ #3 */}
         <div className="mt-4">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black screen-size-15:text-left">
+          <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
             {pageData.faq_3_question}
           </h3>
           <p className="mt-2 text-darkGray">{pageData.faq_3_answer}</p>
@@ -207,7 +204,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
 
         {/* FAQ #4 */}
         <div className="mt-4">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black screen-size-15:text-left">
+          <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
             {pageData.faq_4_question}
           </h3>
           <p className="mt-2 text-darkGray">{pageData.faq_4_answer}</p>
