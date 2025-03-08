@@ -110,17 +110,30 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         <p className="mt-2 text-darkGray">
           {pageData.customization_finishing_paragraph}
         </p>
-        <ul
-          className="list-disc list-inside mt-2 space-y-2 text-darkGray"
-          dangerouslySetInnerHTML={{
-            __html: pageData.customization_finishing_list,
-          }}
-        />
+        <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+          {pageData.customization_finishing_list.map((item) => (
+            <li key={item.id} className="text-darkGray">
+              <strong className="font-bold text-darkGray">{item.page}</strong>
+              <span className="text-darkGray"> - {item.content}</span>
+            </li>
+          ))}
+        </ul>
 
         <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
           {pageData.bulk_printing_subheading}
         </h3>
-        <p className="mt-2 text-darkGray">{pageData.bulk_printing_paragraph}</p>
+        <p className="mt-2 text-darkGray">
+          {pageData.bulk_printing_paragraph?.map((segment) => (
+            <>
+              {segment.content}
+              {segment.page && (
+                <strong className="font-bold text-darkGray">
+                  {segment.page}
+                </strong>
+              )}
+            </>
+          )) || <span>No bulk printing information available.</span>}
+        </p>
 
         {/* Convenient Printing Services */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">

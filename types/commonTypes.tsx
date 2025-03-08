@@ -70,9 +70,9 @@ export interface PageStructureTypes {
   advanced_features_heading: string;
   customization_finishing_subheading: string;
   customization_finishing_paragraph: string;
-  customization_finishing_list: string;
+  customization_finishing_list: PagePathTypes[];
   bulk_printing_subheading: string;
-  bulk_printing_paragraph: string;
+  bulk_printing_paragraph: PagePathTypes[];
   convenient_printing_heading: string;
   convenient_printing_list: string;
   how_to_get_started_heading: string;
