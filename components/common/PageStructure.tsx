@@ -57,7 +57,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
             {pageData.why_choose_offset_printing_heading}
           </h2>
-          <div className="md:float-right w-full md:max-w-[600px] md:ml-4 mb-4">
+          <div className="md:float-right md:max-w-[600px] md:ml-2 ml-0">
             <SEOImage
               src={`/images/${pageData.second_image_src}`}
               alt={pageData.second_image_alt}
@@ -65,11 +65,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               geoData={pageData.second_image_geodata}
               priority={pageData.second_image_priority}
               loading={pageData.second_image_priority ? undefined : "lazy"}
-              sizes="(max-width: 768px) 100vw, 600px"
-              width={500}
-              height={500}
+              sizes={pageData.second_image_sizes}
+              width={600} // Adjust based on actual image width
+              height={400} // Adjust based on actual image height
             />
           </div>
+
           {/* FLOATING IMAGE + TEXT WRAP */}
           <div className="text-darkGray mt-4 ">
             <p>{pageData.why_choose_offset_printing_paragraph_1}</p>
