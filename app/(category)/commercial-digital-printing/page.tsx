@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { getDigitalPrintingPageData } from "db/getDigitalPrintingData";
+import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 
 export const metadata: Metadata = {
@@ -32,10 +32,12 @@ export const metadata: Metadata = {
 };
 
 const CommercialDigitalPrinting = async () => {
-  const data = await getDigitalPrintingPageData();
-  const pageData = data.CommercialDigitalPrintingPageData[0];
+  const data = await getCategoryPagesData("/commercial-digital-printing");
+  const pageData = data.CommercialDigitalPrintingPageData?.[0];
 
-  console.log(pageData);
+  if (!pageData) {
+    return <div>Data not available.</div>;
+  }
   return <PageStructure pageData={pageData} />;
 };
 

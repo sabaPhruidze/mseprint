@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { getPageStructureData } from "db/getPageStructureData";
+import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 
 export const metadata: Metadata = {
@@ -32,8 +32,12 @@ export const metadata: Metadata = {
 };
 
 const CommercialOffsetPrinting = async () => {
-  const data = await getPageStructureData();
-  const pageData = data.CommercialOffsetPrintingPageData[0];
+  const data = await getCategoryPagesData("/commercial-offset-printing");
+  const pageData = data.CommercialOffsetPrintingPageData?.[0];
+
+  if (!pageData) {
+    return <div>Data not available.</div>;
+  }
 
   return <PageStructure pageData={pageData} />;
 };

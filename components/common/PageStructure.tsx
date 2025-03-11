@@ -100,77 +100,85 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           </ul>
         </div>
 
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
-          {pageData.advanced_features_heading}
-        </h2>
-        <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 ">
-          {pageData.customization_finishing_subheading}
-        </h3>
-        <p className="mt-2 text-darkGray">
-          {pageData.customization_finishing_paragraph}
-        </p>
-        <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
-          {pageData.customization_finishing_list.map((item) => (
-            <li key={item.id} className="text-darkGray">
-              <strong className="font-bold text-darkGray">{item.page}</strong>
-              <span className="text-darkGray"> - {item.content}</span>
-            </li>
-          ))}
-        </ul>
+        {pageData.advanced_features_heading && (
+          <>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
+              {pageData.advanced_features_heading}
+            </h2>
+            <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 ">
+              {pageData.customization_finishing_subheading}
+            </h3>
+            <p className="mt-2 text-darkGray">
+              {pageData.customization_finishing_paragraph}
+            </p>
+            <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+              {pageData.customization_finishing_list.map((item) => (
+                <li key={item.id} className="text-darkGray">
+                  <strong className="font-bold text-darkGray">
+                    {item.page}
+                  </strong>
+                  <span className="text-darkGray"> - {item.content}</span>
+                </li>
+              ))}
+            </ul>
 
-        <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
-          {pageData.bulk_printing_subheading}
-        </h3>
-        <p className="mt-2 text-darkGray">
-          {pageData.bulk_printing_paragraph.map((segment) => (
-            <span key={segment.id}>
-              {segment.content}
-              <strong className="font-bold text-darkGray">
-                {segment.page}
-              </strong>
-            </span>
-          ))}
-        </p>
+            <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
+              {pageData.bulk_printing_subheading}
+            </h3>
+            <p className="mt-2 text-darkGray">
+              {pageData.bulk_printing_paragraph.map((segment) => (
+                <span key={segment.id}>
+                  {segment.content}
+                  <strong className="font-bold text-darkGray">
+                    {segment.page}
+                  </strong>
+                </span>
+              ))}
+            </p>
 
-        {/* Convenient Printing Services */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-15:text-left">
-          {pageData.convenient_printing_heading}
-        </h2>
-        <ul className="list-disc space-y-2 pl-5">
-          {pageData.convenient_printing_list.map((item, index) => (
-            <li key={item.id} className="text-darkGray">
-              {item.page && <strong>{item.page}: </strong>}
-              {item.content && <span>{item.content}</span>}
-            </li>
-          ))}
-        </ul>
+            {/* Convenient Printing Services */}
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-15:text-left">
+              {pageData.convenient_printing_heading}
+            </h2>
+            <ul className="list-disc space-y-2 pl-5">
+              {pageData.convenient_printing_list.map((item, index) => (
+                <li key={item.id} className="text-darkGray">
+                  {item.page && <strong>{item.page}: </strong>}
+                  {item.content && <span>{item.content}</span>}
+                </li>
+              ))}
+            </ul>
 
-        {/* How to Get Started */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
-          {pageData.how_to_get_started_heading}
-        </h2>
-        <ol className="list-decimal list-inside mt-2 space-y-2 text-darkGray">
-          {pageData.how_to_get_started_list.map((step) => (
-            <li key={step.id}>
-              {<strong itemProp="name">{step.page}: </strong>}
-              {<span itemProp="text">{step.content}</span>}
-            </li>
-          ))}
-        </ol>
-        {/* Why Trust Us */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
-          {pageData.why_trust_us_heading}
-        </h2>
-        <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
-          {pageData.why_trust_us_list.map((item) => (
-            <li key={item.id}>
-              {item.page && <strong itemProp="name">✅ {item.page}: </strong>}
-              {item.content && (
-                <span itemProp="description">{item.content}</span>
-              )}
-            </li>
-          ))}
-        </ul>
+            {/* How to Get Started */}
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+              {pageData.how_to_get_started_heading}
+            </h2>
+            <ol className="list-decimal list-inside mt-2 space-y-2 text-darkGray">
+              {pageData.how_to_get_started_list.map((step) => (
+                <li key={step.id}>
+                  {<strong itemProp="name">{step.page}: </strong>}
+                  {<span itemProp="text">{step.content}</span>}
+                </li>
+              ))}
+            </ol>
+            {/* Why Trust Us */}
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+              {pageData.why_trust_us_heading}
+            </h2>
+            <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+              {pageData.why_trust_us_list.map((item) => (
+                <li key={item.id}>
+                  {item.page && (
+                    <strong itemProp="name">✅ {item.page}: </strong>
+                  )}
+                  {item.content && (
+                    <span itemProp="description">{item.content}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
         {/* FAQs */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
