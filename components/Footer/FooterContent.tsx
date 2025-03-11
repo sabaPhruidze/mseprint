@@ -19,7 +19,7 @@ export default function FooterContent({
   );
 
   return (
-    <footer className="border-t border-gray-300 screen-size-5:max-h-[740px] max-h-[430px] overflow-hidden">
+    <footer className="border-t border-gray-300 screen-size-5:max-h-[800px] max-h-[430px] overflow-hidden">
       <div
         className="
           grid
