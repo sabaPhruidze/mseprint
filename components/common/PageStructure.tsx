@@ -123,14 +123,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         </h3>
         <p className="mt-2 text-darkGray">
           {pageData.bulk_printing_paragraph.map((segment) => (
-            <>
+            <span key={segment.id}>
               {segment.content}
-              {segment.page && (
-                <strong className="font-bold text-darkGray">
-                  {segment.page}
-                </strong>
-              )}
-            </>
+              <strong className="font-bold text-darkGray">
+                {segment.page}
+              </strong>
+            </span>
           ))}
         </p>
 
@@ -202,7 +200,6 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           <p className="mt-2 text-darkGray">{pageData.faq_3_answer}</p>
         </div>
 
-        {/* FAQ #4 */}
         <div className="mt-4">
           <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
             {pageData.faq_4_question}
@@ -210,11 +207,22 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           <p className="mt-2 text-darkGray">{pageData.faq_4_answer}</p>
         </div>
 
-        {/* Get Started */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
           {pageData.get_started_heading}
         </h2>
-        <p className="mt-4 text-darkGray">{pageData.get_started_paragraph_1}</p>
+        <p className="mt-4 text-darkGray">
+          {pageData.get_started_paragraph_1.map((item) => (
+            <span key={item.id}>
+              {item.page && <span className="text-black"> {item.page} </span>}
+              {item.content && (
+                <span className="text-blue-600 font-semibold">
+                  {item.content}
+                </span>
+              )}
+            </span>
+          ))}
+        </p>
+
         <p className="mt-2 text-darkGray">{pageData.get_started_paragraph_2}</p>
       </div>
     </div>

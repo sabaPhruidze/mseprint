@@ -89,6 +89,6 @@ export interface PageStructureTypes {
   faq_4_question: string;
   faq_4_answer: string;
   get_started_heading: string;
-  get_started_paragraph_1: string;
+  get_started_paragraph_1: PagePathTypes[];
   get_started_paragraph_2: string;
 }
