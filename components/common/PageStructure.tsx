@@ -213,7 +213,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         <p className="mt-4 text-darkGray">
           {pageData.get_started_paragraph_1.map((item) => (
             <span key={item.id}>
-              {item.page && <span className="text-black"> {item.page} </span>}
+              {item.page && <span> {item.page} </span>}
               {item.content && (
                 <span className="text-blue-600 font-semibold">
                   {item.content}
