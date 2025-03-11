@@ -23,6 +23,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           CommercialDigitalPrintingPageData: CommercialDigitalPrintingPageData ?? [],
         };
       }
+      case "/printing-copying": {
+        const [PrintingCopyingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("printing_copying_page"),
+        ]);
+
+        return {
+          PrintingCopyingPageData: PrintingCopyingPageData ?? [],
+        };
+      }
 
       default:
         return {};
