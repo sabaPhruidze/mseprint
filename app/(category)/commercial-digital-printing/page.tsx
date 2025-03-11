@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Commercial Digital Printing | MSE Print",
   description:
     "Professional digital printing services from MSE Print. High-quality, fast, and cost-effective printing solutions for businesses.",
+  alternates: {
+    canonical: "https://www.mseprinting.com/commercial-digital-printing",
+  },
   metadataBase: new URL(
     "https://www.mseprinting.com/commercial-digital-printing"
   ),

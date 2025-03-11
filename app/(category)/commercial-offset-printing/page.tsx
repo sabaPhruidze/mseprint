@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Commercial Offset Printing | MSE Print",
   description:
     "Professional commercial offset printing services from MSE Print. Learn how offset printing can elevate your marketing materials.",
+  alternates: {
+    canonical: "https://www.mseprinting.com/commercial-offset-printing",
+  },
   metadataBase: new URL(
     "https://www.mseprinting.com/commercial-offset-printing"
   ),
