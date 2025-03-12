@@ -56,28 +56,28 @@ interface FAQItem {
 
 export interface PageStructureTypes {
   id: number;
-  mainImage: SEOImageProps;
-  secondaryImage?: SEOImageProps;
-  introSection: {
+  mainimage: SEOImageProps;
+  secondaryimage?: SEOImageProps;
+  introsection: {
     heading: string;
     paragraph: string;
   };
-  whyChooseSection: SectionContent;
-  servicesSection?: SectionContent;
-  offeringsSection?: SectionContent;
-  advancedFeatures?: {
+  whychoosesection: SectionContent;
+  servicessection?: SectionContent;
+  offeringssection?: SectionContent;
+  advancedfeatures?: {
     heading: string;
     customizationFinishing?: SectionContent;
     bulkPrinting?: SectionContent;
     convenientPrinting?: SectionContent;
   };
-  howToGetStarted?: SectionContent;
-  whyTrustUs?: SectionContent;
+  howtogetstarted?: SectionContent;
+  whytrustus?: SectionContent;
   faqs?: {
     heading: string;
     list: FAQItem[];
   };
-  getStartedSection?: {
+  getstartedsection?: {
     heading: string;
     steps: PagePathTypes[];
     finalParagraph?: string;

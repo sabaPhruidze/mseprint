@@ -17,15 +17,15 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         <div className="relative w-full screen-size-5:h-[400px] h-[600px]">
           <SEOImage
             src={
-              `/images/${pageData.mainImage.src}` ||
+              `/images/${pageData.mainimage.src}` ||
               "/images/home-images/additional/offset_printing_right.webp"
             }
-            alt={pageData.mainImage.alt || ""}
-            name={pageData.mainImage.name || ""}
-            geoData={pageData.mainImage.geoData || undefined}
-            priority={pageData.mainImage.priority || false}
-            loading={pageData.mainImage.priority ? undefined : "lazy"}
-            sizes={pageData.mainImage.sizes || ""}
+            alt={pageData.mainimage.alt || ""}
+            name={pageData.mainimage.alt || ""}
+            geoData={pageData.mainimage.geoData || undefined}
+            priority={pageData.mainimage.priority || false}
+            loading={pageData.mainimage.priority ? undefined : "lazy"}
+            sizes={pageData.mainimage.sizes || ""}
             width={700} //must be removed width changes
             height={200} // must be removed because height chnages
             fill={true}
@@ -35,11 +35,11 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center items-start text-white screen-size-15:text-left text-center">
             <div className="screen-size-15:w-[1200px] max-w-[1200px] max-w-full screen-size-15:ml-20 ml-0">
               <h1 className="screen-size-10:text-[50px] text-[30px] font-extrabold leading-tight text-white max-w-full">
-                {pageData.introSection.heading ||
+                {pageData.introsection.heading ||
                   "pageData.introSection.heading not written"}
               </h1>
               <p className="mb-2 leading-relaxed screen-size-15:my-8 my-0 screen-size-15:text-2xl text-xl">
-                {pageData.introSection.paragraph ||
+                {pageData.introsection.paragraph ||
                   "pageData.introSection.paragraph not written"}
               </p>
               {/* write only request a quote and will be static for all  */}
@@ -58,48 +58,48 @@ export default function PageStructure({ pageData }: PageStructureProps) {
       <div className="container mx-auto sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-15:text-left text-center">
         <div className="container py-8 max-w-[1500px] screen-size-15:text-left text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
-            {pageData.whyChooseSection.heading ||
+            {pageData.whychoosesection.heading ||
               "pageData.whyChooseSection.heading not written"}
           </h2>
           <div className="md:float-right md:max-w-[600px] md:ml-2 ml-0">
             <SEOImage
               src={
-                `/images/${pageData.secondaryImage?.src}` ||
+                `/images/${pageData.secondaryimage?.src}` ||
                 "/images/home-images/additional/offset_printing_right.webp"
               }
-              alt={pageData.secondaryImage?.alt || ""}
-              name={pageData.secondaryImage?.name || ""}
-              geoData={pageData.secondaryImage?.geoData || undefined}
-              priority={pageData.secondaryImage?.priority || false}
-              loading={pageData.secondaryImage?.priority ? undefined : "lazy"}
-              sizes={pageData.secondaryImage?.sizes || ""}
+              alt={pageData.secondaryimage?.alt || ""}
+              name={pageData.secondaryimage?.alt || ""}
+              geoData={pageData.secondaryimage?.geoData || undefined}
+              priority={pageData.secondaryimage?.priority || false}
+              loading={pageData.secondaryimage?.priority ? undefined : "lazy"}
+              sizes={pageData.secondaryimage?.sizes || ""}
               width={600} //must be removed
               height={400} //must be removed
             />
           </div>
           <div className="text-darkGray mt-4 ">
             <p>
-              {pageData.whyChooseSection.paragraph1 ||
+              {pageData.whychoosesection.paragraph1 ||
                 "pageData.whyChooseSection.paragraph1 not written"}
             </p>
-            <p className="mt-2">{pageData.whyChooseSection.paragraph2}</p>
+            <p className="mt-2">{pageData.whychoosesection.paragraph2}</p>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
-            {pageData.servicesSection?.heading ||
+            {pageData.servicessection?.heading ||
               "pageData.servicesSection.heading not written"}
           </h2>
           <p className="mt-4 text-darkGray">
-            {pageData.servicesSection?.paragraph1 ||
+            {pageData.servicessection?.paragraph1 ||
               "pageData.servicesSection.paragraph1 not written"}
           </p>
 
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
-            {pageData.offeringsSection?.heading ||
+            {pageData.offeringssection?.heading ||
               "pageData.offeringsSection.heading not written"}
           </h3>
           <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
-            {pageData.offeringsSection?.list?.map((item) => (
+            {pageData.offeringssection?.list?.map((item) => (
               <li key={item.id} className="text-darkGray">
                 <Link
                   href={item.path || "/"}
@@ -114,23 +114,23 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           </ul>
         </div>
 
-        {(pageData.advancedFeatures?.heading && (
+        {(pageData.advancedfeatures?.heading && (
           <>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
-              {pageData.advancedFeatures?.heading ||
+              {pageData.advancedfeatures?.heading ||
                 "pageData.advancedFeatures?.heading not written"}
             </h2>
             <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 ">
-              {pageData.advancedFeatures?.customizationFinishing?.heading ||
+              {pageData.advancedfeatures?.customizationFinishing?.heading ||
                 "pageData.advancedFeatures?.customizationFinishing?.heading not written"}
             </h3>
             <p className="mt-2 text-darkGray">
-              {pageData.advancedFeatures?.customizationFinishing?.paragraph1 ||
+              {pageData.advancedfeatures?.customizationFinishing?.paragraph1 ||
                 "pageData.advancedFeatures?.customizationFinishing?.paragraph1 not written"}
             </p>
             <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
-              {(pageData.advancedFeatures.customizationFinishing?.list &&
-                pageData.advancedFeatures.customizationFinishing?.list.map(
+              {(pageData.advancedfeatures.customizationFinishing?.list &&
+                pageData.advancedfeatures.customizationFinishing?.list.map(
                   (item) => (
                     <li key={item.id} className="text-darkGray">
                       <strong className="font-bold text-darkGray">
@@ -144,12 +144,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             </ul>
 
             <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
-              {pageData.advancedFeatures.bulkPrinting?.heading ||
+              {pageData.advancedfeatures.bulkPrinting?.heading ||
                 "pageData.advancedFeatures.bulkPrinting?.heading not written"}
             </h3>
             <p className="mt-2 text-darkGray">
-              {(pageData.advancedFeatures.bulkPrinting?.list &&
-                pageData.advancedFeatures.bulkPrinting?.list.map((segment) => (
+              {(pageData.advancedfeatures.bulkPrinting?.list &&
+                pageData.advancedfeatures.bulkPrinting?.list.map((segment) => (
                   <span key={segment.id}>
                     {segment.content}
                     <strong className="font-bold text-darkGray">
@@ -161,11 +161,11 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             </p>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-15:text-left">
-              {pageData.advancedFeatures.convenientPrinting?.heading}
+              {pageData.advancedfeatures.convenientPrinting?.heading}
             </h2>
             <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
-              {(pageData.advancedFeatures.convenientPrinting?.list &&
-                pageData.advancedFeatures.convenientPrinting?.list.map(
+              {(pageData.advancedfeatures.convenientPrinting?.list &&
+                pageData.advancedfeatures.convenientPrinting?.list.map(
                   (item) => (
                     <li key={item.id} className="text-darkGray">
                       {item.page && <strong>{item.page}: </strong>}
@@ -178,12 +178,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
 
             {/* How to Get Started */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
-              {pageData.howToGetStarted?.heading ||
+              {pageData.howtogetstarted?.heading ||
                 "pageData.howToGetStarted?.heading not written"}
             </h2>
             <ol className="list-decimal list-inside mt-2 space-y-2 text-darkGray">
-              {(pageData.howToGetStarted?.list &&
-                pageData.howToGetStarted?.list.map((step) => (
+              {(pageData.howtogetstarted?.list &&
+                pageData.howtogetstarted?.list.map((step) => (
                   <li key={step.id}>
                     {<strong itemProp="name">{step.page}: </strong>}
                     {<span itemProp="text">{step.content}</span>}
@@ -193,12 +193,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             </ol>
             {/* Why Trust Us */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
-              {pageData.whyTrustUs?.heading ||
+              {pageData.whytrustus?.heading ||
                 "pageData.whyTrustUs?.heading not written"}
             </h2>
             <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
-              {(pageData.whyTrustUs?.list &&
-                pageData.whyTrustUs?.list.map((item) => (
+              {(pageData.whytrustus?.list &&
+                pageData.whytrustus?.list.map((item) => (
                   <li key={item.id}>
                     {item.page && (
                       <strong itemProp="name">✅ {item.page}: </strong>
@@ -230,12 +230,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           "pageData.faqs?.items not written"}
 
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
-          {pageData.getStartedSection?.heading ||
+          {pageData.getstartedsection?.heading ||
             "pageData.getStartedSection?.heading not written"}
         </h2>
         <p className="mt-4 text-darkGray">
-          {(pageData.getStartedSection?.steps &&
-            pageData.getStartedSection?.steps?.map((item) => (
+          {(pageData.getstartedsection?.steps &&
+            pageData.getstartedsection?.steps?.map((item) => (
               <span key={item.id}>
                 {item.page && <span> {item.page} </span>}
                 {item.content && (
@@ -249,7 +249,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         </p>
 
         <p className="mt-2 text-darkGray">
-          {pageData.getStartedSection?.finalParagraph ||
+          {pageData.getstartedsection?.finalParagraph ||
             "pageData.getStartedSection?.finalParagraph not written"}
         </p>
       </div>

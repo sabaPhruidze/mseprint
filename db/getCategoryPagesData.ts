@@ -14,15 +14,15 @@ export const getCategoryPagesData = async (pathname: string) => {
         };
       }
 
-      // case "/commercial-digital-printing": {
-      //   const [CommercialDigitalPrintingPageData] = await Promise.all([
-      //     getDataPattern<PageStructureTypes>("commercial_digital_printing"),
-      //   ]);
+      case "/commercial-digital-printing": {
+        const [CommercialDigitalPrintingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("digital_printing_page"),
+        ]);
 
-      //   return {
-      //     CommercialDigitalPrintingPageData: CommercialDigitalPrintingPageData ?? [],
-      //   };
-      // }
+        return {
+          CommercialDigitalPrintingPageData: CommercialDigitalPrintingPageData ?? [],
+        };
+      }
       // case "/printing-copying": {
       //   const [PrintingCopyingPageData] = await Promise.all([
       //     getDataPattern<PageStructureTypes>("printing_copying_page"),
