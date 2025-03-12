@@ -61,8 +61,8 @@ export interface PageStructureTypes {
   second_image_priority: boolean;
   hero_section_heading: string;
   hero_section_paragraph: string;
-  hero_section_cta_text: string;
-  hero_section_cta_link: string;
+  hero_section_cta_text: string; //remove
+  hero_section_cta_link: string; //remove
   why_choose_offset_printing_heading: string;
   why_choose_offset_printing_paragraph_1: string;
   why_choose_offset_printing_paragraph_2: string;
@@ -94,4 +94,45 @@ export interface PageStructureTypes {
   get_started_heading?: string;
   get_started_paragraph_1: PagePathTypes[];
   get_started_paragraph_2?: string;
+}
+
+interface SectionContent {
+  heading: string;
+  paragraph?: string;
+  list?: PagePathTypes[];
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface PageStructure {
+  id: number;
+  mainImage: SEOImageProps;
+  secondaryImage?: SEOImageProps;
+  introSection: {
+    heading: string;
+    paragraph: string;
+  };
+  whyChooseSection: SectionContent;
+  servicesSection?: SectionContent;
+  offeringsSection?: SectionContent;
+  advancedFeatures?: {
+    heading: string;
+    customizationFinishing?: SectionContent;
+    bulkPrinting?: SectionContent;
+    convenientPrinting?: SectionContent;
+  };
+  howToGetStarted?: SectionContent;
+  whyTrustUs?: SectionContent;
+  faqs?: {
+    heading: string;
+    items: FAQItem[];
+  };
+  getStartedSection?: {
+    heading: string;
+    steps: PagePathTypes[];
+    finalParagraph?: string;
+  };
 }

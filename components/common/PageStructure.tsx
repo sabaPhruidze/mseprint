@@ -37,12 +37,13 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               <p className="mb-2 leading-relaxed screen-size-15:my-8 my-0 screen-size-15:text-2xl text-xl">
                 {pageData.hero_section_paragraph}
               </p>
+              {/* write only request a quote and will be static for all  */}
               <Link
-                href={pageData.hero_section_cta_link}
+                href="/request-quote"
                 aria-label={`Request a Quote: ${pageData.hero_section_cta_text}`}
                 className="inline-block bg-[#ff0015] text-white font-bold border-none rounded-[10px] px-8 py-5 transition duration-300 ease-in-out hover:bg-[#ff0015] hover:text-white focus:scale-90"
               >
-                {pageData.hero_section_cta_text}
+                Request a Quote
               </Link>
             </div>
           </div>
