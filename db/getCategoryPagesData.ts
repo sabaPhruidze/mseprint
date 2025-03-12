@@ -6,7 +6,7 @@ export const getCategoryPagesData = async (pathname: string) => {
     switch (pathname) {
       case "/commercial-offset-printing": {
         const [CommercialOffsetPrintingPageData] = await Promise.all([
-          getDataPattern<PageStructureTypes>("commercial_offset_printing_page"),
+          getDataPattern<PageStructureTypes>("offset_printing_page"),
         ]);
 
         return {
@@ -14,24 +14,24 @@ export const getCategoryPagesData = async (pathname: string) => {
         };
       }
 
-      case "/commercial-digital-printing": {
-        const [CommercialDigitalPrintingPageData] = await Promise.all([
-          getDataPattern<PageStructureTypes>("commercial_digital_printing"),
-        ]);
+      // case "/commercial-digital-printing": {
+      //   const [CommercialDigitalPrintingPageData] = await Promise.all([
+      //     getDataPattern<PageStructureTypes>("commercial_digital_printing"),
+      //   ]);
 
-        return {
-          CommercialDigitalPrintingPageData: CommercialDigitalPrintingPageData ?? [],
-        };
-      }
-      case "/printing-copying": {
-        const [PrintingCopyingPageData] = await Promise.all([
-          getDataPattern<PageStructureTypes>("printing_copying_page"),
-        ]);
+      //   return {
+      //     CommercialDigitalPrintingPageData: CommercialDigitalPrintingPageData ?? [],
+      //   };
+      // }
+      // case "/printing-copying": {
+      //   const [PrintingCopyingPageData] = await Promise.all([
+      //     getDataPattern<PageStructureTypes>("printing_copying_page"),
+      //   ]);
 
-        return {
-          PrintingCopyingPageData: PrintingCopyingPageData ?? [],
-        };
-      }
+      //   return {
+      //     PrintingCopyingPageData: PrintingCopyingPageData ?? [],
+      //   };
+      // }
 
       default:
         return {};
