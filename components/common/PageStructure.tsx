@@ -138,13 +138,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 ))}
             </p>
 
-            {/* Convenient Printing Services */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-15:text-left">
               {pageData.convenient_printing_heading}
             </h2>
             <ul className="list-disc space-y-2 pl-5">
               {pageData.convenient_printing_list &&
-                pageData.convenient_printing_list.map((item, index) => (
+                pageData.convenient_printing_list.map((item) => (
                   <li key={item.id} className="text-darkGray">
                     {item.page && <strong>{item.page}: </strong>}
                     {item.content && <span>{item.content}</span>}
