@@ -21,6 +21,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
             loading={card.priority ? undefined : "lazy"}
             sizes={card.sizes}
             fill
+            className="object-cover w-full h-full"
           />
         </div>
         <div className="p-4 flex-grow flex flex-col justify-between ">

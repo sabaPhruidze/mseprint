@@ -26,6 +26,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
           sizes={heroSection.sizes}
           fill
           objectFit="cover"
+          className="w-full h-[500px] object-cover"
         />
       </div>
       <div className="absolute inset-0 bg-black/50"></div>

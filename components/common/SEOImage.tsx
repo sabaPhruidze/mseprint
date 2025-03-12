@@ -1,8 +1,7 @@
 import Image from "next/image";
-import Head from "next/head";
 import { SEOImageProps } from "../../types/commonTypes";
 
-const SEOImage: React.FC<SEOImageProps> = ({
+const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
   src,
   alt,
   name,
@@ -14,6 +13,7 @@ const SEOImage: React.FC<SEOImageProps> = ({
   height,
   fill,
   objectFit,
+  className = "",
 }) => {
   const structuredData = {
     "@context": "http://schema.org",
@@ -42,16 +42,7 @@ const SEOImage: React.FC<SEOImageProps> = ({
 
   return (
     <>
-      <Head>
-        <title>{name}</title>
-        <meta name="description" content={alt} />
-        <meta property="og:image" content={src} />
-        <meta property="og:image:alt" content={alt} />
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      </Head>
-      <div className="relative w-full h-full">
+      <div className={`relative ${className}`}>
         <Image
           src={src}
           alt={alt}

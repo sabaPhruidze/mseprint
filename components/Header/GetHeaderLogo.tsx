@@ -17,6 +17,7 @@ const GetHeaderLogo = ({ LogoData }: { LogoData: SEOImageProps }) => {
           priority={LogoData.priority}
           sizes={LogoData.sizes}
           fill={true}
+          className="object-contain w-full h-full"
         />
       </div>
     </Link>

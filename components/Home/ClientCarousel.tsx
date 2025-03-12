@@ -54,9 +54,8 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               priority={carouselData[currentIndex].priority}
               loading={carouselData[currentIndex].priority ? undefined : "lazy"}
               sizes={carouselData[currentIndex].sizes}
-              width={700}
-              height={200}
               fill={true}
+              className="w-full h-[400px]"
               objectFit="cover"
             />
           </motion.div>

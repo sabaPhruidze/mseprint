@@ -26,8 +26,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             priority={pageData.mainimage.priority || false}
             loading={pageData.mainimage.priority ? undefined : "lazy"}
             sizes={pageData.mainimage.sizes || ""}
-            width={700} //must be removed width changes
-            height={200} // must be removed because height chnages
+            className="w-full h-[600px]  screen-size-5:h-[400px]"
             fill={true}
             objectFit="cover"
           />
@@ -61,7 +60,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             {pageData.whychoosesection.heading ||
               "pageData.whyChooseSection.heading not written"}
           </h2>
-          <div className="md:float-right md:max-w-[600px] md:ml-2 ml-0">
+          <div className="w-full screen-size-5:w-[400px] screen-size-10:w-[500px] h-[400px] mx-auto md:float-right md:ml-2 md:mr-0">
             <SEOImage
               src={
                 `/images/${pageData.secondaryimage?.src}` ||
@@ -73,8 +72,9 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               priority={pageData.secondaryimage?.priority || false}
               loading={pageData.secondaryimage?.priority ? undefined : "lazy"}
               sizes={pageData.secondaryimage?.sizes || ""}
-              width={600} //must be removed
-              height={400} //must be removed
+              className="w-full h-full"
+              fill={true}
+              objectFit="cover"
             />
           </div>
           <div className="text-darkGray mt-4 ">
