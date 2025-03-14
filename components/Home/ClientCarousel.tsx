@@ -47,7 +47,10 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
             transition={{ duration: 0.5 }}
           >
             <SEOImage
-              src={`/images/${carouselData[currentIndex].src}`}
+              src={
+                `/images/${carouselData[currentIndex].src}` ||
+                "/images/home-images/additional/offset_printing_right.webp"
+              }
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}

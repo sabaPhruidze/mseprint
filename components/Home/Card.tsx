@@ -13,7 +13,10 @@ const Card: React.FC<CardProps> = ({ card }) => {
       <div className="bg-white text-black rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[400px] mx-auto border border-mediumGray transition-transform transform hover:scale-105 cursor-pointer flex flex-col h-full">
         <div className="relative w-full h-[250px]">
           <SEOImage
-            src={`/images/${card.src}`}
+            src={
+              `/images/${card.src}` ||
+              "/images/home-images/additional/offset_printing_right.webp"
+            }
             alt={card.alt}
             name={card.alt}
             geoData={card.geoData}

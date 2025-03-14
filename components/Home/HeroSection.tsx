@@ -17,7 +17,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
     >
       <div className="absolute inset-0">
         <SEOImage
-          src={`/images/${heroSection.src}`}
+          src={
+            `/images/${heroSection.src}` ||
+            "/images/home-images/additional/offset_printing_right.webp"
+          }
           alt={heroSection.alt}
           name={heroSection.alt}
           geoData={heroSection.geoData}
