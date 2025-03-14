@@ -5,7 +5,6 @@ import PageStructure from "components/common/PageStructure";
 const PrintingCopying = async () => {
   const data = await getCategoryPagesData("/printing-copying");
   const pageData = data.PrintingCopyingPageData?.[0];
-
   if (!pageData) {
     return <div>Data not available.</div>;
   }

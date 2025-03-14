@@ -15,33 +15,37 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
   objectFit,
   className = "",
 }) => {
-  // const structuredData = {
-  //   "@context": "http://schema.org",
-  //   "@type": "ImageObject",
-  //   contentUrl: src,
-  //   description: alt,
-  //   name,
-  //   locationCreated: geoData
-  //     ? {
-  //         "@type": "Place",
-  //         name: geoData.location,
-  //         geo: {
-  //           "@type": "GeoCoordinates",
-  //           latitude: geoData.latitude,
-  //           longitude: geoData.longitude,
-  //         },
-  //         address: {
-  //           "@type": "PostalAddress",
-  //           addressLocality: geoData.location,
-  //           addressRegion: geoData.addressRegion || "",
-  //           addressCountry: "USA",
-  //         },
-  //       }
-  //     : undefined,
-  // };
+  const structuredData = {
+    "@context": "http://schema.org",
+    "@type": "ImageObject",
+    contentUrl: src,
+    description: alt,
+    name,
+    locationCreated: geoData
+      ? {
+          "@type": "Place",
+          name: geoData.location,
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: geoData.latitude,
+            longitude: geoData.longitude,
+          },
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: geoData.location,
+            addressRegion: geoData.addressRegion || "",
+            addressCountry: "USA",
+          },
+        }
+      : undefined,
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className={`relative ${className}`}>
         <Image
           src={src}
