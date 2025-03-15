@@ -52,7 +52,9 @@ const FooterTop: React.FC<FooterTopProps> = ({ footerTopData }) => {
             }}
           >
             <SEOImage
-              src={`images/footer-images/${icon.src}`}
+              src={`${process.env.PUBLIC_URL || ""}/images/footer-images/${
+                icon.src
+              }`}
               alt={icon.alt}
               name={icon.alt}
               geoData={icon.geoData}

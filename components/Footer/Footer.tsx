@@ -21,9 +21,7 @@ const Footer: React.FC<FooterProps> = ({
 }) => {
   return (
     <footer>
-      {footerTopData.length > 0 && (
-        <FooterTop footerTopData={footerTopData[0]} />
-      )}
+      <FooterTop footerTopData={footerTopData[0]} />
       <FooterContent footerContentData={footerContentData} />
       <FooterBottom footerBottomData={footerBottomData} />
     </footer>
