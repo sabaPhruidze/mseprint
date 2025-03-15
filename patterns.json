@@ -1,0 +1,474 @@
+
+    CREATE TABLE IF NOT EXISTS my_table (
+    id SERIAL PRIMARY KEY,
+    mainimage JSONB DEFAULT '{}' NOT NULL,
+    secondaryimage JSONB DEFAULT '{}' NOT NULL,
+    introsection JSONB DEFAULT '{}' NOT NULL,
+    whychoosesection JSONB DEFAULT '{}' NOT NULL,
+    servicessection JSONB DEFAULT '{}' NOT NULL,
+    offeringssection JSONB DEFAULT '{}' NOT NULL,
+    advancedfeatures JSONB DEFAULT '{}' NOT NULL,
+    howtogetstarted JSONB DEFAULT '{}' NOT NULL,
+    whytrustus JSONB DEFAULT '{}' NOT NULL,
+    faqs JSONB DEFAULT '{}' NOT NULL,
+    getstartedsection JSONB DEFAULT '{}' NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+); 
+// offeringsSection     advancedFeatures     howToGetStarted whyTrustUs faqs     getStartedSection
+INSERT INTO direct_mail_mailing_services (
+    mainimage,
+    secondaryimage,
+    introsection
+)
+VALUES (
+    '{
+      "src": "",
+      "alt": "",
+      "geoData": {
+        "location": "",
+        "latitude": ,
+        "longitude": ,
+        "addressRegion": ""
+      },
+      "sizes": "100vw",
+      "priority": true
+    }',
+    '{
+      "src": "",
+      "alt": "",
+      "geoData": {
+        "location": "",
+        "latitude":,
+        "longitude": ,
+        "addressRegion": ""
+      },
+      "sizes": "(min-width: 768px) 600px, 100vw",
+      "priority": false
+    }',
+    '{
+      "heading": "",
+      "paragraph": ""
+    }'
+);
+UPDATE direct_mail_mailing_services
+SET 
+  whychoosesection = '{
+    "heading": "",
+    "paragraph1": " ",
+    "paragraph2": "",
+    "list": [
+      {
+        "id": 1,
+        "page": " ",
+        "content": " "
+      },
+      {
+        "id": 2,
+        "page": " ",
+        "content": ""
+      },
+      {
+        "id": 3,
+        "page": "",
+        "content": ""
+      },
+      {
+        "id": 4,
+        "page": " ",
+        "content": " "
+      },
+      {
+        "id": 5,
+        "page": " ",
+        "content": " "
+      }
+    ]
+  }',
+  servicessection = '{
+    "heading": " ",
+    "paragraph1": ""
+  }',
+  updated_at = CURRENT_TIMESTAMP
+WHERE id = 1; 
+
+
+UPDATE direct_mail_mailing_services
+SET 
+  offeringssection = '{
+    "heading": "What We Offer:",
+    "list": [
+      {
+        "id": 1,
+        "page": " ",
+        "path": "/",
+        "content": " "
+      },
+      {
+        "id": 2,
+        "page": " ",
+        "path": "",
+        "content": " "
+      },
+      {
+        "id": 3,
+        "page": "",
+        "path": "",
+        "content": ""
+      },
+      {
+        "id": 4,
+        "page": "",
+        "path": "",
+        "content": " "
+      },
+      {
+        "id": 5,
+        "page": " ",
+        "path": "",
+        "content": ""
+      },
+      {
+        "id": 6,
+        "page": "",
+        "path": "",
+        "content": ""
+      }
+    ]
+}';
+UPDATE offset_printing_page
+SET advancedFeatures = '{
+  "heading": "",
+  "customizationFinishing": {
+    "heading": "",
+    "paragraph1": "",
+    "list": [
+        {"id":1,
+        "page":"",
+        "content":""
+        },
+        {
+        "id":2,
+        "page":"",
+        "content":""
+        },
+        {
+        "id":3,
+        "page":"",
+        "content":""
+        },
+        {
+        "id":4,
+        "page":"",
+        "content":""
+        }
+        ]  
+    },
+  "bulkPrinting": {
+    "heading": "",
+    "list": [
+        {"id":1,
+        "content":""
+        }
+        ]  
+    },
+  "convenientPrinting": {
+    "heading": "",
+    "list": [
+        {
+        "id":1,
+        "page":"",
+        "content":""},
+        {"id":2,
+        "page":"",
+        "content":""}]
+  }
+}',
+updated_at = CURRENT_TIMESTAMP
+WHERE id = 1;
+
+
+UPDATE offset_printing_page
+SET howToGetStarted = '{
+  "heading": "",
+  "list": [
+    {
+    "id":1,
+    "page":"",
+    "content":""},
+    {
+    "id":2,
+    "page":"",
+    "content":""},
+    {
+    "id":3,
+    "page":"",
+    "content":""},
+    {
+    "id":4,
+    "page":"",
+    "content":""},
+    {
+    "id":5,
+    "page":"",
+    "content":""
+    }
+]
+}',
+updated_at = CURRENT_TIMESTAMP
+WHERE id = 1;
+
+UPDATE direct_mail_mailing_services
+SET 
+    whyTrustUs = '{
+      "heading": "",
+      "list": 
+      [
+        {
+            "id":1,
+            "page":"",
+            "content":""
+            },
+            {
+            "id":2,
+            "page":"",
+            "content":""
+            },
+            {
+            "id":3,
+            "page":"",
+            "content":""
+            },
+            {
+            "id":4,
+            "page":"",
+            "content":""
+            },
+            {
+            "id":5,
+            "page":"",
+            "content":""
+            },
+            {
+            "id":6,
+            "page":"",
+            "content":""}]
+    }', 
+    updated_at = CURRENT_TIMESTAMP
+    WHERE id = 1;
+UPDATE direct_mail_mailing_services
+SET 
+    faqs = '{
+      "heading": " FAQs About Direct Mail & Mailing Services",
+      "list": [
+        {
+          "id": 1,
+          "question": "",
+          "answer": ""
+        },
+        {
+          "id": 2,
+          "question": "",
+          "answer": ""
+        },
+        {
+          "id": 3,
+          "question": "",
+          "answer": ""
+        },
+        {
+          "id": 4,
+          "question": " ",
+          "answer": ""
+        },
+        {
+          "id": 5,
+          "question": "",
+          "answer": ""
+        }
+      ]
+    }',
+    getStartedSection = '{
+      "heading": "",
+      "steps": [
+        {
+          "id": 1,
+          "page": "",
+          "content": ""
+        },
+        {
+          "id": 2,
+          "page": "",
+          "content": ""
+        },
+        {
+          "id": 3,
+          "page": "",
+          "content": ""
+        },
+        {
+          "id": 4,
+          "page": "",
+          "content": ""
+        }
+      ],
+      "finalParagraph": ""
+    }',
+    updated_at = CURRENT_TIMESTAMP
+WHERE id = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+თუ რამე მოხდა აქ სრულია
+export const pageData: PageStructureTypes = {
+  mainImage: {
+    src: "home-images/offset_printing.webp",
+    alt: "Commercial Offset Printing in Minneapolis: High-Quality, Large-Volume Printing",
+    
+    geoData: { latitude: 31.3152, location: "Enterprise", longitude: -85.8552, addressRegion: "Alabama" },
+    sizes: "100vw",
+    height: 400,
+    priority: true,
+  },
+  secondaryImage: {
+    src: "home-images/additional/offset_printing_right.webp",
+    alt: "Commercial Offset Printing in Minneapolis: High-Quality, Large-Volume Printing right side",
+    
+    geoData: { latitude: 31.8913, location: "Eufaula", longitude: -85.1455, addressRegion: "Alabama" },
+    sizes: "(min-width: 768px) 600px, 100vw",
+    priority: false,
+  },
+  introSection: {
+    heading: "Commercial Offset Printing in Minneapolis: High-Quality, Large-Volume Printing",
+    paragraph1:
+      "Commercial offset printing is a high-quality, cost-effective method for producing large volumes of printed materials like brochures, posters, and packaging. It offers sharp, vibrant images by transferring ink from a plate to a rubber blanket then onto the printing surface.",
+  },
+  whyChooseSection: {
+    heading: "Why Choose Offset Printing for Your Business?",
+    paragraph1:
+      "Offset printing is the gold standard for producing high-quality printed materials in large quantities. It offers precise color accuracy, sharp details, and cost-effective production, making it the ideal choice for businesses that need professional marketing materials, corporate branding, and bulk printing solutions.",
+    paragraph2:
+      "At MSE Printing, we use advanced offset printing technology to deliver exceptional results that enhance your brand's image.",
+  },
+  servicesSection: {
+    heading: "Custom Offset Printing Services in Minneapolis",
+    paragraph1:
+      "With years of experience serving businesses across Minneapolis, MSE Printing offers professional offset printing services that combine efficiency, quality, and affordability. Whether you need corporate brochures, promotional materials, or bulk business printing, we provide custom solutions tailored to your needs.",
+  },
+  offeringsSection: {
+    heading: "What We Offer:",
+    list: [{"id":1,"page":"Offset Printing","path":"/brochures-collateral","content":"Brochures & Collateral – Elevate your marketing efforts with professionally printed brochures, pamphlets, and collateral tailored to highlight your products, services, and brand identity. Our offset printing process ensures vibrant colors, sharp imagery, and premium paper quality, making your materials stand out at trade shows, sales meetings, or client presentations. Whether you need tri-fold brochures, multi-page pamphlets, or sleek sell sheets, we deliver consistent, high-quality results that captivate your audience and leave a lasting impression, helping you differentiate your business in a competitive market."},{"id":2,"page":"Custom business card printing","path":"/printing-copying/custom-business-card-printing","content":"Make a lasting impression with custom business cards that are tailored to your own personal brand image. At MSE Printing, we provide high-quality printing, premium finishes, and striking design to help your business cards leave a professional and lasting impression every time. From traditional to contemporary designs, we have an extensive range of materials and finishes, including matte, glossy, textured, and embossed finishes. Whether you're networking at an event or sitting down with a client, our custom business cards get you noticed, convey your message with clarity, and cement your professional relationships."},{"id":3,"page":"Newsletters, Flyers & Rack Cards","path":"/newsletters-flyers-rack-cards","content":"Our newsletters, flyers, and rack cards are expertly printed to help you communicate key updates, promotions, and product details with clarity and impact. Designed to capture attention with bold visuals and concise messaging, these materials are essential tools for engaging both existing customers and prospective clients. Whether you’re distributing monthly newsletters to keep your audience informed, handing out flyers at events to drive foot traffic, or displaying rack cards in high-traffic areas, our offset printing delivers stunning color accuracy, durable finishes, and professional polish that amplifies your outreach efforts and boosts brand recognition."},{"id":4,"page":"Manuals, Catalogs & Booklets","path":"/manuals-catalogs-booklets","content":"Transform your technical documentation, product showcases, or literary projects with our professional printing services for manuals, catalogs, and books. Leveraging advanced offset printing techniques, we provide exceptional detail, clarity, and color consistency across every page, ensuring your content is both visually appealing and easy to navigate. Ideal for user manuals requiring precise diagrams, product catalogs showcasing your inventory in vivid detail, or books needing a polished finish, we offer a range of binding options—like perfect binding, saddle stitching, or spiral binding—along with durable paper stocks to meet your specific needs and ensure long-term usability."},{"id":5,"page":"Labels, Stickers & Decals","path":"/labels-stickers-decals","content":"Create standout labels, stickers, and decals customized to your brand’s exact specifications with our high-quality offset printing services. Perfect for product packaging, promotional giveaways, or branding initiatives, our prints feature rich colors, sharp designs, and durable materials that withstand wear, weather, and time. Whether you need eye-catching product labels to boost shelf appeal, custom stickers for marketing campaigns, or decals for equipment and vehicles, we offer a variety of adhesives, finishes (like matte, gloss, or UV coating), and die-cut shapes to ensure your designs not only look fantastic but also perform reliably in any environment."},{"id":6,"page":"Presentation & Training Materials","path":"/presentation-training-materials","content":"Enhance your corporate presentations, training programs, and seminars with professionally designed and printed materials that elevate your message and engage your audience. Our offset printing ensures razor-sharp text, vibrant graphics, and consistent quality across handouts, workbooks, and visual aids, all crafted on durable, high-grade paper. From detailed slide decks to comprehensive training manuals, we provide custom solutions like tabbed dividers, glossy covers, or laminated sheets to make your content accessible and impactful. Equip your team or attendees with materials that reflect your professionalism and support effective learning and communication."},{"id":7,"page":"Book Printing","path":"/printing-copying/book-printing","content":"Bring your stories, expertise, or business insights to life with our high-quality offset printing services tailored for authors, publishers, and organizations. We specialize in producing professionally bound books with superior print clarity, consistent color reproduction, and a range of customization options to suit your vision. Whether you’re printing educational textbooks, corporate histories, or literary novels, choose from hardcover, softcover, or perfect binding, along with premium paper stocks and finishes like dust jackets or embossing. Our meticulous process ensures every copy meets the highest standards, delivering a product you’ll be proud to share or sell."},{"id":8,"page":"Presentation & Training Materials","path":"/presentation-training-materials","content":"Make your presentations and training sessions unforgettable with expertly printed handouts, binders, and supplementary materials designed for clarity and durability. Our offset printing services guarantee crisp readability, polished visuals, and a professional appearance that enhances your credibility. Customize your materials with features like full-color inserts, perforated pages, or sturdy ring-bound formats to facilitate interactive learning and seamless note-taking. Ideal for workshops, corporate meetings, or educational courses, our high-quality prints ensure your audience stays engaged and retains your message long after the session ends."},{"id":9,"page":"Postcards & Direct Mailers","path":"/postcards-direct-mailers","content":"Engage your target audience directly and effectively with custom-designed postcards and direct mailers that demand attention. Our offset printing process delivers vibrant colors, high-resolution imagery, and a premium feel that makes your marketing campaigns pop in crowded mailboxes. Whether you’re launching a promotional offer, inviting customers to an event, or building brand awareness, we offer a variety of sizes, paper weights, and finishes—like aqueous coating or spot UV—to maximize impact. Pair our precision printing with targeted mailing services for a powerful, cost-effective way to drive responses and grow your business."}]      
+  },
+  advancedFeatures: {
+    heading: "Advanced Features for Superior Offset Printing",
+    customizationFinishing: {
+      heading: "Customization & Finishing Options",
+      paragraph1: "Your printed materials should reflect your brand's quality and professionalism. We offer a variety of customizations:",
+      list: [
+        { id: 1, page: "Paper Stock", content: "Glossy, matte, and eco-friendly recycled options." },
+        { id: 2, page: "Finishing Touches", content: "Enhance your prints with UV coating, embossing, and foil stamping." },
+        { id: 3, page: "Binding Styles", content: "Perfect binding, saddle stitching, and spiral binding available." },
+        { id: 4, page: "Custom Sizes & Formats", content: "Print projects tailored to your exact specifications." },
+      ],
+    },
+  whyChooseSection: {
+    heading: "Why Choose Offset Printing for Your Business?",
+    paragraph1:
+      "Offset printing is the gold standard for producing high-quality printed materials in large quantities. It offers precise color accuracy, sharp details, and cost-effective production, making it the ideal choice for businesses that need professional marketing materials, corporate branding, and bulk printing solutions.",
+    paragraph2:
+      "At MSE Printing, we use advanced offset printing technology to deliver exceptional results that enhance your brand's image.",
+  },
+    bulkPrinting: {
+    heading: "Bulk Printing for Cost Efficiency",
+    list: [
+      { id: 1, page: "Offset printing is the best choice for", content: " large print runs " },
+      { id: 2, page: "while providing", content: " lower costs per piece " },
+  { id: 3, page: "while maintaining the highest print quality.", content: "" },
+    ],
+  },
+  convenientPrinting: {
+    heading: "Convenient Printing Services for Minneapolis Businesses",
+    list: [
+      { id: 1, page: "Local Pickup or Delivery: ", content: "Visit us at 3839 Washington Ave N, Minneapolis, MN 55412, or opt for fast delivery to your location." },
+      { id: 2, page: "Rush Orders Available: ", content: "Need prints quickly? We offer expedited printing service." },
+  
+    ],
+  },
+    },
+  howToGetStarted: {
+    heading: "How to Get Started with Offset Printing in Minneapolis",
+    list: [
+      { id: 1, page: "Consultation", content: "Share details about your printing project, including your objectives, desired print quantities, preferred formats, and any specific design or material requirements. Our experts will guide you through every step." },
+      { id: 2, page: "Design Collaboration", content: "Submit your existing artwork or partner closely with our experienced design team to create visually impactful and effective materials that align perfectly with your brand and marketing goals." },
+      { id: 3, page: "Proof Approval", content: "Receive a detailed digital or physical proof of your project for thorough review. Approve or request adjustments to ensure the final product meets your exact expectations and quality standards before production begins." },
+      { id: 4, page: "Production & Printing", content: "Once approved, your materials are produced using advanced offset printing technology, guaranteeing vibrant colors, precision, consistency, and unmatched quality tailored specifically to your project's needs." },
+      { id: 5, page: "Local Pickup or Delivery", content: "Conveniently receive your professionally printed materials either through local pickup or fast, reliable delivery directly to your business or designated location, ensuring timely arrival for immediate use." },
+    ],
+  },
+  whyTrustUs: {
+    heading: "Why Minneapolis Businesses Trust MSE Printing for Offset Printing",
+    list: [
+      { id: 1, page: "✅ Professional Quality: ", content: "Crisp images, precise color matching, and durable materials." },
+      { id: 2, page: "✅ Cost-Effective Solutions: ", content: "Bulk printing at competitive prices." },
+       { id: 3, page: "✅ Eco-Friendly Options: ", content: "Sustainable printing with recycled paper and non-toxic inks." },
+      { id: 4, page: "✅ Reliable Turnaround Times: ", content: "On-time delivery for all orders." },
+      { id: 5, page: "✅ Dedicated Customer Support: ", content: "Call 612-522-7600 for expert assistance." },
+    ],
+  },
+  faqs: {
+    heading: "FAQs About Offset Printing in Minneapolis",
+    list: [
+      { id: 1, question: "Q: What is offset printing best for?", answer: "A: It's ideal for large-scale orders, including brochures, catalogs, business reports, and promotional materials." },
+      { id: 2, question: "Q: How does offset printing compare to digital printing?", answer: "A: Offset printing provides better color accuracy and is more cost-effective for large print runs, while digital printing is better for small batches." },
+       { id: 3, question: "Q: Do you offer design assistance?", answer: "A: Yes! Our design team can create layouts that align with your brand." },
+       { id: 4, question: "Q: What is the turnaround time?", answer: "A: Standard production takes 5-7 business days, with rush options available." },
+    ],
+  },
+  getStartedSection: {
+    heading: "Get Started with Commercial Offset Printing Today!",
+    steps: [
+      { id: 1, page: "Ensure your brand stands out with high-quality offset printing from MSE Printing. Contact us at", content: " info@mseprinting.com " },
+      { id: 2, page: "or call", content: " 612-522-7600 " },
+      { id: 3, page: "to discuss your printing needs.", content: "" },
+    ],
+    finalParagraph: "📍 From Vision to Print, We Bring Your Ideas to Life.",
+  },
+};

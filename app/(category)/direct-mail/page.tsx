@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
 const DirectMailMailingServices = async () => {
   const data = await getCategoryPagesData("/direct-mail");
-  const pageData = data.DirectMailMailingServices?.[0];
+  const pageData = data.DirectMailMailingServicesPageData?.[0];
 
   if (!pageData) {
     return <div>Data not available.</div>;

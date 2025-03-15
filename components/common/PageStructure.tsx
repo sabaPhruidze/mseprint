@@ -54,8 +54,8 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         </div>
       </section>
 
-      <div className="container mx-auto sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-15:text-left text-center">
-        <div className="container py-8 max-w-[1500px] screen-size-15:text-left text-center">
+      <div className="container mx-auto sm:px-6 md:px-8 py-8 max-w-[1500px] screen-size-10:text-left text-center">
+        <div className="container py-8 max-w-[1500px] screen-size-10:text-left text-center">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
             {pageData.whychoosesection.heading ||
               "pageData.whyChooseSection.heading not written"}
@@ -106,7 +106,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               "pageData.servicesSection.paragraph1 not written"}
           </p>
 
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-15:text-left">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black mt-4 screen-size-10:text-left">
             {pageData.offeringssection?.heading ||
               "pageData.offeringsSection.heading not written"}
           </h3>
@@ -155,7 +155,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 "pageData.advancedFeatures.customizationFinishing?.list not written"}
             </ul>
 
-            <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
+            <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-10:text-left">
               {pageData.advancedfeatures.bulkPrinting?.heading ||
                 "pageData.advancedFeatures.bulkPrinting?.heading not written"}
             </h3>
@@ -172,7 +172,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 "pageData.advancedFeatures.bulkPrinting?.list not written"}
             </p>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-15:text-left">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-10:text-left">
               {pageData.advancedfeatures.convenientPrinting?.heading}
             </h2>
             <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
@@ -189,7 +189,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             </ul>
 
             {/* How to Get Started */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-10:text-left">
               {pageData.howtogetstarted?.heading ||
                 "pageData.howToGetStarted?.heading not written"}
             </h2>
@@ -204,7 +204,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 "pageData.howToGetStarted?.list not written"}
             </ol>
             {/* Why Trust Us */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-10:text-left">
               {pageData.whytrustus?.heading ||
                 "pageData.whyTrustUs?.heading not written"}
             </h2>
@@ -227,13 +227,13 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           ""}
 
         {/* FAQs */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-10:text-left">
           {pageData.faqs?.heading || "pageData.faqs?.heading not written"}
         </h2>
         {(pageData.faqs?.list &&
           pageData.faqs.list?.map((faqItem, index) => (
             <div className="mt-4" key={index}>
-              <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-15:text-left">
+              <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-10:text-left">
                 {faqItem.question}
               </h3>
               <p className="mt-2 text-darkGray">{faqItem.answer}</p>
@@ -241,7 +241,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           ))) ||
           "pageData.faqs?.items not written"}
 
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-10:text-left">
           {pageData.getstartedsection?.heading ||
             "pageData.getStartedSection?.heading not written"}
         </h2>

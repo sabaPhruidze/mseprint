@@ -33,12 +33,21 @@ export const getCategoryPagesData = async (pathname: string) => {
         };
       }
       case "/direct-mail": {
-        const [DirectMailMailingServices] = await Promise.all([
+        const [DirectMailMailingServicesPageData] = await Promise.all([
           getDataPattern<PageStructureTypes>("direct_mail_mailing_services"),
         ]);
 
         return {
-          DirectMailMailingServices: DirectMailMailingServices ?? [],
+          DirectMailMailingServicesPageData: DirectMailMailingServicesPageData ?? [],
+        };
+      }
+      case "/signs": {
+        const [SignsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("signs_page"),
+        ]);
+
+        return {
+          SignsPageData: SignsPageData ?? [],
         };
       }
 
