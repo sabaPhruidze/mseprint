@@ -32,6 +32,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           PrintingCopyingPageData: PrintingCopyingPageData ?? [],
         };
       }
+      case "/direct-mail": {
+        const [DirectMailMailingServices] = await Promise.all([
+          getDataPattern<PageStructureTypes>("direct_mail_mailing_services"),
+        ]);
+
+        return {
+          DirectMailMailingServices: DirectMailMailingServices ?? [],
+        };
+      }
 
       default:
         return {};

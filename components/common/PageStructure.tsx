@@ -83,6 +83,18 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 "pageData.whyChooseSection.paragraph1 not written"}
             </p>
             <p className="mt-2">{pageData.whychoosesection.paragraph2}</p>
+            <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+              {(pageData.whychoosesection.list &&
+                pageData.whychoosesection.list.map((item) => (
+                  <li key={item.id} className="text-darkGray">
+                    <strong className="font-bold text-darkGray">
+                      {item.page}
+                    </strong>
+                    <span className="text-darkGray"> - {item.content}</span>
+                  </li>
+                ))) ||
+                ""}
+            </ul>
           </div>
 
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 ">
@@ -212,7 +224,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             </ul>
           </>
         )) ||
-          "pageData.advancedFeatures?.heading not written"}
+          ""}
 
         {/* FAQs */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-15:text-left">
