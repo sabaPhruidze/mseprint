@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import Header from "../components/Header/Header";
 import { getHeaderData } from "../db/getHeaderData";
 import { getFooterData } from "../db/GetFooterData";
-
 import Footer from "../components/Footer/Footer";
 
 const interBold = localFont({
@@ -48,7 +47,7 @@ export default async function RootLayout({
           ${interMedium.variable} 
           min-h-screen flex flex-col font-inter-medium`}
       >
-        <Header {...headerData} />
+        <Header {...headerData} servicesData={footerData.footerContentData} />
         <main className="flex-grow">{children}</main>
         <Footer {...footerData} />
       </body>
