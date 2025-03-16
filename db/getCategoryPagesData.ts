@@ -59,7 +59,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           OnlineOrderingPortalsPageData: OnlineOrderingPortalsPageData ?? [],
         };
       }
+      case "/banners-posters": {
+        const [BannersPostersPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("banners_posters_page"),
+        ]);
 
+        return {
+          BannersPostersPageData: BannersPostersPageData ?? [],
+        };
+      }
+      
       default:
         return {};
     }

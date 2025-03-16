@@ -24,8 +24,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
           alt={heroSection.alt}
           name={heroSection.alt}
           geoData={heroSection.geoData}
-          priority={heroSection.priority}
-          loading={heroSection.priority ? undefined : "lazy"}
+          priority={true} // explicitly high priority for hero image
           sizes={heroSection.sizes}
           fill
           objectFit="cover"

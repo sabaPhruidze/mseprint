@@ -14,6 +14,8 @@ interface ClientCarouselProps {
 const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  if (!carouselData || carouselData.length === 0) return null;
+
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
   };
@@ -54,8 +56,8 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}
-              priority={carouselData[currentIndex].priority}
-              loading={carouselData[currentIndex].priority ? undefined : "lazy"}
+              priority={currentIndex === 0}
+              loading={currentIndex === 0 ? undefined : "lazy"}
               sizes={carouselData[currentIndex].sizes}
               fill={true}
               className="w-full h-[400px]"

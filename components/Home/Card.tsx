@@ -1,13 +1,14 @@
 import React from "react";
-import { SEOImageProps } from "../../types/commonTypes";
 import Link from "next/link";
+import { SEOImageProps } from "../../types/commonTypes";
 import SEOImage from "../../components/common/SEOImage";
 
 interface CardProps {
   card: SEOImageProps;
+  priority?: boolean;
 }
 
-const Card: React.FC<CardProps> = ({ card }) => {
+const Card: React.FC<CardProps> = ({ card, priority }) => {
   return (
     <Link href={card.path || "/"} passHref>
       <div className="bg-white text-black rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[400px] mx-auto border border-mediumGray transition-transform transform hover:scale-105 cursor-pointer flex flex-col h-full">
@@ -20,8 +21,8 @@ const Card: React.FC<CardProps> = ({ card }) => {
             alt={card.alt}
             name={card.alt}
             geoData={card.geoData}
-            priority={card.priority}
-            loading={card.priority ? undefined : "lazy"}
+            priority={priority}
+            loading={priority ? undefined : "lazy"}
             sizes={card.sizes}
             fill
             className="object-cover w-full h-full"
