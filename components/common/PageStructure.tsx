@@ -234,9 +234,9 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           pageData.faqs.list?.map((faqItem, index) => (
             <div className="mt-4" key={index}>
               <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-10:text-left">
-                {faqItem.question}
+                Q: {faqItem.question}
               </h3>
-              <p className="mt-2 text-darkGray">{faqItem.answer}</p>
+              <p className="mt-2 text-darkGray">A: {faqItem.answer}</p>
             </div>
           ))) ||
           "pageData.faqs?.items not written"}
