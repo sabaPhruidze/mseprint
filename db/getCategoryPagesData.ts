@@ -68,10 +68,20 @@ export const getCategoryPagesData = async (pathname: string) => {
           BannersPostersPageData: BannersPostersPageData ?? [],
         };
       }
-      
+      case "/brochures-collateral": {
+        const [BrochuresCollateralPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("brochures_collateral_page"),
+        ]);
+
+        return {
+          BrochuresCollateralPageData: BrochuresCollateralPageData ?? [],
+        };
+      }
+
       default:
         return {};
     }
+    
   } catch (error) {
     console.error("Error fetching category pages data:", error);
     return {};
