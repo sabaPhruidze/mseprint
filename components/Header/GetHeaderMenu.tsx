@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { PagePathTypes, ServicesPathTypes } from "../../types/commonTypes";
 import GetDropDown from "./GetDropDown";
 
@@ -15,45 +15,72 @@ export default function GetHeaderMenu({
   servicesData,
 }: GetHeaderMenuProps) {
   const [hovered, setHovered] = useState(false);
+  const [buttonWidth, setButtonWidth] = useState<number>(0);
+
+  // This ref is only for the "Products & Services" link
+  const linkRef = useRef<HTMLAnchorElement | null>(null);
+
+  // Whenever we hover on the "Products & Services" link, recalc width
+  const handleMouseEnterProducts = () => {
+    setHovered(true);
+    if (linkRef.current) {
+      setButtonWidth(linkRef.current.offsetWidth);
+    }
+  };
+
+  // If you wish to update width on window resize as well, you can do so:
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (linkRef.current) {
+        setButtonWidth(linkRef.current.offsetWidth);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <nav
       role="navigation"
       aria-label="Main navigation"
-      className="h-full relative"
+      className="relative h-full"
     >
-      <ul className="flex gap-6 h-full items-center">
+      <ul className="flex h-full items-center gap-6">
         {menuData.map((item) => {
-          // Check if this item is the "Products & Services" link
           const isProducts = item.page === "Products & Services";
 
           return (
             <li
               key={item.id}
-              className="h-full flex items-center"
-              onMouseEnter={() => isProducts && setHovered(true)}
+              className="relative flex h-full items-center"
+              onMouseEnter={isProducts ? handleMouseEnterProducts : undefined}
               onMouseLeave={() => isProducts && setHovered(false)}
             >
               <Link
+                ref={isProducts ? linkRef : null}
                 href={item.path || "/"}
                 aria-label={`Go to ${item.page}`}
                 className={`
                   font-inter-extrabold
-                  h-full
-                  flex
-                  items-center
-                  px-3
-                  underline
                   font-bold
+                  underline
                   screen-size-26:text-3xl
                   screen-size-20:text-2xl
                   screen-size-18:text-3xl
                   screen-size-5:text-2xl
                   text-md
+                  flex
+                  h-full
+                  items-center
+                  px-3
                   transition-all
                   duration-700
-                  ${!isProducts ? "hover:bg-white hover:text-black" : ""}
-                  ${isProducts && hovered ? "bg-white text-black" : ""}
+                  ${
+                    isProducts && hovered
+                      ? "bg-white text-black"
+                      : "hover:bg-white hover:text-black"
+                  }
                 `}
                 style={{
                   color:
@@ -64,8 +91,14 @@ export default function GetHeaderMenu({
               </Link>
 
               {hovered && isProducts && (
-                <div className="absolute top-full left-0 bg-white shadow-xl rounded-md z-50 flex">
-                  <GetDropDown data={servicesData} />
+                <div
+                  className="absolute left-0 top-full z-50 flex bg-white shadow-xl rounded-md"
+                  // So the dropdown attaches directly below
+                >
+                  <GetDropDown
+                    data={servicesData}
+                    buttonWidth={buttonWidth || undefined}
+                  />
                 </div>
               )}
             </li>

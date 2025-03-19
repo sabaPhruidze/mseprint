@@ -7,10 +7,10 @@ import { ServicesPathTypes } from "../../types/commonTypes";
 
 interface GetDropDownProps {
   data: ServicesPathTypes[];
+  buttonWidth?: number;
 }
 
-const GetDropDown: React.FC<GetDropDownProps> = ({ data }) => {
-  // Separate main categories (left) vs. subcategories (right)
+const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
   const leftItems = useMemo(
     () => data.filter((item) => !item.parent_id),
     [data]
@@ -20,57 +20,50 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data }) => {
     [data]
   );
 
-  // Track which category is currently hovered
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const currentPath = usePathname();
 
-  // Whenever the URL changes, reset the dropdown
   useEffect(() => {
-    setActiveCategory(null);
+    setActiveCategory(null); // Reset on route change
   }, [currentPath]);
 
-  // Filter rightItems by the active category
   const filteredRightItems = useMemo(
     () => rightItems.filter((item) => item.parent_id === activeCategory),
     [rightItems, activeCategory]
   );
 
-  // Identify the item being hovered
   const activeItem = useMemo(
     () => leftItems.find((item) => item.id === activeCategory) || null,
     [leftItems, activeCategory]
   );
 
-  // Decide when to show the right column
   const showRightColumn = useMemo(() => {
-    if (!activeItem) return false; // No category hovered
+    if (!activeItem) return false;
     const lowerTitle = activeItem.title.toLowerCase();
-
-    // Hide if these categories are hovered
-    if (["online ordering portals", "graphic design"].includes(lowerTitle)) {
-      return false;
-    }
-
-    // Show only if sub-items exist
-    return filteredRightItems.length > 0;
+    return (
+      !["online ordering portals", "graphic design"].includes(lowerTitle) &&
+      filteredRightItems.length > 0
+    );
   }, [activeItem, filteredRightItems]);
 
-  // Close the dropdown on mouse leave
-  const handleMouseLeave = useCallback(() => {
-    setActiveCategory(null);
-  }, []);
+  const handleMouseLeave = useCallback(() => setActiveCategory(null), []);
 
   return (
     <div
       className="flex rounded-xl shadow-lg border border-gray-200 overflow-hidden"
       onMouseLeave={handleMouseLeave}
     >
-      {/* LEFT COLUMN: Main Categories */}
-      <div className="bg-white w-64 flex-shrink-0">
+      {/* Left Column */}
+      <div
+        className="bg-white flex-shrink-0"
+        style={{ width: buttonWidth ? `${buttonWidth}px` : "16rem" }}
+      >
         <ul className="flex flex-col">
           {leftItems.map((item) => (
             <li key={item.id} onMouseEnter={() => setActiveCategory(item.id)}>
-              <Link href={item.path || "/"}>
+              <Link
+                href={item.path?.startsWith("/") ? item.path : `/${item.path}`}
+              >
                 <p
                   className={`block px-4 py-3 cursor-pointer transition-colors duration-200 text-sm ${
                     activeCategory === item.id
@@ -85,12 +78,31 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data }) => {
           ))}
         </ul>
       </div>
+
+      {/* Right Column */}
       {showRightColumn && (
-        <div className="bg-gray-50 px-6 py-4 min-w-[200px] border-l border-gray-300">
+        <div
+          className="
+            bg-gray-50
+            px-6
+            py-4
+            min-w-[200px]
+            border-l
+            border-gray-300
+            hidden
+            screen-size-5:block
+          "
+        >
           <ul className="space-y-2">
             {filteredRightItems.map((subItem) => (
               <li key={subItem.id}>
-                <Link href={subItem.path || "/"}>
+                <Link
+                  href={
+                    subItem.path.startsWith("/")
+                      ? subItem.path
+                      : `/${subItem.path}`
+                  }
+                >
                   <p className="block px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md transition-colors duration-150">
                     {subItem.title}
                   </p>
