@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ServicesPathTypes } from "../../types/commonTypes";
@@ -22,10 +28,18 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
 
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const currentPath = usePathname();
+  const leftSideRef = useRef<HTMLUListElement>(null);
+  const [leftSideHeight, setLeftSideHeight] = useState<number>(0);
 
   useEffect(() => {
-    setActiveCategory(null); // Reset on route change
+    setActiveCategory(null);
   }, [currentPath]);
+
+  useEffect(() => {
+    if (leftSideRef.current) {
+      setLeftSideHeight(leftSideRef.current.offsetHeight);
+    }
+  }, [leftItems]);
 
   const filteredRightItems = useMemo(
     () => rightItems.filter((item) => item.parent_id === activeCategory),
@@ -46,30 +60,50 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
     );
   }, [activeItem, filteredRightItems]);
 
-  const handleMouseLeave = useCallback(() => setActiveCategory(null), []);
+  const handleMouseLeave = useCallback(() => {
+    setActiveCategory(null);
+  }, []);
+
+  // Unified click handler for closing the dropdown
+  const handleLinkClick = useCallback(() => {
+    setActiveCategory(null);
+  }, []);
 
   return (
     <div
-      className="flex rounded-xl shadow-lg border border-gray-200 overflow-hidden"
+      className="flex overflow-hidden rounded-xl border border-gray-200 shadow-lg"
       onMouseLeave={handleMouseLeave}
     >
-      {/* Left Column */}
+      {/* LEFT COLUMN */}
       <div
         className="bg-white flex-shrink-0"
         style={{ width: buttonWidth ? `${buttonWidth}px` : "16rem" }}
       >
-        <ul className="flex flex-col">
+        <ul ref={leftSideRef} className="flex flex-col">
           {leftItems.map((item) => (
             <li key={item.id} onMouseEnter={() => setActiveCategory(item.id)}>
               <Link
                 href={item.path?.startsWith("/") ? item.path : `/${item.path}`}
+                onClick={handleLinkClick} // Added click handler
               >
                 <p
-                  className={`block px-4 py-3 cursor-pointer transition-colors duration-200 text-sm ${
-                    activeCategory === item.id
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-800 hover:bg-blue-600 hover:text-white"
-                  }`}
+                  className={`
+                    block px-4 py-3 
+                    text-sm font-medium
+                    transition-colors duration-200
+                    border border-gray-300
+                    rounded-md
+                    ${
+                      activeCategory === item.id
+                        ? "bg-blue-600 text-white"
+                        : "text-gray-800 hover:bg-gray-100 hover:text-blue-600"
+                    }
+                  `}
+                  style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
                 >
                   {item.title}
                 </p>
@@ -79,21 +113,24 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
         </ul>
       </div>
 
-      {/* Right Column */}
+      {/* RIGHT COLUMN */}
       {showRightColumn && (
         <div
           className="
-            bg-gray-50
-            px-6
-            py-4
-            min-w-[200px]
-            border-l
-            border-gray-300
             hidden
             screen-size-5:block
+            bg-white
+            border-l
+            border-gray-300
+            p-4
+            overflow-y-auto
+            overflow-x-hidden
           "
+          style={{
+            maxHeight: leftSideHeight ? `${leftSideHeight}px` : undefined,
+          }}
         >
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-2 items-start">
             {filteredRightItems.map((subItem) => (
               <li key={subItem.id}>
                 <Link
@@ -102,8 +139,30 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
                       ? subItem.path
                       : `/${subItem.path}`
                   }
+                  onClick={handleLinkClick} // Unified click handler
                 >
-                  <p className="block px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-100 rounded-md transition-colors duration-150">
+                  <p
+                    className="
+                      block
+                      border border-gray-300
+                      rounded-md
+                      transition-colors
+                      duration-150
+                      text-gray-800
+                      text-sm
+                      font-medium
+                      px-3
+                      py-2
+                      hover:text-blue-600
+                      hover:bg-gray-100
+                    "
+                    style={{
+                      width: "250px",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
                     {subItem.title}
                   </p>
                 </Link>
