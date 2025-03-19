@@ -10,7 +10,7 @@ interface GetDropDownProps {
 }
 
 const GetDropDown: React.FC<GetDropDownProps> = ({ data }) => {
-  // Filter main categories and sub-items
+  // Separate main categories (left) vs. subcategories (right)
   const leftItems = useMemo(
     () => data.filter((item) => !item.parent_id),
     [data]
@@ -20,45 +20,52 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data }) => {
     [data]
   );
 
+  // Track which category is currently hovered
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const currentPath = usePathname();
 
-  // Reset active category when path changes
+  // Whenever the URL changes, reset the dropdown
   useEffect(() => {
     setActiveCategory(null);
   }, [currentPath]);
 
-  // Filter sub-items based on active category
+  // Filter rightItems by the active category
   const filteredRightItems = useMemo(
     () => rightItems.filter((item) => item.parent_id === activeCategory),
     [rightItems, activeCategory]
   );
 
+  // Identify the item being hovered
   const activeItem = useMemo(
-    () => leftItems.find((item) => item.id === activeCategory),
+    () => leftItems.find((item) => item.id === activeCategory) || null,
     [leftItems, activeCategory]
   );
 
-  // Determine when to show right column
-  const showRightColumn = useMemo(
-    () =>
-      activeCategory !== null &&
-      activeItem &&
-      !["online ordering portals", "graphic design"].includes(
-        activeItem.title.toLowerCase()
-      ) &&
-      filteredRightItems.length > 0,
-    [activeCategory, activeItem, filteredRightItems]
-  );
+  // Decide when to show the right column
+  const showRightColumn = useMemo(() => {
+    if (!activeItem) return false; // No category hovered
+    const lowerTitle = activeItem.title.toLowerCase();
 
-  const handleMouseLeave = useCallback(() => setActiveCategory(null), []);
+    // Hide if these categories are hovered
+    if (["online ordering portals", "graphic design"].includes(lowerTitle)) {
+      return false;
+    }
+
+    // Show only if sub-items exist
+    return filteredRightItems.length > 0;
+  }, [activeItem, filteredRightItems]);
+
+  // Close the dropdown on mouse leave
+  const handleMouseLeave = useCallback(() => {
+    setActiveCategory(null);
+  }, []);
 
   return (
     <div
       className="flex rounded-xl shadow-lg border border-gray-200 overflow-hidden"
       onMouseLeave={handleMouseLeave}
     >
-      {/* Left Column */}
+      {/* LEFT COLUMN: Main Categories */}
       <div className="bg-white w-64 flex-shrink-0">
         <ul className="flex flex-col">
           {leftItems.map((item) => (
@@ -78,8 +85,6 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data }) => {
           ))}
         </ul>
       </div>
-
-      {/* Right Column */}
       {showRightColumn && (
         <div className="bg-gray-50 px-6 py-4 min-w-[200px] border-l border-gray-300">
           <ul className="space-y-2">
