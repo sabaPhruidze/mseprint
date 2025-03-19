@@ -14,9 +14,23 @@ import { ServicesPathTypes } from "../../types/commonTypes";
 interface GetDropDownProps {
   data: ServicesPathTypes[];
   buttonWidth?: number;
+  /**
+   * Add a callback that parent can pass down, which we call to close the dropdown
+   */
+  onCloseDropdown?: () => void;
 }
 
-const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
+const GetDropDown: React.FC<GetDropDownProps> = ({
+  data,
+  buttonWidth,
+  onCloseDropdown,
+}) => {
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
+  const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(true);
+  const currentPath = usePathname();
+  const leftSideRef = useRef<HTMLUListElement>(null);
+  const [leftSideHeight, setLeftSideHeight] = useState<number>(0);
+
   const leftItems = useMemo(
     () => data.filter((item) => !item.parent_id),
     [data]
@@ -25,11 +39,6 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
     () => data.filter((item) => item.parent_id),
     [data]
   );
-
-  const [activeCategory, setActiveCategory] = useState<number | null>(null);
-  const currentPath = usePathname();
-  const leftSideRef = useRef<HTMLUListElement>(null);
-  const [leftSideHeight, setLeftSideHeight] = useState<number>(0);
 
   useEffect(() => {
     setActiveCategory(null);
@@ -64,10 +73,17 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
     setActiveCategory(null);
   }, []);
 
-  // Unified click handler for closing the dropdown
+  // Call parent's "onCloseDropdown" so it can reset 'hovered' to false
   const handleLinkClick = useCallback(() => {
     setActiveCategory(null);
-  }, []);
+    setIsDropdownVisible(false);
+
+    if (onCloseDropdown) {
+      onCloseDropdown();
+    }
+  }, [onCloseDropdown]);
+
+  if (!isDropdownVisible) return null;
 
   return (
     <div
@@ -84,7 +100,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
             <li key={item.id} onMouseEnter={() => setActiveCategory(item.id)}>
               <Link
                 href={item.path?.startsWith("/") ? item.path : `/${item.path}`}
-                onClick={handleLinkClick} // Added click handler
+                onClick={handleLinkClick}
               >
                 <p
                   className={`
@@ -139,7 +155,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({ data, buttonWidth }) => {
                       ? subItem.path
                       : `/${subItem.path}`
                   }
-                  onClick={handleLinkClick} // Unified click handler
+                  onClick={handleLinkClick} // Clicking closes dropdown
                 >
                   <p
                     className="

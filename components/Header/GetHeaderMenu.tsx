@@ -29,7 +29,6 @@ export default function GetHeaderMenu({
   };
 
   // If you wish to update width on window resize as well, you can do so:
-
   useEffect(() => {
     const handleResize = () => {
       if (linkRef.current) {
@@ -39,6 +38,11 @@ export default function GetHeaderMenu({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Called by the child dropdown whenever a link is clicked
+  const closeDropdown = () => {
+    setHovered(false);
+  };
 
   return (
     <nav
@@ -91,13 +95,12 @@ export default function GetHeaderMenu({
               </Link>
 
               {hovered && isProducts && (
-                <div
-                  className="absolute left-0 top-full z-50 flex bg-white shadow-xl rounded-md"
-                  // So the dropdown attaches directly below
-                >
+                <div className="absolute left-0 top-full z-50 flex bg-white shadow-xl rounded-md">
                   <GetDropDown
                     data={servicesData}
                     buttonWidth={buttonWidth || undefined}
+                    // Pass down the callback so that child can close the dropdown
+                    onCloseDropdown={closeDropdown}
                   />
                 </div>
               )}
