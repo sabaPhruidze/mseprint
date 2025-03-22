@@ -8,19 +8,19 @@ export const metadata: Metadata = {
   description:
     "Transform your vehicle into a moving advertisement with custom car graphics and wraps from MSE Printing.",
   alternates: {
-    canonical: "https://www.mseprinting.com/car-graphics-wraps",
+    canonical: "https://www.mseprinting.com/signs/car-graphics-wraps",
   },
-  metadataBase: new URL("https://www.mseprinting.com/car-graphics-wraps"),
+  metadataBase: new URL("https://www.mseprinting.com/signs/car-graphics-wraps"),
   openGraph: {
     title: "Car Graphics & Wraps | MSE Print",
     description:
       "High-quality custom vehicle wraps and graphics designed to boost brand visibility on the road.",
-    url: "https://www.mseprinting.com/car-graphics-wraps",
+    url: "https://www.mseprinting.com/signs/car-graphics-wraps",
     siteName: "MSE Printing",
     type: "website",
     images: [
       {
-        url: "/images/home-images/car-graphics-wraps.webp",
+        url: "/images/signs-images/additional/car_graphics_wraps_right.webp",
         width: 500,
         height: 500,
         alt: "MSE Printing - Car Graphics & Wraps",
