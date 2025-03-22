@@ -86,6 +86,24 @@ export const getCategoryPagesData = async (pathname: string) => {
           BusinessFormsPageData: BusinessFormsPageData ?? [],
         };
       }
+      case "/labels-packaging": {
+        const [LabelsPackagingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("labels_packaging_page"),
+        ]);
+      
+        return {
+          LabelsPackagingPageData: LabelsPackagingPageData ?? [],
+        };
+      }
+      case "/manuals-catalogs-booklets": {
+        const [ManualsCatalogsBookletsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("manuals_catalogs_booklets_page"),
+        ]);
+      
+        return {
+          ManualsCatalogsBookletsPageData: ManualsCatalogsBookletsPageData ?? [],
+        };
+      }
       
       default:
         return {};
