@@ -64,7 +64,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             `}
           >
             <Link
-              href={result.path || "/"}
+              href={`/${result.path}`}
               className="p-4 block w-full h-full"
               onClick={onReset}
               title={`Navigate to ${result.title}`}
