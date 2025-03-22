@@ -27,6 +27,7 @@ export interface SEOImageProps {
   height?: number;
   fill?: boolean;
   objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down";
+  below?: string[];
 }
 
 export interface TitleContentTypes {
