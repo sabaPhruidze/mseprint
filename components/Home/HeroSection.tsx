@@ -49,7 +49,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
             aria-label={`Learn more about ${heroSection.alt}`}
             className="inline-block mt-6 px-6 py-3 text-lg font-semibold text-black bg-white rounded-full transition-all hover:bg-opacity-90"
           >
-            Learn More...
+            Learn More About Our {heroSection.alt}
           </Link>
         )}
       </div>
