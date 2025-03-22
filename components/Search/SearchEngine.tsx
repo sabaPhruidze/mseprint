@@ -2,16 +2,16 @@
 
 import { useState, useCallback } from "react";
 import SearchResults from "./SearchResults";
-import { PagePathTypes } from "../../types/commonTypes";
+import { ServicesPathTypes } from "../../types/commonTypes";
 import { Search } from "lucide-react";
 
 interface GetSearchEngineProps {
-  searchEngineData: PagePathTypes[];
+  searchEngineData: ServicesPathTypes[];
 }
 
 const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<PagePathTypes[]>([]);
+  const [results, setResults] = useState<ServicesPathTypes[]>([]);
 
   const handleSearch = useCallback(() => {
     if (query.trim().length === 0) {
@@ -21,7 +21,7 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
 
     setResults(
       searchEngineData.filter((item) =>
-        item.page.toLowerCase().includes(query.toLowerCase())
+        item.title.toLowerCase().includes(query.toLowerCase())
       )
     );
   }, [query, searchEngineData]);

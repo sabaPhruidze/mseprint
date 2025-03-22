@@ -11,7 +11,6 @@ interface HeaderProps {
   headerMenuData: PagePathTypes[];
   headerEffectiveTextData: headerEffectiveTextTypes[];
   headerRegisterData: PagePathTypes[];
-  allPagesData: PagePathTypes[];
   requestQuoteSendAFileData: PagePathTypes[];
   headerLogoData: SEOImageProps[];
   servicesData: ServicesPathTypes[];
@@ -21,7 +20,6 @@ const Header: React.FC<HeaderProps> = ({
   headerMenuData,
   headerEffectiveTextData,
   headerRegisterData,
-  allPagesData,
   requestQuoteSendAFileData,
   headerLogoData,
   servicesData,
@@ -35,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({
         <GetHeaderEffectiveText effectiveTextData={headerEffectiveTextData} />
         <GetHeaderMenu menuData={headerMenuData} servicesData={servicesData} />
         <GetHeaderRegister registerData={headerRegisterData} />
-        <SearchEngine searchEngineData={allPagesData} />
+        <SearchEngine searchEngineData={servicesData} />
       </div>
       <GetHeaderRQSF rqsafData={requestQuoteSendAFileData} />
     </header>

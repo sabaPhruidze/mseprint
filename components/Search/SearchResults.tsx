@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { PagePathTypes } from "../../types/commonTypes";
+import { ServicesPathTypes } from "../../types/commonTypes";
 
 interface SearchResultsProps {
-  results: PagePathTypes[];
+  results: ServicesPathTypes[];
   onReset: () => void;
   ariaLabel?: string;
 }
@@ -67,9 +67,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({
               href={result.path || "/"}
               className="p-4 block w-full h-full"
               onClick={onReset}
-              title={`Navigate to ${result.page}`}
+              title={`Navigate to ${result.title}`}
             >
-              <span className="line-clamp-1">{result.page}</span>
+              <span className="line-clamp-1">{result.title}</span>
             </Link>
           </li>
         ))}

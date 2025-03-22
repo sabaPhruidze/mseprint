@@ -6,7 +6,7 @@ import { SEOImageProps } from "../types/commonTypes";
 
 export const getHeaderData = async () => {
   try {
-    const [headerMenuData, headerEffectiveTextData, headerRegisterData, allPagesData,requestQuoteSendAFileData,headerLogoData] = await Promise.all([
+    const [headerMenuData, headerEffectiveTextData, headerRegisterData, ,requestQuoteSendAFileData,headerLogoData] = await Promise.all([
       getDataPattern<PagePathTypes>("header_menu"),
       getDataPattern<headerEffectiveTextTypes>("header_effective_text"),
       getDataPattern<PagePathTypes>("header_register"),
@@ -19,7 +19,6 @@ export const getHeaderData = async () => {
       headerMenuData: headerMenuData ?? [],
       headerEffectiveTextData: headerEffectiveTextData ?? [],
       headerRegisterData: headerRegisterData ?? [],
-      allPagesData: allPagesData ?? [], 
       requestQuoteSendAFileData: requestQuoteSendAFileData ?? [],
       headerLogoData:headerLogoData?? []
     };
@@ -29,7 +28,6 @@ export const getHeaderData = async () => {
       headerMenuData: [],
       headerEffectiveTextData: [],
       headerRegisterData: [],
-      allPagesData: [],
       requestQuoteSendAFileData: [],
       headerLogoData: [],
     };
