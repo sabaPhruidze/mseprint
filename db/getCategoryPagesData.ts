@@ -131,7 +131,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           WindowWallFloorGraphicsPageData: WindowWallFloorGraphicsPageData ?? [],
         };
       }
-           
+      case "/signs/interior-office-lobby-decor": {
+        const [InteriorOfficeLobbyDecorPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("interior_office_lobby_decor_page"),
+        ]);
+      
+        return {
+          InteriorOfficeLobbyDecorPageData: InteriorOfficeLobbyDecorPageData ?? [],
+        };
+      }           
       default:
         return {};
     }
