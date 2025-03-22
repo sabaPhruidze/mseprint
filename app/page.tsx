@@ -51,14 +51,14 @@ const Home = async () => {
         <HeroSection heroSection={data.heroSection} />
         <p>
           Interior Office & Lobby Décor: Elevate Your Workspace with Custom
-          Branding Your office space is more than just a place to work—it’s a
-          reflection of your brand’s identity, culture, and professionalism.
+          Branding Your office space is more than just a place to work—its a
+          reflection of your brands identity, culture, and professionalism.
           Custom interior office and lobby décor enhance aesthetics, improve
           workplace ambiance, and create a lasting impression on visitors and
           employees. At MSE Printing, we offer tailored décor solutions that
           transform corporate spaces into branded environments. Why Invest in
           Custom Interior Office & Lobby Décor? A well-designed office creates a
-          welcoming and professional atmosphere. Here’s why custom interior
+          welcoming and professional atmosphere. Heres why custom interior
           office and lobby décor is essential: • Brand Reinforcement: Display
           your company’s logo, mission statement, and brand colors to establish
           a cohesive identity. • Professional Aesthetics: Custom décor elevates
@@ -129,27 +129,27 @@ const Home = async () => {
           customers can quickly locate their orders. Our signs are available in
           weather-resistant and illuminated options for maximum visibility. Now
           Open Signs & Graphics Grand openings and rebranding efforts deserve
-          attention! Our custom "Now Open" signs are designed to generate
+          attention! Our custom Now Open signs are designed to generate
           excitement and attract foot traffic. Choose from vinyl banners, window
           clings, A-frame signs, or large-format posters to announce your
           business with confidence. FAQs About Interior Office & Lobby Décor Q:
           What types of office signage do you offer? A: We provide a wide range
           of office décor solutions, including wall graphics, lobby signs,
           window decals, directional signage, and custom branding elements.
-          Whether you're looking to improve navigation, add decorative elements,
-          or showcase your company mission, we offer tailored signage to meet
-          your needs. Our signs are available in multiple materials, finishes,
-          and styles to match your office aesthetics perfectly. Q: Can you help
-          with design? A: Absolutely! Our experienced design team works closely
-          with you to create visually appealing office graphics that align with
-          your brand identity. Whether you have existing artwork or need a
-          completely new design, we ensure that every element—from font choices
-          to color schemes—matches your company’s vision. We also offer proofs
-          before printing, so you can see how your signage will look before
-          installation. Q: Do you offer installation services? A: Yes! Our
-          professional installation team ensures that your office signage and
-          décor are applied seamlessly, without air bubbles, misalignment, or
-          damage to your walls. We handle everything from simple vinyl
+          Whether you are looking to improve navigation, add decorative
+          elements, or showcase your company mission, we offer tailored signage
+          to meet your needs. Our signs are available in multiple materials,
+          finishes, and styles to match your office aesthetics perfectly. Q: Can
+          you help with design? A: Absolutely! Our experienced design team works
+          closely with you to create visually appealing office graphics that
+          align with your brand identity. Whether you have existing artwork or
+          need a completely new design, we ensure that every element—from font
+          choices to color schemes—matches your companys vision. We also offer
+          proofs before printing, so you can see how your signage will look
+          before installation. Q: Do you offer installation services? A: Yes!
+          Our professional installation team ensures that your office signage
+          and décor are applied seamlessly, without air bubbles, misalignment,
+          or damage to your walls. We handle everything from simple vinyl
           applications to complex 3D logo installations. Our team works
           efficiently to minimize disruptions to your office operations while
           ensuring a clean and professional final result. Q: How long does the
@@ -159,7 +159,7 @@ const Home = async () => {
           turnaround times with expedited options available. Larger projects,
           such as full office rebrands, may take longer, but we work closely
           with you to meet your deadlines. If you need something urgent, let us
-          know—we’re happy to accommodate rush orders whenever possible. Upgrade
+          know—were happy to accommodate rush orders whenever possible. Upgrade
           Your Workspace with MSE Printing Transform your office into a visually
           compelling and professional space with custom interior office and
           lobby décor from MSE Printing. Contact us at info@mseprinting.com or
