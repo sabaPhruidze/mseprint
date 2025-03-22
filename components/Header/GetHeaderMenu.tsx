@@ -50,7 +50,7 @@ export default function GetHeaderMenu({
       aria-label="Main navigation"
       className="relative h-full"
     >
-      <ul className="flex h-full items-center gap-6">
+      <ul className="flex h-full items-center  screen-size-5:gap-6 gap-3">
         {menuData.map((item) => {
           const isProducts = item.page === "Products & Services";
 
@@ -77,7 +77,9 @@ export default function GetHeaderMenu({
                   flex
                   h-full
                   items-center
-                  px-3
+                  screen-size-10:px-3
+                  screen-size-5:px-1
+                  px-0
                   transition-all
                   duration-700
                   ${
@@ -99,7 +101,6 @@ export default function GetHeaderMenu({
                   <GetDropDown
                     data={servicesData}
                     buttonWidth={buttonWidth || undefined}
-                    // Pass down the callback so that child can close the dropdown
                     onCloseDropdown={closeDropdown}
                   />
                 </div>
