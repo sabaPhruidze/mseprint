@@ -14,18 +14,16 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   onReset,
   ariaLabel = "Search results",
 }) => {
-  if (!results || results.length === 0) return null;
+  // Deduplicate based on title + path
+  const uniqueResults = Array.from(
+    new Map(results.map((item) => [item.title + item.path, item])).values()
+  );
+
+  // If there’s nothing to show after deduplication, return null
+  if (!uniqueResults || uniqueResults.length === 0) return null;
 
   return (
-    <div
-      role="region"
-      aria-label={ariaLabel}
-      className="
-        absolute
-        w-full
-        z-50
-      "
-    >
+    <div role="region" aria-label={ariaLabel} className="absolute w-full z-50">
       <ul
         className="
           bg-white
@@ -51,7 +49,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
           scrollbar-color-gray-300
         "
       >
-        {results.slice(0, 5).map((result, index) => (
+        {uniqueResults.slice(0, 5).map((result, index) => (
           <li
             key={result.id}
             className={`
