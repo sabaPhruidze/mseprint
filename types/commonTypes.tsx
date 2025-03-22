@@ -32,7 +32,9 @@ export interface SEOImageProps {
 export interface TitleContentTypes {
   id: number;
   title: string;
-  content: string[];
+  content?: string[];
+  contentUp?: string[];
+  contentDown?: string[];
 }
 
 export interface ServicesPathTypes {

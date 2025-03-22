@@ -5,23 +5,24 @@ interface SpecialitiesProps {
   specialities: TitleContentTypes[];
 }
 
-const Specialities: React.FC<SpecialitiesProps> = ({ specialities }) => {
+const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
+  specialities,
+}) => {
   if (!specialities || specialities.length === 0) {
     return (
       <p className="text-center text-gray-500">No specialities available.</p>
     );
   }
-
   return (
     <div className="p-6 flex flex-col items-start text-left">
       {specialities.map((speciality, index) => (
         <div key={index} className="w-full">
-          <h1 className="text-3xl font-bold mb-4 text-center font-inter-extrabold">
-            {speciality.title}
-          </h1>
-          <ul className="list-disc pl-5 text-gray-700 text-center font-inter-medium">
-            {speciality.contentUp?.map((item, idx) => (
-              <li key={idx}>{item}</li>
+          <ul className=" pl-5 text-gray-700 text-center font-inter-medium">
+            {speciality.contentDown?.map((item, idx) => (
+              <>
+                <li key={idx}>{item}</li>
+                <br />
+              </>
             ))}
           </ul>
         </div>
@@ -30,4 +31,4 @@ const Specialities: React.FC<SpecialitiesProps> = ({ specialities }) => {
   );
 };
 
-export default Specialities;
+export default BelowAdditionalSpecialities;
