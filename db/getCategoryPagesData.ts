@@ -104,6 +104,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           ManualsCatalogsBookletsPageData: ManualsCatalogsBookletsPageData ?? [],
         };
       }
+      case "/pull-up-banners-flags": {
+        const [PullUpBannersFlagsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("pull_up_banners_flags_page"),
+        ]);
+      
+        return {
+          PullUpBannersFlagsPageData: PullUpBannersFlagsPageData ?? [],
+        };
+      }
       
       default:
         return {};
