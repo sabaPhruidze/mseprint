@@ -76,8 +76,8 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               href={carouselData[currentIndex].path || "/"}
               aria-label={`Learn more about ${carouselData[currentIndex].alt}`}
             >
-              <span className="font-inter-extrabold inline-block bg-white/70 text-black px-6 py-3 mt-3 rounded-full font-medium transition text-left w-fit hover:bg-white/85 active:bg-white">
-                Learn more...
+              <span className="font-inter-extrabold inline-block bg-white/70 text-black px-6 py-3 mt-3 rounded-full font-medium transition text-left w-fit hover:bg-white/85 active:bg-white text-center">
+                Learn more about <br /> {carouselData[currentIndex].alt}
               </span>
             </Link>
 
