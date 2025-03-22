@@ -110,6 +110,9 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             {pageData.offeringssection?.heading ||
               "pageData.offeringsSection.heading not written"}
           </h3>
+          <p className="mt-4 text-darkGray">
+            {pageData.offeringssection?.paragraph1 || ""}
+          </p>
           <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
             {pageData.offeringssection?.list?.map((item) => (
               <li key={item.id} className="text-darkGray">

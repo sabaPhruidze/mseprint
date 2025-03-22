@@ -77,7 +77,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           BrochuresCollateralPageData: BrochuresCollateralPageData ?? [],
         };
       }
+      case "/business-forms": {
+        const [BusinessFormsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("business_forms_page"),
+        ]);
 
+        return {
+          BusinessFormsPageData: BusinessFormsPageData ?? [],
+        };
+      }
+      
       default:
         return {};
     }
