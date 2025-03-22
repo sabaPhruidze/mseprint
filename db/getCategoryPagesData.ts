@@ -113,7 +113,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           PullUpBannersFlagsPageData: PullUpBannersFlagsPageData ?? [],
         };
       }
+      case "/car-graphics-wraps": {
+        const [CarGraphicsWrapsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("car_graphics_wraps_page"),
+        ]);
       
+        return {
+          CarGraphicsWrapsPageData: CarGraphicsWrapsPageData ?? [],
+        };
+      }
+            
       default:
         return {};
     }
