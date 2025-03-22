@@ -122,7 +122,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           CarGraphicsWrapsPageData: CarGraphicsWrapsPageData ?? [],
         };
       }
-            
+      case "/window-wall-floor-graphics": {
+        const [WindowWallFloorGraphicsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("window_wall_floor_graphics_page"),
+        ]);
+      
+        return {
+          WindowWallFloorGraphicsPageData: WindowWallFloorGraphicsPageData ?? [],
+        };
+      }
+           
       default:
         return {};
     }
