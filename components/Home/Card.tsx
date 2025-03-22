@@ -30,9 +30,9 @@ const Card: React.FC<CardProps> = ({ card, priority }) => {
         </div>
         <div className="p-4 flex-grow flex flex-col justify-between ">
           <div>
-            <h1 className="text-lg font-semibold font-inter-extrabold">
+            <h2 className="text-lg font-semibold font-inter-extrabold">
               {card.alt}
-            </h1>
+            </h2>
             <p className="text-gray-700 font-inter-medium">
               {card.description}
             </p>
