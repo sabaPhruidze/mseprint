@@ -54,11 +54,11 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData = [] }) => {
           {rqsafData.map(({ id, contentDown }) => (
             <React.Fragment key={id}>
               {Array.isArray(contentDown) &&
-                contentDown.map((text) => (
-                  <>
-                    <li key={text}>{text}</li>
+                contentDown.map((text, index) => (
+                  <React.Fragment key={`${text}-${index}`}>
+                    <li>{text}</li>
                     <br />
-                  </>
+                  </React.Fragment>
                 ))}
             </React.Fragment>
           ))}
