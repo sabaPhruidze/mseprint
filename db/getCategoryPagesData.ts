@@ -167,6 +167,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           YardOutdoorSignsPageData: YardOutdoorSignsPageData ?? [],
         };
       }
+      case "/counter-pop-up-displays": {
+        const [CounterPopUpDisplaysPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("counter_pop_up_displays_page"),
+        ]);
+      
+        return {
+          CounterPopUpDisplaysPageData: CounterPopUpDisplaysPageData ?? [],
+        };
+      }
       
       default:
         return {};
