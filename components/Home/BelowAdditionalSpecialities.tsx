@@ -17,14 +17,15 @@ const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
     <div className="pt-6 flex flex-col items-start text-left">
       {specialities.map((speciality, index) => (
         <div key={index} className="w-full">
-          <ul className=" px-5 text-gray-700 text-center font-inter-medium">
-            {speciality.contentDown?.map((item) => (
-              <>
-                <li key={item}>{item}</li>
-                <br />
-              </>
-            ))}
-          </ul>
+          {speciality.contentDown?.map((item) => (
+            <ul
+              className=" px-5 text-gray-700 text-center font-inter-medium"
+              key={item}
+            >
+              <li>{item}</li>
+              <br />
+            </ul>
+          ))}
         </div>
       ))}
     </div>
