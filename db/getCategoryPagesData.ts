@@ -140,6 +140,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           InteriorOfficeLobbyDecorPageData: InteriorOfficeLobbyDecorPageData ?? [],
         };
       }           
+      case "/tradeshow-event-signs": {
+        const [TradeshowEventSignsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("tradeshow_event_signs_page"),
+        ]);
+      
+        return {
+          TradeshowEventSignsPageData: TradeshowEventSignsPageData ?? [],
+        };
+      }
+      
       default:
         return {};
     }
