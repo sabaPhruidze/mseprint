@@ -149,6 +149,24 @@ export const getCategoryPagesData = async (pathname: string) => {
           TradeshowEventSignsPageData: TradeshowEventSignsPageData ?? [],
         };
       }
+      case "/signs/ada-wayfinding-signs": {
+        const [AdaWayfindingSignsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("ada_wayfinding_signs_page"),
+        ]);
+      
+        return {
+          AdaWayfindingSignsPageData: AdaWayfindingSignsPageData ?? [],
+        };
+      }
+      case "/signs/yard-outdoor-signs": {
+        const [YardOutdoorSignsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("yard_outdoor_signs_page"),
+        ]);
+      
+        return {
+          YardOutdoorSignsPageData: YardOutdoorSignsPageData ?? [],
+        };
+      }
       
       default:
         return {};
