@@ -1,27 +1,27 @@
 import React, { FC } from "react";
-import { PagePathTypes } from "../../types/commonTypes";
 import Link from "next/link";
+import { PagePathTypes } from "../../types/commonTypes";
 
 interface CTASectionProps {
   rqsafData: PagePathTypes[];
 }
 
-const CTASection: FC<CTASectionProps> = ({ rqsafData }) => {
-  if (!rqsafData || rqsafData.length === 0) return null;
+const CTASection: FC<CTASectionProps> = ({ rqsafData = [] }) => {
+  if (!rqsafData.length) return null;
 
   return (
-    <nav
-      className="my-[50px] w-full h-20 bg-gray-300 flex items-center justify-center px-4"
-      role="navigation"
-      aria-label="Call To Action Navigation"
-    >
-      <ul className="flex flex-row items-center justify-center">
-        {rqsafData.map((item) => (
-          <li key={item.id}>
-            <Link
-              href={item.path || "/"}
-              prefetch
-              className="
+    <section className=" w-full px-4" aria-label="Call To Action Section">
+      <nav
+        className="h-20 bg-gray-300 flex items-center justify-center"
+        role="navigation"
+        aria-label="Primary Navigation"
+      >
+        <ul className="flex items-center justify-center">
+          {rqsafData.map(({ id, path, page }) => (
+            <li key={id}>
+              <Link
+                href={path || "/"}
+                className="
                 bg-red
                 text-white
                 border-2
@@ -40,14 +40,31 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData }) => {
                 hover:scale-105
                 screen-size-4:px-6
               "
-              aria-label={`Navigate to ${item.page}`}
-            >
-              {item.page}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </nav>
+                aria-label={`Navigate to ${page}`}
+              >
+                {page}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <article className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px]">
+        <ul className="pl-5 text-gray-700 text-center font-inter-medium pt-6">
+          {rqsafData.map(({ id, contentDown }) => (
+            <React.Fragment key={id}>
+              {Array.isArray(contentDown) &&
+                contentDown.map((text, idx) => (
+                  <>
+                    <li key={text}>{text}</li>
+                    <br />
+                  </>
+                ))}
+            </React.Fragment>
+          ))}
+        </ul>
+      </article>
+    </section>
   );
 };
 

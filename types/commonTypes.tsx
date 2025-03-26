@@ -3,6 +3,7 @@ export interface PagePathTypes {
   page: string;
   path?: string;
   content?: string;
+  contentDown?: string[];
 }
 
 export interface GeoData {

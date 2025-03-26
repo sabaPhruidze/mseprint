@@ -42,7 +42,7 @@ const Home = async () => {
     <>
       <div>
         <Carousel carouselData={data.carouselData} />
-        <div className="flex flex-col lg:flex-row gap-6 p-4">
+        <div className="flex flex-col lg:flex-row gap-6 py-6">
           <Cards
             cardsData={data.cardsData}
             homeSpecialities={data.homeSpecialities}

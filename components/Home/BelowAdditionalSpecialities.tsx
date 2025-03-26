@@ -14,13 +14,13 @@ const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
     );
   }
   return (
-    <div className="p-6 flex flex-col items-start text-left">
+    <div className="pt-6 flex flex-col items-start text-left">
       {specialities.map((speciality, index) => (
         <div key={index} className="w-full">
-          <ul className=" pl-5 text-gray-700 text-center font-inter-medium">
-            {speciality.contentDown?.map((item, idx) => (
+          <ul className=" px-5 text-gray-700 text-center font-inter-medium">
+            {speciality.contentDown?.map((item) => (
               <>
-                <li key={idx}>{item}</li>
+                <li key={item}>{item}</li>
                 <br />
               </>
             ))}

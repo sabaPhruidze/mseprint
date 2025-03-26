@@ -10,6 +10,10 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
   if (!heroSection) return null;
 
+  const imageSrc = heroSection.src
+    ? `/images/${heroSection.src}`
+    : "/images/home-images/additional/offset_printing_right.webp";
+
   return (
     <section>
       <div
@@ -18,21 +22,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
       >
         <div className="absolute inset-0">
           <SEOImage
-            src={
-              `/images/${heroSection.src}` ||
-              "/images/home-images/additional/offset_printing_right.webp"
-            }
+            src={imageSrc}
             alt={heroSection.alt}
             name={heroSection.alt}
             geoData={heroSection.geoData}
-            priority={true}
+            priority
             sizes={heroSection.sizes}
             fill
+            className="w-full h-[500px]"
             objectFit="cover"
-            className="w-full h-[500px] object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 max-w-[1200px] px-6 text-center md:text-left">
           <h2
             id="hero-heading"
@@ -55,11 +56,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
           )}
         </div>
       </div>
-      <div className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] mt-6 px-6">
-        <ul className=" pl-5 text-gray-700 text-center font-inter-medium">
-          {heroSection.below?.map((item, idx) => (
+
+      <div className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] pt-6 px-6">
+        <ul className="px-5 text-gray-700 text-center font-inter-medium">
+          {heroSection.below?.map((item) => (
             <>
-              <li key={idx}>{item}</li>
+              <li key={item}>{item}</li>
               <br />
             </>
           ))}

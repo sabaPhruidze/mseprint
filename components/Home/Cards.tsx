@@ -39,7 +39,6 @@ const Cards: React.FC<homeSpecialityCardsTypes> = ({
           </div>
         </div>
       </div>
-
       <BelowAdditionalSpecialities specialities={homeSpecialities} />
     </section>
   );
