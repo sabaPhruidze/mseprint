@@ -176,7 +176,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           CounterPopUpDisplaysPageData: CounterPopUpDisplaysPageData ?? [],
         };
       }
+      case "/labels-stickers-decals": {
+        const [LabelsStickersDecalsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("labels_stickers_decals_page"),
+        ]);
       
+        return {
+          LabelsStickersDecalsPageData: LabelsStickersDecalsPageData ?? [],
+        };
+      }
+            
       default:
         return {};
     }
