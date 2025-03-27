@@ -185,6 +185,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           LabelsStickersDecalsPageData: LabelsStickersDecalsPageData ?? [],
         };
       }
+      case "/booth-graphics-signs-banners": {
+        const [BoothGraphicsSignsBannersPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("booth_graphics_signs_banners_page"),
+        ]);
+      
+        return {
+          BoothGraphicsSignsBannersPageData: BoothGraphicsSignsBannersPageData ?? [],
+        };
+      }
             
       default:
         return {};
