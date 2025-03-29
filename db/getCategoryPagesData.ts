@@ -194,7 +194,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           BoothGraphicsSignsBannersPageData: BoothGraphicsSignsBannersPageData ?? [],
         };
       }
-            
+      case "/signs/delivery-takeout-signs": {
+        const [DeliveryTakeoutSignsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("delivery_takeout_signs_page"),
+        ]);
+      
+        return {
+          DeliveryTakeoutSignsPageData: DeliveryTakeoutSignsPageData ?? [],
+        };
+      }
+                  
       default:
         return {};
     }
