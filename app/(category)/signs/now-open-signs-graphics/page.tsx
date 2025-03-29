@@ -8,9 +8,11 @@ export const metadata: Metadata = {
   description:
     "Celebrate your grand opening with bold and professional Now Open signage from MSE Printing.",
   alternates: {
-    canonical: "https://www.mseprinting.com/now-open-signs-graphics",
+    canonical: "https://www.mseprinting.com/signs/now-open-signs-graphics",
   },
-  metadataBase: new URL("https://www.mseprinting.com/now-open-signs-graphics"),
+  metadataBase: new URL(
+    "https://www.mseprinting.com/signs/now-open-signs-graphics"
+  ),
   openGraph: {
     title: "Now Open Signs & Graphics | MSE Print",
     description:
