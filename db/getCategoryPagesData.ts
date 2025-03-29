@@ -203,6 +203,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           DeliveryTakeoutSignsPageData: DeliveryTakeoutSignsPageData ?? [],
         };
       }
+      case "/now-open-signs-graphics": {
+        const [NowOpenSignsGraphicsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("now_open_signs_graphics_page"),
+        ]);
+      
+        return {
+          NowOpenSignsGraphicsPageData: NowOpenSignsGraphicsPageData ?? [],
+        };
+      }
                   
       default:
         return {};
