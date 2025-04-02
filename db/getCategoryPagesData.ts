@@ -230,7 +230,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           NewslettersFlyersRackCardsPageData: NewslettersFlyersRackCardsPageData ?? [],
         };
       }
-          
+      case "/presentation-training-materials": {
+        const [PresentationTrainingMaterialsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("presentation_training_materials_page"),
+        ]);
+      
+        return {
+          PresentationTrainingMaterialsPageData: PresentationTrainingMaterialsPageData ?? [],
+        };
+      }
+                
       default:
         return {};
     }
