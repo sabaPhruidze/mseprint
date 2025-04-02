@@ -95,7 +95,7 @@ export const getCategoryPagesData = async (pathname: string) => {
           LabelsPackagingPageData: LabelsPackagingPageData ?? [],
         };
       }
-      case "/manuals-catalogs-booklets": {
+      case "/printing-copying/manuals-catalogs-booklets": {
         const [ManualsCatalogsBookletsPageData] = await Promise.all([
           getDataPattern<PageStructureTypes>("manuals_catalogs_booklets_page"),
         ]);
@@ -212,7 +212,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           NowOpenSignsGraphicsPageData: NowOpenSignsGraphicsPageData ?? [],
         };
       }
-                  
+      case "/postcards-direct-mailers": {
+        const [PostcardsDirectMailersPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("postcards_direct_mailers_page"),
+        ]);
+      
+        return {
+          PostcardsDirectMailersPageData: PostcardsDirectMailersPageData ?? [],
+        };
+      }                  
       default:
         return {};
     }
