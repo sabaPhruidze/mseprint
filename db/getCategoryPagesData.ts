@@ -338,7 +338,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           PremiumPrivateLabelsPageData: PremiumPrivateLabelsPageData ?? [],
         };
       }
-                                                
+      case "/product-promotional-labels": {
+        const [ProductPromotionalLabelsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("product_promotional_labels_page"),
+        ]);
+      
+        return {
+          ProductPromotionalLabelsPageData: ProductPromotionalLabelsPageData ?? [],
+        };
+      }
+                                                      
       default:
         return {};
     }
