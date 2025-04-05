@@ -310,7 +310,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           AdvancedMailingServicesPageData: AdvancedMailingServicesPageData ?? [],
         };
-      }                              
+      }
+      case "/kitting-fulfillment": {
+        const [KittingFulfillmentPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("kitting_fulfillment_page"),
+        ]);
+      
+        return {
+          KittingFulfillmentPageData: KittingFulfillmentPageData ?? [],
+        };
+      }
+                                    
       default:
         return {};
     }
