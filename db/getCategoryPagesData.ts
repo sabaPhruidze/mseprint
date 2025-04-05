@@ -347,7 +347,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           ProductPromotionalLabelsPageData: ProductPromotionalLabelsPageData ?? [],
         };
       }
-                                                      
+      case "/safety-labels": {
+        const [SafetyLabelsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("safety_labels_page"),
+        ]);
+      
+        return {
+          SafetyLabelsPageData: SafetyLabelsPageData ?? [],
+        };
+      }                                                       
       default:
         return {};
     }
