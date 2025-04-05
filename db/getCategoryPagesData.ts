@@ -239,7 +239,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           PresentationTrainingMaterialsPageData: PresentationTrainingMaterialsPageData ?? [],
         };
       }
-                
+      case "/printing-copying/business-annual-reports": {
+        const [BusinessAnnualReportsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("business_annual_reports_page"),
+        ]);
+      
+        return {
+          BusinessAnnualReportsPageData: BusinessAnnualReportsPageData ?? [],
+        };
+      }      
       default:
         return {};
     }
