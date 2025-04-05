@@ -320,7 +320,25 @@ export const getCategoryPagesData = async (pathname: string) => {
           KittingFulfillmentPageData: KittingFulfillmentPageData ?? [],
         };
       }
-                                    
+      case "/event-literature-signs": {
+        const [EventLiteratureSignsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("event_literature_signs_page"),
+        ]);
+      
+        return {
+          EventLiteratureSignsPageData: EventLiteratureSignsPageData ?? [],
+        };
+      }
+      case "/premium-private-labels": {
+        const [PremiumPrivateLabelsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("premium_private_labels_page"),
+        ]);
+      
+        return {
+          PremiumPrivateLabelsPageData: PremiumPrivateLabelsPageData ?? [],
+        };
+      }
+                                                
       default:
         return {};
     }
