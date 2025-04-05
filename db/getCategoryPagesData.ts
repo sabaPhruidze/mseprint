@@ -265,7 +265,16 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           BookPrintingPageData: BookPrintingPageData ?? [],
         };
-      }      
+      }
+      case "/printing-copying/poster-printing": {
+        const [PosterPrintingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("poster_printing_page"),
+        ]);
+      
+        return {
+          PosterPrintingPageData: PosterPrintingPageData ?? [],
+        };
+      }            
       default:
         return {};
     }
