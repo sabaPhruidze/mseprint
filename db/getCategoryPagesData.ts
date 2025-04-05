@@ -248,6 +248,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           BusinessAnnualReportsPageData: BusinessAnnualReportsPageData ?? [],
         };
       }      
+      case "/cards-invitations": {
+        const [CardsInvitationsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("cards_invitations_page"),
+        ]);
+      
+        return {
+          CardsInvitationsPageData: CardsInvitationsPageData ?? [],
+        };
+      }
+      
       default:
         return {};
     }
