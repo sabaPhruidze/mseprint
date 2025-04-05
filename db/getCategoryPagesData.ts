@@ -274,7 +274,25 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           PosterPrintingPageData: PosterPrintingPageData ?? [],
         };
-      }            
+      }
+      case "/printing-copying/legal-copying": {
+        const [LegalCopyingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("legal_copying_page"),
+        ]);
+      
+        return {
+          LegalCopyingPageData: LegalCopyingPageData ?? [],
+        };
+      }
+      case "/standard-direct-mail": {
+        const [StandardDirectMailPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("standard_direct_mail_page"),
+        ]);
+      
+        return {
+          StandardDirectMailPageData: StandardDirectMailPageData ?? [],
+        };
+      }                  
       default:
         return {};
     }
