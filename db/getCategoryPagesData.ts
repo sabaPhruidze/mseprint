@@ -302,7 +302,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           EveryDoorDirectMailPageData: EveryDoorDirectMailPageData ?? [],
         };
       }
-                        
+      case "/advanced-mailing-services": {
+        const [AdvancedMailingServicesPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("advanced_mailing_services_page"),
+        ]);
+      
+        return {
+          AdvancedMailingServicesPageData: AdvancedMailingServicesPageData ?? [],
+        };
+      }                              
       default:
         return {};
     }
