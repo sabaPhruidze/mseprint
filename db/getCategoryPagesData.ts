@@ -355,7 +355,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           SafetyLabelsPageData: SafetyLabelsPageData ?? [],
         };
-      }                                                       
+      }
+      case "/short-run-packaging": {
+        const [ShortRunPackagingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("short_run_packaging_page"),
+        ]);
+      
+        return {
+          ShortRunPackagingPageData: ShortRunPackagingPageData ?? [],
+        };
+      }
+                                                             
       default:
         return {};
     }
