@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/home-images/product-promotional-labels.webp",
+        url: "/images/common-images/additional/premium_private_labels_right.webp",
         width: 500,
         height: 500,
         alt: "MSE Printing - Product Promotional Labels",
