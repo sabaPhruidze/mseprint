@@ -292,7 +292,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           StandardDirectMailPageData: StandardDirectMailPageData ?? [],
         };
-      }                  
+      }
+      case "/every-door-direct-mail": {
+        const [EveryDoorDirectMailPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("every_door_direct_mail_page"),
+        ]);
+      
+        return {
+          EveryDoorDirectMailPageData: EveryDoorDirectMailPageData ?? [],
+        };
+      }
+                        
       default:
         return {};
     }
