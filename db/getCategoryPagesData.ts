@@ -365,7 +365,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           ShortRunPackagingPageData: ShortRunPackagingPageData ?? [],
         };
       }
-                                                             
+      case "/apparel-uniforms": {
+        const [ApparelUniformsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("apparel_uniforms_page"),
+        ]);
+      
+        return {
+          ApparelUniformsPageData: ApparelUniformsPageData ?? [],
+        };
+      }
+                                                            
       default:
         return {};
     }
