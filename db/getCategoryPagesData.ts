@@ -401,7 +401,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           CustomEnvelopePrintingPageData: CustomEnvelopePrintingPageData ?? [],
         };
       }
-                                                            
+      case "/printing-copying/custom-letterheads": {
+        const [CustomLetterheadsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("custom_letterheads_page"),
+        ]);
+      
+        return {
+          CustomLetterheadsPageData: CustomLetterheadsPageData ?? [],
+        };
+      }
+                                                     
       default:
         return {};
     }
