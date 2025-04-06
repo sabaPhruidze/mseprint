@@ -382,7 +382,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           MarketingSalesKitsPageData: MarketingSalesKitsPageData ?? [],
         };
-      }                                                     
+      }
+      case "/printing-copying/custom-business-card-printing": {
+        const [CustomBusinessCardPrintingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("custom_business_card_printing_page"),
+        ]);
+      
+        return {
+          CustomBusinessCardPrintingPageData: CustomBusinessCardPrintingPageData ?? [],
+        };
+      }
+                                                           
       default:
         return {};
     }
