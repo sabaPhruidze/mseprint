@@ -392,7 +392,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           CustomBusinessCardPrintingPageData: CustomBusinessCardPrintingPageData ?? [],
         };
       }
-                                                           
+      case "/printing-copying/custom-envelope-printing": {
+        const [CustomEnvelopePrintingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("custom_envelope_printing_page"),
+        ]);
+      
+        return {
+          CustomEnvelopePrintingPageData: CustomEnvelopePrintingPageData ?? [],
+        };
+      }
+                                                            
       default:
         return {};
     }
