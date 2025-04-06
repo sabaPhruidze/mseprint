@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 const PosterPrinting = async () => {
   const data = await getCategoryPagesData("/printing-copying/poster-printing");
   const pageData = data.PosterPrintingPageData?.[0];
-
+  console.log(pageData?.mainimage.src);
   if (!pageData) {
     return <div>Data not available.</div>;
   }
