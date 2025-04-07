@@ -77,20 +77,18 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               objectFit="cover"
             />
           </div>
-          <div className="text-darkGray mt-4 ">
+          <div className="mt-4 ">
             <p>
               {pageData.whychoosesection.paragraph1 ||
                 "pageData.whyChooseSection.paragraph1 not written"}
             </p>
             <p className="mt-2">{pageData.whychoosesection.paragraph2}</p>
-            <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+            <ul className="list-disc list-inside mt-2 space-y-2 ">
               {(pageData.whychoosesection.list &&
                 pageData.whychoosesection.list.map((item) => (
-                  <li key={item.id} className="text-darkGray">
-                    <strong className="font-bold text-darkGray">
-                      {item.page}
-                    </strong>
-                    <span className="text-darkGray"> - {item.content}</span>
+                  <li key={item.id}>
+                    <strong>{item.page}</strong>
+                    <span> - {item.content}</span>
                   </li>
                 ))) ||
                 ""}
@@ -101,7 +99,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             {pageData.servicessection?.heading ||
               "pageData.servicesSection.heading not written"}
           </h2>
-          <p className="mt-4 text-darkGray">
+          <p className="mt-4 ">
             {pageData.servicessection?.paragraph1 ||
               "pageData.servicesSection.paragraph1 not written"}
           </p>
@@ -110,12 +108,10 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             {pageData.offeringssection?.heading ||
               "pageData.offeringsSection.heading not written"}
           </h3>
-          <p className="mt-4 text-darkGray">
-            {pageData.offeringssection?.paragraph1 || ""}
-          </p>
-          <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+          <p className="mt-4 ">{pageData.offeringssection?.paragraph1 || ""}</p>
+          <ul className="list-disc list-inside mt-2 space-y-2 ">
             {pageData.offeringssection?.list?.map((item) => (
-              <li key={item.id} className="text-darkGray">
+              <li key={item.id}>
                 <Link
                   href={item.path || "/"}
                   className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
@@ -123,7 +119,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 >
                   {item.page}
                 </Link>
-                <span className="text-darkGray"> - {item.content}</span>
+                <span> - {item.content}</span>
               </li>
             )) || "pageData.offeringsSection?.list? not written"}
           </ul>
@@ -139,19 +135,17 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               {pageData.advancedfeatures?.customizationFinishing?.heading ||
                 "pageData.advancedFeatures?.customizationFinishing?.heading not written"}
             </h3>
-            <p className="mt-2 text-darkGray">
+            <p className="mt-2 ">
               {pageData.advancedfeatures?.customizationFinishing?.paragraph1 ||
                 "pageData.advancedFeatures?.customizationFinishing?.paragraph1 not written"}
             </p>
-            <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+            <ul className="list-disc list-inside mt-2 space-y-2 ">
               {(pageData.advancedfeatures.customizationFinishing?.list &&
                 pageData.advancedfeatures.customizationFinishing?.list.map(
                   (item) => (
-                    <li key={item.id} className="text-darkGray">
-                      <strong className="font-bold text-darkGray">
-                        {item.page}
-                      </strong>
-                      <span className="text-darkGray"> - {item.content}</span>
+                    <li key={item.id}>
+                      <strong className="font-bold ">{item.page}</strong>
+                      <span> - {item.content}</span>
                     </li>
                   )
                 )) ||
@@ -162,14 +156,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               {pageData.advancedfeatures.bulkPrinting?.heading ||
                 "pageData.advancedFeatures.bulkPrinting?.heading not written"}
             </h3>
-            <p className="mt-2 text-darkGray">
+            <p className="mt-2 ">
               {(pageData.advancedfeatures.bulkPrinting?.list &&
                 pageData.advancedfeatures.bulkPrinting?.list.map((segment) => (
                   <span key={segment.id}>
                     {segment.content}
-                    <strong className="font-bold text-darkGray">
-                      {segment.page}
-                    </strong>
+                    <strong className="font-bold ">{segment.page}</strong>
                   </span>
                 ))) ||
                 "pageData.advancedFeatures.bulkPrinting?.list not written"}
@@ -178,11 +170,11 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold mt-6 screen-size-10:text-left">
               {pageData.advancedfeatures.convenientPrinting?.heading}
             </h2>
-            <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+            <ul className="list-disc list-inside mt-2 space-y-2 ">
               {(pageData.advancedfeatures.convenientPrinting?.list &&
                 pageData.advancedfeatures.convenientPrinting?.list.map(
                   (item) => (
-                    <li key={item.id} className="text-darkGray">
+                    <li key={item.id}>
                       {item.page && <strong>{item.page}: </strong>}
                       {item.content && <span>{item.content}</span>}
                     </li>
@@ -196,7 +188,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               {pageData.howtogetstarted?.heading ||
                 "pageData.howToGetStarted?.heading not written"}
             </h2>
-            <ol className="list-decimal list-inside mt-2 space-y-2 text-darkGray">
+            <ol className="list-decimal list-inside mt-2 space-y-2 ">
               {(pageData.howtogetstarted?.list &&
                 pageData.howtogetstarted?.list.map((step) => (
                   <li key={step.id}>
@@ -211,7 +203,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               {pageData.whytrustus?.heading ||
                 "pageData.whyTrustUs?.heading not written"}
             </h2>
-            <ul className="list-disc list-inside mt-2 space-y-2 text-darkGray">
+            <ul className="list-disc list-inside mt-2 space-y-2">
               {(pageData.whytrustus?.list &&
                 pageData.whytrustus?.list.map((item) => (
                   <li key={item.id}>
@@ -239,7 +231,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black mt-4 screen-size-10:text-left">
                 Q: {faqItem.question}
               </h3>
-              <p className="mt-2 text-darkGray">A: {faqItem.answer}</p>
+              <p className="mt-2">A: {faqItem.answer}</p>
             </div>
           ))) ||
           "pageData.faqs?.items not written"}
@@ -248,7 +240,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           {pageData.getstartedsection?.heading ||
             "pageData.getStartedSection?.heading not written"}
         </h2>
-        <p className="mt-4 text-darkGray">
+        <p className="mt-4">
           {(pageData.getstartedsection?.steps &&
             pageData.getstartedsection?.steps?.map((item) => (
               <span key={item.id}>
@@ -263,7 +255,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             "pageData.getStartedSection?.steps not written"}
         </p>
 
-        <p className="mt-2 text-darkGray">
+        <p className="mt-2">
           {pageData.getstartedsection?.finalParagraph ||
             "pageData.getStartedSection?.finalParagraph not written"}
         </p>
