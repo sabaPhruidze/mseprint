@@ -9,7 +9,7 @@ const Cards: React.FC<homeSpecialityCardsTypes> = ({
   homeSpecialities,
 }) => {
   if (!cardsData || cardsData.length === 0) {
-    return <p className="text-center text-gray-500">No cards available.</p>;
+    return <p className="text-center ">No cards available.</p>;
   }
 
   return (

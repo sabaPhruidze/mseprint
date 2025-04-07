@@ -7,9 +7,7 @@ interface SpecialitiesProps {
 
 const Specialities: React.FC<SpecialitiesProps> = ({ specialities }) => {
   if (!specialities || specialities.length === 0) {
-    return (
-      <p className="text-center text-gray-500">No specialities available.</p>
-    );
+    return <p className="text-center">No specialities available.</p>;
   }
 
   return (
@@ -19,7 +17,7 @@ const Specialities: React.FC<SpecialitiesProps> = ({ specialities }) => {
           <h1 className="text-3xl font-bold mb-4 text-center font-inter-extrabold">
             {speciality.title}
           </h1>
-          <ul className="list-disc pl-5 text-gray-700 text-center font-inter-medium">
+          <ul className="list-disc pl-5 text-center font-inter-medium">
             {speciality.contentUp?.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}

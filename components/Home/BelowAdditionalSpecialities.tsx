@@ -9,19 +9,14 @@ const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
   specialities,
 }) => {
   if (!specialities || specialities.length === 0) {
-    return (
-      <p className="text-center text-gray-500">No specialities available.</p>
-    );
+    return <p className="text-center">No specialities available.</p>;
   }
   return (
     <div className="pt-6 flex flex-col items-start text-left">
       {specialities.map((speciality, index) => (
         <div key={index} className="w-full">
           {speciality.contentDown?.map((item) => (
-            <ul
-              className=" px-5 text-gray-700 text-center font-inter-medium"
-              key={item}
-            >
+            <ul className=" px-5 text-center font-inter-medium" key={item}>
               <li>{item}</li>
               <br />
             </ul>

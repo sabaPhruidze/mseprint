@@ -50,7 +50,7 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData = [] }) => {
       </nav>
 
       <article className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px]">
-        <ul className="pl-5 text-gray-700 text-center font-inter-medium pt-6">
+        <ul className="pl-5 text-center font-inter-medium pt-6">
           {rqsafData.map(({ id, contentDown }) => (
             <React.Fragment key={id}>
               {Array.isArray(contentDown) &&

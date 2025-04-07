@@ -58,7 +58,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
       </div>
 
       <div className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] pt-6 px-6">
-        <ul className="px-5 text-gray-700 text-center font-inter-medium">
+        <ul className="px-5 text-center font-inter-medium">
           {heroSection.below?.map((item, index) => (
             <React.Fragment key={`${item}-${index}`}>
               <li>{item}</li>
