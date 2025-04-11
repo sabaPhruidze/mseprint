@@ -87,3 +87,23 @@ export interface PageStructureTypes {
     finalParagraph?: string;
   };
 }
+
+export type FormData = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  emailVerification: string;
+  phone: string; // single phone field
+
+  // 3 new optional fields
+  jobTitle?: string;
+  company?: string;
+  extension?: string;
+
+  projectName: string;
+  quantity: number;
+  description: string;
+  dueDate: string;
+  terms: boolean;
+  representative: string;
+};
