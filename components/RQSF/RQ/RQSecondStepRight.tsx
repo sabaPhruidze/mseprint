@@ -67,12 +67,17 @@ export default function RQSecondStepRight() {
       }
       const zipBlob = await zip.generateAsync({ type: "blob" });
 
-      // 2) Ask our Next.js API for a presigned URL
+      // Generate a unique file name for each upload
+      const uniqueFileName = `RequestQuoteFiles-${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2, 7)}.zip`;
+
+      // 2) Ask our Next.js API for a presigned URL using the unique file name
       const presignRes = await fetch("/api/upload-s3", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fileName: "RequestQuoteFiles.zip", // file name in S3
+          fileName: uniqueFileName, // Now using the unique name
           fileType: "application/zip",
         }),
       });
@@ -92,7 +97,7 @@ export default function RQSecondStepRight() {
         body: zipBlob,
       });
 
-      // 5) Fake progress from 0 to 100
+      // 5) Show "fake" progress from 0 to 100
       let fakeProgress = 0;
       const progressInterval = setInterval(() => {
         fakeProgress += 10;
