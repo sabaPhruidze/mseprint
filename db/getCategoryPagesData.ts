@@ -427,7 +427,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           ListManagementServicesPageData: ListManagementServicesPageData ?? [],
         };
-      }                                                           
+      }
+      case "/graphic-design": {
+        const [GraphicDesignPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("graphic_design_page"),
+        ]);
+      
+        return {
+          GraphicDesignPageData: GraphicDesignPageData ?? [],
+        };
+      }
+                                                                 
       default:
         return {};
     }
