@@ -10,10 +10,10 @@ export default function RQSecondStepRight() {
   const [uploadFinished, setUploadFinished] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 1GB limit
+  // 1GB limit per file
   const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024;
 
-  // DnD logic
+  // Drag-and-drop logic
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const validFiles = acceptedFiles.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
@@ -31,7 +31,7 @@ export default function RQSecondStepRight() {
     maxSize: MAX_FILE_SIZE,
   });
 
-  // Add files button
+  // Manual “Add Files” button
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
     const chosenFiles = Array.from(e.target.files);
@@ -45,41 +45,54 @@ export default function RQSecondStepRight() {
     setFiles((prev) => [...prev, ...validFiles]);
   }
 
-  // Remove file
-  const handleRemoveFile = (index: number) => {
+  // Remove a file from the list
+  function handleRemoveFile(index: number) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
-  };
+  }
 
-  // Upload
+  // Main upload logic
   async function handleUpload() {
     if (files.length === 0) return;
+
     setUploading(true);
     setUploadFinished(false);
     setProgress(0);
     setError(null);
 
     try {
-      // Optional ZIP
+      // 1) ZIP all selected files
       const zip = new JSZip();
-      for (let file of files) {
+      for (const file of files) {
         zip.file(file.name, file);
       }
       const zipBlob = await zip.generateAsync({ type: "blob" });
 
-      // Upload to Next.js route
-      const formData = new FormData();
-      formData.append("file", zipBlob, "RequestQuoteFiles.zip");
-
-      const response = await fetch("/api/upload-files", {
+      // 2) Ask our Next.js API for a presigned URL
+      const presignRes = await fetch("/api/upload-s3", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fileName: "RequestQuoteFiles.zip", // file name in S3
+          fileType: "application/zip",
+        }),
       });
-
-      if (!response.ok) {
-        throw new Error("Error uploading file(s).");
+      if (!presignRes.ok) {
+        throw new Error("Failed to get presigned URL from server.");
       }
 
-      // Fake progress
+      // 3) Extract the presigned URL & public download link from server’s response
+      const { presignedUrl, downloadUrl } = await presignRes.json();
+
+      // 4) PUT the ZIP to the presigned URL
+      await fetch(presignedUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/zip",
+        },
+        body: zipBlob,
+      });
+
+      // 5) Fake progress from 0 to 100
       let fakeProgress = 0;
       const progressInterval = setInterval(() => {
         fakeProgress += 10;
@@ -88,6 +101,9 @@ export default function RQSecondStepRight() {
           clearInterval(progressInterval);
           setUploading(false);
           setUploadFinished(true);
+
+          // Log the final S3 link for debugging
+          console.log("File uploaded to:", downloadUrl);
         }
       }, 200);
     } catch (err: any) {
@@ -96,10 +112,6 @@ export default function RQSecondStepRight() {
       setUploading(false);
     }
   }
-
-  // Conditions:
-  // - Show "Add Files" & "Remove" only if !uploading && !uploadFinished
-  // - Hide them once user clicks Upload (uploading===true) or is finished.
 
   const showFileControls = !uploading && !uploadFinished;
 
@@ -121,7 +133,7 @@ export default function RQSecondStepRight() {
       >
         <input {...getInputProps()} />
 
-        {/* Title + Add Files button */}
+        {/* Title + Add Files Button */}
         <div className="flex flex-col items-center">
           <p className="mb-2 text-base text-center">Drag files to upload, or</p>
           {showFileControls && (
@@ -150,7 +162,7 @@ export default function RQSecondStepRight() {
           </p>
         </div>
 
-        {/* Display selected files */}
+        {/* Display Selected Files */}
         {files.length > 0 && (
           <div className="mt-6 text-center">
             <h4 className="text-md font-bold mb-1">Selected Files:</h4>
@@ -176,7 +188,7 @@ export default function RQSecondStepRight() {
           </div>
         )}
 
-        {/* Upload button */}
+        {/* Upload Button */}
         {showFileControls && files.length > 0 && (
           <button
             onClick={(e) => {
@@ -195,7 +207,7 @@ export default function RQSecondStepRight() {
           </button>
         )}
 
-        {/* Progress */}
+        {/* Progress Bar */}
         {uploading && (
           <div className="mt-4 w-full">
             <div className="w-full bg-gray-200 h-2 rounded">
@@ -210,14 +222,14 @@ export default function RQSecondStepRight() {
           </div>
         )}
 
-        {/* Success */}
+        {/* Success Message */}
         {uploadFinished && (
           <p className="mt-4 text-green-600 font-semibold text-center">
-            Upload Complete! Your files have been uploaded.
+            Upload Complete! Check console for the S3 link.
           </p>
         )}
 
-        {/* Error */}
+        {/* Error Message */}
         {error && (
           <p className="mt-4 text-red-500 text-center">
             <strong>Error:</strong> {error}
