@@ -464,7 +464,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           VideoProductionPageData: VideoProductionPageData ?? [],
         };
       }
-                                                                       
+      case "/marketing-services/website-design": {
+        const [WebsiteDesignPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("website_design_page"),
+        ]);
+      
+        return {
+          WebsiteDesignPageData: WebsiteDesignPageData ?? [],
+        };
+      }
+                                                                             
       default:
         return {};
     }
