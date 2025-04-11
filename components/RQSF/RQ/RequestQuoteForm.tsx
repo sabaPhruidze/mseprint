@@ -6,37 +6,25 @@ import { useForm, FormProvider } from "react-hook-form";
 import RQFirstStepRequired from "./RQFirstStepRequired";
 import RQFirstStepOptional from "./RQFirstStepOptional";
 
+// Step 2 components
+import RQSecondStepLeft from "./RQSecondStepLeft";
+import RQSecondStepRight from "./RQSecondStepRight";
+
 export default function RequestQuoteForm() {
-  // Initialize react-hook-form
   const methods = useForm<FormData>({ mode: "onBlur" });
 
-  // Submission logic
   const onSubmitRQ = async (data: FormData) => {
-    try {
-      const res = await fetch("/api/send-quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) {
-        throw new Error("Failed to submit");
-      }
-      alert("Quote submitted successfully!");
-    } catch (error) {
-      console.error(error);
-      alert("An error occurred. Please try again later.");
-    }
+    // ...submit logic
   };
 
   return (
-    // Provide form methods (register, errors, getValues, etc.) to children
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmitRQ)}
         autoComplete="off"
         className="max-w-[1500px] mx-auto border border-black p-10 rounded-md shadow-md flex flex-col gap-8 bg-white"
       >
-        {/* STEP 1: Personal Information */}
+        {/* STEP 1 */}
         <div>
           <h1 className="text-[36px] font-inter-extrabold mb-2">
             STEP 1 OF 2{" "}
@@ -48,7 +36,28 @@ export default function RequestQuoteForm() {
           </div>
         </div>
 
-        {/* Step 2 fields, etc... */}
+        {/* STEP 2 */}
+        <div>
+          <h2 className="text-[36px] font-inter-extrabold mb-2 mt-8">
+            STEP 2 OF 2 <span className="font-inter-medium">ABOUT PROJECT</span>
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
+            {/* Left side: Project Name, Quantity, etc. */}
+            <RQSecondStepLeft />
+
+            {/* Right side: File Upload */}
+            <RQSecondStepRight />
+          </div>
+        </div>
+
+        {/* SUBMIT BUTTON */}
+        <button
+          type="submit"
+          className="mt-6 bg-red-600 text-white py-2 px-6 rounded hover:bg-red-700"
+        >
+          Submit
+        </button>
       </form>
     </FormProvider>
   );
