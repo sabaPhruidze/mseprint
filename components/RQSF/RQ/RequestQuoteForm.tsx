@@ -49,12 +49,14 @@ export default function RequestQuoteForm() {
         </div>
 
         {/* SUBMIT BUTTON */}
-        <button
-          type="submit"
-          className="mt-6 bg-red-600 text-white py-2 px-6 rounded hover:bg-red-700"
-        >
-          Submit
-        </button>
+        <div className="w-full h-[60px] flex justify-center items-center">
+          <button
+            type="submit"
+            className="mt-6 bg-red text-white w-[200px] h-[50px] rounded hover:bg-red-700"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     </FormProvider>
   );
