@@ -418,7 +418,16 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           TargetedDirectMailPageData: TargetedDirectMailPageData ?? [],
         };
-      }                                                     
+      }
+      case "/direct-mail/list-management-services": {
+        const [ListManagementServicesPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("list_management_services_page"),
+        ]);
+      
+        return {
+          ListManagementServicesPageData: ListManagementServicesPageData ?? [],
+        };
+      }                                                           
       default:
         return {};
     }
