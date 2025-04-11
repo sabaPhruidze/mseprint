@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import React from "react";
-import RequestQuoteForm from "components/RQSF/RequestQuoteForm";
+import RequestQuoteForm from "components/RQSF/RQ/RequestQuoteForm";
 
 // 1) SEO config with metadata
 export const metadata: Metadata = {
