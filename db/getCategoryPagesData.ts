@@ -437,6 +437,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           GraphicDesignPageData: GraphicDesignPageData ?? [],
         };
       }
+      case "/marketing-services/campaigns-consultation": {
+        const [CampaignsConsultationPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("campaigns_consultation_page"),
+        ]);
+      
+        return {
+          CampaignsConsultationPageData: CampaignsConsultationPageData ?? [],
+        };
+      }
                                                                  
       default:
         return {};
