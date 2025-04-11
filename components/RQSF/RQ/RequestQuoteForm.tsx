@@ -43,10 +43,7 @@ export default function RequestQuoteForm() {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
-            {/* Left side: Project Name, Quantity, etc. */}
             <RQSecondStepLeft />
-
-            {/* Right side: File Upload */}
             <RQSecondStepRight />
           </div>
         </div>
