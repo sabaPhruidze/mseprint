@@ -11,14 +11,14 @@ export default function RQSecondStepLeft() {
 
   return (
     <div className="space-y-6">
-      <h3 className="text-xl font-semibold">About Project</h3>
+      <h3 className="text-[24px] font-inter-bold">About Project</h3>
 
       {/* Project Name */}
       <div className="flex flex-col">
         <input
           type="text"
           placeholder="Project Name *"
-          className=" border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px]
+          className="  border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px]
                 rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
           {...register("projectName", { required: "This field is required" })}
         />

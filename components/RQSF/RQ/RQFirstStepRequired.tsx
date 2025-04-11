@@ -16,7 +16,7 @@ const RQFirstStepRequired = () => {
   const requiredFields = getRequiredFields(getValues);
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-6 w-[500px]">
       <p className="text-[24px] font-inter-bold">Required Information</p>
 
       {requiredFields.map((field) => {

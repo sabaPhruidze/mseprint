@@ -12,7 +12,7 @@ const RQFirstStepOptional = () => {
   } = useFormContext<FormData>();
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 w-[500px]">
       <p className="text-[24px] font-inter-bold">Optional Details</p>
 
       {optionalFields.map((field) => {

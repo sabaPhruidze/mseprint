@@ -1,7 +1,7 @@
 "use client";
 import React, { useCallback, useState } from "react";
-import { useDropzone } from "react-dropzone"; // optional library
-import JSZip from "jszip"; // optional if you want to zip locally
+import { useDropzone } from "react-dropzone";
+import JSZip from "jszip";
 
 export default function RQSecondStepRight() {
   const [files, setFiles] = useState<File[]>([]);
@@ -13,7 +13,7 @@ export default function RQSecondStepRight() {
   // 1GB limit
   const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024;
 
-  // Handle drag-and-drop
+  // DnD logic
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const validFiles = acceptedFiles.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
@@ -31,7 +31,7 @@ export default function RQSecondStepRight() {
     maxSize: MAX_FILE_SIZE,
   });
 
-  // Handle "Add Files" button
+  // Add files button
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
     const chosenFiles = Array.from(e.target.files);
@@ -45,12 +45,12 @@ export default function RQSecondStepRight() {
     setFiles((prev) => [...prev, ...validFiles]);
   }
 
-  // Remove file from list
+  // Remove file
   const handleRemoveFile = (index: number) => {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Upload logic
+  // Upload
   async function handleUpload() {
     if (files.length === 0) return;
     setUploading(true);
@@ -59,14 +59,14 @@ export default function RQSecondStepRight() {
     setError(null);
 
     try {
-      // OPTIONAL: Zip the files
+      // Optional ZIP
       const zip = new JSZip();
       for (let file of files) {
         zip.file(file.name, file);
       }
       const zipBlob = await zip.generateAsync({ type: "blob" });
 
-      // Example: upload to Next.js route
+      // Upload to Next.js route
       const formData = new FormData();
       formData.append("file", zipBlob, "RequestQuoteFiles.zip");
 
@@ -79,7 +79,7 @@ export default function RQSecondStepRight() {
         throw new Error("Error uploading file(s).");
       }
 
-      // Simulated progress (in a real scenario, read progress from server or storage API)
+      // Fake progress
       let fakeProgress = 0;
       const progressInterval = setInterval(() => {
         fakeProgress += 10;
@@ -97,48 +97,54 @@ export default function RQSecondStepRight() {
     }
   }
 
+  // Conditions:
+  // - Show "Add Files" & "Remove" only if !uploading && !uploadFinished
+  // - Hide them once user clicks Upload (uploading===true) or is finished.
+
+  const showFileControls = !uploading && !uploadFinished;
+
   return (
-    <div className="w-full">
-      {/* Keep this heading in normal flow (not centered) */}
+    <div className="screen-size-12:w-full w-[460px]">
       <h3 className="text-xl font-semibold mb-4">
         File Upload (Do not use special characters in file names)
       </h3>
 
-      {/* SINGLE dashed container holding everything, centered inside */}
       <div
         {...getRootProps()}
         className="
           border-2 border-dashed border-gray-400 rounded
           w-full min-h-[400px]
           p-4 flex flex-col
-          items-center  /* This centers content inside */
+          items-center justify-center
           cursor-pointer
         "
       >
-        {/* Hidden dropzone input */}
         <input {...getInputProps()} />
 
         {/* Title + Add Files button */}
         <div className="flex flex-col items-center">
           <p className="mb-2 text-base text-center">Drag files to upload, or</p>
-          <label
-            className="
-              bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
-              flex items-center justify-center
-              hover:bg-black
-              transition-colors duration-700
-            "
-          >
-            <span className="text-white font-inter-extrabold text-[20px]">
-              Add Files
-            </span>
-            <input
-              type="file"
-              className="hidden"
-              multiple
-              onChange={handleFileChange}
-            />
-          </label>
+          {showFileControls && (
+            <label
+              className="
+                bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
+                flex items-center justify-center
+                hover:bg-black
+                transition-colors duration-700
+              "
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="text-white font-inter-extrabold text-[20px]">
+                Add Files
+              </span>
+              <input
+                type="file"
+                className="hidden"
+                multiple
+                onChange={handleFileChange}
+              />
+            </label>
+          )}
           <p className="mt-2 text-sm text-gray-500 text-center">
             File size limit: 1GB per file
           </p>
@@ -152,27 +158,29 @@ export default function RQSecondStepRight() {
               {files.map((file, index) => (
                 <li key={file.name} className="flex items-center gap-2">
                   <span>{file.name}</span>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation(); // avoid triggering the dropzone
-                      handleRemoveFile(index);
-                    }}
-                    className="text-red-600"
-                  >
-                    Remove
-                  </button>
+                  {showFileControls && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRemoveFile(index);
+                      }}
+                      className="text-red-600"
+                    >
+                      Remove
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
           </div>
         )}
 
-        {/* Upload button, progress, success/error messages */}
-        {!uploading && !uploadFinished && files.length > 0 && (
+        {/* Upload button */}
+        {showFileControls && files.length > 0 && (
           <button
             onClick={(e) => {
-              e.stopPropagation(); // avoid triggering the dropzone
+              e.stopPropagation();
               handleUpload();
             }}
             className="
@@ -187,6 +195,7 @@ export default function RQSecondStepRight() {
           </button>
         )}
 
+        {/* Progress */}
         {uploading && (
           <div className="mt-4 w-full">
             <div className="w-full bg-gray-200 h-2 rounded">
@@ -201,12 +210,14 @@ export default function RQSecondStepRight() {
           </div>
         )}
 
+        {/* Success */}
         {uploadFinished && (
           <p className="mt-4 text-green-600 font-semibold text-center">
             Upload Complete! Your files have been uploaded.
           </p>
         )}
 
+        {/* Error */}
         {error && (
           <p className="mt-4 text-red-500 text-center">
             <strong>Error:</strong> {error}
@@ -214,7 +225,6 @@ export default function RQSecondStepRight() {
         )}
       </div>
 
-      {/* Final instructions remain outside, not centered */}
       <p className="text-gray-400 text-xs mt-4">
         Choose all files first using the "Add Files" button. Only when you are
         ready, click "Upload" to start uploading all files as a single ZIP.
