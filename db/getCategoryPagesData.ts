@@ -410,7 +410,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           CustomLetterheadsPageData: CustomLetterheadsPageData ?? [],
         };
       }
-                                                     
+      case "/targeted-direct-mail": {
+        const [TargetedDirectMailPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("targeted_direct_mail_page"),
+        ]);
+      
+        return {
+          TargetedDirectMailPageData: TargetedDirectMailPageData ?? [],
+        };
+      }                                                     
       default:
         return {};
     }
