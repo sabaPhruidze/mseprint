@@ -446,7 +446,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           CampaignsConsultationPageData: CampaignsConsultationPageData ?? [],
         };
       }
-                                                                 
+      case "/marketing-services/social-media": {
+        const [SocialMediaPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("social_media_page"),
+        ]);
+      
+        return {
+          SocialMediaPageData: SocialMediaPageData ?? [],
+        };
+      }                                                                 
       default:
         return {};
     }
