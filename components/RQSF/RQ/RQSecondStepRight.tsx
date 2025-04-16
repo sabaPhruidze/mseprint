@@ -3,17 +3,19 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
 
-export default function RQSecondStepRight() {
+interface Props {
+  setDownloadUrl: (url: string) => void;
+}
+
+export default function RQSecondStepRight({ setDownloadUrl }: Props) {
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState<number>(0);
   const [uploadFinished, setUploadFinished] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 1GB limit per file
-  const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024;
+  const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024; // 1GB per file
 
-  // Drag-and-drop logic
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const validFiles = acceptedFiles.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
@@ -31,7 +33,6 @@ export default function RQSecondStepRight() {
     maxSize: MAX_FILE_SIZE,
   });
 
-  // Manual “Add Files” button
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
     const chosenFiles = Array.from(e.target.files);
@@ -45,12 +46,10 @@ export default function RQSecondStepRight() {
     setFiles((prev) => [...prev, ...validFiles]);
   }
 
-  // Remove a file from the list
   function handleRemoveFile(index: number) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   }
 
-  // Main upload logic
   async function handleUpload() {
     if (files.length === 0) return;
 
@@ -60,35 +59,31 @@ export default function RQSecondStepRight() {
     setError(null);
 
     try {
-      // 1) ZIP all selected files
       const zip = new JSZip();
       for (const file of files) {
         zip.file(file.name, file);
       }
       const zipBlob = await zip.generateAsync({ type: "blob" });
 
-      // Generate a unique file name for each upload
       const uniqueFileName = `RequestQuoteFiles-${Date.now()}-${Math.random()
         .toString(36)
         .substring(2, 7)}.zip`;
 
-      // 2) Ask our Next.js API for a presigned URL using the unique file name
       const presignRes = await fetch("/api/upload-s3", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fileName: uniqueFileName, // Now using the unique name
+          fileName: uniqueFileName,
           fileType: "application/zip",
         }),
       });
+
       if (!presignRes.ok) {
         throw new Error("Failed to get presigned URL from server.");
       }
 
-      // 3) Extract the presigned URL & public download link from server’s response
       const { presignedUrl, downloadUrl } = await presignRes.json();
 
-      // 4) PUT the ZIP to the presigned URL
       await fetch(presignedUrl, {
         method: "PUT",
         headers: {
@@ -97,7 +92,7 @@ export default function RQSecondStepRight() {
         body: zipBlob,
       });
 
-      // 5) Show "fake" progress from 0 to 100
+      // Fake progress bar
       let fakeProgress = 0;
       const progressInterval = setInterval(() => {
         fakeProgress += 10;
@@ -106,14 +101,13 @@ export default function RQSecondStepRight() {
           clearInterval(progressInterval);
           setUploading(false);
           setUploadFinished(true);
-
-          // Log the final S3 link for debugging
-          console.log("File uploaded to:", downloadUrl);
+          setDownloadUrl(downloadUrl); // 🔗 Pass S3 link to parent
+          console.log("✅ File uploaded to:", downloadUrl);
         }
       }, 200);
     } catch (err: any) {
       console.error(err);
-      setError(err.message);
+      setError(err.message || "Upload failed.");
       setUploading(false);
     }
   }
@@ -138,17 +132,13 @@ export default function RQSecondStepRight() {
       >
         <input {...getInputProps()} />
 
-        {/* Title + Add Files Button */}
         <div className="flex flex-col items-center">
           <p className="mb-2 text-base text-center">Drag files to upload, or</p>
           {showFileControls && (
             <label
-              className="
-                bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
-                flex items-center justify-center
-                hover:bg-black
-                transition-colors duration-700
-              "
+              className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
+              flex items-center justify-center hover:bg-black
+              transition-colors duration-700"
               onClick={(e) => e.stopPropagation()}
             >
               <span className="text-white font-inter-extrabold text-[20px]">
@@ -167,7 +157,7 @@ export default function RQSecondStepRight() {
           </p>
         </div>
 
-        {/* Display Selected Files */}
+        {/* File List */}
         {files.length > 0 && (
           <div className="mt-6 text-center">
             <h4 className="text-md font-bold mb-1">Selected Files:</h4>
@@ -200,19 +190,16 @@ export default function RQSecondStepRight() {
               e.stopPropagation();
               handleUpload();
             }}
-            className="
-              bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
-              flex items-center justify-center
-              hover:bg-black
+            className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
+              flex items-center justify-center hover:bg-black
               transition-colors duration-700 text-white font-inter-extrabold
-              text-[20px] mt-4
-            "
+              text-[20px] mt-4"
           >
             Upload
           </button>
         )}
 
-        {/* Progress Bar */}
+        {/* Progress */}
         {uploading && (
           <div className="mt-4 w-full">
             <div className="w-full bg-gray-200 h-2 rounded">
@@ -227,14 +214,14 @@ export default function RQSecondStepRight() {
           </div>
         )}
 
-        {/* Success Message */}
+        {/* Success */}
         {uploadFinished && (
           <p className="mt-4 text-green-600 font-semibold text-center">
-            Upload Complete! Check console for the S3 link.
+            Upload Complete! File is attached to your form.
           </p>
         )}
 
-        {/* Error Message */}
+        {/* Error */}
         {error && (
           <p className="mt-4 text-red-500 text-center">
             <strong>Error:</strong> {error}

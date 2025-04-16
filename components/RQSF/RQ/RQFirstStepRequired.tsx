@@ -5,14 +5,12 @@ import { getRequiredFields } from "db/RQData";
 import { FormData } from "../../../types/commonTypes";
 
 const RQFirstStepRequired = () => {
-  // Access react-hook-form methods from context
   const {
     register,
     getValues,
     formState: { errors },
   } = useFormContext<FormData>();
 
-  // Build the array using getValues
   const requiredFields = getRequiredFields(getValues);
 
   return (
@@ -21,23 +19,21 @@ const RQFirstStepRequired = () => {
 
       {requiredFields.map((field) => {
         const { name, type, placeholder, rules, onChange } = field;
+
         return (
           <div key={name} className="flex flex-col">
             <input
               type={type}
               placeholder={placeholder}
-              className="
-                border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px]
-                rounded screen-size-5:text-base w-[340px] h-[45px] text-sm
-              "
+              className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
               {...register(name, {
                 ...rules,
-                onChange, // Attach onChange if present
+                onChange,
               })}
             />
             {errors[name] && (
               <p className="text-red text-sm">
-                {errors[name]?.message as string}
+                {String(errors[name]?.message)}
               </p>
             )}
           </div>

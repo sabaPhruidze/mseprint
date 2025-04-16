@@ -18,14 +18,11 @@ export default function RQSecondStepLeft() {
         <input
           type="text"
           placeholder="Project Name *"
-          className="  border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px]
-                rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
+          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
           {...register("projectName", { required: "This field is required" })}
         />
         {errors.projectName && (
-          <p className="text-red text-sm">
-            {errors.projectName.message as string}
-          </p>
+          <p className="text-red text-sm">{errors.projectName.message}</p>
         )}
       </div>
 
@@ -34,14 +31,11 @@ export default function RQSecondStepLeft() {
         <input
           type="text"
           placeholder="Quantity *"
-          className=" border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px]
-                rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
+          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
           {...register("quantity", { required: "This field is required" })}
         />
         {errors.quantity && (
-          <p className="text-red text-sm">
-            {errors.quantity.message as string}
-          </p>
+          <p className="text-red text-sm">{errors.quantity.message}</p>
         )}
       </div>
 
@@ -52,10 +46,7 @@ export default function RQSecondStepLeft() {
         </label>
         <textarea
           placeholder="Describe your project..."
-          className="
-    border p-2 screen-size-5:w-[460px]
-    rounded screen-size-5:text-base w-[340px] text-sm min-h-[200px] resize-vertical
-  "
+          className="border p-2 screen-size-5:w-[460px] rounded screen-size-5:text-base w-[340px] text-sm min-h-[200px] resize-vertical"
           maxLength={700}
           {...register("description", {
             required: "This field is required",
@@ -65,32 +56,28 @@ export default function RQSecondStepLeft() {
             },
           })}
         />
-
         {errors.description && (
-          <p className="text-red text-sm">
-            {errors.description.message as string}
-          </p>
+          <p className="text-red text-sm">{errors.description.message}</p>
         )}
         <p className="text-gray-400 text-xs">
           Max 700 characters for description
         </p>
       </div>
 
-      {/* Project Due Date */}
+      {/* Due Date */}
       <div className="flex flex-col">
         <label className="text-sm font-medium mb-1">Project Due Date *</label>
         <input
           type="date"
-          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px]
-                rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
+          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
           {...register("dueDate", { required: "This field is required" })}
         />
         {errors.dueDate && (
-          <p className="text-red text-sm">{errors.dueDate.message as string}</p>
+          <p className="text-red text-sm">{errors.dueDate.message}</p>
         )}
       </div>
 
-      {/* Terms Checkbox */}
+      {/* Terms Agreement */}
       <div className="flex items-center gap-2">
         <input
           type="checkbox"
@@ -102,7 +89,7 @@ export default function RQSecondStepLeft() {
         </label>
       </div>
       {errors.terms && (
-        <p className="text-red text-sm">{errors.terms.message as string}</p>
+        <p className="text-red text-sm">{errors.terms.message}</p>
       )}
     </div>
   );
