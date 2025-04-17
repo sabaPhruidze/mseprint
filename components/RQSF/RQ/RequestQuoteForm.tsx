@@ -22,7 +22,8 @@ export default function RequestQuoteForm() {
     setSubmitting(true);
     setSuccessMessage(null);
     setErrorMessage(null);
-    console.log(data, fileDownloadUrl);
+    console.log(data);
+    console.log(fileDownloadUrl);
     try {
       const payload = {
         ...data,
