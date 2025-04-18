@@ -10,8 +10,8 @@ interface QuoteRequestPayload {
   email: string;
   phone?: string;                 // keep as string → can hold “+1‑800…”
   company?: string;
-  website?: string;
-  address?: string;
+  jobTitle?: string;
+  extension?: string;
   representative?: string;
   projectName: string;
   quantity: number | string;      // change to number if you coerce later
@@ -81,8 +81,8 @@ export async function POST(req: NextRequest) {
 📧 Email: ${body.email}
 📞 Phone: ${body.phone || "N/A"}
 🏢 Company: ${body.company || "N/A"}
-🌐 Website: ${body.website || "N/A"}
-🏠 Address: ${body.address || "N/A"}
+🌐 Job Title: ${body.jobTitle || "N/A"}
+🏠 Extension: ${body.extension || "N/A"}
 📌 Representative: ${body.representative || "No preference"}
 📄 Project Name: ${body.projectName}
 🔢 Quantity: ${body.quantity}
