@@ -491,7 +491,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           GreetingCardsPageData: GreetingCardsPageData ?? [],
         };
       }
-                                                                                   
+      case "/tradeshows-events/gifts-awards-incentives": {
+        const [GiftsAwardsIncentivesPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("gifts_awards_incentives_page"),
+        ]);
+      
+        return {
+          GiftsAwardsIncentivesPageData: GiftsAwardsIncentivesPageData ?? [],
+        };
+      }                                                                                         
       default:
         return {};
     }
