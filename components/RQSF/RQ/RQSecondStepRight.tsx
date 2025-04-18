@@ -1,30 +1,43 @@
 "use client";
+
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
+
+/* ------------------------------------------------------------------ */
+/*  Constants & Types                                                  */
+/* ------------------------------------------------------------------ */
+const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024; // 1 GB per file
 
 interface Props {
   setDownloadUrl: (url: string) => void;
 }
 
+interface PresignResponse {
+  presignedUrl: string;
+  downloadUrl: string;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
 export default function RQSecondStepRight({ setDownloadUrl }: Props) {
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
-  const [progress, setProgress] = useState<number>(0);
+  const [progress, setProgress] = useState(0);
   const [uploadFinished, setUploadFinished] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024; // 1GB per file
-
+  /* ---------- 1. Handle drops ---------- */
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    const validFiles = acceptedFiles.filter((file) => {
+    const valid = acceptedFiles.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
-        alert(`File ${file.name} exceeds 1GB limit and was skipped.`);
+        alert(`File ${file.name} exceeds the 1 GB limit and was skipped.`);
         return false;
       }
       return true;
     });
-    setFiles((prev) => [...prev, ...validFiles]);
+    setFiles((prev) => [...prev, ...valid]);
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -33,23 +46,26 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
     maxSize: MAX_FILE_SIZE,
   });
 
+  /* ---------- 2. Manual file picker ---------- */
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
-    const chosenFiles = Array.from(e.target.files);
-    const validFiles = chosenFiles.filter((file) => {
+    const chosen = Array.from(e.target.files);
+    const valid = chosen.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
-        alert(`File ${file.name} exceeds 1GB limit and was skipped.`);
+        alert(`File ${file.name} exceeds the 1 GB limit and was skipped.`);
         return false;
       }
       return true;
     });
-    setFiles((prev) => [...prev, ...validFiles]);
+    setFiles((prev) => [...prev, ...valid]);
   }
 
+  /* ---------- 3. Remove file ---------- */
   function handleRemoveFile(index: number) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   }
 
+  /* ---------- 4. Upload ---------- */
   async function handleUpload() {
     if (files.length === 0) return;
 
@@ -59,13 +75,13 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
     setError(null);
 
     try {
+      /* ---- 4.1  ZIP all files ---- */
       const zip = new JSZip();
-      for (const file of files) {
-        zip.file(file.name, file);
-      }
+      files.forEach((file) => zip.file(file.name, file));
       const zipBlob = await zip.generateAsync({ type: "blob" });
 
-      const uniqueFileName = `RequestQuoteFiles-${Date.now()}-${Math.random()
+      /* ---- 4.2  Get presigned URL ---- */
+      const uniqueName = `RequestQuoteFiles-${Date.now()}-${Math.random()
         .toString(36)
         .substring(2, 7)}.zip`;
 
@@ -73,7 +89,7 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fileName: uniqueFileName,
+          fileName: uniqueName,
           fileType: "application/zip",
         }),
       });
@@ -82,38 +98,42 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
         throw new Error("Failed to get presigned URL from server.");
       }
 
-      const { presignedUrl, downloadUrl } = await presignRes.json();
+      const { presignedUrl, downloadUrl } =
+        (await presignRes.json()) as PresignResponse;
 
+      /* ---- 4.3  PUT the ZIP to S3 ---- */
       await fetch(presignedUrl, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/zip",
-        },
+        headers: { "Content-Type": "application/zip" },
         body: zipBlob,
       });
 
-      // Fake progress bar
-      let fakeProgress = 0;
-      const progressInterval = setInterval(() => {
-        fakeProgress += 10;
-        setProgress(fakeProgress);
-        if (fakeProgress >= 100) {
-          clearInterval(progressInterval);
+      /* ---- 4.4  Fake progress bar ---- */
+      let fake = 0;
+      const interval = setInterval(() => {
+        fake += 10;
+        setProgress(fake);
+        if (fake >= 100) {
+          clearInterval(interval);
           setUploading(false);
           setUploadFinished(true);
           setDownloadUrl(downloadUrl); // 🔗 Pass S3 link to parent
           console.log("✅ File uploaded to:", downloadUrl);
         }
       }, 200);
-    } catch (err: any) {
-      console.error(err);
-      setError(err.message || "Upload failed.");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error(message);
+      setError(message || "Upload failed.");
       setUploading(false);
     }
   }
 
   const showFileControls = !uploading && !uploadFinished;
 
+  /* ------------------------------------------------------------------ */
+  /*  Render                                                            */
+  /* ------------------------------------------------------------------ */
   return (
     <div className="screen-size-12:w-full w-[460px]">
       <h3 className="text-xl font-semibold mb-4">
@@ -153,7 +173,7 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
             </label>
           )}
           <p className="mt-2 text-sm text-gray-500 text-center">
-            File size limit: 1GB per file
+            File size limit: 1 GB per file
           </p>
         </div>
 
@@ -209,7 +229,7 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
               />
             </div>
             <p className="mt-1 text-sm text-center">
-              {progress}% Uploading... Please wait.
+              {progress}% Uploading… Please wait.
             </p>
           </div>
         )}
@@ -230,11 +250,12 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
       </div>
 
       <p className="text-gray-400 text-xs mt-4">
-        Choose all files first using the "Add Files" button. Only when you are
-        ready, click "Upload" to start uploading all files as a single ZIP.
-        After uploading, you cannot add more files until you submit and come
-        back to this page. It may take a few minutes depending on file size and
-        internet speed. Do not refresh or close the page during the upload.
+        Choose all files first using the &quot;Add Files&quot; button. Only when
+        you are ready, click &quot;Upload&quot; to start uploading all files as
+        a single ZIP. After uploading, you cannot add more files until you
+        submit and come back to this page. It may take a few minutes depending
+        on file size and internet speed. Do not refresh or close the page during
+        the upload.
       </p>
     </div>
   );

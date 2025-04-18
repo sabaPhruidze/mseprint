@@ -31,11 +31,11 @@ export default function RequestQuoteForm() {
     setSubmitting(true);
     setSuccessMessage(null);
     setErrorMessage(null);
-    console.log(data, fileDownloadUrl);
+
     /* Build the exact payload the API expects */
     const payload = {
       ...data,
-      fileLink: fileDownloadUrl ?? null, // always send key – even if null
+      fileLink: fileDownloadUrl ?? null, // always send the key – even if null
     };
 
     try {
@@ -45,11 +45,10 @@ export default function RequestQuoteForm() {
         body: JSON.stringify(payload),
       });
 
-      /* Read the JSON so we can surface server messages */
-      const result = await response.json();
+      const result = await response.json(); // `any` from fetch types – acceptable
 
       if (!response.ok) {
-        /* The API returns { error: "…" } on 400/500 */
+        // The API returns { error: "…" } on 400/500
         throw new Error(
           result.error || result.message || "Failed to send email"
         );
@@ -59,9 +58,10 @@ export default function RequestQuoteForm() {
       setSuccessMessage("Your quote request has been submitted successfully!");
       methods.reset();
       setFileDownloadUrl(null);
-    } catch (error: any) {
-      console.error("Submit error:", error);
-      setErrorMessage(error.message ?? "An unexpected error occurred");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      console.error("Submit error:", message);
+      setErrorMessage(message);
     } finally {
       setSubmitting(false);
     }
