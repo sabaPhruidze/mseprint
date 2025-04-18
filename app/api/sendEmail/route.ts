@@ -1,98 +1,86 @@
-// app/api/sendEmail/route.ts
-import { NextRequest, NextResponse } from "next/server";
-import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses"; // Changed to v3 SDK
+import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
-// Initialize SES client with modern SDK
-const sesClient = new SESClient({
-  region: process.env.AWS_REGION,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY!);
 
 export async function POST(req: NextRequest) {
+  /* ---------- 1. Parse JSON safely ---------- */
+  let body: any;
   try {
-    const body = await req.json();
-    
-    // Add validation for required fields
-    const requiredFields = ['name', 'email', 'projectName', 'quantity', 'description', 'dueDate'];
-    for (const field of requiredFields) {
-      if (!body[field]) {
-        return NextResponse.json(
-          { error: `Missing required field: ${field}` },
-          { status: 400 }
-        );
-      }
-    }
-
-    // Construct HTML email version
-    const htmlBody = `
-      <html>
-        <body>
-          <h1>New Quote Request</h1>
-          <p><strong>Name:</strong> ${body.name}</p>
-          <p><strong>Email:</strong> ${body.email}</p>
-          ${body.phone ? `<p><strong>Phone:</strong> ${body.phone}</p>` : ''}
-          <p><strong>Project Name:</strong> ${body.projectName}</p>
-          <p><strong>Quantity:</strong> ${body.quantity}</p>
-          <p><strong>Due Date:</strong> ${body.dueDate}</p>
-          <h2>Description:</h2>
-          <p>${body.description.replace(/\n/g, '<br>')}</p>
-          ${body.fileLink ? `<p><strong>File:</strong> <a href="${body.fileLink}">Download</a></p>` : ''}
-        </body>
-      </html>
-    `;
-
-    // SES parameters with proper configuration
-    const params = {
-      Source: process.env.SES_FROM_EMAIL!, // Use env variable
-      Destination: {
-        ToAddresses: [process.env.SES_TO_EMAIL!], // Use env variable
-      },
-      Message: {
-        Subject: { Data: `New Quote Request: ${body.projectName}` },
-        Body: {
-          Html: { Data: htmlBody },
-          Text: { Data: `Text version: ${JSON.stringify(body, null, 2)}` }
-        }
-      },
-      ReplyToAddresses: [body.email], // Add reply-to address
-    };
-
-    // Send using modern SDK command
-    const result = await sesClient.send(new SendEmailCommand(params));
-    
+    body = await req.json();
+  } catch (err: any) {
+    console.error('❌  JSON parse error:', err.message);
     return NextResponse.json(
-      { message: "Email sent successfully", result },
-      { status: 200 }
+      { error: 'Invalid JSON payload – check fetch body and headers' },
+      { status: 400 }
     );
+  }
 
-  } catch (error: any) {
-    console.error("SES Error Details:", {
-      message: error.message,
-      code: error.name,
-      stack: error.stack
+  console.log('🔎  Received payload:', body);
+
+  /* ---------- 2. Validate required fields ---------- */
+  const requiredFields = [
+    'name',
+    'email',
+    'projectName',
+    'quantity',
+    'description',
+    'dueDate'
+  ];
+
+  for (const field of requiredFields) {
+    if (body[field] === undefined || body[field] === null || body[field] === '') {
+      return NextResponse.json(
+        { error: `Missing required field: ${field}` },
+        { status: 400 }
+      );
+    }
+  }
+
+  /* ---------- 3. Build the e‑mail body ---------- */
+  const html = `
+<pre>
+📬  New Quote Request
+👤 Name: ${body.name}
+📧 Email: ${body.email}
+📞 Phone: ${body.phone || 'N/A'}
+🏢 Company: ${body.company || 'N/A'}
+🌐 Website: ${body.website || 'N/A'}
+🏠 Address: ${body.address || 'N/A'}
+📌 Representative: ${body.representative || 'No preference'}
+📄 Project Name: ${body.projectName}
+🔢 Quantity: ${body.quantity}
+📝 Description: ${body.description}
+📅 Due Date: ${body.dueDate}
+📎 File: ${body.fileLink || 'None'}
+</pre>`;
+
+  /* ---------- 4. Send via Resend ---------- */
+  try {
+    const result = await resend.emails.send({
+      from: process.env.RESEND_FROM!,   // "MSE Printing <info@mseprinting.com>"
+      to:   process.env.RESEND_TO!,     // info@mseprinting.com  (or quotes@…)
+      subject: `New Quote Request: ${body.projectName}`,
+      html
     });
-    
+
+    return NextResponse.json({ ok: true, result }, { status: 200 });
+  } catch (err: any) {
+    console.error('❌  Resend error:', err);
     return NextResponse.json(
-      { 
-        message: "Failed to send email",
-        error: process.env.NODE_ENV === "development" ? error.message : undefined,
-        code: error.name
-      },
+      { error: 'Resend failed – check RESEND_API_KEY & domain verification' },
       { status: 500 }
     );
   }
 }
 
-// Add CORS support
+/* ---------- 5. CORS pre‑flight ---------- */
 export async function OPTIONS() {
   return new NextResponse(null, {
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Headers': 'Content-Type'
     }
   });
 }

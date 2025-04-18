@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormData } from "../../../types/commonTypes";
@@ -9,50 +10,64 @@ import SelectRepresentative from "../SelectRepresentative";
 import RQSecondStepLeft from "./RQSecondStepLeft";
 import RQSecondStepRight from "./RQSecondStepRight";
 
+/**
+ * RequestQuoteForm – two‑step quote request wizard
+ * -------------------------------------------------
+ * ‣ Uses react‑hook‑form for validation / state
+ * ‣ Sends a JSON payload to /api/sendEmail which relays via Resend
+ * ‣ Shows success / error banners and disables the button while submitting
+ */
 export default function RequestQuoteForm() {
   const methods = useForm<FormData>({ mode: "onBlur" });
 
-  // State to store the uploaded file's download URL
+  /* ------------- local UI state ------------- */
   const [fileDownloadUrl, setFileDownloadUrl] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  /* ------------- submit handler ------------- */
   const onSubmitRQ = async (data: FormData) => {
     setSubmitting(true);
     setSuccessMessage(null);
     setErrorMessage(null);
-    console.log(data);
-    console.log(fileDownloadUrl);
-    try {
-      const payload = {
-        ...data,
-        fileLink: fileDownloadUrl,
-      };
+    console.log(data, fileDownloadUrl);
+    /* Build the exact payload the API expects */
+    const payload = {
+      ...data,
+      fileLink: fileDownloadUrl ?? null, // always send key – even if null
+    };
 
+    try {
       const response = await fetch("/api/sendEmail", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload), // includes all fields
+        body: JSON.stringify(payload),
       });
 
+      /* Read the JSON so we can surface server messages */
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to send email");
+        /* The API returns { error: "…" } on 400/500 */
+        throw new Error(
+          result.error || result.message || "Failed to send email"
+        );
       }
 
+      console.info("✔️  Email sent:", result);
       setSuccessMessage("Your quote request has been submitted successfully!");
       methods.reset();
       setFileDownloadUrl(null);
     } catch (error: any) {
       console.error("Submit error:", error);
-      setErrorMessage(
-        "An error occurred while submitting the form. Please try again."
-      );
+      setErrorMessage(error.message ?? "An unexpected error occurred");
     } finally {
       setSubmitting(false);
     }
   };
 
+  /* ------------- render ------------- */
   return (
     <FormProvider {...methods}>
       <form
@@ -79,7 +94,7 @@ export default function RequestQuoteForm() {
           </h2>
           <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4">
             <RQSecondStepLeft />
-            {/* Pass setter to capture download URL from file upload */}
+            {/* Right half passes upload callback */}
             <RQSecondStepRight setDownloadUrl={setFileDownloadUrl} />
           </div>
         </div>
@@ -93,7 +108,7 @@ export default function RequestQuoteForm() {
             disabled={submitting}
             className="mt-6 bg-red text-white w-[300px] h-[50px] text-[22px] font-inter-extrabold rounded hover:bg-red-700 disabled:opacity-50"
           >
-            {submitting ? "Submitting..." : "Submit"}
+            {submitting ? "Submitting…" : "Submit"}
           </button>
         </div>
 
