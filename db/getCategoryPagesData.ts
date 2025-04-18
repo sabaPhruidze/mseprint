@@ -473,7 +473,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           WebsiteDesignPageData: WebsiteDesignPageData ?? [],
         };
       }
-                                                                             
+      case "/tradeshows-events/pre-post-show-direct-mail": {
+        const [PrePostShowDirectMailPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("pre_post_show_direct_mail_page"),
+        ]);
+      
+        return {
+          PrePostShowDirectMailPageData: PrePostShowDirectMailPageData ?? [],
+        };
+      }                                                                             
       default:
         return {};
     }
