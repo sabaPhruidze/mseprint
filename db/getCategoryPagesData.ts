@@ -499,7 +499,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           GiftsAwardsIncentivesPageData: GiftsAwardsIncentivesPageData ?? [],
         };
-      }                                                                                         
+      }
+      case "/tradeshows-events/table-counter-kiosk-displays": {
+        const [TableCounterKioskDisplaysPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("table_counter_kiosk_displays_page"),
+        ]);
+      
+        return {
+          TableCounterKioskDisplaysPageData: TableCounterKioskDisplaysPageData ?? [],
+        };
+      }
+                                                                                               
       default:
         return {};
     }
