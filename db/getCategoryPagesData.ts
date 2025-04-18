@@ -481,7 +481,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           PrePostShowDirectMailPageData: PrePostShowDirectMailPageData ?? [],
         };
-      }                                                                             
+      }
+      case "/tradeshows-events/greeting-cards": {
+        const [GreetingCardsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("greeting_cards_page"),
+        ]);
+      
+        return {
+          GreetingCardsPageData: GreetingCardsPageData ?? [],
+        };
+      }
+                                                                                   
       default:
         return {};
     }
