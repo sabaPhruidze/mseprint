@@ -545,6 +545,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           ProductFulfillmentPageData: ProductFulfillmentPageData ?? [],
         };
       }
+      case "/fulfillment-services/inventory-management": {
+        const [InventoryManagementPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("inventory_management_page"),
+        ]);
+      
+        return {
+          InventoryManagementPageData: InventoryManagementPageData ?? [],
+        };
+      }
                                                                                                     
       default:
         return {};
