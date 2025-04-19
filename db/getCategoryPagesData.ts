@@ -580,7 +580,16 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           HealthcarePageData: HealthcarePageData ?? [],
         };
-      }                                                                                                        
+      }
+      case "/industry-specific/education": {
+        const [EducationPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("education"),
+        ]);
+      
+        return {
+          EducationPageData: EducationPageData ?? [],
+        };
+      }                                                                                                              
       default:
         return {};
     }
