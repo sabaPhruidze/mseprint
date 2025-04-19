@@ -563,7 +563,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           RealEstatePageData: RealEstatePageData ?? [],
         };
       }
-                                                                                                  
+      case "/industry-specific/finance": {
+        const [FinancePageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("finance_page"),
+        ]);
+      
+        return {
+          FinancePageData: FinancePageData ?? [],
+        };
+      }                                                                                                  
       default:
         return {};
     }
