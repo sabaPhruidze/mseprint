@@ -526,7 +526,16 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           QRCodesNoTouchOptionsPageData: QRCodesNoTouchOptionsPageData ?? [],
         };
-      }                                                                                        
+      }
+      case "/fulfillment-services/pick-pack": {
+        const [PickPackPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("pick_pack_page"),
+        ]);
+      
+        return {
+          PickPackPageData: PickPackPageData ?? [],
+        };
+      }                                                                                              
       default:
         return {};
     }
