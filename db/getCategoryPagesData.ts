@@ -625,7 +625,16 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           RetailPageData: RetailPageData ?? [],
         };
-      }                                                                                                                                      
+      }
+      case "/industry-specific/manufacturing": {
+        const [ManufacturingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("manufacturing_page"),
+        ]);
+      
+        return {
+          ManufacturingPageData: ManufacturingPageData ?? [],
+        };
+      }                                                                                                                                            
       default:
         return {};
     }
