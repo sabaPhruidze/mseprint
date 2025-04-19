@@ -509,7 +509,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           TableCounterKioskDisplaysPageData: TableCounterKioskDisplaysPageData ?? [],
         };
       }
-                                                                                               
+      case "/labels-packaging/custom-packaging": {
+        const [CustomPackagingPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("custom_packaging_page"),
+        ]);
+
+        return {
+          CustomPackagingPageData: CustomPackagingPageData ?? [],
+        };
+      }
+                                                                                        
       default:
         return {};
     }
