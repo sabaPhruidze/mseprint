@@ -518,7 +518,15 @@ export const getCategoryPagesData = async (pathname: string) => {
           CustomPackagingPageData: CustomPackagingPageData ?? [],
         };
       }
-                                                                                        
+      case "/labels-packaging/qr-codes-no-touch-options": {
+        const [QRCodesNoTouchOptionsPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("qr_codes_no_touch_options_page"),
+        ]);
+      
+        return {
+          QRCodesNoTouchOptionsPageData: QRCodesNoTouchOptionsPageData ?? [],
+        };
+      }                                                                                        
       default:
         return {};
     }
