@@ -616,7 +616,16 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           RestaurantsPageData: RestaurantsPageData ?? [],
         };
-      }                                                                                                                                
+      }
+      case "/industry-specific/retail": {
+        const [RetailPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("retail_page"),
+        ]);
+      
+        return {
+          RetailPageData: RetailPageData ?? [],
+        };
+      }                                                                                                                                      
       default:
         return {};
     }
