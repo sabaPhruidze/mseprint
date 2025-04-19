@@ -554,7 +554,16 @@ export const getCategoryPagesData = async (pathname: string) => {
           InventoryManagementPageData: InventoryManagementPageData ?? [],
         };
       }
-                                                                                                    
+      case "/industry-specific/real-estate": {
+        const [RealEstatePageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("real_estate_page"),
+        ]);
+
+        return {
+          RealEstatePageData: RealEstatePageData ?? [],
+        };
+      }
+                                                                                                  
       default:
         return {};
     }
