@@ -571,7 +571,16 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           FinancePageData: FinancePageData ?? [],
         };
-      }                                                                                                  
+      }
+      case "/industry-specific/healthcare": {
+        const [HealthcarePageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("healthcare_page"),
+        ]);
+      
+        return {
+          HealthcarePageData: HealthcarePageData ?? [],
+        };
+      }                                                                                                        
       default:
         return {};
     }
