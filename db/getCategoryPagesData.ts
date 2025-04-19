@@ -598,7 +598,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           PoliticalPageData: PoliticalPageData ?? [],
         };
-      }                                                                                                                    
+      }
+      case "/industry-specific/legal": {
+        const [LegalPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("legal_page"),
+        ]);
+      
+        return {
+          LegalPageData: LegalPageData ?? [],
+        };
+      }
+                                                                                                                          
       default:
         return {};
     }
