@@ -535,7 +535,17 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           PickPackPageData: PickPackPageData ?? [],
         };
-      }                                                                                              
+      }
+      case "/fulfillment-services/product-fulfillment": {
+        const [ProductFulfillmentPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("product_fulfillment_page"),
+        ]);
+      
+        return {
+          ProductFulfillmentPageData: ProductFulfillmentPageData ?? [],
+        };
+      }
+                                                                                                    
       default:
         return {};
     }
