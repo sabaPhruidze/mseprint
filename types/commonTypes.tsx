@@ -46,7 +46,7 @@ export interface ServicesPathTypes {
   path: string;
 }
 
-interface SectionContent {
+export interface SectionContent {
   heading: string;
   paragraph1?: string;
   paragraph2?: string;
@@ -107,3 +107,10 @@ export type FormData = {
   terms: boolean;
   representative: string;
 };
+
+export interface ReceivingPriceType {
+  begin_jurney: SectionContent;
+  services: SectionContent;
+  why_us: SectionContent;
+  get_started: TitleContentTypes;
+}
