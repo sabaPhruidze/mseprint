@@ -4,10 +4,7 @@ import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
 
-/* ------------------------------------------------------------------ */
-/*  Constants & Types                                                  */
-/* ------------------------------------------------------------------ */
-const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024; // 1 GB per file
+const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024;
 
 interface Props {
   setDownloadUrl: (url: string) => void;
@@ -18,9 +15,6 @@ interface PresignResponse {
   downloadUrl: string;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Component                                                          */
-/* ------------------------------------------------------------------ */
 export default function RQSecondStepRight({ setDownloadUrl }: Props) {
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
@@ -28,7 +22,6 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
   const [uploadFinished, setUploadFinished] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  /* ---------- 1. Handle drops ---------- */
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const valid = acceptedFiles.filter((file) => {
       if (file.size > MAX_FILE_SIZE) {
@@ -46,7 +39,6 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
     maxSize: MAX_FILE_SIZE,
   });
 
-  /* ---------- 2. Manual file picker ---------- */
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
     const chosen = Array.from(e.target.files);
@@ -60,12 +52,10 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
     setFiles((prev) => [...prev, ...valid]);
   }
 
-  /* ---------- 3. Remove file ---------- */
   function handleRemoveFile(index: number) {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   }
 
-  /* ---------- 4. Upload ---------- */
   async function handleUpload() {
     if (files.length === 0) return;
 
@@ -75,12 +65,10 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
     setError(null);
 
     try {
-      /* ---- 4.1  ZIP all files ---- */
       const zip = new JSZip();
       files.forEach((file) => zip.file(file.name, file));
       const zipBlob = await zip.generateAsync({ type: "blob" });
 
-      /* ---- 4.2  Get presigned URL ---- */
       const uniqueName = `RequestQuoteFiles-${Date.now()}-${Math.random()
         .toString(36)
         .substring(2, 7)}.zip`;
@@ -101,14 +89,12 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
       const { presignedUrl, downloadUrl } =
         (await presignRes.json()) as PresignResponse;
 
-      /* ---- 4.3  PUT the ZIP to S3 ---- */
       await fetch(presignedUrl, {
         method: "PUT",
         headers: { "Content-Type": "application/zip" },
         body: zipBlob,
       });
 
-      /* ---- 4.4  Fake progress bar ---- */
       let fake = 0;
       const interval = setInterval(() => {
         fake += 10;
@@ -117,7 +103,7 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
           clearInterval(interval);
           setUploading(false);
           setUploadFinished(true);
-          setDownloadUrl(downloadUrl); // 🔗 Pass S3 link to parent
+          setDownloadUrl(downloadUrl);
           console.log("✅ File uploaded to:", downloadUrl);
         }
       }, 200);
@@ -131,11 +117,8 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
 
   const showFileControls = !uploading && !uploadFinished;
 
-  /* ------------------------------------------------------------------ */
-  /*  Render                                                            */
-  /* ------------------------------------------------------------------ */
   return (
-    <div className="screen-size-12:w-full w-[460px]">
+    <div className="screen-size-12:w-full w-[460px] mx-auto text-center screen-size-12:text-left">
       <h3 className="text-xl font-semibold mb-4">
         File Upload (Do not use special characters in file names)
       </h3>
@@ -177,7 +160,6 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
           </p>
         </div>
 
-        {/* File List */}
         {files.length > 0 && (
           <div className="mt-6 text-center">
             <h4 className="text-md font-bold mb-1">Selected Files:</h4>
@@ -203,7 +185,6 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
           </div>
         )}
 
-        {/* Upload Button */}
         {showFileControls && files.length > 0 && (
           <button
             onClick={(e) => {
@@ -219,7 +200,6 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
           </button>
         )}
 
-        {/* Progress */}
         {uploading && (
           <div className="mt-4 w-full">
             <div className="w-full bg-gray-200 h-2 rounded">
@@ -234,14 +214,12 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
           </div>
         )}
 
-        {/* Success */}
         {uploadFinished && (
           <p className="mt-4 text-green-600 font-semibold text-center">
             Upload Complete! File is attached to your form.
           </p>
         )}
 
-        {/* Error */}
         {error && (
           <p className="mt-4 text-red-500 text-center">
             <strong>Error:</strong> {error}
@@ -249,7 +227,7 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
         )}
       </div>
 
-      <p className="text-gray-400 text-xs mt-4">
+      <p className="text-gray-400 text-xs mt-4 text-center screen-size-12:text-left">
         Choose all files first using the &quot;Add Files&quot; button. Only when
         you are ready, click &quot;Upload&quot; to start uploading all files as
         a single ZIP. After uploading, you cannot add more files until you

@@ -14,14 +14,17 @@ const RQFirstStepRequired = () => {
   const requiredFields = getRequiredFields(getValues);
 
   return (
-    <div className="space-y-6 w-[500px]">
+    <div className="space-y-6 w-[500px] mx-auto text-center screen-size-12:text-left">
       <p className="text-[24px] font-inter-bold">Required Information</p>
 
       {requiredFields.map((field) => {
         const { name, type, placeholder, rules, onChange } = field;
 
         return (
-          <div key={name} className="flex flex-col">
+          <div
+            key={name}
+            className="flex flex-col items-center screen-size-12:items-start"
+          >
             <input
               type={type}
               placeholder={placeholder}
@@ -32,7 +35,7 @@ const RQFirstStepRequired = () => {
               })}
             />
             {errors[name] && (
-              <p className="text-red text-sm">
+              <p className="text-red text-sm mt-1">
                 {String(errors[name]?.message)}
               </p>
             )}

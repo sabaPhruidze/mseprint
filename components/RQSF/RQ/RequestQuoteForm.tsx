@@ -92,7 +92,7 @@ export default function RequestQuoteForm() {
           <h2 className="text-[36px] font-inter-extrabold mb-2 mt-8">
             STEP 2 OF 2 <span className="font-inter-medium">ABOUT PROJECT</span>
           </h2>
-          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s">
             <RQSecondStepLeft />
             {/* Right half passes upload callback */}
             <RQSecondStepRight setDownloadUrl={setFileDownloadUrl} />

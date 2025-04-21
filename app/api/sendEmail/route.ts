@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
   /* ---------- 4.3  Build the e‑mail body ---------- */
   const html = `
 <pre>
-📬  New Quote Request
+📬  New Quote Request for ${body.representative || "No preference"}
 👤 Name: ${body.firstname} ${body.lastname}
 📧 Email: ${body.email}
 📞 Phone: ${body.phone || "N/A"}
