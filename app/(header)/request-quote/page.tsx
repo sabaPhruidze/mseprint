@@ -15,11 +15,7 @@ export const metadata: Metadata = {
 
 // ── Page component ──────────────────────────────────────────────
 export default async function RequestQuotePage() {
-  // 1. Fetch by supplying the pathname that the helper expects
   const { requestQuoteContent } = await getRequestQuoteData("/request-quote");
-
-  // 2. Quick sanity‑check in the server logs
-  console.log("Request‑quote content ▶", requestQuoteContent);
 
   return (
     <main className="bg-gray-50 screen-size-6:p-10 p-0">
