@@ -42,6 +42,31 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
           {item.page}
         </Link>
       ))}
+
+      {/* Phone Call Button */}
+      <a
+        href="tel:7635428812"
+        className="
+          text-white
+          border
+          border-white
+          rounded-lg
+          px-4
+          py-2
+          mx-2
+          no-underline
+          hover:bg-white
+          hover:text-black
+          hover:border-0
+          focus:scale-95
+          transition-all
+          duration-500
+          font-inter-extrabold
+        "
+        aria-label="Call 763-542-8812"
+      >
+        763-542-8812
+      </a>
     </nav>
   );
 };
