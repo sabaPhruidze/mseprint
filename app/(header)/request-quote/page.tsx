@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 // 2) Simple page wrapper
 export default function RequestQuotePage() {
   return (
-    <main className="bg-gray-50 p-10">
+    <main className="bg-gray-50 screen-size-6:p-10 p-0">
       <RequestQuoteForm />
     </main>
   );

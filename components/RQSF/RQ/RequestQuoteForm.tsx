@@ -73,7 +73,7 @@ export default function RequestQuoteForm() {
       <form
         onSubmit={methods.handleSubmit(onSubmitRQ)}
         autoComplete="off"
-        className="max-w-[1500px] mx-auto border p-10 rounded-md shadow-2xl ring-1 ring-gray-200 bg-white flex flex-col gap-8 justify-center screen-size-12:items-stretch items-center"
+        className="max-w-[1500px] mx-auto border px-4 screen-size-4:px-10 py-10 rounded-md shadow-2xl ring-1 ring-gray-200 bg-white flex flex-col gap-8 justify-center screen-size-12:items-stretch items-center"
       >
         {/* STEP 1 */}
         <div>

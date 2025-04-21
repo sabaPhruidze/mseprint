@@ -11,7 +11,7 @@ const RQFirstStepOptional = () => {
   } = useFormContext<FormData>();
 
   return (
-    <div className="space-y-3 w-[500px] screen-size-12:mx-[0px] mx-auto text-center screen-size-12:text-left">
+    <div className="space-y-6 max-w-[500px] min-w-[300px] screen-size-12:mx-[0px] mx-auto text-center screen-size-12:text-left">
       <p className="text-[24px] font-inter-bold">Optional Details</p>
 
       {optionalFields.map((field) => {
@@ -25,7 +25,7 @@ const RQFirstStepOptional = () => {
             <input
               type={type}
               placeholder={placeholder}
-              className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
+              className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
               {...register(name, rules)}
             />
             {errors[name] && (

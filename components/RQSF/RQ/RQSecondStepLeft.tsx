@@ -10,7 +10,7 @@ export default function RQSecondStepLeft() {
   } = useFormContext<FormData>();
 
   return (
-    <div className="space-y-6 w-[500px] mx-auto text-center screen-size-12:text-left">
+    <div className="space-y-6 max-w-[500px] min-w-[300px] mx-auto text-center screen-size-12:text-left">
       <h3 className="text-[24px] font-inter-bold">About Project</h3>
 
       {/* Project Name */}
@@ -18,7 +18,7 @@ export default function RQSecondStepLeft() {
         <input
           type="text"
           placeholder="Project Name *"
-          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
+          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
           {...register("projectName", { required: "This field is required" })}
         />
         {errors.projectName && (
@@ -31,7 +31,7 @@ export default function RQSecondStepLeft() {
         <input
           type="text"
           placeholder="Quantity *"
-          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
+          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
           {...register("quantity", { required: "This field is required" })}
         />
         {errors.quantity && (
@@ -46,7 +46,7 @@ export default function RQSecondStepLeft() {
         </label>
         <textarea
           placeholder="Describe your project..."
-          className="border p-2 screen-size-5:w-[460px] rounded screen-size-5:text-base w-[340px] text-sm min-h-[200px] resize-vertical"
+          className="border p-2 screen-size-5:w-[460px] rounded screen-size-5:text-base w-[300px] text-sm min-h-[200px] resize-vertical"
           maxLength={700}
           {...register("description", {
             required: "This field is required",
@@ -69,7 +69,7 @@ export default function RQSecondStepLeft() {
         <label className="text-sm font-medium mb-1">Project Due Date *</label>
         <input
           type="date"
-          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[340px] h-[45px] text-sm"
+          className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
           {...register("dueDate", { required: "This field is required" })}
         />
         {errors.dueDate && (

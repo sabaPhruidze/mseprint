@@ -118,7 +118,7 @@ export default function RQSecondStepRight({ setDownloadUrl }: Props) {
   const showFileControls = !uploading && !uploadFinished;
 
   return (
-    <div className="screen-size-12:w-full w-[460px] mx-auto text-center screen-size-12:text-left">
+    <div className="screen-size-12:w-full screen-size-5:w-[460px] w-[300px] mx-auto text-center screen-size-12:text-left">
       <h3 className="text-xl font-semibold mb-4">
         File Upload (Do not use special characters in file names)
       </h3>
