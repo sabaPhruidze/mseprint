@@ -25,7 +25,7 @@ export default function SelectRepresentative() {
       <h3 className="text-lg font-inter-bold">Select a Representative</h3>
 
       {/* Use a responsive grid: 2 columns on small screens, up to 6 columns on larger */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+      <div className="grid grid-col-1 screen-size-5:grid-cols-2 screen-size-10:grid-cols-3 screen-size-13:grid-cols-6 gap-3">
         {representatives.map((rep) => (
           <label
             key={rep.id}
