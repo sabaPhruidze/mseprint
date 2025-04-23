@@ -104,7 +104,7 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
           setUploading(false);
           setUploadFinished(true);
           setDownloadUrl(downloadUrl);
-          console.log("✅ File uploaded to:", downloadUrl);
+          // console.log("✅ File uploaded to:", downloadUrl);
         }
       }, 200);
     } catch (err: unknown) {

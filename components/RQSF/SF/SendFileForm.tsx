@@ -54,7 +54,7 @@ export default function SendFileForm() {
         );
       }
 
-      console.info("✔️  Email sent:", result);
+      // console.info("✔️  Email sent:", result);
       setSuccessMessage("Your quote request has been submitted successfully!");
       methods.reset();
       setFileDownloadUrl(null);
