@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import React from "react";
 import RequestQuoteForm from "components/RQSF/RQ/RequestQuoteForm";
-import { getRequestQuoteData } from "db/getRQContent";
+import { getRQSFData } from "db/getRQSFContent";
 import RQContentTop from "components/RQSF/RQ/RQContentTop";
 import RQContentBottom from "components/RQSF/RQ/RQContentBottom";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 // ── Page component ──────────────────────────────────────────────
 export default async function RequestQuotePage() {
-  const { requestQuoteContent } = await getRequestQuoteData("/request-quote");
+  const { requestQuoteContent } = await getRQSFData("/request-quote");
 
   return (
     <main className="bg-gray-50 screen-size-6:p-10 p-0">

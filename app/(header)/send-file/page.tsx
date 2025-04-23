@@ -1,14 +1,12 @@
-// ── app/send-file/page.tsx ──────────────────────────────────────
 import type { Metadata } from "next";
 import React from "react";
 
-import { getRequestQuoteData } from "db/getRQContent";
+import { getRQSFData } from "db/getRQSFContent";
 
 import SFContentTop from "components/RQSF/SF/SFContentTop";
 import SFContentBottom from "components/RQSF/SF/SFContentBottom";
 import SendFileForm from "components/RQSF/SF/SendFileForm";
 
-// ── SEO metadata ────────────────────────────────────────────────
 export const metadata: Metadata = {
   title: "Place an Order | MSE Printing",
   description:
@@ -16,15 +14,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://www.mseprinting.com/send-file" },
 };
 
-// ── Page component ──────────────────────────────────────────────
 export default async function SendAFile() {
-  const { requestQuoteContent } = await getRequestQuoteData("/request-quote");
+  const { sendFileContent } = await getRQSFData("/send-file");
 
   return (
     <main className="bg-gray-50 screen-size-6:p-10 p-0">
-      <SFContentTop data={requestQuoteContent} />
+      <SFContentTop data={sendFileContent} />
       <SendFileForm />
-      <SFContentBottom data={requestQuoteContent} />
+      <SFContentBottom data={sendFileContent} />
     </main>
   );
 }
