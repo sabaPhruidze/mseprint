@@ -58,12 +58,33 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
       </div>
 
       <div className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] pt-6 px-6">
-        <ul className="px-5 text-center font-inter-medium">
-          {heroSection.below?.map((item, index) => (
-            <React.Fragment key={`${item}-${index}`}>
-              <li>{item}</li>
-              <br />
-            </React.Fragment>
+        <details className="w-full md:hidden group" role="group">
+          <summary className="px-5 text-center font-inter-medium cursor-pointer marker:hidden">
+            {heroSection.below?.[0]}
+
+            <span className="ml-1 text-blue-600 group-open:hidden">
+              see more&nbsp;…
+            </span>
+            <span className="ml-1 text-blue-600 hidden group-open:inline">
+              see less
+            </span>
+          </summary>
+
+          <ul className="mt-2 px-5 text-center font-inter-medium">
+            {heroSection.below?.slice(1).map((item, idx) => (
+              <li key={idx} className="mb-2">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </details>
+
+        {/* Desktop / larger-than-mobile view – always expanded                 */}
+        <ul className="hidden md:block px-5 text-center font-inter-medium">
+          {heroSection.below?.map((item, idx) => (
+            <li key={idx} className="mb-2">
+              {item}
+            </li>
           ))}
         </ul>
       </div>

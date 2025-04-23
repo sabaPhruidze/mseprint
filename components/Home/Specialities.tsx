@@ -29,10 +29,10 @@ export default function Specialities({ specialities }: SpecialitiesProps) {
               {speciality.contentUp?.[0]}
 
               {/* toggle wording */}
-              <span className="ml-1 text-blue-600 underline group-open:hidden">
+              <span className="ml-1 text-blue-600 group-open:hidden">
                 see more&nbsp;…
               </span>
-              <span className="ml-1 text-blue-600 underline hidden group-open:inline">
+              <span className="ml-1 text-blue-600 hidden group-open:inline">
                 see less
               </span>
             </summary>
