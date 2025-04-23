@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 // ── Page component ──────────────────────────────────────────────
 export default async function SendAFile() {
   // Pull the CMS entry keyed to /send-file (adjust if you use a different slug)
-  const { requestQuoteContent } = await getRequestQuoteData("/send-file");
+  const { requestQuoteContent } = await getRequestQuoteData("/request-quote");
 
   return (
     <main className="bg-gray-50 screen-size-6:p-10 p-0">
