@@ -4,8 +4,8 @@ import React from "react";
 
 import { getRequestQuoteData } from "db/getRQContent";
 
-import RQContentTop from "components/RQSF/RQ/RQContentTop";
-import RQContentBottom from "components/RQSF/RQ/RQContentBottom";
+import SFContentTop from "components/RQSF/SF/SFContentTop";
+import SFContentBottom from "components/RQSF/SF/SFContentBottom";
 import SendFileForm from "components/RQSF/SF/SendFileForm";
 
 // ── SEO metadata ────────────────────────────────────────────────
@@ -18,15 +18,13 @@ export const metadata: Metadata = {
 
 // ── Page component ──────────────────────────────────────────────
 export default async function SendAFile() {
-  // Pull the CMS entry keyed to /send-file (adjust if you use a different slug)
   const { requestQuoteContent } = await getRequestQuoteData("/request-quote");
 
   return (
     <main className="bg-gray-50 screen-size-6:p-10 p-0">
-      {/* Optional: pass a custom heading so the H1 also reads “Place an Order” */}
-      <RQContentTop data={requestQuoteContent} />
+      <SFContentTop data={requestQuoteContent} />
       <SendFileForm />
-      <RQContentBottom data={requestQuoteContent} />
+      <SFContentBottom data={requestQuoteContent} />
     </main>
   );
 }
