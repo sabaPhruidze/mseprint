@@ -96,7 +96,7 @@ export async function POST(req: NextRequest) {
     const result = await resend.emails.send({
       from: process.env.RESEND_FROM!, // e.g. "MSE Printing <info@mseprinting.com>"
       to: process.env.RESEND_TO!,     // e.g. "info@mseprinting.com"
-      subject: `New Order Placed: ${body.projectName}`,
+      subject: `New Order Placed: ${body.representative || "No preference"}`,
       html,
     });
 

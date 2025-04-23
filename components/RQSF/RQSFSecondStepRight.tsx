@@ -174,7 +174,7 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
                         e.stopPropagation();
                         handleRemoveFile(index);
                       }}
-                      className="text-red-600"
+                      className="text-red"
                     >
                       Remove
                     </button>
@@ -221,7 +221,7 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
         )}
 
         {error && (
-          <p className="mt-4 text-red-500 text-center">
+          <p className="mt-4 text-red text-center">
             <strong>Error:</strong> {error}
           </p>
         )}
