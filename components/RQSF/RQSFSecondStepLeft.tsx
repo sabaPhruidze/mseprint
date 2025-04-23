@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "../../../types/commonTypes";
+import { FormData } from "../../types/commonTypes";
 
-export default function RQSecondStepLeft() {
+export default function RQSFSecondStepLeft() {
   const {
     register,
     formState: { errors },

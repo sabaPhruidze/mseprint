@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { FormData } from "../../../types/commonTypes";
 
-import RQFirstStepRequired from "./RQFirstStepRequired";
-import RQFirstStepOptional from "./RQFirstStepOptional";
+import RQSFFirstStepRequired from "../RQSFFirstStepRequired";
+import RQSFFirstStepOptional from "../RQSFFirstStepOptional";
 import SelectRepresentative from "../SelectRepresentative";
-import RQSecondStepLeft from "./RQSecondStepLeft";
-import RQSecondStepRight from "./RQSecondStepRight";
+import RQSFSecondStepLeft from "../RQSFSecondStepLeft";
+import RQSFSecondStepRight from "../RQSFSecondStepRight";
 
 /**
  * RequestQuoteForm – two‑step quote request wizard
@@ -82,8 +82,8 @@ export default function RequestQuoteForm() {
             <span className="font-inter-medium">PERSONAL INFORMATION</span>
           </h1>
           <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s">
-            <RQFirstStepRequired />
-            <RQFirstStepOptional />
+            <RQSFFirstStepRequired />
+            <RQSFFirstStepOptional />
           </div>
         </div>
 
@@ -93,9 +93,9 @@ export default function RequestQuoteForm() {
             STEP 2 OF 2 <span className="font-inter-medium">ABOUT PROJECT</span>
           </h2>
           <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s">
-            <RQSecondStepLeft />
+            <RQSFSecondStepLeft />
             {/* Right half passes upload callback */}
-            <RQSecondStepRight setDownloadUrl={setFileDownloadUrl} />
+            <RQSFSecondStepRight setDownloadUrl={setFileDownloadUrl} />
           </div>
         </div>
 

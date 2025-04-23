@@ -1,24 +1,21 @@
 "use client";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { getRequiredFields } from "db/RQData";
-import { FormData } from "../../../types/commonTypes";
+import { optionalFields } from "db/RQData";
+import { FormData } from "../../types/commonTypes";
 
-const RQFirstStepRequired = () => {
+const RQSFFirstStepOptional = () => {
   const {
     register,
-    getValues,
     formState: { errors },
   } = useFormContext<FormData>();
 
-  const requiredFields = getRequiredFields(getValues);
-
   return (
-    <div className="space-y-6 max-w-[500px] min-w-[300px] mx-auto text-center screen-size-12:text-left">
-      <p className="text-[24px] font-inter-bold">Required Information</p>
+    <div className="space-y-6 max-w-[500px] min-w-[300px] screen-size-12:mx-[0px] mx-auto text-center screen-size-12:text-left">
+      <p className="text-[24px] font-inter-bold">Optional Details</p>
 
-      {requiredFields.map((field) => {
-        const { name, type, placeholder, rules, onChange } = field;
+      {optionalFields.map((field) => {
+        const { name, type, placeholder, rules } = field;
 
         return (
           <div
@@ -29,10 +26,7 @@ const RQFirstStepRequired = () => {
               type={type}
               placeholder={placeholder}
               className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
-              {...register(name, {
-                ...rules,
-                onChange,
-              })}
+              {...register(name, rules)}
             />
             {errors[name] && (
               <p className="text-red text-sm mt-1">
@@ -46,4 +40,4 @@ const RQFirstStepRequired = () => {
   );
 };
 
-export default RQFirstStepRequired;
+export default RQSFFirstStepOptional;

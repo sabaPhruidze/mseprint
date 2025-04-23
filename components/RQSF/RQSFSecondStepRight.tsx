@@ -15,7 +15,7 @@ interface PresignResponse {
   downloadUrl: string;
 }
 
-export default function RQSecondStepRight({ setDownloadUrl }: Props) {
+export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
   const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
