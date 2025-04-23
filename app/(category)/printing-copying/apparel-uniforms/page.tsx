@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 const ApparelUniforms = async () => {
-  const data = await getCategoryPagesData("/apparel-uniforms");
+  const data = await getCategoryPagesData("/printing-copying/apparel-uniforms");
   const pageData = data.ApparelUniformsPageData?.[0];
 
   if (!pageData) {
