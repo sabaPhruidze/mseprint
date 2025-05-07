@@ -87,7 +87,6 @@ const SectionBlock: React.FC<{ data: SectionContent }> = ({ data }) => (
   </section>
 );
 
-/* ---------- Page Component ---------- */
 export default async function Accessibility() {
   const data = await getSpecialPagesData("/accessibility");
   const pageData = data.accessibilityData?.[0];
@@ -106,8 +105,8 @@ export default async function Accessibility() {
   const { first, second, third, fourth, fifth, sixth, seventh } = pageData;
 
   return (
-    <main className="screen-size-15:w-[1200px] max-w-full screen-size-5:mx-20 mx-0 screen-size-15:text-left text-center">
-      <h1 className="text-4xl font-bold text-center mb-10">{first}</h1>
+    <main className="screen-size-15:w-[1200px] max-w-full screen-size-5:mx-20 mx-10 screen-size-15:text-left text-center">
+      <h1 className="text-4xl font-bold my-10">{first}</h1>
 
       <TitleBlock data={second} />
       <TitleBlock data={third} />
