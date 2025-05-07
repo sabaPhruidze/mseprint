@@ -6,9 +6,21 @@ import type {
 import { getSpecialPagesData } from "db/GetSpecialPagesData";
 
 export const metadata = {
+  /* — Primary tags — */
   title: "Accessibility Statement | MSE Printing",
   description:
-    "Learn how MSE Printing designs a barrier‑free digital experience that meets WCAG 2.1 AA guidelines and our ongoing plans for inclusive improvements.",
+    "Learn how MSE Printing designs a barrier‑free digital experience that meets WCAG 2.1 AA guidelines, our ongoing accessibility roadmap, and how you can request assistance or provide feedback.",
+  alternates: {
+    canonical: "https://www.mseprinting.com/accessibility",
+  },
+  openGraph: {
+    title: "Accessibility Statement | MSE Printing",
+    description:
+      "Discover MSE Printing’s commitment to inclusive web design, recent WCAG 2.1 AA improvements, and ways to contact us for accessible formats.",
+    url: "https://www.mseprinting.com/accessibility",
+    siteName: "MSE Printing",
+    type: "article",
+  },
 };
 
 const TitleBlock: React.FC<{ data: TitleContentTypes }> = ({ data }) => {

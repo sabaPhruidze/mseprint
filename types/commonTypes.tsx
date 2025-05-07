@@ -116,9 +116,18 @@ export interface ReceivingPriceType {
 }
 // footer pages, about us , service and products and one more
 export interface accessibilityTypes {
-  first: string; //title:
+  first: string;
   second: TitleContentTypes;
   third: TitleContentTypes;
+  fourth: SectionContent;
+  fifth: SectionContent;
+  sixth: SectionContent;
+  seventh: TitleContentTypes;
+}
+export interface privacyPolicyTypes {
+  first: string;
+  second: TitleContentTypes;
+  third: SectionContent;
   fourth: SectionContent;
   fifth: SectionContent;
   sixth: SectionContent;
