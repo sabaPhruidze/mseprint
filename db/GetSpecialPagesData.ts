@@ -1,5 +1,5 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { accessibilityTypes,privacyPolicyTypes} from "../types/commonTypes";
+import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes} from "../types/commonTypes";
 
 export const getSpecialPagesData = async (pathname: string) => {
   try {
@@ -20,6 +20,15 @@ export const getSpecialPagesData = async (pathname: string) => {
         
             return {
               privacyPolicyData: privacyPolicyData ?? [],
+            };
+          }
+          case "/terms-conditions": {
+            const [termsConditionsData] = await Promise.all([
+              getDataPattern<termsConditionsTypes>("terms_conditions_page"),
+            ]);
+      
+            return {
+              termsConditionsData: termsConditionsData ?? [],
             };
           }
       default:

@@ -133,3 +133,18 @@ export interface privacyPolicyTypes {
   sixth: SectionContent;
   seventh: TitleContentTypes;
 }
+//
+export interface termsSection {
+  id: number;
+  heading: string;
+  paragraphs: string[];
+}
+
+/** Row shape in the `terms_conditions_page` table. */
+export interface termsConditionsTypes {
+  id?: number; // SERIAL primary key (optional on insert)
+  title: string; // “MSE Printing — Terms & Conditions”
+  intro: string[]; // the two intro paragraphs
+  sections: termsSection[]; // array of 16 sections
+  created_at?: string; // auto‑timestamp from the DB
+}

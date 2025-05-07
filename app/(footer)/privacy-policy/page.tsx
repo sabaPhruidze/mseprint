@@ -122,7 +122,7 @@ export default async function PrivacyPolicy() {
   const { first, second, third, fourth, fifth, sixth, seventh } = policyRow;
 
   return (
-    <main className="screen-size-15:w-[1200px] max-w-[1200px] max-w-full screen-size-5:mx-20 mx-10 screen-size-15:text-left text-center">
+    <main className="max-w-full mx-auto max-w-[800px] screen-size-15:text-left text-center px-8">
       <h1 className="text-4xl font-bold text-center my-10">{first}</h1>
 
       <TitleBlock data={second} />
