@@ -26,7 +26,7 @@ const TOP_LEVEL_STATIC = [
   { title: "About Us", path: "/about-us" },
   { title: "Contact Us", path: "/contact-us" },
   { title: "Request a Quote", path: "/request-quote" },
-  { title: "Place an Order", path: "/place-order" },
+  { title: "Place an Order", path: "/send-file" },
 ] as const;
 
 const FOOTER_STATIC = [
