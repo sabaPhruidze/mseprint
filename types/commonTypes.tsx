@@ -114,3 +114,13 @@ export interface ReceivingPriceType {
   why_us: SectionContent;
   get_started: TitleContentTypes;
 }
+// footer pages, about us , service and products and one more
+export interface FaccessibilityTypes {
+  first: string; //title:
+  second: TitleContentTypes;
+  third: TitleContentTypes;
+  fourth: SectionContent;
+  fifth: SectionContent;
+  sixth: SectionContent;
+  seventh: TitleContentTypes;
+}
