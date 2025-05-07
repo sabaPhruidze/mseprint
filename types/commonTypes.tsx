@@ -115,7 +115,7 @@ export interface ReceivingPriceType {
   get_started: TitleContentTypes;
 }
 // footer pages, about us , service and products and one more
-export interface FaccessibilityTypes {
+export interface accessibilityTypes {
   first: string; //title:
   second: TitleContentTypes;
   third: TitleContentTypes;

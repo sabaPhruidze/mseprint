@@ -634,7 +634,8 @@ export const getCategoryPagesData = async (pathname: string) => {
         return {
           ManufacturingPageData: ManufacturingPageData ?? [],
         };
-      }                                                                                                                                            
+      }  
+                                                                                                                                             
       default:
         return {};
     }
