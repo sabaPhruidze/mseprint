@@ -1,7 +1,6 @@
 "use client";
 import { useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import SEOImage from "components/common/SEOImage";
 import { BlogPost } from "types/commonTypes";
 
 interface Props {
@@ -20,6 +19,7 @@ export default function FeaturedPosts({ posts }: Props) {
 
   return (
     <div className="relative">
+      {/* ---------- scroll track ---------- */}
       <div
         ref={track}
         className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar"
@@ -27,24 +27,36 @@ export default function FeaturedPosts({ posts }: Props) {
         {posts.map((post) => (
           <div
             key={post.id}
-            // href={post.slug ? `/blog/${post.slug}` : "#"}
             className="relative shrink-0 snap-start
                        w-[85%] sm:w-[60%] md:w-[45%] lg:w-[30%] xl:w-[25%]
                        h-64 rounded-2xl overflow-hidden
                        shadow hover:shadow-xl transition-shadow duration-300
                        focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
           >
-            <Image
-              src={post.image.src}
+            {/* ---------- SEO‑friendly image ---------- */}
+
+            <SEOImage
+              src={
+                post.image.src ||
+                "/images/home-images/additional/offset_printing_right.webp"
+              }
               alt={post.image.alt}
+              name={post.image.alt}
+              geoData={post.image.geoData}
+              priority={post.image.priority}
+              loading={post.image.priority ? undefined : "lazy"}
+              sizes={
+                post.image.sizes ||
+                "(min-width:1280px) 25vw, (min-width:1024px) 30vw, (min-width:640px) 45vw, 85vw"
+              }
+              /*  ⬇️  wrapper now has real size  */
+              className="w-full h-full transition-transform duration-500 hover:scale-105"
               fill
-              sizes="(min-width:1280px) 25vw,
-                     (min-width:1024px) 30vw,
-                     (min-width:640px) 45vw,
-                     85vw"
-              className="object-cover transition-transform duration-500 hover:scale-105"
+              objectFit="cover"
             />
+            {/* gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            {/* title + date */}
             <div className="absolute bottom-4 left-4 right-4 text-white">
               <h3 className="text-lg font-semibold leading-snug line-clamp-2 drop-shadow">
                 {post.title}
@@ -55,12 +67,14 @@ export default function FeaturedPosts({ posts }: Props) {
         ))}
       </div>
 
+      {/* ---------- nav arrows (desktop) ---------- */}
       <button
         aria-label="Previous"
         onClick={() => scrollBy("left")}
         className="hidden md:flex absolute left-2.5 top-1/2 -translate-y-1/2
-             bg-white/80 hover:bg-white rounded-full p-2 shadow"
+                   bg-white/80 hover:bg-white rounded-full p-2 shadow"
       >
+        {/* left arrow */}
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path
             d="M15 6l-6 6 6 6"
@@ -73,13 +87,13 @@ export default function FeaturedPosts({ posts }: Props) {
         </svg>
       </button>
 
-      {/* → Next */}
       <button
         aria-label="Next"
         onClick={() => scrollBy("right")}
         className="hidden md:flex absolute right-2.5 top-1/2 -translate-y-1/2
-             bg-white/80 hover:bg-white rounded-full p-2 shadow"
+                   bg-white/80 hover:bg-white rounded-full p-2 shadow"
       >
+        {/* right arrow */}
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path
             d="M9 6l6 6-6 6"
