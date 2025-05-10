@@ -1,5 +1,5 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection} from "../types/commonTypes";
+import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection} from "../types/commonTypes";
 
 export const getSpecialPagesData = async (pathname: string) => {
   try {
@@ -31,16 +31,25 @@ export const getSpecialPagesData = async (pathname: string) => {
               termsConditionsData: termsConditionsData ?? [],
             };
           }
-  
-case "/eoe-diversity": {
-  const [eoeDiversityData] = await Promise.all([
-    getDataPattern<EoeDiversitySection[]>("eoe_diversity_page"),
-  ]);
+          case "/eoe-diversity": {
+            const [eoeDiversityData] = await Promise.all([
+              getDataPattern<EoeDiversitySection[]>("eoe_diversity_page"),
+            ]);
 
-  return {
-    eoeDiversityData: eoeDiversityData ?? [],
-  };
-}
+            return {
+              eoeDiversityData: eoeDiversityData ?? [],
+            };
+          }
+          case "/environmental-message": {
+            const [environmentalMessageData] = await Promise.all([
+              getDataPattern<EnvironmentalSection[]>("environmental_message_page"),
+            ]);
+
+            return {
+              environmentalMessageData: environmentalMessageData ?? [],
+            };
+          }
+
 
       default:
         return {};

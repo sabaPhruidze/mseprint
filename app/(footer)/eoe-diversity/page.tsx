@@ -46,15 +46,10 @@ const SectionBlock: React.FC<{ data: EoeDiversitySection }> = ({ data }) => (
   </section>
 );
 
-/* ---------- Page Component ---------- */
 export default async function EoeDiversity() {
   const { eoeDiversityData = [] } = await getSpecialPagesData("/eoe-diversity");
 
-  // 1. Flatten the nested shape → EoeDiversitySection[]
   const sections: EoeDiversitySection[] = eoeDiversityData.flat();
-
-  // 2. (Optional) server‑side sanity check
-  console.log("EOE Diversity sections →", sections);
 
   if (sections.length === 0) {
     console.warn(

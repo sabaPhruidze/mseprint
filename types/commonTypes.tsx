@@ -153,3 +153,10 @@ export interface EoeDiversitySection {
   heading: string;
   content: string[]; // Markdown/HTML‑safe strings
 }
+
+export interface EnvironmentalSection {
+  id: string;
+  heading: string | null; // null for intro
+  content: string[];
+  list?: string[]; // optional unordered list (already contains <strong> markup)
+}
