@@ -3,17 +3,17 @@ import { EnvironmentalSection } from "types/commonTypes";
 import { getSpecialPagesData } from "db/GetSpecialPagesData";
 
 export const metadata: Metadata = {
-  title: "Environmental Commitment | MSE Printing",
+  title: "Environmental message | MSE Printing",
   description:
     "Discover how MSE Printing reduces its environmental footprint through sustainable materials, lean workflows, and responsible sourcing.",
   alternates: {
-    canonical: "https://www.mseprinting.com/environmental-commitment",
+    canonical: "https://www.mseprinting.com/environmental-message",
   },
   openGraph: {
-    title: "Environmental Commitment | MSE Printing",
+    title: "Environmental message | MSE Printing",
     description:
       "Learn how MSE Printing powers your brand while protecting the planet—digital technologies, recycled papers, soy inks, and more.",
-    url: "https://www.mseprinting.com/environmental-commitment",
+    url: "https://www.mseprinting.com/environmental-message",
     siteName: "MSE Printing",
     type: "article",
   },
@@ -35,7 +35,7 @@ export default async function EnvironmentalCommitment() {
   if (sections.length === 0) {
     return (
       <main className="max-w-xl mx-auto px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold mb-4">Environmental Commitment</h1>
+        <h1 className="text-3xl font-bold mb-4">Environmental message</h1>
         <p className="text-red-600">
           Environmental message content is not yet available.
         </p>
@@ -43,7 +43,7 @@ export default async function EnvironmentalCommitment() {
     );
   }
 
-  const pageTitle = "MSE Printing – Environmental Commitment" as const;
+  const pageTitle = "MSE Printing – Environmental message" as const;
 
   return (
     <main className="max-w-3xl mx-auto px-6 py-12 text-gray-800">

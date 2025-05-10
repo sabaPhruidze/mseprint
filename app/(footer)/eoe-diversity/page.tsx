@@ -8,13 +8,13 @@ export const metadata = {
   description:
     "Explore MSE Printing’s commitment to equal employment opportunity, our inclusive hiring practices, and how we foster a diverse workplace culture across our franchise network.",
   alternates: {
-    canonical: "https://www.mseprinting.com/equal-employment-diversity",
+    canonical: "https://www.mseprinting.com/eoe-diversity",
   },
   openGraph: {
     title: "Equal Employment Opportunity & Diversity | MSE Printing",
     description:
       "Learn how MSE Printing champions fair hiring, accessibility accommodations, and a culture of respect for all employees and applicants.",
-    url: "https://www.mseprinting.com/equal-employment-diversity",
+    url: "https://www.mseprinting.com/eoe-diversity",
     siteName: "MSE Printing",
     type: "article",
   },
