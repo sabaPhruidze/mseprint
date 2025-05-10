@@ -15,7 +15,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
     : "/images/home-images/additional/offset_printing_right.webp";
 
   return (
-    <section>
+    <section className="mb-6">
       <div
         aria-labelledby="hero-heading"
         className="relative w-full h-[500px] flex items-center justify-start text-white overflow-hidden screen-size-18:pl-[50px] pl-[20px]"

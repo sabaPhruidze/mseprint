@@ -25,7 +25,7 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData = [] }) => {
   const [firstBullet, ...restBullets] = bullets;
 
   return (
-    <section className="w-full px-4" aria-label="Call To Action Section">
+    <section className="w-full px-4 mb-6" aria-label="Call To Action Section">
       {/* ── CTA nav ───────────────────────────────── */}
       <nav
         className="h-20 bg-gray-300 flex items-center justify-center"
