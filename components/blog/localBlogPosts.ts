@@ -10,7 +10,7 @@ import { getSpecialPagesData } from 'db/GetSpecialPagesData';
 
 const sortAscending = (arr: BlogPost[]): BlogPost[] =>
   arr
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    .sort((a, b) => new Date(a.published_on).getTime() - new Date(b.published_on).getTime())
     .map((p, idx) => ({ ...p, id: idx + 1 }));
 
 export async function fetchBlogPosts(): Promise<BlogPost[]> {
