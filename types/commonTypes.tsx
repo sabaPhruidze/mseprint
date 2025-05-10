@@ -148,3 +148,8 @@ export interface termsConditionsTypes {
   sections: termsSection[]; // array of 16 sections
   created_at?: string; // auto‑timestamp from the DB
 }
+export interface EoeDiversitySection {
+  id: string;
+  heading: string;
+  content: string[]; // Markdown/HTML‑safe strings
+}
