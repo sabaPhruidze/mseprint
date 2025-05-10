@@ -199,3 +199,33 @@ export interface SubsectionsSection extends BaseSection {
     items: { title: string; text: string }[];
   };
 }
+
+export interface CardsPagesStructureTypes {
+  id: number;
+  mainimage: SEOImageProps;
+  secondaryimages?: SEOImageProps[]; // multiple entries
+  introsection: {
+    heading: string;
+    paragraph: string;
+  };
+  whychoosesection: SectionContent;
+  servicessection?: SectionContent;
+  offeringssection?: SectionContent;
+  advancedfeatures?: {
+    heading: string;
+    customizationFinishing?: SectionContent;
+    bulkPrinting?: SectionContent;
+    convenientPrinting?: SectionContent;
+  };
+  howtogetstarted?: SectionContent;
+  whytrustus?: SectionContent;
+  faqs?: {
+    heading: string;
+    list: FAQItem[];
+  };
+  getstartedsection?: {
+    heading: string;
+    steps: PagePathTypes[];
+    finalParagraph?: string;
+  };
+}
