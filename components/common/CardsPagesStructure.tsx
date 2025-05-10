@@ -55,13 +55,9 @@ export default function CardsPagesStructure({ pageData }: PageStructureProps) {
       </section>
       <div className="grid grid-cols-1 screen-size-5:grid-cols-2 screen-size-8:grid-cols-3 screen-size-10:grid-cols-4 gap-6 max-w-[1500px] mx-auto p-10">
         {pageData.secondaryimages?.map((img, index) => {
-          const cardPath =
-            pageData.whychoosesection?.list?.[index]?.path || "/";
-          const cardTitle =
-            pageData.whychoosesection?.list?.[index]?.page || "Untitled";
-          const cardParagraph =
-            pageData.whychoosesection?.list?.[index]?.content ||
-            "No description available.";
+          const cardPath = img.path || "/";
+          const cardTitle = img.alt || "Untitled";
+          const cardParagraph = img.description || "No description available.";
 
           return (
             <Link

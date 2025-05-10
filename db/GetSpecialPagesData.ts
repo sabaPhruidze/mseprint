@@ -70,7 +70,15 @@ export const getSpecialPagesData = async (pathname: string) => {
               IndustrySpecificCardPageData: IndustrySpecificCardPageData ?? [],
             };
           }
-          
+          case "/fulfillment-services": {
+            const [FulfillmentServicesCardPageData] = await Promise.all([
+              getDataPattern<CardsPagesStructureTypes>("fulfillment_services_card_page"),
+            ]);
+
+            return {
+              FulfillmentServicesCardPageData: FulfillmentServicesCardPageData ?? [],
+            };
+          }
       default:
         return {};
     }
