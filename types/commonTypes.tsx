@@ -160,3 +160,11 @@ export interface EnvironmentalSection {
   content: string[];
   list?: string[]; // optional unordered list (already contains <strong> markup)
 }
+
+export interface BlogPost {
+  id: number;
+  title: string;
+  date: string; // e.g. '06/20/2024'
+  image: SEOImageProps; // re‑use your type
+  slug?: string; // optional, ready for future dynamic pages
+}
