@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { CardsPagesStructureTypes } from "types/commonTypes";
+import ContactUs from "./ContactUs";
 
 interface PageStructureProps {
   pageData: CardsPagesStructureTypes;
@@ -312,6 +313,7 @@ export default function CardsPagesStructure({ pageData }: PageStructureProps) {
             "pageData.getStartedSection?.finalParagraph not written"}
         </p>
       </div>
+      <ContactUs />
     </div>
   );
 }
