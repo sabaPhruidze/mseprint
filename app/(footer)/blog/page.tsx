@@ -46,10 +46,6 @@ export default async function BlogPage() {
     )
     .map((p, idx) => ({ ...p, id: idx + 1 }));
 
-  // Server‑side log shows in terminal, great for debugging DB shape
-  console.log("[BlogPage] posts →", posts);
-
-  /* JSON‑LD for SEO */
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
