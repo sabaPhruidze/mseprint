@@ -635,7 +635,17 @@ export const getCategoryPagesData = async (pathname: string) => {
           ManufacturingPageData: ManufacturingPageData ?? [],
         };
       }  
-                                                                                                                                             
+      case "/products-services": {
+        const [ProductsServicesPageData] = await Promise.all([
+          getDataPattern<PageStructureTypes>("products_services_page"),
+        ]);
+
+        return {
+          ProductsServicesPageData: ProductsServicesPageData ?? [],
+        };
+      }
+
+                                                                                                                                        
       default:
         return {};
     }
