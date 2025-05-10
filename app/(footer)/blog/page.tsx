@@ -4,35 +4,18 @@ import FeaturedPosts from "components/blog/FeaturedPosts";
 import { localBlogPosts } from "components/blog/localBlogPosts";
 import { BlogPost } from "types/commonTypes";
 
-/* ───────────────────────────
-   SEO / social metadata (App Router)
-   ─────────────────────────── */
+/*────────── SEO metadata ──────────*/
 export const metadata: Metadata = {
   title: "MSE Printing Blog | Expert Tips, Design & Marketing Insights",
   description:
     "Explore the latest articles from MSE Printing—printing tips, design inspiration, and marketing strategies to grow your business.",
-  keywords: [
-    "printing tips",
-    "design insights",
-    "marketing strategies",
-    "MSE Printing blog",
-  ],
-  alternates: {
-    canonical: "https://www.mseprinting.com/blog",
-  },
+  alternates: { canonical: "https://www.mseprinting.com/blog" },
   openGraph: {
     type: "website",
     url: "https://www.mseprinting.com/blog",
     title: "MSE Printing Blog",
     description: "Expert articles on printing, design, and marketing.",
-    images: [
-      {
-        url: "https://www.mseprinting.com/og-image-blog.jpg",
-        width: 1200,
-        height: 630,
-        alt: "MSE Printing Blog Open Graph Image",
-      },
-    ],
+    images: [{ url: "https://www.mseprinting.com/og-image-blog.jpg" }],
   },
   twitter: {
     card: "summary_large_image",
@@ -42,16 +25,13 @@ export const metadata: Metadata = {
   },
 };
 
-/* ───────────────────────────
-   The page component itself
-   (runs on the server by default)
-   ─────────────────────────── */
-export default async function BlogPage() {
-  /* In a real project replace this import with
-     await fetch('https://…/api/posts').then(r => r.json()) */
-  const posts: BlogPost[] = localBlogPosts;
+/*────────── Page component (server) ──────────*/
+export default function BlogPage() {
+  /* newest → left */
+  const posts: BlogPost[] = [...localBlogPosts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
-  /* JSON‑LD for richer SERP */
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -63,8 +43,7 @@ export default async function BlogPage() {
 
   return (
     <>
-      {/* JSON‑LD needs to be in <head>.  
-          In the App Router we can inject it with next/script */}
+      {/* JSON‑LD */}
       <Script
         id="blog-ld"
         type="application/ld+json"
@@ -72,7 +51,7 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* ------- page content ------- */}
+      {/* page content */}
       <main className="min-h-screen bg-white py-16 px-6 md:px-20">
         <header className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl font-bold mb-4 tracking-tight">BLOG</h1>
