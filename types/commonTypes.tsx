@@ -164,7 +164,7 @@ export interface EnvironmentalSection {
 export interface BlogPost {
   id: number;
   title: string;
-  date: string;
+  published_on: string;
   image: SEOImageProps;
   slug?: string;
 }

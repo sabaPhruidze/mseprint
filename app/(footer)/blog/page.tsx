@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { getSpecialPagesData } from "db/GetSpecialPagesData"; // ← direct DB call
 import FeaturedPosts from "components/blog/FeaturedPosts";
-import { localBlogPosts } from "components/blog/localBlogPosts";
 import { BlogPost } from "types/commonTypes";
 
-/*────────── SEO metadata ──────────*/
+/* ────── SEO metadata (unchanged) ────── */
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.mseprinting.com"),
   title: "MSE Printing Blog | Expert Tips, Design & Marketing Insights",
   description:
     "Explore the latest articles from MSE Printing—printing tips, design inspiration, and marketing strategies to grow your business.",
   alternates: { canonical: "https://www.mseprinting.com/blog" },
   openGraph: {
     type: "website",
-    url: "https://www.mseprinting.com/blog",
+    url: "/blog",
     title: "MSE Printing Blog",
     description: "Expert articles on printing, design, and marketing.",
     images: [
@@ -31,11 +32,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  const posts: BlogPost[] = [...localBlogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+export default async function BlogPage() {
+  /* ---------- fetch & shape ---------- */
+  const { blogData } = await getSpecialPagesData("/blog");
 
+  // BlogPost[][] ➜ BlogPost[]
+  const posts: BlogPost[] = (blogData ?? [])
+    .flat()
+    // newest first feels more natural for a blog; flip if you prefer oldest→newest
+    .sort(
+      (a, b) =>
+        new Date(b.published_on).getTime() - new Date(a.published_on).getTime()
+    )
+    .map((p, idx) => ({ ...p, id: idx + 1 }));
+
+  // Server‑side log shows in terminal, great for debugging DB shape
+  console.log("[BlogPage] posts →", posts);
+
+  /* JSON‑LD for SEO */
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
@@ -47,7 +61,6 @@ export default function BlogPage() {
 
   return (
     <>
-      {/* JSON‑LD */}
       <Script
         id="blog-ld"
         type="application/ld+json"
@@ -55,7 +68,6 @@ export default function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* page content */}
       <main className="min-h-screen bg-white py-16 px-6 md:px-20">
         <header className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl font-bold mb-4 tracking-tight">BLOG</h1>

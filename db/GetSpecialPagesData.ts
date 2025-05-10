@@ -1,5 +1,5 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection} from "../types/commonTypes";
+import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection, BlogPost} from "../types/commonTypes";
 
 export const getSpecialPagesData = async (pathname: string) => {
   try {
@@ -49,7 +49,12 @@ export const getSpecialPagesData = async (pathname: string) => {
               environmentalMessageData: environmentalMessageData ?? [],
             };
           }
-
+          case "/blog": {
+            const [blogData] = await Promise.all([
+              getDataPattern<BlogPost[]>("blog_post_page"),
+            ]);
+            return { blogData: blogData ?? [] };
+          }
 
       default:
         return {};
