@@ -236,27 +236,58 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           ))) ||
           "pageData.faqs?.items not written"}
 
+        {/* Get Started Section */}
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black mt-6 screen-size-10:text-left">
-          {pageData.getstartedsection?.heading ||
+          {pageData.getstartedsection?.heading ??
             "pageData.getStartedSection?.heading not written"}
         </h2>
+
         <p className="mt-4">
-          {(pageData.getstartedsection?.steps &&
-            pageData.getstartedsection?.steps?.map((item) => (
+          {pageData.getstartedsection?.steps?.map((item) => {
+            // Normalise whitespace for cleaner matching
+            const content = item.content?.trim() ?? "";
+
+            // Decide how to render the “content” part
+            let renderedContent: React.ReactNode = null;
+
+            if (content.includes("@")) {
+              // E‑mail
+              renderedContent = (
+                <a
+                  href={`mailto:${content}`}
+                  className="text-blue-600 font-semibold "
+                >
+                  {content}
+                </a>
+              );
+            } else if (/^\d{3}-\d{3}-\d{4}$/.test(content)) {
+              // Phone in 763‑542‑8812 format
+              renderedContent = (
+                <a
+                  href={`tel:${content.replace(/-/g, "")}`}
+                  className="text-blue-600 font-semibold "
+                >
+                  {content}
+                </a>
+              );
+            } else {
+              // Anything else, including the “MSE Printing” text
+              renderedContent = (
+                <span className="text-blue-600 font-semibold">{content}</span>
+              );
+            }
+
+            return (
               <span key={item.id}>
-                {item.page && <span> {item.page} </span>}
-                {item.content && (
-                  <span className="text-blue-600 font-semibold">
-                    {item.content}
-                  </span>
-                )}
+                {item.page && <span>{` ${item.page} `}</span>}
+                {renderedContent}
               </span>
-            ))) ||
-            "pageData.getStartedSection?.steps not written"}
+            );
+          }) ?? "pageData.getStartedSection?.steps not written"}
         </p>
 
         <p className="mt-2">
-          {pageData.getstartedsection?.finalParagraph ||
+          {pageData.getstartedsection?.finalParagraph ??
             "pageData.getStartedSection?.finalParagraph not written"}
         </p>
       </div>
