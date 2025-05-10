@@ -168,3 +168,34 @@ export interface BlogPost {
   image: SEOImageProps;
   slug?: string;
 }
+
+//about us
+// src/types/about-us-section.ts
+export type AboutUsSection =
+  | ParagraphSection
+  | ListSection
+  | SubsectionsSection;
+
+interface BaseSection {
+  id: number;
+  title: string;
+  /** 1 for <h1>, 2 for <h2>, … */
+  heading_level: 1 | 2 | 3;
+}
+
+export interface ParagraphSection extends BaseSection {
+  type: "paragraph";
+  content: { text: string };
+}
+
+export interface ListSection extends BaseSection {
+  type: "list";
+  content: { items: string[] };
+}
+
+export interface SubsectionsSection extends BaseSection {
+  type: "subsections";
+  content: {
+    items: { title: string; text: string }[];
+  };
+}

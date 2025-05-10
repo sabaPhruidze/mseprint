@@ -48,7 +48,6 @@ const Home = async () => {
             homeSpecialities={data.homeSpecialities}
           />
         </div>
-
         <HeroSection heroSection={data.heroSection} />
         <CTASection rqsafData={headerData.requestQuoteSendAFileData} />
       </div>

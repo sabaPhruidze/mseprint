@@ -1,5 +1,5 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection, BlogPost} from "../types/commonTypes";
+import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection, BlogPost,AboutUsSection} from "../types/commonTypes";
 
 export const getSpecialPagesData = async (pathname: string) => {
   try {
@@ -55,7 +55,12 @@ export const getSpecialPagesData = async (pathname: string) => {
             ]);
             return { blogData: blogData ?? [] };
           }
-
+          case '/about-us': {
+            const [aboutUsData] = await Promise.all([
+              getDataPattern<AboutUsSection[]>('about_us_sections'), // 👈 same shape, new key
+            ]);
+            return { aboutUsData: aboutUsData ?? [] };
+          }
       default:
         return {};
     }
