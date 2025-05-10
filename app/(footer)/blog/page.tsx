@@ -15,19 +15,23 @@ export const metadata: Metadata = {
     url: "https://www.mseprinting.com/blog",
     title: "MSE Printing Blog",
     description: "Expert articles on printing, design, and marketing.",
-    images: [{ url: "https://www.mseprinting.com/og-image-blog.jpg" }],
+    images: [
+      {
+        url: "/images/blog/2.webp",
+        width: 500,
+        height: 500,
+        alt: "MSE Printing - Banners & Posters",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "MSE Printing Blog",
     description: "Expert articles on printing, design, and marketing.",
-    images: ["https://www.mseprinting.com/og-image-blog.jpg"],
   },
 };
 
-/*────────── Page component (server) ──────────*/
 export default function BlogPage() {
-  /* newest → left */
   const posts: BlogPost[] = [...localBlogPosts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );

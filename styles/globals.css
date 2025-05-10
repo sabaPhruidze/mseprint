@@ -22,3 +22,6 @@ body {
   margin: 0;
   padding: 0;
 }
+/* globals.css */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
