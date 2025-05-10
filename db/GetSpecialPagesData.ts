@@ -1,5 +1,5 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection, BlogPost,AboutUsSection} from "../types/commonTypes";
+import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection, BlogPost,AboutUsSection, CardsPagesStructureTypes} from "../types/commonTypes";
 
 export const getSpecialPagesData = async (pathname: string) => {
   try {
@@ -61,6 +61,16 @@ export const getSpecialPagesData = async (pathname: string) => {
             ]);
             return { aboutUsData: aboutUsData ?? [] };
           }
+          case "/industry-specific": {
+            const [IndustrySpecificCardPageData] = await Promise.all([
+              getDataPattern<CardsPagesStructureTypes>("industry_specific_card_page"),
+            ]);
+          
+            return {
+              IndustrySpecificCardPageData: IndustrySpecificCardPageData ?? [],
+            };
+          }
+          
       default:
         return {};
     }
