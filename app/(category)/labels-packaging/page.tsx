@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
-import PageStructure from "components/common/PageStructure";
+import CardsPagesStructure from "components/common/CardsPagesStructure";
 
 export const metadata: Metadata = {
   title: "Labels & Packaging | MSE Print",
@@ -37,7 +37,7 @@ const LabelsPackaging = async () => {
     return <div>Data not available.</div>;
   }
 
-  return <PageStructure pageData={pageData} />;
+  return <CardsPagesStructure pageData={pageData} />;
 };
 
 export default LabelsPackaging;
