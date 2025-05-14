@@ -79,6 +79,17 @@ export const getSpecialPagesData = async (pathname: string) => {
               FulfillmentServicesCardPageData: FulfillmentServicesCardPageData ?? [],
             };
           }
+        case "/tradeshows-events": {
+          const [TradeshowsEventsPageCardPageData] = await Promise.all([
+            getDataPattern<CardsPagesStructureTypes>("tradeshows_events_page_card_page"),
+          ]);
+
+          return {
+            TradeshowsEventsPageCardPageData: TradeshowsEventsPageCardPageData ?? [],
+          };
+        }
+
+
       default:
         return {};
     }
