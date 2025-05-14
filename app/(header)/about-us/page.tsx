@@ -42,7 +42,7 @@ export default async function AboutUsPage() {
     : [];
 
   const renderSection = (section: AboutUsSection) => {
-    const HeadingTag = `h${section.heading_level}` as ElementType;
+    const HeadingTag = `h${section.heading_level + 1}` as ElementType;
 
     switch (section.type) {
       case "paragraph":
