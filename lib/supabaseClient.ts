@@ -2,7 +2,7 @@
 import { neon } from "@neondatabase/serverless";
 import { cache } from "react";
 
-const sql = neon(process.env.DATABASE_URL!);
+export const sql = neon(process.env.DATABASE_URL!);
 
 export const getDataPattern = cache(async <T extends object>(
   tableName: string,

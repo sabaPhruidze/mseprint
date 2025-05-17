@@ -14,6 +14,7 @@
     "@aws-sdk/s3-request-presigner": "^3.787.0",
     "@neondatabase/serverless": "^0.10.4",
     "aws-sdk": "^2.1692.0",
+    "bcryptjs": "^3.0.2",
     "framer-motion": "^12.4.3",
     "jszip": "^3.10.1",
     "lucide-react": "^0.475.0",
