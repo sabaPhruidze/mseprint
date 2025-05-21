@@ -39,8 +39,8 @@ importers:
         specifier: ^4.2.3
         version: 4.2.3(next@15.3.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
       pg:
-        specifier: 8.11.6
-        version: 8.11.6
+        specifier: ^8.16.0
+        version: 8.16.0
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -78,6 +78,9 @@ importers:
       eslint-config-next:
         specifier: 15.1.7
         version: 15.1.7(eslint@9.27.0(jiti@1.21.7))(typescript@5.8.3)
+      pg-protocol:
+        specifier: ^1.10.0
+        version: 1.10.0
       postcss:
         specifier: ^8.5.2
         version: 8.5.3
@@ -2025,8 +2028,8 @@ packages:
     resolution: {integrity: sha512-cRL3JpS3lKMGsKaWndugWQoLOCoP+Cic8oseVcbr0qhPzYD5DWXK+RZ9LY9wxRf7RQia4SCwQlXk0q6FCPrVng==}
     engines: {node: '>=10'}
 
-  pg@8.11.6:
-    resolution: {integrity: sha512-6CyL4F0j3vPmakU9rWdeRY8qF5Cjc3OE86y6YpgDI6YtKHhNyCjGEIE8U5ZRfBjKTZikwolKIFWh3I22MeRnoA==}
+  pg@8.16.0:
+    resolution: {integrity: sha512-7SKfdvP8CTNXjMUzfcVTaI+TDzBEeaUnVwiVGZQD1Hh33Kpev7liQba9uLd4CfN8r9mCVsD0JIpq03+Unpz+kg==}
     engines: {node: '>= 8.0.0'}
     peerDependencies:
       pg-native: '>=3.0.1'
@@ -5061,9 +5064,9 @@ snapshots:
 
   pg-numeric@1.0.2: {}
 
-  pg-pool@3.10.0(pg@8.11.6):
+  pg-pool@3.10.0(pg@8.16.0):
     dependencies:
-      pg: 8.11.6
+      pg: 8.16.0
 
   pg-protocol@1.10.0: {}
 
@@ -5085,10 +5088,10 @@ snapshots:
       postgres-interval: 3.0.0
       postgres-range: 1.1.4
 
-  pg@8.11.6:
+  pg@8.16.0:
     dependencies:
       pg-connection-string: 2.9.0
-      pg-pool: 3.10.0(pg@8.11.6)
+      pg-pool: 3.10.0(pg@8.16.0)
       pg-protocol: 1.10.0
       pg-types: 2.2.0
       pgpass: 1.0.5
