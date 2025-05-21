@@ -72,14 +72,14 @@ export default function Register() {
                 type={type}
                 placeholder={placeholder}
                 autoComplete={autoComplete}
-                className="w-full border rounded py-3 px-4 h-[60px] text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border rounded py-3 px-4 h-[60px] text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue"
                 {...register(name, {
                   ...(rules || {}),
                   ...(onChange ? { onChange } : {}),
                 })}
               />
               {errors[name] && (
-                <p className="text-red-600 text-xs md:text-sm">
+                <p className="text-red text-xs md:text-sm">
                   {String(errors[name]?.message)}
                 </p>
               )}
@@ -88,7 +88,7 @@ export default function Register() {
         )}
 
         {serverError && (
-          <p className="text-red-600 text-center text-sm md:text-base">
+          <p className="text-red text-center text-sm md:text-base">
             {serverError}
           </p>
         )}

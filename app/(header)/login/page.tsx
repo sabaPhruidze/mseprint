@@ -76,11 +76,11 @@ export default function Login() {
               type={type}
               placeholder={placeholder}
               autoComplete={autoComplete}
-              className="w-full border rounded px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
+              className="w-full border rounded px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red"
               {...register(name, rules)}
             />
             {errors[name] && (
-              <p className="text-red-600 text-xs md:text-sm">
+              <p className="text-red text-xs md:text-sm">
                 {String(errors[name]?.message)}
               </p>
             )}
@@ -88,7 +88,7 @@ export default function Login() {
         ))}
 
         {serverError && (
-          <p className="text-red-600 text-center text-sm md:text-base">
+          <p className="text-red text-center text-sm md:text-base">
             {serverError}
           </p>
         )}
