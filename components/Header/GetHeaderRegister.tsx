@@ -16,24 +16,24 @@ export default async function GetHeaderRegister({ registerData }: Props) {
   const cookieStore = await cookies();
   const displayName = cookieStore.get("displayName")?.value;
 
-  /* ─────────────────────────────── logged-in view ────────────────────────────── */
+  /* ─────────────────────────────── logged-in view ───────────────────────────── */
   if (displayName) {
     return (
       <nav
         role="navigation"
         aria-label="User navigation"
-        className="flex w-full items-center justify-between screen-size-13:hidden screen-size-15:flex"
+        className="flex items-center gap-4 screen-size-13:hidden screen-size-15:flex"
       >
-        {/* left ─ user’s name */}
-        <span className="font-inter-extrabold text-2xl screen-size-20:text-3xl">
+        {/* user’s name */}
+        <span className="font-inter-extrabold whitespace-nowrap text-2xl screen-size-20:text-3xl">
           {displayName}
         </span>
 
-        {/* right ─ Log-out button that calls the server action */}
+        {/* Log-out button that calls the server action */}
         <form action={logoutAction}>
           <button
             type="submit"
-            className="bg-red-600 hover:bg-red-700 text-white rounded px-4 py-2 transition-colors"
+            className="font-inter-extrabold font-semibold transition-all screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl text-2xl"
           >
             Log&nbsp;out
           </button>
@@ -42,7 +42,7 @@ export default async function GetHeaderRegister({ registerData }: Props) {
     );
   }
 
-  /* ─────────────────────────────── guest view ──────────────────────────────── */
+  /* ─────────────────────────────── guest view ─────────────────────────────── */
   return (
     <nav
       role="navigation"
