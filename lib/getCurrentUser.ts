@@ -1,6 +1,12 @@
-"use server";
-import { cookies } from "next/headers";
-import { sql } from "lib/supabaseClient";
+/* ------------------------------------------------------------------
+   lib/getCurrentUser.ts
+   ------------------------------------------------------------------
+   Returns the signed-in user’s row or null (guest)
+------------------------------------------------------------------- */
+'use server';
+
+import { cookies } from 'next/headers';
+import { sql }     from 'lib/supabaseClient';
 
 export interface CurrentUser {
   firstname:  string | null;
@@ -13,12 +19,11 @@ export interface CurrentUser {
 }
 
 export async function getCurrentUser(): Promise<CurrentUser | null> {
-  /* ── read the cookie jar (await!) ───────────────── */
-  const cookieStore = await cookies();         // ✅ no TS error
-  const uid = cookieStore.get("uid")?.value;   // get() exists
+  /* read-only cookie jar is fine here */
+  const cookieStore = await cookies();
+  const uid = cookieStore.get('uid')?.value;
   if (!uid) return null;
 
-  /* ── pull the user row ─────────────────────────── */
   const rows = (await sql`
       SELECT first_name AS "firstname",
              last_name  AS "lastname",
