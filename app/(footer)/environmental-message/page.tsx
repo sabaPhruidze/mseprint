@@ -46,7 +46,7 @@ export default async function EnvironmentalCommitment() {
   const pageTitle = "MSE Printing – Environmental message" as const;
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12 text-gray-800">
+    <main className="max-w-3xl mx-auto px-6 py-12 text-black dark:text-white ">
       <h1 className="text-4xl font-bold text-center mb-10">{pageTitle}</h1>
 
       {sections.map((section) => (

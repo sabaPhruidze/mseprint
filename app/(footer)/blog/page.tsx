@@ -64,10 +64,10 @@ export default async function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <main className="min-h-screen bg-white py-16 px-6 md:px-20">
+      <main className="min-h-screen bg-white dark:bg-black py-16 px-6 md:px-20">
         <header className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl font-bold mb-4 tracking-tight">BLOG</h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg text-black dark:text-white max-w-3xl mx-auto">
             Our blog provides informative articles, practical tips, and expert
             insights to help your business thrive. Stay ahead with strategic
             guidance and industry news.

@@ -78,7 +78,7 @@ export default function FeaturedPosts({ posts }: Props) {
         aria-label="Previous"
         onClick={() => scrollBy("left")}
         className="flex absolute left-2.5 top-1/2 -translate-y-1/2
-                   bg-white/80 hover:bg-white rounded-full p-2 shadow z-10"
+                   bg-white/80 dark:bg-black/80 hover:bg-white dark:hover:bg-black rounded-full p-2 shadow z-10"
       >
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path
@@ -96,7 +96,7 @@ export default function FeaturedPosts({ posts }: Props) {
         aria-label="Next"
         onClick={() => scrollBy("right")}
         className="flex absolute right-2.5 top-1/2 -translate-y-1/2
-                   bg-white/80 hover:bg-white rounded-full p-2 shadow z-10"
+                  bg-white/80 dark:bg-black/80 hover:bg-white dark:hover:bg-black rounded-full p-2 shadow z-10"
       >
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path

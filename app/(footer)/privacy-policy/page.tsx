@@ -46,7 +46,7 @@ const TitleBlock: React.FC<{ data: TitleContentTypes }> = ({ data }) =>
   );
 
 const SectionBlock: React.FC<{ data: SectionContent }> = ({ data }) => (
-  <section className="mt-12">
+  <section className="mt-12 ">
     <h2 className="text-2xl font-semibold mb-4">{data.heading}</h2>
     {data.paragraph1 && (
       <p className="mb-4 leading-relaxed">{data.paragraph1}</p>
@@ -122,7 +122,7 @@ export default async function PrivacyPolicy() {
   const { first, second, third, fourth, fifth, sixth, seventh } = policyRow;
 
   return (
-    <main className="max-w-full mx-auto max-w-[800px] screen-size-15:text-left text-center px-8">
+    <main className="mx-auto max-w-[800px] screen-size-15:text-left text-center px-8">
       <h1 className="text-4xl font-bold text-center my-10">{first}</h1>
 
       <TitleBlock data={second} />
