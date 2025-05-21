@@ -11,7 +11,16 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ card, priority }) => {
   return (
     <Link href={card.path || "/"} passHref>
-      <div className="bg-white text-black rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[400px] mx-auto border border-mediumGray transition-transform transform hover:scale-105 cursor-pointer flex flex-col h-full">
+      <div
+        className="
+          bg-white text-black dark:bg-black dark:text-white
+          rounded-lg shadow-lg overflow-hidden
+          min-w-[300px] max-w-[400px] mx-auto
+          border border-mediumGray dark:border-darkGray
+          transition-transform transform hover:scale-105 cursor-pointer
+          flex flex-col h-full
+        "
+      >
         <div className="relative w-full h-[350px]">
           <SEOImage
             src={
@@ -28,12 +37,13 @@ const Card: React.FC<CardProps> = ({ card, priority }) => {
             className="object-cover w-full h-full"
           />
         </div>
-        <div className="p-4 flex-grow flex flex-col justify-between ">
+
+        <div className="p-4 flex-grow flex flex-col justify-between">
           <div>
-            <h2 className="text-lg font-semibold font-inter-extrabold">
+            <h2 className="text-lg font-semibold font-inter-extrabold dark:text-white">
               {card.alt}
             </h2>
-            <p className="text-gray-700 font-inter-medium">
+            <p className="text-gray-700 dark:text-gray-300 font-inter-medium">
               {card.description}
             </p>
           </div>

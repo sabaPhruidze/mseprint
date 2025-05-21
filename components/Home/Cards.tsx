@@ -4,16 +4,17 @@ import Specialities from "./Specialities";
 import Card from "./Card";
 import BelowAdditionalSpecialities from "./BelowAdditionalSpecialities";
 
+// Ensure dark mode is enabled in your Tailwind config with `darkMode: 'class'`
 const Cards: React.FC<homeSpecialityCardsTypes> = ({
   cardsData,
   homeSpecialities,
 }) => {
   if (!cardsData || cardsData.length === 0) {
-    return <p className="text-center ">No cards available.</p>;
+    return <p className="text-center dark:text-white">No cards available.</p>;
   }
 
   return (
-    <section className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px]">
+    <section className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] bg-white text-black dark:bg-black dark:text-white">
       <div
         aria-labelledby="cards-section"
         className="flex flex-col xl:flex-row items-center gap-6 w-full"
@@ -31,7 +32,7 @@ const Cards: React.FC<homeSpecialityCardsTypes> = ({
             {cardsData.map((card, index) => (
               <div
                 key={card.alt}
-                className="flex xl:justify-start justify-center"
+                className="flex xl:justify-start justify-center mx-[10px]"
               >
                 <Card card={card} priority={index < 2} />
               </div>
