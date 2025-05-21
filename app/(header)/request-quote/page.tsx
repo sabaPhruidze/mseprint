@@ -5,6 +5,7 @@ import { getRQSFData } from "db/getRQSFContent";
 import RQContentTop from "components/RQSF/RQ/RQContentTop";
 import RQContentBottom from "components/RQSF/RQ/RQContentBottom";
 
+import { getCurrentUser } from "lib/getCurrentUser";
 // ── SEO metadata ────────────────────────────────────────────────
 export const metadata: Metadata = {
   title: "Request a Quote | MSE Printing",
@@ -16,11 +17,12 @@ export const metadata: Metadata = {
 // ── Page component ──────────────────────────────────────────────
 export default async function RequestQuotePage() {
   const { requestQuoteContent } = await getRQSFData("/request-quote");
+  const userDefaults = await getCurrentUser();
 
   return (
     <main className="bg-gray-50 screen-size-6:p-10 p-0">
       <RQContentTop data={requestQuoteContent} />
-      <RequestQuoteForm />
+      <RequestQuoteForm userDefaults={userDefaults ?? undefined} />
       <RQContentBottom data={requestQuoteContent} />
     </main>
   );
