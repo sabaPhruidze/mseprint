@@ -4,7 +4,7 @@ import { sql } from 'lib/supabaseClient';
 import bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { LoginFormValues } from './page';
+import { LoginFormValues } from 'components/Header/GetLoginClient';
 
 export async function loginAction(
   data: LoginFormValues,
