@@ -33,5 +33,5 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  return <GetLoginClient />; // 👈 renders the hook-based UI
+  return <GetLoginClient />;
 }
