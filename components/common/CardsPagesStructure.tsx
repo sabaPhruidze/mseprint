@@ -65,7 +65,7 @@ export default function CardsPagesStructure({ pageData }: PageStructureProps) {
               key={index}
               href={cardPath}
               aria-label={cardTitle}
-              className="block overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-shadow duration-300 bg-white"
+              className="block overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-black"
             >
               <div className="h-[240px] w-full relative">
                 <SEOImage
@@ -82,10 +82,12 @@ export default function CardsPagesStructure({ pageData }: PageStructureProps) {
                 />
               </div>
               <div className="p-4">
-                <h3 className="font-bold text-lg text-gray-900 mb-2">
+                <h3 className="font-bold text-lg text-black dark:text-white mb-2">
                   {cardTitle}
                 </h3>
-                <p className="text-gray-600 text-base">{cardParagraph}</p>
+                <p className="text-black dark:text-white text-base">
+                  {cardParagraph}
+                </p>
               </div>
             </Link>
           );
