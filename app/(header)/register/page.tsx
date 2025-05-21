@@ -44,7 +44,7 @@ export default function Register() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [isPending, start] = useTransition();
 
-  /* build the field list once                                                  */
+  /* build the field list once                                               */
   const fields: FieldDef[] = useMemo(() => {
     const required = getRequiredFields(getValues) as FieldDef[];
     return [...required, ...optionalFields] as FieldDef[];
@@ -60,47 +60,47 @@ export default function Register() {
     });
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 items-center screen-size-12:items-start"
-    >
-      {fields.map(
-        ({ name, type, placeholder, rules, onChange, autoComplete }) => (
-          <div
-            key={name}
-            className="flex flex-col items-center screen-size-12:items-start"
-          >
-            <input
-              type={type}
-              placeholder={placeholder}
-              autoComplete={autoComplete}
-              className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px]
-                       rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
-              {...register(name, {
-                ...(rules || {}),
-                ...(onChange ? { onChange } : {}),
-              })}
-            />
-            {errors[name] && (
-              <p className="text-red text-sm mt-1">
-                {String(errors[name]?.message)}
-              </p>
-            )}
-          </div>
-        )
-      )}
-
-      {serverError && (
-        <p className="text-red text-sm mt-1 text-center">{serverError}</p>
-      )}
-
-      <button
-        type="submit"
-        disabled={isPending}
-        className="bg-blue-600 text-white rounded px-6 py-2 disabled:opacity-50"
+    <div className="flex justify-center items-start lg:items-center min-h-screen px-4 my-10">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-md lg:max-w-lg flex flex-col gap-6 mx-auto"
       >
-        {isPending ? "Creating account…" : "Create account"}
-      </button>
-    </form>
+        {fields.map(
+          ({ name, type, placeholder, rules, onChange, autoComplete }) => (
+            <div key={name} className="flex flex-col gap-1 w-full">
+              <input
+                type={type}
+                placeholder={placeholder}
+                autoComplete={autoComplete}
+                className="w-full border rounded py-3 px-4 h-[60px] text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                {...register(name, {
+                  ...(rules || {}),
+                  ...(onChange ? { onChange } : {}),
+                })}
+              />
+              {errors[name] && (
+                <p className="text-red-600 text-xs md:text-sm">
+                  {String(errors[name]?.message)}
+                </p>
+              )}
+            </div>
+          )
+        )}
+
+        {serverError && (
+          <p className="text-red-600 text-center text-sm md:text-base">
+            {serverError}
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={isPending}
+          className="w-full rounded-lg bg-red py-3 font-semibold text-white transition-opacity duration-800 hover:bg-red disabled:opacity-50"
+        >
+          {isPending ? "Creating account…" : "Create account"}
+        </button>
+      </form>
+    </div>
   );
 }

@@ -4,9 +4,9 @@ import React, { useMemo, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { loginAction } from "./loginAction";
 
-/* ──────────────────────────────────────────────────────────────── */
-/* 1 ·  shape of the form                                          */
-/* ──────────────────────────────────────────────────────────────── */
+/* ----------------------------------------------------------------------- */
+/* 1 ·  shape of the form                                                  */
+/* ----------------------------------------------------------------------- */
 export type LoginFormValues = {
   email: string;
   password: string;
@@ -31,7 +31,7 @@ export default function Login() {
   const [serverError, setServerError] = useState<string | null>(null);
   const [isPending, start] = useTransition();
 
-  /* two inputs, same style you used for register */
+  /* two inputs, styled like Register but using red as the accent color */
   const fields: FieldDef[] = useMemo(
     () => [
       {
@@ -65,41 +65,42 @@ export default function Login() {
     });
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-6 items-center screen-size-12:items-start"
-    >
-      {fields.map(({ name, type, placeholder, autoComplete, rules }) => (
-        <div
-          key={name}
-          className="flex flex-col items-center screen-size-12:items-start"
-        >
-          <input
-            type={type}
-            placeholder={placeholder}
-            autoComplete={autoComplete}
-            className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
-            {...register(name, rules)}
-          />
-          {errors[name] && (
-            <p className="text-red text-sm mt-1">
-              {String(errors[name]?.message)}
-            </p>
-          )}
-        </div>
-      ))}
-
-      {serverError && (
-        <p className="text-red text-sm mt-1 text-center">{serverError}</p>
-      )}
-
-      <button
-        type="submit"
-        disabled={isPending}
-        className="bg-blue-600 text-white rounded px-6 py-2 disabled:opacity-50"
+    <div className="flex justify-center items-start lg:items-center min-h-screen px-4">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-md lg:max-w-lg flex flex-col gap-6 mx-auto"
       >
-        {isPending ? "Signing in…" : "Sign in"}
-      </button>
-    </form>
+        {fields.map(({ name, type, placeholder, autoComplete, rules }) => (
+          <div key={name} className="flex flex-col gap-1 w-full">
+            <input
+              type={type}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+              className="w-full border rounded px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
+              {...register(name, rules)}
+            />
+            {errors[name] && (
+              <p className="text-red-600 text-xs md:text-sm">
+                {String(errors[name]?.message)}
+              </p>
+            )}
+          </div>
+        ))}
+
+        {serverError && (
+          <p className="text-red-600 text-center text-sm md:text-base">
+            {serverError}
+          </p>
+        )}
+
+        <button
+          type="submit"
+          disabled={isPending}
+          className="w-full rounded-lg bg-red py-3 font-semibold text-white transition-opacity duration-200 hover:bg-red disabled:opacity-50"
+        >
+          {isPending ? "Signing in…" : "Sign in"}
+        </button>
+      </form>
+    </div>
   );
 }
