@@ -1,5 +1,5 @@
 import { UseFormGetValues } from 'react-hook-form';
-import { RegisterFormValues } from 'app/(header)/register/page';
+import { RegisterFormValues } from 'components/Header/GetRegisterClient';
 import { formatPhoneNumber } from 'components/RQSF/PhoneNumberLogic';
 
 
