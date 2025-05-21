@@ -3,7 +3,7 @@
 import { sql } from '../../../lib/supabaseClient';       // or '@/lib/db'
 import bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
-import { RegisterFormValues } from './page';
+import { RegisterFormValues } from 'components/Header/GetRegisterClient';
 
 /**
  * Creates a user row; returns `{ error?: string }` so the client
