@@ -3,26 +3,38 @@
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
-    "skipLibCheck": false,
+
+    /* ↓ turn this on so TypeScript stops crawling the broken lib typings */
+    "skipLibCheck": true,               // CHANGED
+
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+
+    /* ↓ switch from “bundler” to plain Node resolution */
+    "moduleResolution": "node",        // CHANGED
+
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".", 
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-  "paths": {
+    "baseUrl": ".",
+    "plugins": [{ "name": "next" }],
+    "paths": {
       "@types/*": ["types/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "types", "src", "pages", "components", ".next/types/app/(category)/direct-mail-mailing-services/page.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "types",
+    "src",
+    "pages",
+    "components",
+    ".next/types/app/(category)/direct-mail-mailing-services/page.tsx"
+  ],
   "exclude": ["node_modules"]
 }
