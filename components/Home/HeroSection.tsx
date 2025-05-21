@@ -18,7 +18,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
     <section className="mb-6">
       <div
         aria-labelledby="hero-heading"
-        className="relative w-full h-[500px] flex items-center justify-start text-white overflow-hidden screen-size-18:pl-[50px] pl-[20px]"
+        className="relative w-full h-[600px] screen-size-5:h-[500px] flex items-center justify-start text-white overflow-hidden screen-size-18:pl-[50px] pl-[20px]"
       >
         <div className="absolute inset-0">
           <SEOImage
@@ -29,7 +29,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
             priority
             sizes={heroSection.sizes}
             fill
-            className="w-full h-[500px]"
+            className="w-full h-[600px] screen-size-5:h-[500px]"
             objectFit="cover"
           />
         </div>
@@ -57,7 +57,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
         </div>
       </div>
 
-      <div className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] pt-6 px-6">
+      <div className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] p-8">
         <details className="w-full md:hidden group" role="group">
           <summary className="px-5 text-center font-inter-medium cursor-pointer marker:hidden">
             {heroSection.below?.[0]}

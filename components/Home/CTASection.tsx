@@ -25,10 +25,10 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData = [] }) => {
   const [firstBullet, ...restBullets] = bullets;
 
   return (
-    <section className="w-full px-4 mb-6" aria-label="Call To Action Section">
+    <section className="w-full mb-6" aria-label="Call To Action Section">
       {/* ── CTA nav ───────────────────────────────── */}
       <nav
-        className="h-20 bg-gray-300 flex items-center justify-center"
+        className="h-20 dark:bg-darkGray bg-gray-300 flex items-center justify-center"
         role="navigation"
         aria-label="Primary Navigation"
       >
@@ -54,6 +54,8 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData = [] }) => {
                   focus:scale-95
                   hover:scale-105
                   screen-size-4:px-6
+                  dark:bg-darkRed
+                  dark:border-darkRed
                 "
                 aria-label={`Navigate to ${page}`}
               >
@@ -65,7 +67,7 @@ const CTASection: FC<CTASectionProps> = ({ rqsafData = [] }) => {
       </nav>
 
       {/* ── bullets with ONE accordion ────────────── */}
-      <article className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] pt-6">
+      <article className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] p-10">
         {/* mobile (≤ md) collapsible */}
         <details className="group block w-full md:hidden" role="group">
           <summary className="list-disc pl-5 text-center font-inter-medium marker:hidden cursor-pointer">

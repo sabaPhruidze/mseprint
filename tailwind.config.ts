@@ -12,8 +12,9 @@ export default {
       colors: {
         lightGray: "#f7f8f9",
         mediumGray: "#c3c3c39d",
-        darkGray: "#454343",
+        darkGray: "rgb(24, 22, 22)",
         red: "#ff0000",
+        darkRed: "rgb(129, 4, 4)",
         purple: "#aa7eca",
         white: "#FFFFFF",
         black: "#000000",

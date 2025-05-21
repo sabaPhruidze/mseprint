@@ -13,7 +13,7 @@ const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
   }
 
   return (
-    <div className="pt-6 flex flex-col items-start text-left">
+    <div className="p-8 flex flex-col items-start text-left ">
       {specialities.map((speciality, i) => (
         <div key={i} className="w-full mb-6">
           {/* — optional heading; remove if you don’t need titles here — */}
@@ -24,18 +24,18 @@ const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
           {/* Mobile accordion (≤ md) */}
           <details className="group block w-full md:hidden" role="group">
             {/* First list item + toggle text */}
-            <summary className="list-disc pl-5 text-center font-inter-medium marker:hidden cursor-pointer">
+            <summary className="list-disc text-center font-inter-medium marker:hidden cursor-pointer">
               {speciality.contentDown?.[0]}
-              <span className="ml-1 text-blue-600 group-open:hidden">
+              <span className="text-blue-600 group-open:hidden">
                 see more&nbsp;…
               </span>
-              <span className="ml-1 text-blue-600 hidden group-open:inline">
+              <span className="text-blue-600 hidden group-open:inline">
                 see less
               </span>
             </summary>
 
             {/* Remaining bullets – visible only when open */}
-            <ul className="list-disc pl-5 text-center font-inter-medium mt-2">
+            <ul className="list-disc text-center font-inter-medium mt-2">
               {speciality.contentDown
                 ?.slice(1)
                 .map((item, idx) => <li key={idx}>{item}</li>)}
@@ -43,7 +43,7 @@ const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
           </details>
 
           {/* Desktop / ≥ md view – always expanded */}
-          <ul className="hidden md:block list-disc pl-5 text-center font-inter-medium">
+          <ul className="hidden md:block list-disc text-center font-inter-medium">
             {speciality.contentDown?.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}

@@ -11,7 +11,7 @@ export default function Specialities({ specialities }: SpecialitiesProps) {
   }
 
   return (
-    <div className="p-6 flex flex-col items-start text-left">
+    <div className="p-8 flex flex-col items-start text-left ">
       {specialities.map((speciality, i) => (
         <div key={i} className="w-full mb-6">
           <h1 className="text-3xl font-bold mb-4 text-center font-inter-extrabold">
