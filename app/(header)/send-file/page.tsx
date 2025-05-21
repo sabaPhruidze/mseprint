@@ -7,6 +7,7 @@ import SFContentTop from "components/RQSF/SF/SFContentTop";
 import SFContentBottom from "components/RQSF/SF/SFContentBottom";
 import SendFileForm from "components/RQSF/SF/SendFileForm";
 
+import { getCurrentUser } from "lib/getCurrentUser";
 export const metadata: Metadata = {
   title: "Place an Order | MSE Printing",
   description:
@@ -16,11 +17,11 @@ export const metadata: Metadata = {
 
 export default async function SendAFile() {
   const { sendFileContent } = await getRQSFData("/send-file");
-
+  const userDefaults = await getCurrentUser();
   return (
     <main className="bg-gray-50 screen-size-6:p-10 p-0">
       <SFContentTop data={sendFileContent} />
-      <SendFileForm />
+      <SendFileForm userDefaults={userDefaults ?? undefined} />
       <SFContentBottom data={sendFileContent} />
     </main>
   );
