@@ -3,7 +3,7 @@
 import React, { useMemo, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { loginAction } from "./loginAction";
-
+import { Metadata } from "next";
 /* ----------------------------------------------------------------------- */
 /* 1 ·  shape of the form                                                  */
 /* ----------------------------------------------------------------------- */
@@ -19,6 +19,50 @@ type FieldDef = {
   placeholder: string;
   autoComplete: string;
   rules: Record<string, unknown>;
+};
+
+export const metadata: Metadata = {
+  /* ⇢ <title> tag */
+  title: "Sign In | MSE Printing",
+
+  /* ⇢ <meta-description> */
+  description:
+    "Securely sign in to your MSE Printing account to track orders, request quotes, and manage your projects online.",
+
+  /* ⇢ canonical URL */
+  alternates: {
+    canonical: "https://www.mseprinting.com/login",
+  },
+
+  /* ⇢ base for any relative URLs inside other metadata */
+  metadataBase: new URL("https://www.mseprinting.com/login"),
+
+  /* ⇢ extra SEO signals */
+  keywords: [
+    "MSE Printing login",
+    "print order tracking",
+    "manage printing projects",
+    "printing services account",
+  ],
+  robots: { index: true, follow: true },
+
+  /* ⇢ Open Graph / social preview */
+  openGraph: {
+    title: "Sign In | MSE Printing",
+    description:
+      "Access your personalised printing dashboard at MSE Printing. Sign in to view orders, upload files, and get real-time updates.",
+    url: "https://www.mseprinting.com/login",
+    siteName: "MSE Printing",
+    type: "website",
+    images: [
+      {
+        url: "/images/home-images/booth-graphics-signs-banners.webp", // ← put your real image path
+        width: 500,
+        height: 500,
+        alt: "MSE Printing – Sign In page preview",
+      },
+    ],
+  },
 };
 
 export default function Login() {
