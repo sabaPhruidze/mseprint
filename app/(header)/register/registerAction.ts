@@ -1,18 +1,18 @@
 'use server';
 
-import { sql } from '../../../lib/supabaseClient';       // or '@/lib/db'
-import bcrypt from 'bcryptjs';
+import { sql } from 'lib/supabaseClient';  // adjust alias if needed
+import bcrypt    from 'bcryptjs';
 import { redirect } from 'next/navigation';
-import { RegisterFormValues } from 'components/Header/GetRegisterClient';
+import type { RegisterFormValues } from 'components/Header/GetRegisterClient';
 
 /**
- * Creates a user row; returns `{ error?: string }` so the client
- * can decide what to display.  Success triggers a redirect to /login.
+ * Saves a new user row and redirects to /login.
+ * Returns `{ error?: string }` for client-side banner display.
  */
 export async function registerAction(
   data: RegisterFormValues,
 ): Promise<{ error?: string }> {
-  /* extra client-side validations already ran, but duplicate-mail check is here */
+  /* extra client-side checks already ran but duplicate-mail guard stays here */
   if (data.email !== data.emailVerification)
     return { error: 'Emails do not match.' };
   if (data.password !== data.passwordVerification)
@@ -28,15 +28,17 @@ export async function registerAction(
       VALUES (${data.firstname}, ${data.lastname}, ${data.email}, ${data.phone},
               ${data.jobTitle}, ${data.company}, ${data.extension}, ${hash})
     `;
-  } catch (err: any) {
+  } catch (err: unknown) {
+    /** Narrow to a type that MAY have `code` */
+    const pgErr = err as { code?: string };
+
     /* Postgres unique-constraint violation → code 23505 */
-    if (err?.code === '23505') {
+    if (pgErr?.code === '23505')
       return { error: 'This e-mail is already registered.' };
-    }
-    /* re-throw anything else so Next.js error overlay shows it */
+
+    /* Unknown error – surface it in the Next.js overlay */
     throw err;
   }
 
-  /* success → send the browser to /login */
   redirect('/login');
 }
