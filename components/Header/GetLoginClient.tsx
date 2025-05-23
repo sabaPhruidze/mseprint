@@ -58,10 +58,11 @@ export default function GetLoginClient() {
     });
 
   return (
-    <div className="flex justify-center items-start lg:items-center min-h-screen px-4">
+    <div className="flex justify-center px-4">
+      {/* keeps original width: 100 % up to 512 px (max-w-lg) */}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md lg:max-w-lg flex flex-col gap-6 mx-auto"
+        className="screen-size-5:w-[500px] screen-size-4:w-[330px] w-[300px] flex flex-col gap-6 mx-auto"
       >
         {fields.map(({ name, type, placeholder, autoComplete, rules }) => (
           <div key={name} className="flex flex-col gap-1 w-full">

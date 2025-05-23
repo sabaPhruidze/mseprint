@@ -33,5 +33,14 @@ export const metadata: Metadata = {
 };
 
 export default function LoginPage() {
-  return <GetLoginClient />;
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4">
+      {/* bigger heading, sitting ~16 px above the form */}
+      <h1 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-black mb-4">
+        Log in
+      </h1>
+
+      <GetLoginClient />
+    </div>
+  );
 }
