@@ -34,9 +34,8 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4">
-      {/* bigger heading, sitting ~16 px above the form */}
-      <h1 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-black mb-4">
+    <div className="my-10 flex flex-col items-center justify-center px-4">
+      <h1 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-black my-6">
         Log in
       </h1>
 
