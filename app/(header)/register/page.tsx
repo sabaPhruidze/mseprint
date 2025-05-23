@@ -33,5 +33,12 @@ export const metadata: Metadata = {
 };
 
 export default function RegisterPage() {
-  return <RegisterClient />;
+  return (
+    <div>
+      <h1 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-black my-8">
+        Registration
+      </h1>
+      <RegisterClient />
+    </div>
+  );
 }
