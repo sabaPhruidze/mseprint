@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Premium & Private Labels Minneapolis | Custom High-End Labels | MSE Printing",
+  title: "Premium & Private Labels Minneapolis | Print |  MSE Printing",
   description:
     "Stand out with high-end, customizable premium and private labels from MSE Printing. Distinctive branding and exceptional print quality for Minneapolis & nationwide.",
   keywords: [
@@ -43,8 +42,7 @@ export const metadata: Metadata = {
     google: "ABCD1234xyz", // ← replace with your Search Console verification code
   },
   openGraph: {
-    title:
-      "Premium & Private Labels Minneapolis | Custom High-End Labels | MSE Printing",
+    title: "Premium & Private Labels Minneapolis | Print |  MSE Printing",
     description:
       "Custom premium and private labels crafted to reflect your brand’s uniqueness and quality with precision and elegance.",
     url: "https://www.mseprinting.com/premium-private-labels",
@@ -62,8 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Premium & Private Labels Minneapolis | Custom High-End Labels | MSE Printing",
+    title: "Premium & Private Labels Minneapolis | Print |  MSE Printing",
     description:
       "Custom, high-end premium and private label printing for luxury brands, products, and retail by MSE Printing.",
     site: "@MSEPrinting",
