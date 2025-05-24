@@ -139,15 +139,6 @@ export default async function BlogPage() {
     )
     .map((p, idx) => ({ ...p, id: idx + 1 }));
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    name: "MSE Printing Blog",
-    url: "https://www.mseprinting.com/blog",
-    description:
-      "Expert articles on printing, design, and marketing from MSE Printing.",
-  };
-
   return (
     <>
       <BlogSchema />
