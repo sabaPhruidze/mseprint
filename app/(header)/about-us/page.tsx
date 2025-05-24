@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/blog/3.webp",
+        url: "https://www.mseprinting.com/images/header-images/about_us.webp",
         width: 800,
         height: 630,
         alt: "Inside MSE Printing’s production floor",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/blog/3.webp",
+        url: "https://www.mseprinting.com/images/header-images/about_us.webp",
         alt: "MSE Printing Production Team",
       },
     ],
@@ -125,7 +125,7 @@ const OrganizationSchema = () => {
       "https://www.linkedin.com/company/mseprinting",
     ],
     foundingDate: "1985",
-    image: ["https://www.mseprinting.com/images/blog/3.webp"],
+    image: ["https://www.mseprinting.com/images/header-images/about_us.webp"],
   };
 
   return (

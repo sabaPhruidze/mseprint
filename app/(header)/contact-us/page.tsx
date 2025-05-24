@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/contact-og.jpg",
-        width: 1200,
+        url: "https://www.mseprinting.com/images/header-images/contact_us.webp",
+        width: 800,
         height: 630,
         alt: "MSE Printing contact page preview",
       },

@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://www.mseprinting.com/images/header-images/send_file.webp",
-        width: 1200,
+        width: 800,
         height: 630,
         alt: "Place an Order - MSE Printing",
       },
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/common-images/send_file.webp",
+        url: "https://www.mseprinting.com/images/header-images/send_file.webp",
         alt: "Place an Order - MSE Printing",
       },
     ],
@@ -118,7 +118,7 @@ const WebPageSchema = () => {
     inLanguage: "en-US",
     datePublished: "2024-01-01", // Update as appropriate
     dateModified: "2025-05-24", // Update dynamically if possible
-    image: ["https://www.mseprinting.com/images/common-images/send_file.webp"],
+    image: ["https://www.mseprinting.com/images/header-images/send_file.webp"],
   };
 
   return (
