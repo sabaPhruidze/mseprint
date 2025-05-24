@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 export const metadata: Metadata = {
   /* ─────────────── CORE ─────────────── */
-  title:
-    "Printing Minneapolis & Nationwide | Custom Signs, Banners, Booth Graphics – MSE Printing",
+  title: "Printing Minneapolis & USA | Custom Signs, Banners, Booth Graphics ",
   description:
     "Top-rated Minneapolis print shop for custom booth graphics, trade-show banners, business signs and large-format printing. Fast turnaround, nationwide shipping. Free quote: 763-542-8812.",
   keywords: [
@@ -45,8 +44,7 @@ export const metadata: Metadata = {
 
   /* ─────────────── OPEN GRAPH ─────────────── */
   openGraph: {
-    title:
-      "Printing Minneapolis & Nationwide | Custom Signs, Banners – MSE Printing",
+    title: "Printing Minneapolis & USA | Custom Signs, Banners, Booth Graphics",
     description:
       "Professional booth graphics, banners and signage printed in Minneapolis-St. Paul with same-day service and UPS/FedEx nationwide delivery.",
     url: "https://www.mseprinting.com/booth-graphics-signs-banners", // ← matches canonical
@@ -70,8 +68,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Custom Printing, Signs & Banners in Minneapolis – MSE Printing (Free Quote)",
+    title: "Printing Minneapolis & USA | Custom Signs, Banners, Booth Graphics",
     description:
       "Minneapolis’ trusted partner for high-impact booth graphics, banners & signage since 2002.",
     site: "@MSEPrinting", // TODO: update if different
