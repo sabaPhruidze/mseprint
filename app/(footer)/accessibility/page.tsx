@@ -54,7 +54,7 @@ export const metadata = {
     images: [
       {
         url: "https://www.mseprinting.com/images/footer-images/accessibility.webp",
-        width: 1200,
+        width: 800,
         height: 630,
         alt: "MSE Printing Accessibility Statement - Inclusive Digital Design",
       },

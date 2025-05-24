@@ -4,22 +4,136 @@ import { getSpecialPagesData } from "db/GetSpecialPagesData"; // same helper you
 
 /* ──────────────────────────  SEO  ────────────────────────── */
 export const metadata = {
-  title: "Equal Employment Opportunity & Diversity | MSE Printing",
+  title: "Equal Opportunity & Diversity | MSE Printing",
   description:
-    "Explore MSE Printing’s commitment to equal employment opportunity, our inclusive hiring practices, and how we foster a diverse workplace culture across our franchise network.",
+    "Explore MSE Printing’s commitment to equal employment opportunity, inclusive hiring, and our diverse workplace culture.",
+  keywords: [
+    "equal employment opportunity",
+    "diversity and inclusion",
+    "inclusive hiring",
+    "fair workplace",
+    "diverse workforce",
+    "employment equity",
+    "MSE Printing careers",
+    "franchise diversity",
+    "accessibility accommodations",
+    "respectful workplace",
+  ],
+  applicationName: "MSE Printing",
+  category: "Equal Opportunity & Diversity",
+  metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/eoe-diversity",
   },
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "ABCD1234xyz", // Replace with your Search Console code
+  },
   openGraph: {
-    title: "Equal Employment Opportunity & Diversity | MSE Printing",
+    title: "Equal Opportunity & Diversity | MSE Printing",
     description:
       "Learn how MSE Printing champions fair hiring, accessibility accommodations, and a culture of respect for all employees and applicants.",
     url: "https://www.mseprinting.com/eoe-diversity",
     siteName: "MSE Printing",
+    locale: "en_US",
     type: "article",
+    images: [
+      {
+        url: "https://www.mseprinting.com/images/footer-images/eoe_diversity.webp",
+        width: 800,
+        height: 630,
+        alt: "MSE Printing Equal Employment Opportunity & Diversity",
+      },
+    ],
   },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: "summary_large_image",
+    title: "Equal Opportunity & Diversity | MSE Printing",
+    description:
+      "Learn how MSE Printing fosters a respectful, inclusive, and diverse workplace culture.",
+    site: "@MSEPrinting",
+    creator: "@MSEPrinting",
+    images: [
+      {
+        url: "https://www.mseprinting.com/images/footer-images/eoe_diversity.webp",
+        alt: "Equal Employment Opportunity & Diversity at MSE Printing",
+      },
+    ],
+  },
+  other: {
+    "geo.region": "US-MN",
+    "geo.placename": "Minneapolis",
+    "geo.position": "45.0230;-93.2790",
+    ICBM: "45.0230, -93.2790",
+    "business:contact_data:street_address": "3839 N Washington Ave Ste. 101",
+    "business:contact_data:locality": "Minneapolis",
+    "business:contact_data:region": "MN",
+    "business:contact_data:postal_code": "55412",
+    "business:contact_data:country_name": "USA",
+    "business:contact_data:phone_number": "763-542-8812",
+    "og:email": "info@mseprinting.com",
+    "og:phone_number": "763-542-8812",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
+  creator: "MSE Printing",
+  publisher: "MSE Printing",
 } as const;
+
+/* — Schema.org Article structured data — */
+const ArticleSchema = () => {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": "https://www.mseprinting.com/eoe-diversity#statement",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/eoe-diversity",
+    },
+    headline: "Equal Opportunity & Diversity",
+    description:
+      "Explore MSE Printing’s commitment to equal employment opportunity, inclusive hiring, and our diverse workplace culture.",
+    author: {
+      "@type": "Organization",
+      name: "MSE Printing",
+      url: "https://www.mseprinting.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "MSE Printing",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.mseprinting.com/favicon.ico",
+      },
+    },
+    datePublished: "2024-01-01", // Update as appropriate
+    dateModified: "2025-05-24", // Update dynamically if possible
+    image: [
+      "https://www.mseprinting.com/images/footer-images/eoe_diversity.webp",
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+};
 
 /* ---------- Simple Section Block ---------- */
 const SectionBlock: React.FC<{ data: EoeDiversitySection }> = ({ data }) => (
@@ -71,12 +185,15 @@ export default async function EoeDiversity() {
     "MSE PRINTING EQUAL EMPLOYMENT OPPORTUNITY & DIVERSITY" as const;
 
   return (
-    <main className="max-w-3xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold text-center mb-10">{pageTitle}</h1>
+    <>
+      <ArticleSchema />
+      <main className="max-w-3xl mx-auto px-6 py-12">
+        <h1 className="text-4xl font-bold text-center mb-10">{pageTitle}</h1>
 
-      {sections.map((section) => (
-        <SectionBlock key={section.id} data={section} />
-      ))}
-    </main>
+        {sections.map((section) => (
+          <SectionBlock key={section.id} data={section} />
+        ))}
+      </main>
+    </>
   );
 }
