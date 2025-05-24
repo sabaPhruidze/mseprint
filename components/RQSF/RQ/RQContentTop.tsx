@@ -21,16 +21,12 @@ const RQContentTop: React.FC<RQContentTopProps> = ({ data }) => {
   return (
     <section className="mx-auto max-w-[1500px] px-4 py-12 screen-size-12:text-left text-center">
       {heading && (
-        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl mb-6">
+        <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl mb-6">
           {heading}
         </h2>
       )}
-      {paragraph1 && (
-        <p className="mb-6 leading-relaxed text-gray-700">{paragraph1}</p>
-      )}
-      {paragraph2 && (
-        <p className="leading-relaxed text-gray-700">{paragraph2}</p>
-      )}
+      {paragraph1 && <p className="mb-6 leading-relaxed">{paragraph1}</p>}
+      {paragraph2 && <p className="leading-relaxed">{paragraph2}</p>}
     </section>
   );
 };

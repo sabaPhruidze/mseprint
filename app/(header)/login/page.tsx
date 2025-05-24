@@ -1,40 +1,128 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import GetLoginClient from "components/Header/GetLoginClient";
 
 export const metadata: Metadata = {
   title: "Sign In | MSE Printing",
   description:
     "Securely sign in to your MSE Printing account to track orders, request quotes, and manage your projects online.",
-  alternates: { canonical: "https://www.mseprinting.com/login" },
   metadataBase: new URL("https://www.mseprinting.com"),
+  alternates: {
+    canonical: "https://www.mseprinting.com/login",
+  },
   keywords: [
     "MSE Printing login",
     "print order tracking",
     "manage printing projects",
     "printing services account",
   ],
-  robots: { index: false, follow: false },
+  applicationName: "MSE Printing",
+  category: "Printing Services",
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    },
+  },
   openGraph: {
     title: "Sign In | MSE Printing",
     description:
       "Access your personalised printing dashboard at MSE Printing. Sign in to view orders, upload files, and get real-time updates.",
     url: "https://www.mseprinting.com/login",
     siteName: "MSE Printing",
+    locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/images/home-images/booth-graphics-signs-banners.webp",
-        width: 500,
-        height: 500,
+        url: "https://www.mseprinting.com/images/header-images/about_us.webp",
+        width: 800,
+        height: 630,
         alt: "MSE Printing – Sign In preview",
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sign In | MSE Printing",
+    description:
+      "Login to manage your print projects, request quotes, and upload files with MSE Printing’s secure client dashboard.",
+    site: "@MSEPrinting",
+    creator: "@MSEPrinting",
+    images: [
+      {
+        url: "https://www.mseprinting.com/images/header-images/about_us.webp",
+        alt: "MSE Printing – Sign In preview",
+      },
+    ],
+  },
+  other: {
+    "geo.region": "US-MN",
+    "geo.placename": "Minneapolis",
+    "geo.position": "45.0230;-93.2790",
+    ICBM: "45.0230, -93.2790",
+    "business:contact_data:street_address": "3839 N Washington Ave Ste. 101",
+    "business:contact_data:locality": "Minneapolis",
+    "business:contact_data:region": "MN",
+    "business:contact_data:postal_code": "55412",
+    "business:contact_data:country_name": "USA",
+    "business:contact_data:phone_number": "763-542-8812",
+    "og:email": "info@mseprinting.com",
+    "og:phone_number": "763-542-8812",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
+  creator: "MSE Printing",
+  publisher: "MSE Printing",
+};
+
+/* ──────────────── VIEWPORT ──────────────── */
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  colorScheme: "normal",
+};
+
+/* ──────────────── STRUCTURED DATA ──────────────── */
+const LoginSchema = () => {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Login Page - MSE Printing",
+    url: "https://www.mseprinting.com/login",
+    description:
+      "Login securely to access your dashboard, request printing quotes, manage orders, and upload project files.",
+    about: {
+      "@type": "Organization",
+      name: "MSE Printing",
+      url: "https://www.mseprinting.com",
+    },
+    potentialAction: {
+      "@type": "LoginAction",
+      target: "https://www.mseprinting.com/login",
+      name: "User Login",
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
 };
 
 export default function LoginPage() {
   return (
     <div className="my-10 flex flex-col items-center justify-center px-4">
+      <LoginSchema />
       <h1 className="text-4xl md:text-5xl font-inter-extrabold text-center dark:text-white text-black my-6">
         Log in
       </h1>

@@ -85,7 +85,7 @@ export default function SendFileForm({ userDefaults }: Props) {
         className="max-w-[1500px] mx-auto border px-4 screen-size-4:px-10
                    py-10 rounded-md shadow-2xl ring-1 ring-gray-200 bg-white
                    flex flex-col gap-8 justify-center
-                   screen-size-12:items-stretch items-center"
+                   screen-size-12:items-stretch items-center dark:bg-black"
       >
         {/* ─────────────── STEP 1 – PROJECT DETAILS ─────────────── */}
         <div>

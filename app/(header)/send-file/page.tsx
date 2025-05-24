@@ -134,7 +134,7 @@ export default async function SendAFile() {
   const { sendFileContent } = await getRQSFData("/send-file");
   const userDefaults = await getCurrentUser();
   return (
-    <main className="bg-gray-50 screen-size-6:p-10 p-0">
+    <main className="bg-gray-50 dark:bg-black screen-size-6:p-10 p-0">
       <WebPageSchema />
       <SFContentTop data={sendFileContent} />
       <SendFileForm userDefaults={userDefaults ?? undefined} />

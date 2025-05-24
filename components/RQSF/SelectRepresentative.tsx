@@ -29,7 +29,7 @@ export default function SelectRepresentative() {
         {representatives.map((rep) => (
           <label
             key={rep.id}
-            className="flex items-center gap-2 border rounded px-3 py-2 hover:bg-gray-50 cursor-pointer h-[50px] font-inter-bold"
+            className="flex items-center gap-2 border rounded px-3 py-2 hover:bg-gray-50 dark:hover:text-black cursor-pointer h-[50px] font-inter-bold"
           >
             {/* Radio input (registered with react-hook-form) */}
             <input

@@ -137,7 +137,7 @@ export default async function RequestQuotePage() {
   const userDefaults = await getCurrentUser();
 
   return (
-    <main className="bg-gray-50 screen-size-6:p-10 p-0">
+    <main className="bg-gray-50 dark:bg-black screen-size-6:p-10 p-0">
       <WebPageSchema />
       <RQContentTop data={requestQuoteContent} />
       <RequestQuoteForm userDefaults={userDefaults ?? undefined} />
