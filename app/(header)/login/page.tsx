@@ -6,14 +6,14 @@ export const metadata: Metadata = {
   description:
     "Securely sign in to your MSE Printing account to track orders, request quotes, and manage your projects online.",
   alternates: { canonical: "https://www.mseprinting.com/login" },
-  metadataBase: new URL("https://www.mseprinting.com/login"),
+  metadataBase: new URL("https://www.mseprinting.com"),
   keywords: [
     "MSE Printing login",
     "print order tracking",
     "manage printing projects",
     "printing services account",
   ],
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Sign In | MSE Printing",
     description:
