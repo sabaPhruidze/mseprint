@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     title: "Printing Minneapolis & USA | Custom Signs, Banners, Booth Graphics",
     description:
       "Minneapolis’ trusted partner for high-impact booth graphics, banners & signage since 2002.",
-    site: "@MSEPrinting", // TODO: update if different
+    site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
       {
@@ -80,7 +80,6 @@ export const metadata: Metadata = {
     ],
   },
 
-  /* ─────────────── GEO / LOCAL BUSINESS ─────────────── */
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
@@ -96,7 +95,6 @@ export const metadata: Metadata = {
     "og:phone_number": "763-542-8812",
   },
 
-  /* ─────────────── BRANDING & PWA EXTRAS ─────────────── */
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
@@ -176,6 +174,20 @@ const ServiceSchema = () => {
         },
       ],
     },
+    offers: {
+      "@type": "Offer",
+      url: "https://www.mseprinting.com/booth-graphics-signs-banners",
+      availability: "https://schema.org/InStock",
+      itemOffered: {
+        "@type": "Service",
+        name: "Custom Booth Graphics, Signs & Banners",
+      },
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "42",
+    },
   };
 
   return (
@@ -196,7 +208,6 @@ const BoothGraphicsSignsBanners = async () => {
 
   return (
     <>
-      {/* 🔥 Add the structured data schemas */}
       <ServiceSchema />
       <PageStructure pageData={pageData} />
     </>

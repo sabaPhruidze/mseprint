@@ -17,22 +17,33 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         <div className="relative w-full screen-size-5:h-[400px] h-[600px]">
           <SEOImage
             src={
-              `/images/${pageData.mainimage.src}` ||
-              "/images/home-images/additional/offset_printing_right.webp"
+              pageData.mainimage?.src
+                ? pageData.mainimage.src
+                : "/images/home-images/offset_printing.webp"
             }
-            alt={pageData.mainimage.alt || ""}
-            name={pageData.mainimage.alt || ""}
-            geoData={pageData.mainimage.geoData || undefined}
+            alt={
+              pageData.mainimage.alt ||
+              `${pageData.introsection.heading} - MSE Printing`
+            }
+            name={pageData.mainimage.alt || "Printing services in Minneapolis"}
+            geoData={
+              pageData.mainimage.geoData || {
+                latitude: 45.023,
+                longitude: -93.279,
+                location: "3839 N Washington Ave Ste. 101",
+                addressRegion: "Minneapolis",
+              }
+            }
             priority={pageData.mainimage.priority || false}
             loading={pageData.mainimage.priority ? undefined : "lazy"}
-            sizes={pageData.mainimage.sizes || ""}
+            sizes={pageData.mainimage.sizes || "100vw"}
             className="w-full h-[600px]  screen-size-5:h-[400px]"
             fill={true}
             objectFit="cover"
           />
 
           <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center items-start text-white screen-size-15:text-left text-center">
-            <div className="screen-size-15:w-[1200px] max-w-[1200px] max-w-full screen-size-15:ml-20 ml-0">
+            <div className="screen-size-15:w-[1200px] max-w-[1500px] screen-size-15:ml-20 ml-0">
               <h1 className="screen-size-10:text-[50px] text-[30px] font-extrabold leading-tight text-white max-w-full">
                 {pageData.introsection.heading ||
                   "pageData.introSection.heading not written"}
@@ -63,15 +74,32 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           <div className="w-full screen-size-5:w-[400px] screen-size-10:w-[500px] h-[400px] mx-auto md:float-right md:ml-2 md:mr-0">
             <SEOImage
               src={
-                `/images/${pageData.secondaryimage?.src}` ||
-                "/images/home-images/additional/offset_printing_right.webp"
+                pageData.secondaryimage?.src
+                  ? `/images/${pageData.secondaryimage.src}`
+                  : "/images/home-images/additional/offset_printing_right.webp"
               }
-              alt={pageData.secondaryimage?.alt || ""}
-              name={pageData.secondaryimage?.alt || ""}
-              geoData={pageData.secondaryimage?.geoData || undefined}
+              alt={
+                pageData.secondaryimage?.alt ||
+                `${pageData.introsection.heading} - MSE Printing`
+              }
+              name={
+                pageData.secondaryimage?.alt ||
+                "MSE Printing | print your product here"
+              }
+              geoData={
+                pageData.secondaryimage?.geoData || {
+                  latitude: 45.023,
+                  longitude: -93.279,
+                  location: "3839 N Washington Ave Ste. 101",
+                  addressRegion: "Minneapolis",
+                }
+              }
               priority={pageData.secondaryimage?.priority || false}
               loading={pageData.secondaryimage?.priority ? undefined : "lazy"}
-              sizes={pageData.secondaryimage?.sizes || ""}
+              sizes={
+                pageData.secondaryimage?.sizes ||
+                "(min-width: 768px) 600px, 100vw"
+              }
               className="w-full h-full"
               fill={true}
               objectFit="cover"
