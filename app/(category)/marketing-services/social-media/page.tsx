@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Social Media Marketing Minneapolis | SMM & Management Services | MSE Printing",
+  title: "Social Media Marketing Minneapolis | MSE Printing",
   description:
     "Boost your online presence with expert social media marketing and management services from MSE Printing. Content creation, ads, and community growth for Minneapolis & nationwide.",
   keywords: [
@@ -43,8 +42,7 @@ export const metadata: Metadata = {
     google: "ABCD1234xyz", // ← replace with your Search Console verification code
   },
   openGraph: {
-    title:
-      "Social Media Marketing Minneapolis | SMM & Management Services | MSE Printing",
+    title: "Social Media Marketing Minneapolis | MSE Printing",
     description:
       "From content creation to ad campaigns, we help your business grow with strategic social media solutions tailored for success.",
     url: "https://www.mseprinting.com/marketing-services/social-media",
@@ -62,8 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Social Media Marketing Minneapolis | SMM & Management Services | MSE Printing",
+    title: "Social Media Marketing Minneapolis | MSE Printing",
     description:
       "Grow your business with expert social media marketing and management by MSE Printing. Strategy, content, ads, and more.",
     site: "@MSEPrinting",

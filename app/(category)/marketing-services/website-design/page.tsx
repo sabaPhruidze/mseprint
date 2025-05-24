@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Website Design Minneapolis | Modern, Mobile-Friendly Web Design | MSE Printing",
+  title: "Website Design Minneapolis | Web Design | MSE Printing",
   description:
     "Modern, mobile-friendly websites that reflect your brand and convert visitors into customers. Responsive, SEO-optimized, and stunning web design in Minneapolis & nationwide.",
   keywords: [
@@ -43,8 +42,7 @@ export const metadata: Metadata = {
     google: "ABCD1234xyz", // ← replace with your Search Console verification code
   },
   openGraph: {
-    title:
-      "Website Design Minneapolis | Modern, Mobile-Friendly Web Design | MSE Printing",
+    title: "Website Design Minneapolis | Web Design | MSE Printing",
     description:
       "We design responsive, SEO-optimized websites that look stunning and perform flawlessly across all devices.",
     url: "https://www.mseprinting.com/marketing-services/website-design",
@@ -62,8 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Website Design Minneapolis | Modern, Mobile-Friendly Web Design | MSE Printing",
+    title: "Website Design Minneapolis | Web Design | MSE Printing",
     description:
       "Grow your business with modern, SEO-focused, mobile-friendly website design by MSE Printing.",
     site: "@MSEPrinting",

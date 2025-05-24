@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Marketing Campaigns & Consultation Minneapolis | Strategy Support | MSE Printing",
+  title: "Marketing Campaigns & Consultation Minneapolis |  MSE Printing",
   description:
     "Strategic marketing consultation and campaign support tailored to your business goals. Plan, launch, and optimize high-impact campaigns with MSE Printing.",
   keywords: [
@@ -44,8 +43,7 @@ export const metadata: Metadata = {
     google: "ABCD1234xyz", // ← replace with your Search Console verification code
   },
   openGraph: {
-    title:
-      "Marketing Campaigns & Consultation Minneapolis | Strategy Support | MSE Printing",
+    title: "Marketing Campaigns & Consultation Minneapolis |  MSE Printing",
     description:
       "Get expert advice and support to plan, launch, and manage high-impact marketing campaigns that generate measurable results.",
     url: "https://www.mseprinting.com/marketing-services/campaigns-consultation",
@@ -63,8 +61,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Marketing Campaigns & Consultation Minneapolis | Strategy Support | MSE Printing",
+    title: "Marketing Campaigns & Consultation Minneapolis |  MSE Printing",
     description:
       "Expert marketing consultation and campaign management. Launch successful, measurable campaigns with MSE Printing.",
     site: "@MSEPrinting",

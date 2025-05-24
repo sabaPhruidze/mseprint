@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Custom Packaging Minneapolis | Product Packaging Design & Printing | MSE Printing",
+  title: "Custom Packaging Minneapolis | Product Packaging  | MSE Printing",
   description:
     "Elevate your product experience with branded custom packaging by MSE Printing. Premium materials, eye-catching designs, and secure packaging for every product.",
   keywords: [
@@ -43,8 +42,7 @@ export const metadata: Metadata = {
     google: "ABCD1234xyz", // ← replace with your Search Console verification code
   },
   openGraph: {
-    title:
-      "Custom Packaging Minneapolis | Product Packaging Design & Printing | MSE Printing",
+    title: "Custom Packaging Minneapolis | Product Packaging  | MSE Printing",
     description:
       "Stylish, secure, and strategic—MSE Printing creates custom packaging that delivers more than just a product.",
     url: "https://www.mseprinting.com/labels-packaging/custom-packaging",
@@ -62,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Custom Packaging Minneapolis | Product Packaging Design & Printing",
+    title: "Custom Packaging Minneapolis | Product Packaging  | MSE Printing",
     description:
       "Premium custom packaging and design for retail, e-commerce, and product launches. Impress customers with every unboxing.",
     site: "@MSEPrinting",

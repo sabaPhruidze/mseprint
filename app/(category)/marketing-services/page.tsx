@@ -5,8 +5,7 @@ import CardsPagesStructure from "components/common/CardsPagesStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Marketing Services Minneapolis | Strategy, Campaigns, Websites | MSE Printing",
+  title: "Marketing Services Minneapolis | Websites | Printing | MSE Printing",
   description:
     "Strategy-fueled, story-driven marketing solutions that connect and convert—powered by MSE Printing. Campaigns, consultation, video, web, and social media marketing for Minneapolis & nationwide.",
   keywords: [
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Marketing Services Minneapolis | Strategy, Campaigns, Websites | MSE Printing",
+      "Marketing Services Minneapolis | Websites | Printing | MSE Printing",
     description:
       "From campaigns and consultation to websites and video, MSE Printing delivers data‑driven marketing that generates results.",
     url: "https://www.mseprinting.com/marketing-services",
@@ -63,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Marketing Services Minneapolis | Strategy, Campaigns, Websites | MSE Printing",
+      "Marketing Services Minneapolis | Websites | Printing | MSE Printing",
     description:
       "Integrated marketing: campaigns, web design, video, and social media by MSE Printing.",
     site: "@MSEPrinting",

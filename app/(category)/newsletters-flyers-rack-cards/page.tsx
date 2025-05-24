@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Newsletters, Flyers & Rack Cards Minneapolis | Print Marketing | MSE Printing",
+  title: "Newsletters, Flyers & Rack Cards Minneapolis | MSE Printing",
   description:
     "Engage your audience with high-quality printed newsletters, flyers, and rack cards from MSE Printing. Custom design and fast turnaround for businesses in Minneapolis & nationwide.",
   keywords: [
@@ -43,8 +42,7 @@ export const metadata: Metadata = {
     google: "ABCD1234xyz", // ← replace with your Search Console verification code
   },
   openGraph: {
-    title:
-      "Newsletters, Flyers & Rack Cards Minneapolis | Print Marketing | MSE Printing",
+    title: "Newsletters, Flyers & Rack Cards Minneapolis | MSE Printing",
     description:
       "Print eye-catching flyers, informative newsletters, and handy rack cards that capture attention and promote your message effectively.",
     url: "https://www.mseprinting.com/newsletters-flyers-rack-cards",
@@ -62,8 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Newsletters, Flyers & Rack Cards Minneapolis | Print Marketing | MSE Printing",
+    title: "Newsletters, Flyers & Rack Cards Minneapolis | MSE Printing",
     description:
       "Attract attention and promote your business with custom newsletters, flyers, and rack cards printed by MSE Printing.",
     site: "@MSEPrinting",

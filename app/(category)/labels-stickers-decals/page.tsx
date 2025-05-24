@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Custom Labels, Stickers & Decals Minneapolis | Brand Printing | MSE Printing",
+  title: "Custom Labels, Stickers & Decals Minneapolis | Print | MSE Printing",
   description:
     "Custom-designed labels, stickers, and decals that help your brand stick in customers’ minds. Print for products, packaging, and promotions in Minneapolis & nationwide.",
   keywords: [
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title:
-      "Custom Labels, Stickers & Decals Minneapolis | Brand Printing | MSE Printing",
+      "Custom Labels, Stickers & Decals Minneapolis | Print | MSE Printing",
     description:
       "High-quality labels, stickers, and decals by MSE Printing to enhance your packaging, promotions, and brand visibility.",
     url: "https://www.mseprinting.com/labels-stickers-decals",
@@ -63,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Custom Labels, Stickers & Decals Minneapolis | Brand Printing | MSE Printing",
+      "Custom Labels, Stickers & Decals Minneapolis | Print | MSE Printing",
     description:
       "Boost your brand with high-quality, custom labels, stickers, and decals for any application—by MSE Printing.",
     site: "@MSEPrinting",

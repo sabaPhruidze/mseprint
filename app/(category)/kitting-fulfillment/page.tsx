@@ -5,8 +5,7 @@ import PageStructure from "components/common/PageStructure";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title:
-    "Kitting & Fulfillment Services Minneapolis | Assembly, Packaging, Delivery | MSE Printing",
+  title: "Kitting & Fulfillment Services Minneapolis | MSE Printing",
   description:
     "Streamline complex projects with MSE Printing’s kitting and fulfillment services—assembly, packaging, and delivery done right. Serving Minneapolis & USA. Get a free quote: 763-542-8812.",
   keywords: [
