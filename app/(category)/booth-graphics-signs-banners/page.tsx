@@ -148,8 +148,9 @@ const ServiceSchema = () => {
       itemListElement: [
         {
           "@type": "Offer",
+          url: "https://www.mseprinting.com/booth-graphics-signs-banners#trade-show",
           itemOffered: {
-            "@type": "Product",
+            "@type": "Service", // ⬅️ changed
             name: "Trade Show Booth Graphics",
             description:
               "Custom designed booth graphics for trade shows and exhibitions",
@@ -157,16 +158,18 @@ const ServiceSchema = () => {
         },
         {
           "@type": "Offer",
+          url: "https://www.mseprinting.com/booth-graphics-signs-banners#signs",
           itemOffered: {
-            "@type": "Product",
+            "@type": "Service", // ⬅️ changed
             name: "Custom Business Signs",
             description: "Professional business signage and display signs",
           },
         },
         {
           "@type": "Offer",
+          url: "https://www.mseprinting.com/booth-graphics-signs-banners#banners",
           itemOffered: {
-            "@type": "Product",
+            "@type": "Service", // ⬅️ changed
             name: "Event Banners",
             description:
               "High-quality banners for events, promotions, and advertising",
