@@ -4,7 +4,6 @@ import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 
 export const metadata: Metadata = {
-  /* ─────────────── CORE ─────────────── */
   title: "Printing Minneapolis & USA | Custom Signs, Banners, Booth Graphics ",
   description:
     "Top-rated Minneapolis print shop for custom booth graphics, trade-show banners, business signs and large-format printing. Fast turnaround, nationwide shipping. Free quote: 763-542-8812.",
@@ -115,6 +114,78 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
+// 🔥 NEW: Service Schema Component (for specific services)
+const ServiceSchema = () => {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://www.mseprinting.com/booth-graphics-signs-banners#service",
+    name: "Booth Graphics, Signs & Banners",
+    description:
+      "Professional booth graphics, custom signs, and banners for trade shows, events, and business marketing. High-quality printing with fast turnaround in Minneapolis.",
+    provider: {
+      "@type": "LocalBusiness",
+      name: "MSE Printing",
+      "@id": "https://www.mseprinting.com/#business",
+    },
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Minneapolis",
+      },
+      {
+        "@type": "State",
+        name: "Minnesota",
+      },
+      {
+        "@type": "Country",
+        name: "United States",
+      },
+    ],
+    serviceType: "Printing Services",
+    category: "Commercial Printing",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Booth Graphics Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Product",
+            name: "Trade Show Booth Graphics",
+            description:
+              "Custom designed booth graphics for trade shows and exhibitions",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Product",
+            name: "Custom Business Signs",
+            description: "Professional business signage and display signs",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Product",
+            name: "Event Banners",
+            description:
+              "High-quality banners for events, promotions, and advertising",
+          },
+        },
+      ],
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+};
+
 const BoothGraphicsSignsBanners = async () => {
   const data = await getCategoryPagesData("/booth-graphics-signs-banners");
   const pageData = data.BoothGraphicsSignsBannersPageData?.[0];
@@ -123,7 +194,13 @@ const BoothGraphicsSignsBanners = async () => {
     return <div>Data not available.</div>;
   }
 
-  return <PageStructure pageData={pageData} />;
+  return (
+    <>
+      {/* 🔥 Add the structured data schemas */}
+      <ServiceSchema />
+      <PageStructure pageData={pageData} />
+    </>
+  );
 };
 
 export default BoothGraphicsSignsBanners;
