@@ -51,7 +51,7 @@ export default function RegisterClient() {
     });
 
   return (
-    <div className="flex justify-center items-start lg:items-center min-h-screen px-4 my-10">
+    <div className="flex justify-center items-start lg:items-center min-h-screen px-4 my-10 screen-size-6:w-[600px] screen-size-4:w-[400px] w-[300px]">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-md lg:max-w-lg flex flex-col gap-6 mx-auto"

@@ -35,11 +35,22 @@ export const metadata: Metadata = {
 export default function LoginPage() {
   return (
     <div className="my-10 flex flex-col items-center justify-center px-4">
-      <h1 className="text-4xl md:text-5xl font-bold text-center dark:text-white text-black my-6">
+      <h1 className="text-4xl md:text-5xl font-inter-extrabold text-center dark:text-white text-black my-6">
         Log in
       </h1>
 
       <GetLoginClient />
+      <h2 className="text-3xl md:text-4xl font-inter-bold mt-10 text-center">
+        Why Logging In Is Recommended
+      </h2>
+      <p className="text-2xl font-inter-medium max-w-[700px] my-6 text-center">
+        For a faster and more convenient experience, we recommend logging into
+        your account. When you’re logged in, your personal and company
+        information will be automatically filled in the "Request a Quote" and
+        "Send a File" forms. This saves you time and effort by eliminating the
+        need to re-enter important details every time you submit a
+        request—making your workflow smoother and more efficient.
+      </p>
     </div>
   );
 }
