@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/printing-copying-images/additional/postcards_direct_mailers_right.webp",
+        url: "/images/common-images/additional/postcards_dirrect_mailers_right.webp",
         width: 500,
         height: 500,
         alt: "MSE Printing - Postcards & Direct Mailers",

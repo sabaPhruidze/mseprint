@@ -18,7 +18,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
           <SEOImage
             src={
               pageData.mainimage?.src
-                ? pageData.mainimage.src
+                ? `/images/${pageData.mainimage.src}`
                 : "/images/home-images/offset_printing.webp"
             }
             alt={
