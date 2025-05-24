@@ -43,7 +43,7 @@ const emailHref = "mailto:info@mseprinting.com";
 const ContactUsPage = () => {
   return (
     <div>
-      <main className="mx-auto max-w-4xl px-4 py-16 text-gray-800">
+      <main className="mx-auto max-w-4xl px-4 py-16 text-gray-800 dark:text-white">
         {/* Header */}
         <header className="mb-12 text-center">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
