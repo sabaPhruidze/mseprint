@@ -123,9 +123,21 @@ const ServiceSchema = () => {
       "Professional booth graphics, custom signs, and banners for trade shows, events, and business marketing. High-quality printing with fast turnaround in Minneapolis.",
     provider: {
       "@type": "LocalBusiness",
-      name: "MSE Printing",
       "@id": "https://www.mseprinting.com/#business",
+      name: "MSE Printing",
+      url: "https://www.mseprinting.com",
+      telephone: "763-542-8812",
+      email: "info@mseprinting.com",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "3839 N Washington Ave Ste. 101",
+        addressLocality: "Minneapolis",
+        addressRegion: "MN",
+        postalCode: "55412",
+        addressCountry: "US",
+      },
     },
+
     areaServed: [
       {
         "@type": "City",
