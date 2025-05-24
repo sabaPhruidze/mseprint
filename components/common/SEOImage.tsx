@@ -7,7 +7,6 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
   name,
   geoData,
   priority = false,
-  loading = "lazy",
   sizes,
   width,
   height,
@@ -19,6 +18,8 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
     "@context": "http://schema.org",
     "@type": "ImageObject",
     contentUrl: src,
+    url: src,
+    thumbnailUrl: src,
     description: alt,
     name,
     locationCreated: geoData
@@ -51,7 +52,7 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
           src={src}
           alt={alt}
           priority={priority}
-          loading={priority ? undefined : loading}
+          loading={priority ? undefined : "lazy"}
           sizes={sizes}
           fill={fill}
           style={fill && objectFit ? { objectFit } : undefined}
