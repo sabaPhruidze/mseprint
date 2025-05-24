@@ -133,11 +133,11 @@ export default function LoginPage() {
       </h2>
       <p className="text-2xl font-inter-medium max-w-[700px] my-6 text-center">
         For a faster and more convenient experience, we recommend logging into
-        your account. When you’re logged in, your personal and company
-        information will be automatically filled in the "Request a Quote" and
-        "Send a File" forms. This saves you time and effort by eliminating the
-        need to re-enter important details every time you submit a
-        request—making your workflow smoother and more efficient.
+        your account. When you&rsquo;re logged in, your personal and company
+        information will be automatically filled in the Request a Quote and Send
+        a File forms. This saves you time and effort by eliminating the need to
+        re-enter important details every time you submit a request&mdash;making
+        your workflow smoother and more efficient.
       </p>
     </div>
   );

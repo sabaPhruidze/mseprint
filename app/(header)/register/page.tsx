@@ -132,13 +132,13 @@ export default function RegisterPage() {
       </h2>
       <p className="text-2xl font-inter-medium max-w-[700px] my-6 text-center">
         Creating an account gives you access to a faster and more personalized
-        experience. When you're registered, your personal and business details
-        are securely saved, allowing the "Request a Quote" and "Send a File"
+        experience. When you&rsquo;re registered, your personal and business
+        details are securely saved, allowing the Request a Quote and Send a File
         forms to be filled out automatically. This not only saves you time on
         every submission but also reduces the chance of errors or missing
         information. Plus, registering gives you access to view your past
-        requests, track your submissions, and receive updates more easily—all in
-        one place.
+        requests, track your submissions, and receive updates more
+        easily&mdash;all in one place.
       </p>
     </div>
   );
