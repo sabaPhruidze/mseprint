@@ -5,24 +5,149 @@ import type {
 } from "../../../types/commonTypes";
 import { getSpecialPagesData } from "db/GetSpecialPagesData";
 
+/* — Metadata for SEO, Social Sharing, and Accessibility — */
 export const metadata = {
-  /* — Primary tags — */
   title: "Accessibility Statement | MSE Printing",
   description:
-    "Learn how MSE Printing designs a barrier‑free digital experience that meets WCAG 2.1 AA guidelines, our ongoing accessibility roadmap, and how you can request assistance or provide feedback.",
+    "Learn how MSE Printing designs a barrier-free digital experience that meets WCAG 2.1 AA guidelines, our ongoing accessibility roadmap, and how you can request assistance or provide feedback.",
+  keywords: [
+    "accessibility statement",
+    "WCAG 2.1 AA compliance",
+    "inclusive web design",
+    "accessible printing services",
+    "MSE Printing accessibility",
+    "website accessibility Minneapolis",
+    "barrier-free experience",
+    "digital accessibility statement",
+    "assistive technology support",
+    "accessible formats",
+  ],
+  applicationName: "MSE Printing",
+  category: "Accessibility Statement",
+  metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/accessibility",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "ABCD1234xyz", // Replace with your actual Google Search Console string
   },
   openGraph: {
     title: "Accessibility Statement | MSE Printing",
     description:
-      "Discover MSE Printing’s commitment to inclusive web design, recent WCAG 2.1 AA improvements, and ways to contact us for accessible formats.",
+      "Discover MSE Printing’s commitment to inclusive web design, recent WCAG 2.1 AA improvements, and ways to contact us for accessible formats.",
     url: "https://www.mseprinting.com/accessibility",
     siteName: "MSE Printing",
+    locale: "en_US",
     type: "article",
+    images: [
+      {
+        url: "https://www.mseprinting.com/images/footer-images/accessibility.webp",
+        width: 1200,
+        height: 630,
+        alt: "MSE Printing Accessibility Statement - Inclusive Digital Design",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Accessibility Statement | MSE Printing",
+    description:
+      "Read MSE Printing's Accessibility Statement—barrier-free digital experience and support for all users.",
+    site: "@MSEPrinting",
+    creator: "@MSEPrinting",
+    images: [
+      {
+        url: "https://www.mseprinting.com/images/footer-images/accessibility.webp",
+        alt: "Accessibility Statement by MSE Printing",
+      },
+    ],
+  },
+  other: {
+    "geo.region": "US-MN",
+    "geo.placename": "Minneapolis",
+    "geo.position": "45.0230;-93.2790",
+    ICBM: "45.0230, -93.2790",
+    "business:contact_data:street_address": "3839 N Washington Ave Ste. 101",
+    "business:contact_data:locality": "Minneapolis",
+    "business:contact_data:region": "MN",
+    "business:contact_data:postal_code": "55412",
+    "business:contact_data:country_name": "USA",
+    "business:contact_data:phone_number": "763-542-8812",
+    "og:email": "info@mseprinting.com",
+    "og:phone_number": "763-542-8812",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
+  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
+  creator: "MSE Printing",
+  publisher: "MSE Printing",
 };
 
+/* — Viewport settings — */
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  colorScheme: "normal",
+};
+
+/* — Article Schema.org structured data for Accessibility Statement — */
+const ArticleSchema = () => {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": "https://www.mseprinting.com/accessibility#statement",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/accessibility",
+    },
+    headline: "Accessibility Statement",
+    description:
+      "Learn how MSE Printing designs a barrier-free digital experience that meets WCAG 2.1 AA guidelines, our ongoing accessibility roadmap, and how you can request assistance or provide feedback.",
+    author: {
+      "@type": "Organization",
+      name: "MSE Printing",
+      url: "https://www.mseprinting.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "MSE Printing",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.mseprinting.com/favicon.ico",
+      },
+    },
+    datePublished: "2024-01-01", // Update as appropriate
+    dateModified: "2025-05-24", // Update dynamically if possible
+    image: [
+      "https://www.mseprinting.com/images/common-images/accessibility_statement.webp",
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+    />
+  );
+};
+
+/* — Page blocks — */
 const TitleBlock: React.FC<{ data: TitleContentTypes }> = ({ data }) => {
   if (!data?.title) return null;
 
@@ -117,7 +242,8 @@ export default async function Accessibility() {
   const { first, second, third, fourth, fifth, sixth, seventh } = pageData;
 
   return (
-    <main className=" screen-size-15:text-left text-center mx-auto max-w-[800px] px-8">
+    <main className="screen-size-15:text-left text-center mx-auto max-w-[800px] px-8">
+      <ArticleSchema />
       <div>
         <h1 className="text-4xl font-bold my-10">{first}</h1>
 
