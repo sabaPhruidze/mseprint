@@ -26,9 +26,11 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
             border-white
             rounded-lg
             screen-size-4:px-4
-            py-2
+             screen-size-5:mx-2
+             mx-1
+            screen-size-5:py-2
+            py-3
             px-2
-            mx-0.5
             no-underline
             hover:bg-white
             hover:text-black
@@ -55,9 +57,11 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
           border-white
           rounded-lg
           screen-size-4:px-4
-          py-2
+          screen-size-5:py-2
+          py-3
           px-2
-          mx-0.5
+           screen-size-5:mx-2
+          mx-1
           no-underline
           hover:bg-white
           hover:text-black
@@ -67,6 +71,7 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
           duration-500
           font-inter-extrabold
            text-[12px]
+           
             screen-size-5:text-[18px]
         "
         aria-label="Call 763-542-8812"
