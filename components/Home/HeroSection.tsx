@@ -16,10 +16,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
 
   return (
     <section className="mb-6">
+      {/* ───────────── HERO IMAGE + HEADING ───────────── */}
       <div
         aria-labelledby="hero-heading"
-        className="relative w-full h-[600px] screen-size-5:h-[500px] flex items-center justify-start text-white overflow-hidden screen-size-18:pl-[50px] pl-[20px]"
+        className="relative flex h-[600px] w-full items-center justify-start overflow-hidden pl-[20px] text-white screen-size-5:h-[500px] screen-size-18:pl-[50px]"
       >
+        {/* Background image */}
         <div className="absolute inset-0">
           <SEOImage
             src={imageSrc}
@@ -29,11 +31,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
             priority
             sizes={heroSection.sizes}
             fill
-            className="w-full h-[600px] screen-size-5:h-[500px]"
-            objectFit="cover"
+            className="object-cover h-[600px] w-full screen-size-5:h-[500px]"
           />
         </div>
+        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/50" />
+
+        {/* Foreground content */}
         <div className="relative z-10 max-w-[1200px] px-6 text-center md:text-left">
           <h2
             id="hero-heading"
@@ -49,7 +53,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
             <Link
               href={heroSection.path}
               aria-label={`Learn more about ${heroSection.alt}`}
-              className="inline-block mt-6 px-6 py-3 text-lg font-semibold text-black bg-white rounded-full transition-all hover:bg-opacity-90"
+              className="mt-6 inline-block rounded-full bg-white px-6 py-3 text-lg font-semibold text-black transition-all hover:bg-opacity-90"
             >
               Learn More About Our {heroSection.alt}
             </Link>
@@ -57,37 +61,55 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
         </div>
       </div>
 
-      <div className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] p-8">
-        <details className="w-full md:hidden group" role="group">
-          <summary className="px-5 text-center font-inter-medium cursor-pointer marker:hidden">
-            {heroSection.below?.[0]}
+      {/* ───────────── “BELOW” LIST ───────────── */}
+      {!!heroSection.below?.length && (
+        <div className="mx-auto w-full max-w-[1850px] p-8">
+          {/* Mobile accordion (≤ md) */}
+          <details className="block w-full md:hidden group" role="group">
+            <summary className="cursor-pointer list-none font-inter-medium text-left">
+              <div className="flex items-start">
+                {/* custom bullet */}
+                <span className="mr-3 mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black dark:bg-white" />
+                <div>
+                  {heroSection.below[0]}
+                  <span className="ml-1 text-blue-600 group-open:hidden">
+                    see more…
+                  </span>
+                  <span className="ml-1 hidden text-blue-600 group-open:inline">
+                    see less
+                  </span>
+                </div>
+              </div>
+            </summary>
 
-            <span className="ml-1 text-blue-600 group-open:hidden">
-              see more&nbsp;…
-            </span>
-            <span className="ml-1 text-blue-600 hidden group-open:inline">
-              see less
-            </span>
-          </summary>
+            <div className="mt-2 space-y-2">
+              {heroSection.below.slice(1).map((item, idx) => (
+                <div key={idx} className="flex items-start">
+                  <span className="mr-3 mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black dark:bg-white" />
+                  <span className="font-inter-medium">{item}</span>
+                </div>
+              ))}
+            </div>
+          </details>
 
-          <ul className="mt-2 px-5 text-center font-inter-medium">
-            {heroSection.below?.slice(1).map((item, idx) => (
-              <li key={idx} className="mb-2">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </details>
-
-        {/* Desktop / larger-than-mobile view – always expanded                 */}
-        <ul className="hidden md:block px-5 text-center font-inter-medium">
-          {heroSection.below?.map((item, idx) => (
-            <li key={idx} className="mb-2">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+          {/* Desktop view (≥ md) – two columns, always expanded */}
+          <div className="hidden md:block">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+              {heroSection.below.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex w-full items-start break-inside-avoid"
+                >
+                  <span className="mr-3 mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-black dark:bg-white" />
+                  <span className="flex-1 text-left font-inter-medium">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
