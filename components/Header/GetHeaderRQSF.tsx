@@ -10,7 +10,7 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
   return (
     <nav
       className="
-        w-full screen-size-5:h-[60px] h-[100px] bg-purple flex items-center screen-size-13:justify-end justify-center screen-size-5:px-4 screen-size-4:px-2 px-0
+        w-full h-[60px] bg-purple flex items-center screen-size-13:justify-end justify-center screen-size-5:px-4 screen-size-4:px-2 px-0
       "
       role="navigation"
       aria-label="Request a Quote and Order Navigation"
@@ -25,9 +25,9 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
             border
             border-white
             rounded-lg
-            px-4
+            screen-size-4:px-4
             py-2
-            screen-size-4:mx-2
+            px-2
             mx-0.5
             no-underline
             hover:bg-white
@@ -37,6 +37,8 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
             transition-all
             duration-500
             font-inter-extrabold
+            text-[12px]
+            screen-size-5:text-[18px]
           "
           aria-label={`Navigate to ${item.page}`}
         >
@@ -52,9 +54,9 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
           border
           border-white
           rounded-lg
-          px-4
+          screen-size-4:px-4
           py-2
-          screen-size-4:mx-2
+          px-2
           mx-0.5
           no-underline
           hover:bg-white
@@ -64,6 +66,8 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
           transition-all
           duration-500
           font-inter-extrabold
+           text-[12px]
+            screen-size-5:text-[18px]
         "
         aria-label="Call 763-542-8812"
       >
