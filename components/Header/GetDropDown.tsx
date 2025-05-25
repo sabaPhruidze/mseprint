@@ -37,9 +37,12 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
   const leftSideRef = useRef<HTMLUListElement>(null);
   const dropdownRef = useRef<HTMLElement>(null);
   const [leftSideHeight, setLeftSideHeight] = useState<number>(0);
-  const clickTimeoutRef = useRef<{ [key: number]: NodeJS.Timeout }>({});
+  const clickTimeoutRef = useRef<Record<number, ReturnType<typeof setTimeout>>>(
+    {}
+  );
 
-  // Separate parent and child items
+  /* --------------------------- helpers --------------------------- */
+
   const leftItems = useMemo(
     () => data.filter((item) => !item.parent_id),
     [data]
@@ -50,38 +53,34 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     [data]
   );
 
-  // Mobile detection
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+  /* -------------------------- lifecycle -------------------------- */
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Reset states on path change
   useEffect(() => {
     setActiveCategory(null);
     setMobileExpandedCategories(new Set());
   }, [currentPath]);
 
-  // Calculate left side height
   useEffect(() => {
-    if (leftSideRef.current) {
+    if (leftSideRef.current)
       setLeftSideHeight(leftSideRef.current.offsetHeight);
-    }
   }, [leftItems]);
 
-  // Cleanup timeouts
+  // clear any still-pending double-tap timers when the component unmounts
   useEffect(() => {
+    const timeouts = clickTimeoutRef.current;
     return () => {
-      Object.values(clickTimeoutRef.current).forEach(clearTimeout);
+      Object.values(timeouts).forEach(clearTimeout);
     };
   }, []);
 
-  // Click outside to close
+  // close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -92,12 +91,12 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         onCloseDropdown?.();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onCloseDropdown]);
 
-  // Get filtered subcategories
+  /* ------------------------- derived data ------------------------ */
+
   const filteredRightItems = useMemo(
     () =>
       rightItems
@@ -106,23 +105,20 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     [rightItems, activeCategory]
   );
 
-  // Get active main category
   const activeItem = useMemo(
     () => leftItems.find((item) => item.id === activeCategory) || null,
     [leftItems, activeCategory]
   );
 
-  // Show right column logic
   const showRightColumn = useMemo(() => {
     if (!activeItem || isMobile) return false;
     return filteredRightItems.length > 0;
   }, [activeItem, filteredRightItems, isMobile]);
 
-  // Event handlers
+  /* ------------------------ event handlers ----------------------- */
+
   const handleMouseLeave = useCallback(() => {
-    if (!isMobile) {
-      setTimeout(() => setActiveCategory(null), 150);
-    }
+    if (!isMobile) setTimeout(() => setActiveCategory(null), 150);
   }, [isMobile]);
 
   const handleLinkClick = useCallback(() => {
@@ -133,13 +129,18 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
   }, [onCloseDropdown]);
 
   const handleCategoryClick = useCallback(
-    (e: React.MouseEvent, item: ServicesPathTypes) => {
+    (
+      e:
+        | React.MouseEvent<HTMLAnchorElement>
+        | React.KeyboardEvent<HTMLAnchorElement>,
+      item: ServicesPathTypes
+    ) => {
       const hasSub = rightItems.some((s) => s.parent_id === item.id);
 
       if (isMobile && hasSub) {
         e.preventDefault();
 
-        // Double tap to navigate
+        /* ---------- double-tap-to-navigate ---------- */
         if (clickTimeoutRef.current[item.id]) {
           clearTimeout(clickTimeoutRef.current[item.id]);
           delete clickTimeoutRef.current[item.id];
@@ -150,15 +151,15 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
           return;
         }
 
-        // Toggle expanded state
+        /* ---------- expand / collapse mobile sub-list ---------- */
         setMobileExpandedCategories((prev) => {
-          const newSet = new Set(prev);
-          if (newSet.has(item.id)) {
-            newSet.delete(item.id);
+          const next = new Set(prev);
+          if (next.has(item.id)) {
+            next.delete(item.id);
           } else {
-            newSet.add(item.id);
+            next.add(item.id);
           }
-          return newSet;
+          return next;
         });
 
         clickTimeoutRef.current[item.id] = setTimeout(() => {
@@ -172,13 +173,13 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
   );
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent, item: ServicesPathTypes) => {
+    (e: React.KeyboardEvent<HTMLAnchorElement>, item: ServicesPathTypes) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         if (!isMobile) {
           setActiveCategory(item.id);
         } else {
-          handleCategoryClick(e as any, item);
+          handleCategoryClick(e, item);
         }
       } else if (e.key === "Escape") {
         setActiveCategory(null);
@@ -188,7 +189,8 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     [isMobile, onCloseDropdown, handleCategoryClick]
   );
 
-  // SEO structured data
+  /* -------------------- SEO structured data --------------------- */
+
   const structuredData = useMemo(() => {
     const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
 
@@ -198,13 +200,17 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         .map((sub) => ({
           "@type": "SiteNavigationElement",
           name: sub.title,
-          url: `${baseUrl}${sub.path?.startsWith("/") ? sub.path : `/${sub.path}`}`,
+          url: `${baseUrl}${
+            sub.path?.startsWith("/") ? sub.path : `/${sub.path}`
+          }`,
         }));
 
       return {
         "@type": "SiteNavigationElement",
         name: item.title,
-        url: `${baseUrl}${item.path?.startsWith("/") ? item.path : `/${item.path}`}`,
+        url: `${baseUrl}${
+          item.path?.startsWith("/") ? item.path : `/${item.path}`
+        }`,
         ...(subItems.length > 0 && { hasPart: subItems }),
       };
     });
@@ -217,15 +223,16 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     };
   }, [leftItems, rightItems, ariaLabel]);
 
-  // Dynamic width calculation
+  /* --------------------- visual helpers ------------------------- */
+
   const getLeftColumnWidth = () => {
-    if (isMobile) {
-      return showRightColumn ? "16rem" : "100%";
-    }
+    if (isMobile) return showRightColumn ? "16rem" : "100%";
     return buttonWidth ? `${buttonWidth}px` : "18rem";
   };
 
   if (!isDropdownVisible) return null;
+
+  /* --------------------------- render --------------------------- */
 
   return (
     <>
@@ -244,7 +251,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         role="navigation"
         style={{ maxHeight: "80vh" }}
       >
-        {/* LEFT COLUMN - Main Categories */}
+        {/* ----------------- LEFT COLUMN ----------------- */}
         <div
           className="bg-white flex-shrink-0"
           style={{ width: getLeftColumnWidth() }}
@@ -316,7 +323,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
                     </Link>
                   </li>
 
-                  {/* Mobile Subcategories */}
+                  {/* ----------- Mobile Sub-categories ----------- */}
                   {isMobile && expanded && hasSub && (
                     <li role="none" className="mb-2">
                       <div className="bg-gray-50 rounded-md mx-2 p-3 border border-gray-200">
@@ -350,7 +357,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
           </ul>
         </div>
 
-        {/* RIGHT COLUMN - Subcategories (Desktop Only) */}
+        {/* --------------- RIGHT COLUMN (desktop) --------------- */}
         {showRightColumn && activeItem && (
           <div
             id={`submenu-${activeItem.id}`}
