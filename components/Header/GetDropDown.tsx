@@ -14,17 +14,8 @@ import { ServicesPathTypes } from "../../types/commonTypes";
 interface GetDropDownProps {
   data: ServicesPathTypes[];
   buttonWidth?: number;
-  /**
-   * Add a callback that parent can pass down, which we call to close the dropdown
-   */
   onCloseDropdown?: () => void;
-  /**
-   * Aria label for the dropdown navigation
-   */
   ariaLabel?: string;
-  /**
-   * ID for the dropdown (useful for aria-controls)
-   */
   dropdownId?: string;
 }
 
@@ -37,9 +28,14 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
 }) => {
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(true);
+  const [mobileExpandedCategories, setMobileExpandedCategories] = useState<
+    Set<number>
+  >(new Set());
+  const [isMobile, setIsMobile] = useState<boolean>(false);
   const currentPath = usePathname();
   const leftSideRef = useRef<HTMLUListElement>(null);
   const [leftSideHeight, setLeftSideHeight] = useState<number>(0);
+  const clickTimeoutRef = useRef<{ [key: number]: NodeJS.Timeout }>({});
 
   const leftItems = useMemo(
     () => data.filter((item) => !item.parent_id),
@@ -50,8 +46,21 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     [data]
   );
 
+  // Check if mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   useEffect(() => {
     setActiveCategory(null);
+    setMobileExpandedCategories(new Set());
   }, [currentPath]);
 
   useEffect(() => {
@@ -59,6 +68,15 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
       setLeftSideHeight(leftSideRef.current.offsetHeight);
     }
   }, [leftItems]);
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(clickTimeoutRef.current).forEach((timeout) => {
+        if (timeout) clearTimeout(timeout);
+      });
+    };
+  }, []);
 
   const filteredRightItems = useMemo(
     () =>
@@ -74,32 +92,82 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
   );
 
   const showRightColumn = useMemo(() => {
-    if (!activeItem) return false;
+    if (!activeItem || isMobile) return false;
     const lowerTitle = activeItem.title.toLowerCase();
     return (
       !["online ordering portals", "graphic design"].includes(lowerTitle) &&
       filteredRightItems.length > 0
     );
-  }, [activeItem, filteredRightItems]);
+  }, [activeItem, filteredRightItems, isMobile]);
 
   const handleMouseLeave = useCallback(() => {
-    setActiveCategory(null);
-  }, []);
+    if (!isMobile) {
+      setActiveCategory(null);
+    }
+  }, [isMobile]);
 
   const handleLinkClick = useCallback(() => {
     setActiveCategory(null);
     setIsDropdownVisible(false);
+    setMobileExpandedCategories(new Set());
 
     if (onCloseDropdown) {
       onCloseDropdown();
     }
   }, [onCloseDropdown]);
 
+  const handleCategoryClick = useCallback(
+    (event: React.MouseEvent, item: ServicesPathTypes) => {
+      const hasSubItems = rightItems.some(
+        (subItem) => subItem.parent_id === item.id
+      );
+
+      if (isMobile && hasSubItems) {
+        event.preventDefault();
+
+        // Clear any existing timeout for this item
+        if (clickTimeoutRef.current[item.id]) {
+          clearTimeout(clickTimeoutRef.current[item.id]);
+          delete clickTimeoutRef.current[item.id];
+
+          // Second click - navigate to page
+          window.location.href = item.path?.startsWith("/")
+            ? item.path
+            : `/${item.path}`;
+          handleLinkClick();
+          return;
+        }
+
+        // First click - expand/collapse
+        setMobileExpandedCategories((prev) => {
+          const newSet = new Set(prev);
+          if (newSet.has(item.id)) {
+            newSet.delete(item.id);
+          } else {
+            newSet.add(item.id);
+          }
+          return newSet;
+        });
+
+        // Set timeout for double-click detection
+        clickTimeoutRef.current[item.id] = setTimeout(() => {
+          delete clickTimeoutRef.current[item.id];
+        }, 500);
+      } else {
+        // Desktop or no subitems - normal navigation
+        handleLinkClick();
+      }
+    },
+    [isMobile, rightItems, handleLinkClick]
+  );
+
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent, itemId: number) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
-        setActiveCategory(itemId);
+        if (!isMobile) {
+          setActiveCategory(itemId);
+        }
       } else if (event.key === "Escape") {
         setActiveCategory(null);
         if (onCloseDropdown) {
@@ -107,10 +175,10 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         }
       }
     },
-    [onCloseDropdown]
+    [isMobile, onCloseDropdown]
   );
 
-  // Generate structured data for better SEO
+  // Generate structured data for SEO
   const structuredData = useMemo(() => {
     const navigationItems = leftItems.map((item) => ({
       "@type": "SiteNavigationElement",
@@ -165,73 +233,115 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
             role="menu"
             aria-label="Main service categories"
           >
-            {leftItems.map((item, index) => (
-              <li
-                key={item.id}
-                onMouseEnter={() => setActiveCategory(item.id)}
-                role="none"
-              >
-                <Link
-                  href={
-                    item.path?.startsWith("/") ? item.path : `/${item.path}`
-                  }
-                  onClick={handleLinkClick}
-                  onKeyDown={(e) => handleKeyDown(e, item.id)}
-                  role="menuitem"
-                  tabIndex={0}
-                  aria-expanded={activeCategory === item.id}
-                  aria-haspopup={rightItems.some(
-                    (subItem) => subItem.parent_id === item.id
-                  )}
-                  aria-describedby={
-                    activeCategory === item.id
-                      ? `submenu-${item.id}`
-                      : undefined
-                  }
-                  title={`Navigate to ${item.title} services`}
-                >
-                  <span
-                    className={`
-                      block px-4 py-3 
-                      text-sm font-medium
-                      transition-colors duration-200
-                      border border-gray-300
-                      rounded-md
-                      ${
-                        activeCategory === item.id
-                          ? "bg-blue-600 text-white"
-                          : "text-gray-800 hover:bg-gray-100 hover:text-blue-600"
-                      }
-                    `}
-                    style={{
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                    }}
+            {leftItems.map((item) => {
+              const hasSubItems = rightItems.some(
+                (subItem) => subItem.parent_id === item.id
+              );
+              const isExpanded = mobileExpandedCategories.has(item.id);
+              const mobileSubItems = rightItems
+                .filter((subItem) => subItem.parent_id === item.id)
+                .sort((a, b) => a.title.localeCompare(b.title));
+
+              return (
+                <React.Fragment key={item.id}>
+                  <li
+                    onMouseEnter={() => !isMobile && setActiveCategory(item.id)}
+                    role="none"
                   >
-                    {item.title}
-                    {/* Add visual indicator for items with submenus */}
-                    {rightItems.some(
-                      (subItem) => subItem.parent_id === item.id
-                    ) && (
-                      <span className="ml-2 text-xs" aria-hidden="true">
-                        ▶
+                    <Link
+                      href={
+                        item.path?.startsWith("/") ? item.path : `/${item.path}`
+                      }
+                      onClick={(e) => handleCategoryClick(e, item)}
+                      onKeyDown={(e) => handleKeyDown(e, item.id)}
+                      role="menuitem"
+                      tabIndex={0}
+                      aria-expanded={
+                        isMobile ? isExpanded : activeCategory === item.id
+                      }
+                      aria-haspopup={hasSubItems}
+                      title={`Navigate to ${item.title} services`}
+                    >
+                      <span
+                        className={`
+                          block px-4 py-3 
+                          text-sm font-medium
+                          transition-colors duration-200
+                          border border-gray-300
+                          rounded-md
+                          ${
+                            activeCategory === item.id ||
+                            (isMobile && isExpanded)
+                              ? "bg-blue-600 text-white"
+                              : "text-gray-800 hover:bg-gray-100 hover:text-blue-600"
+                          }
+                        `}
+                        style={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
+                      >
+                        {item.title}
+                        {hasSubItems && (
+                          <span className="ml-2 text-xs" aria-hidden="true">
+                            {isMobile ? (isExpanded ? "▼" : "▶") : "▶"}
+                          </span>
+                        )}
                       </span>
-                    )}
-                  </span>
-                </Link>
-              </li>
-            ))}
+                    </Link>
+                  </li>
+
+                  {/* Mobile subcategories - shown inline */}
+                  {isMobile && isExpanded && hasSubItems && (
+                    <li role="none">
+                      <ul
+                        className="bg-gray-50 rounded-md mx-2 mb-2 p-2 space-y-1"
+                        role="menu"
+                      >
+                        {mobileSubItems.map((subItem) => (
+                          <li key={subItem.id} role="none">
+                            <Link
+                              href={
+                                subItem.path.startsWith("/")
+                                  ? subItem.path
+                                  : `/${subItem.path}`
+                              }
+                              onClick={handleLinkClick}
+                              role="menuitem"
+                              tabIndex={0}
+                              title={`Navigate to ${subItem.title}`}
+                              className="
+                                block
+                                px-3
+                                py-2
+                                text-sm
+                                text-gray-700
+                                rounded
+                                hover:bg-gray-200
+                                hover:text-blue-600
+                                transition-colors
+                                duration-150
+                              "
+                            >
+                              {subItem.title}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  )}
+                </React.Fragment>
+              );
+            })}
           </ul>
         </div>
 
-        {/* RIGHT COLUMN - Subcategories */}
+        {/* RIGHT COLUMN - Subcategories (Desktop only) */}
         {showRightColumn && activeItem && (
           <div
             id={`submenu-${activeItem.id}`}
             className="
-              hidden
-              screen-size-5:block
               bg-white
               border-l
               border-gray-300
