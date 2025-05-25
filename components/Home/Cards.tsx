@@ -14,7 +14,7 @@ const Cards: React.FC<homeSpecialityCardsTypes> = ({
   }
 
   return (
-    <section className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] bg-white text-black dark:bg-black dark:text-white">
+    <section className="mx-auto flex flex-col items-center screen-size-18:max-w-[1850px] bg-white text-black dark:bg-black dark:text-white ">
       <div
         aria-labelledby="cards-section"
         className="flex flex-col xl:flex-row items-center gap-6 w-full"
@@ -40,7 +40,9 @@ const Cards: React.FC<homeSpecialityCardsTypes> = ({
           </div>
         </div>
       </div>
-      <BelowAdditionalSpecialities specialities={homeSpecialities} />
+      <div className="w-full max-w-[1850px] mx-auto">
+        <BelowAdditionalSpecialities specialities={homeSpecialities} />
+      </div>
     </section>
   );
 };

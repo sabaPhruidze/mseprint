@@ -13,41 +13,57 @@ const BelowAdditionalSpecialities: React.FC<SpecialitiesProps> = ({
   }
 
   return (
-    <div className="p-8 flex flex-col items-start text-left ">
+    <div className="p-8 space-y-12">
       {specialities.map((speciality, i) => (
-        <div key={i} className="w-full mb-6">
-          {/* — optional heading; remove if you don’t need titles here — */}
-          <h2 className="text-3xl font-bold mb-4 text-center font-inter-extrabold">
+        <div key={i} className="w-full">
+          {/* Section Title */}
+          <h2 className="mb-6 text-3xl font-inter-extrabold text-center">
             {speciality.title}
           </h2>
 
           {/* Mobile accordion (≤ md) */}
           <details className="group block w-full md:hidden" role="group">
-            {/* First list item + toggle text */}
-            <summary className="list-disc text-center font-inter-medium marker:hidden cursor-pointer">
-              {speciality.contentDown?.[0]}
-              <span className="text-blue-600 group-open:hidden">
-                see more&nbsp;…
-              </span>
-              <span className="text-blue-600 hidden group-open:inline">
-                see less
-              </span>
+            <summary className="cursor-pointer list-none font-inter-medium text-left">
+              <div className="flex items-start">
+                <span className="inline-block w-2 h-2 bg-black dark:bg-white rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                <div>
+                  {speciality.contentDown?.[0]}
+                  <span className="text-blue-600 group-open:hidden ml-1">
+                    see more…
+                  </span>
+                  <span className="text-blue-600 hidden group-open:inline ml-1">
+                    see less
+                  </span>
+                </div>
+              </div>
             </summary>
 
-            {/* Remaining bullets – visible only when open */}
-            <ul className="list-disc text-center font-inter-medium mt-2">
-              {speciality.contentDown
-                ?.slice(1)
-                .map((item, idx) => <li key={idx}>{item}</li>)}
-            </ul>
+            <div className="mt-2 space-y-2">
+              {speciality.contentDown?.slice(1).map((item, idx) => (
+                <div key={idx} className="flex items-start">
+                  <span className="inline-block w-2 h-2 bg-black dark:bg-white rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span className="font-inter-medium">{item}</span>
+                </div>
+              ))}
+            </div>
           </details>
 
-          {/* Desktop / ≥ md view – always expanded */}
-          <ul className="hidden md:block list-disc text-center font-inter-medium">
-            {speciality.contentDown?.map((item, idx) => (
-              <li key={idx}>{item}</li>
-            ))}
-          </ul>
+          {/* Desktop view (≥ md) – 2 column layout */}
+          <div className="hidden md:block">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-3">
+              {speciality.contentDown?.map((item, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start break-inside-avoid w-full"
+                >
+                  <span className="inline-block w-2 h-2 bg-black dark:bg-white rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                  <span className="font-inter-medium text-left flex-1">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       ))}
     </div>
