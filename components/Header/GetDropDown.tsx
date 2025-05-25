@@ -32,52 +32,72 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     Set<number>
   >(new Set());
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
   const currentPath = usePathname();
   const leftSideRef = useRef<HTMLUListElement>(null);
+  const dropdownRef = useRef<HTMLElement>(null);
   const [leftSideHeight, setLeftSideHeight] = useState<number>(0);
   const clickTimeoutRef = useRef<{ [key: number]: NodeJS.Timeout }>({});
 
+  // Separate parent and child items
   const leftItems = useMemo(
     () => data.filter((item) => !item.parent_id),
     [data]
   );
+
   const rightItems = useMemo(
     () => data.filter((item) => item.parent_id),
     [data]
   );
 
-  // Check if mobile on mount and resize
+  // Mobile detection
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
+      setIsMobile(window.innerWidth < 768);
     };
 
     checkMobile();
     window.addEventListener("resize", checkMobile);
-
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  // Reset states on path change
   useEffect(() => {
     setActiveCategory(null);
     setMobileExpandedCategories(new Set());
   }, [currentPath]);
 
+  // Calculate left side height
   useEffect(() => {
     if (leftSideRef.current) {
       setLeftSideHeight(leftSideRef.current.offsetHeight);
     }
   }, [leftItems]);
 
-  // Cleanup timeouts on unmount
+  // Cleanup timeouts
   useEffect(() => {
     return () => {
-      Object.values(clickTimeoutRef.current).forEach((timeout) => {
-        if (timeout) clearTimeout(timeout);
-      });
+      Object.values(clickTimeoutRef.current).forEach(clearTimeout);
     };
   }, []);
 
+  // Click outside to close
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setActiveCategory(null);
+        onCloseDropdown?.();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [onCloseDropdown]);
+
+  // Get filtered subcategories
   const filteredRightItems = useMemo(
     () =>
       rightItems
@@ -86,23 +106,22 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     [rightItems, activeCategory]
   );
 
+  // Get active main category
   const activeItem = useMemo(
     () => leftItems.find((item) => item.id === activeCategory) || null,
     [leftItems, activeCategory]
   );
 
+  // Show right column logic
   const showRightColumn = useMemo(() => {
     if (!activeItem || isMobile) return false;
-    const lowerTitle = activeItem.title.toLowerCase();
-    return (
-      !["online ordering portals", "graphic design"].includes(lowerTitle) &&
-      filteredRightItems.length > 0
-    );
+    return filteredRightItems.length > 0;
   }, [activeItem, filteredRightItems, isMobile]);
 
+  // Event handlers
   const handleMouseLeave = useCallback(() => {
     if (!isMobile) {
-      setActiveCategory(null);
+      setTimeout(() => setActiveCategory(null), 150);
     }
   }, [isMobile]);
 
@@ -110,27 +129,20 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     setActiveCategory(null);
     setIsDropdownVisible(false);
     setMobileExpandedCategories(new Set());
-
-    if (onCloseDropdown) {
-      onCloseDropdown();
-    }
+    onCloseDropdown?.();
   }, [onCloseDropdown]);
 
   const handleCategoryClick = useCallback(
-    (event: React.MouseEvent, item: ServicesPathTypes) => {
-      const hasSubItems = rightItems.some(
-        (subItem) => subItem.parent_id === item.id
-      );
+    (e: React.MouseEvent, item: ServicesPathTypes) => {
+      const hasSub = rightItems.some((s) => s.parent_id === item.id);
 
-      if (isMobile && hasSubItems) {
-        event.preventDefault();
+      if (isMobile && hasSub) {
+        e.preventDefault();
 
-        // Clear any existing timeout for this item
+        // Double tap to navigate
         if (clickTimeoutRef.current[item.id]) {
           clearTimeout(clickTimeoutRef.current[item.id]);
           delete clickTimeoutRef.current[item.id];
-
-          // Second click - navigate to page
           window.location.href = item.path?.startsWith("/")
             ? item.path
             : `/${item.path}`;
@@ -138,7 +150,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
           return;
         }
 
-        // First click - expand/collapse
+        // Toggle expanded state
         setMobileExpandedCategories((prev) => {
           const newSet = new Set(prev);
           if (newSet.has(item.id)) {
@@ -149,12 +161,10 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
           return newSet;
         });
 
-        // Set timeout for double-click detection
         clickTimeoutRef.current[item.id] = setTimeout(() => {
           delete clickTimeoutRef.current[item.id];
         }, 500);
       } else {
-        // Desktop or no subitems - normal navigation
         handleLinkClick();
       }
     },
@@ -162,84 +172,98 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
   );
 
   const handleKeyDown = useCallback(
-    (event: React.KeyboardEvent, itemId: number) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
+    (e: React.KeyboardEvent, item: ServicesPathTypes) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
         if (!isMobile) {
-          setActiveCategory(itemId);
+          setActiveCategory(item.id);
+        } else {
+          handleCategoryClick(e as any, item);
         }
-      } else if (event.key === "Escape") {
+      } else if (e.key === "Escape") {
         setActiveCategory(null);
-        if (onCloseDropdown) {
-          onCloseDropdown();
-        }
+        onCloseDropdown?.();
       }
     },
-    [isMobile, onCloseDropdown]
+    [isMobile, onCloseDropdown, handleCategoryClick]
   );
 
-  // Generate structured data for SEO
+  // SEO structured data
   const structuredData = useMemo(() => {
-    const navigationItems = leftItems.map((item) => ({
-      "@type": "SiteNavigationElement",
-      name: item.title,
-      url: item.path?.startsWith("/") ? item.path : `/${item.path}`,
-      hasSubMenu: rightItems.some((subItem) => subItem.parent_id === item.id)
-        ? rightItems
-            .filter((subItem) => subItem.parent_id === item.id)
-            .map((subItem) => ({
-              "@type": "SiteNavigationElement",
-              name: subItem.title,
-              url: subItem.path?.startsWith("/")
-                ? subItem.path
-                : `/${subItem.path}`,
-            }))
-        : undefined,
-    }));
+    const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
+
+    const navigationElements = leftItems.map((item) => {
+      const subItems = rightItems
+        .filter((sub) => sub.parent_id === item.id)
+        .map((sub) => ({
+          "@type": "SiteNavigationElement",
+          name: sub.title,
+          url: `${baseUrl}${sub.path?.startsWith("/") ? sub.path : `/${sub.path}`}`,
+        }));
+
+      return {
+        "@type": "SiteNavigationElement",
+        name: item.title,
+        url: `${baseUrl}${item.path?.startsWith("/") ? item.path : `/${item.path}`}`,
+        ...(subItems.length > 0 && { hasPart: subItems }),
+      };
+    });
 
     return {
       "@context": "https://schema.org",
       "@type": "SiteNavigationElement",
       name: ariaLabel,
-      hasPart: navigationItems,
+      hasPart: navigationElements,
     };
   }, [leftItems, rightItems, ariaLabel]);
+
+  // Dynamic width calculation
+  const getLeftColumnWidth = () => {
+    if (isMobile) {
+      return showRightColumn ? "16rem" : "100%";
+    }
+    return buttonWidth ? `${buttonWidth}px` : "18rem";
+  };
 
   if (!isDropdownVisible) return null;
 
   return (
     <>
-      {/* Structured Data for SEO */}
+      {/* SEO Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
       <nav
+        ref={dropdownRef}
         id={dropdownId}
-        className="flex overflow-hidden rounded-xl border border-gray-200 shadow-lg"
+        className="flex overflow-hidden rounded-lg border border-gray-200 shadow-xl bg-white"
         onMouseLeave={handleMouseLeave}
         aria-label={ariaLabel}
         role="navigation"
+        style={{ maxHeight: "80vh" }}
       >
         {/* LEFT COLUMN - Main Categories */}
         <div
           className="bg-white flex-shrink-0"
-          style={{ width: buttonWidth ? `${buttonWidth}px` : "16rem" }}
+          style={{ width: getLeftColumnWidth() }}
         >
           <ul
             ref={leftSideRef}
-            className="flex flex-col"
+            className="flex flex-col p-2 gap-1 overflow-y-auto"
             role="menu"
             aria-label="Main service categories"
+            style={{ maxHeight: "75vh" }}
           >
             {leftItems.map((item) => {
-              const hasSubItems = rightItems.some(
-                (subItem) => subItem.parent_id === item.id
-              );
-              const isExpanded = mobileExpandedCategories.has(item.id);
-              const mobileSubItems = rightItems
-                .filter((subItem) => subItem.parent_id === item.id)
+              const hasSub = rightItems.some((s) => s.parent_id === item.id);
+              const expanded = mobileExpandedCategories.has(item.id);
+              const isActive =
+                activeCategory === item.id || (isMobile && expanded);
+
+              const mobileSubs = rightItems
+                .filter((s) => s.parent_id === item.id)
                 .sort((a, b) => a.title.localeCompare(b.title));
 
               return (
@@ -253,82 +277,71 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
                         item.path?.startsWith("/") ? item.path : `/${item.path}`
                       }
                       onClick={(e) => handleCategoryClick(e, item)}
-                      onKeyDown={(e) => handleKeyDown(e, item.id)}
+                      onKeyDown={(e) => handleKeyDown(e, item)}
                       role="menuitem"
                       tabIndex={0}
-                      aria-expanded={
-                        isMobile ? isExpanded : activeCategory === item.id
-                      }
-                      aria-haspopup={hasSubItems}
+                      aria-expanded={isActive}
+                      aria-haspopup={hasSub}
                       title={`Navigate to ${item.title} services`}
+                      className="block focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded-md"
                     >
-                      <span
+                      <div
                         className={`
-                          block px-4 py-3 
-                          text-sm font-medium
-                          transition-colors duration-200
-                          border border-gray-300
-                          rounded-md
+                          flex items-center justify-between px-4 py-3.5 text-sm font-medium 
+                          transition-all duration-200 border rounded-md min-h-[52px]
                           ${
-                            activeCategory === item.id ||
-                            (isMobile && isExpanded)
-                              ? "bg-blue-600 text-white"
-                              : "text-gray-800 hover:bg-gray-100 hover:text-blue-600"
+                            isActive
+                              ? "bg-blue-600 text-white border-blue-600 shadow-md"
+                              : "text-gray-700 border-gray-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
                           }
                         `}
-                        style={{
-                          whiteSpace: "nowrap",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
                       >
-                        {item.title}
-                        {hasSubItems && (
-                          <span className="ml-2 text-xs" aria-hidden="true">
-                            {isMobile ? (isExpanded ? "▼" : "▶") : "▶"}
+                        <span
+                          className="flex-1 text-left truncate pr-2"
+                          title={item.title}
+                        >
+                          {item.title}
+                        </span>
+                        {hasSub && (
+                          <span
+                            className={`text-xs transition-transform duration-200 ${
+                              isActive ? "text-white" : "text-gray-400"
+                            }`}
+                            aria-hidden="true"
+                          >
+                            {isMobile ? (expanded ? "▼" : "▶") : "▶"}
                           </span>
                         )}
-                      </span>
+                      </div>
                     </Link>
                   </li>
 
-                  {/* Mobile subcategories - shown inline */}
-                  {isMobile && isExpanded && hasSubItems && (
-                    <li role="none">
-                      <ul
-                        className="bg-gray-50 rounded-md mx-2 mb-2 p-2 space-y-1"
-                        role="menu"
-                      >
-                        {mobileSubItems.map((subItem) => (
-                          <li key={subItem.id} role="none">
+                  {/* Mobile Subcategories */}
+                  {isMobile && expanded && hasSub && (
+                    <li role="none" className="mb-2">
+                      <div className="bg-gray-50 rounded-md mx-2 p-3 border border-gray-200">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {mobileSubs.map((sub) => (
                             <Link
+                              key={sub.id}
                               href={
-                                subItem.path.startsWith("/")
-                                  ? subItem.path
-                                  : `/${subItem.path}`
+                                sub.path.startsWith("/")
+                                  ? sub.path
+                                  : `/${sub.path}`
                               }
                               onClick={handleLinkClick}
                               role="menuitem"
                               tabIndex={0}
-                              title={`Navigate to ${subItem.title}`}
-                              className="
-                                block
-                                px-3
-                                py-2
-                                text-sm
-                                text-gray-700
-                                rounded
-                                hover:bg-gray-200
-                                hover:text-blue-600
-                                transition-colors
-                                duration-150
-                              "
+                              title={`Navigate to ${sub.title}`}
+                              className="block px-3 py-2.5 text-sm text-gray-700 bg-white rounded-md border border-gray-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[44px] flex items-center"
                             >
-                              {subItem.title}
+                              <span className="truncate" title={sub.title}>
+                                {sub.title}
+                              </span>
                             </Link>
-                          </li>
-                        ))}
-                      </ul>
+                          ))}
+                        </div>
+                      </div>
                     </li>
                   )}
                 </React.Fragment>
@@ -337,67 +350,59 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
           </ul>
         </div>
 
-        {/* RIGHT COLUMN - Subcategories (Desktop only) */}
+        {/* RIGHT COLUMN - Subcategories (Desktop Only) */}
         {showRightColumn && activeItem && (
           <div
             id={`submenu-${activeItem.id}`}
-            className="
-              bg-white
-              border-l
-              border-gray-300
-              p-4
-              overflow-y-auto
-              overflow-x-hidden
-            "
+            className="bg-gray-50 border-l border-gray-200 p-4 overflow-y-auto"
             style={{
-              maxHeight: leftSideHeight ? `${leftSideHeight}px` : undefined,
+              width: "24rem",
+              maxHeight: leftSideHeight || "75vh",
+              minHeight: "200px",
             }}
             role="menu"
             aria-label={`${activeItem.title} subcategories`}
           >
-            <h3 className="sr-only">{activeItem.title} Services</h3>
-            <ul className="flex flex-wrap gap-2 items-start" role="none">
-              {filteredRightItems.map((subItem) => (
-                <li key={subItem.id} role="none">
-                  <Link
-                    href={
-                      subItem.path.startsWith("/")
-                        ? subItem.path
-                        : `/${subItem.path}`
-                    }
-                    onClick={handleLinkClick}
-                    role="menuitem"
-                    tabIndex={0}
-                    title={`Navigate to ${subItem.title}`}
-                  >
-                    <span
-                      className="
-                        block
-                        border border-gray-300
-                        rounded-md
-                        transition-colors
-                        duration-150
-                        text-gray-800
-                        text-sm
-                        font-medium
-                        px-3
-                        py-2
-                        hover:text-blue-600
-                        hover:bg-gray-100
-                      "
-                      style={{
-                        width: "250px",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis",
-                      }}
-                    >
-                      {subItem.title}
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-300 pb-2">
+                {activeItem.title}
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 gap-2">
+              {filteredRightItems.map((sub) => (
+                <Link
+                  key={sub.id}
+                  href={sub.path.startsWith("/") ? sub.path : `/${sub.path}`}
+                  onClick={handleLinkClick}
+                  role="menuitem"
+                  tabIndex={0}
+                  title={`Navigate to ${sub.title}`}
+                  className="group block focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded-md"
+                >
+                  <div className="p-3 bg-white border border-gray-200 rounded-md hover:bg-blue-50 hover:border-blue-300 transition-all duration-200 min-h-[52px] flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-800 group-hover:text-blue-700 flex-1 truncate pr-2">
+                      {sub.title}
                     </span>
-                  </Link>
-                </li>
+                    <div className="text-gray-400 group-hover:text-blue-600 transition-colors">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
         )}
       </nav>
