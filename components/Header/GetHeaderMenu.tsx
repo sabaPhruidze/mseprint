@@ -68,7 +68,6 @@ export default function GetHeaderMenu({
                 className={`
                   font-inter-extrabold
                   font-bold
-                  underline
                   screen-size-26:text-3xl
                   screen-size-20:text-2xl
                   screen-size-18:text-3xl
