@@ -14,7 +14,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
         aria-labelledby="offset-printing-heading"
       >
-        <div className="relative w-full screen-size-5:h-[400px] h-[600px]">
+        <div className="relative w-full screen-size-5:h-[400px] h-[700px]">
           <SEOImage
             src={
               pageData.mainimage?.src
@@ -69,8 +69,8 @@ export default function PageStructure({ pageData }: PageStructureProps) {
       </section>
 
       <div className="container mx-auto p-8 max-w-[1500px] screen-size-10:text-left text-center">
-        <div className="container py-8 max-w-[1500px] screen-size-10:text-left text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6 ">
+        <div className="container py-8 max-w-[1500px]">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white my-6">
             {pageData.whychoosesection.heading ||
               "pageData.whyChooseSection.heading not written"}
           </h2>
@@ -108,7 +108,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               objectFit="cover"
             />
           </div>
-          <div className="mt-4 ">
+          <div className="mt-4 text-left">
             {/* WHY CHOOSE – paragraphs 1 & 2 with mobile toggle */}
             {(() => {
               const p1 =
@@ -123,9 +123,12 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               return (
                 <>
                   {/* mobile accordion */}
-                  <details className="w-full md:hidden group" role="group">
-                    <summary className="cursor-pointer marker:hidden">
-                      {preview}
+                  <details
+                    className="w-full md:hidden group text-left"
+                    role="group"
+                  >
+                    <summary className="cursor-pointer marker:hidden list-none text-left">
+                      <span>{preview}</span>
                       {rest && (
                         <>
                           <span className="ml-1 text-blue-600 group-open:hidden">
@@ -137,13 +140,13 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                         </>
                       )}
                     </summary>
-                    {rest && <p className="mt-2 px-4">{rest}</p>}
+                    {rest && <div className="mt-2 text-left">{rest}</div>}
                   </details>
 
                   {/* desktop – always expanded */}
-                  <div className="hidden md:block">
-                    <p>{p1}</p>
-                    {p2 && <p className="mt-2">{p2}</p>}
+                  <div className="hidden md:block text-left">
+                    <p className="text-left">{p1}</p>
+                    {p2 && <p className="mt-2 text-left">{p2}</p>}
                   </div>
                 </>
               );
@@ -153,21 +156,29 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             {pageData.whychoosesection.list?.length ? (
               <>
                 {/* mobile accordion */}
-                <details className="w-full md:hidden group mt-2" role="group">
-                  <summary className="cursor-pointer marker:hidden">
-                    <strong>{pageData.whychoosesection.list[0].page}</strong>
-                    <span> - {pageData.whychoosesection.list[0].content}</span>
-                    <span className="ml-1 text-blue-600 group-open:hidden">
-                      see more&nbsp;…
-                    </span>
-                    <span className="ml-1 text-blue-600 hidden group-open:inline">
-                      see less
-                    </span>
+                <details
+                  className="w-full md:hidden group mt-2 text-left"
+                  role="group"
+                >
+                  <summary className="cursor-pointer marker:hidden list-none text-left">
+                    <div className="text-left">
+                      <strong>{pageData.whychoosesection.list[0].page}</strong>
+                      <span>
+                        {" "}
+                        - {pageData.whychoosesection.list[0].content}
+                      </span>
+                      <span className="ml-1 text-blue-600 group-open:hidden">
+                        see more&nbsp;…
+                      </span>
+                      <span className="ml-1 text-blue-600 hidden group-open:inline">
+                        see less
+                      </span>
+                    </div>
                   </summary>
 
-                  <ul className="list-disc list-inside mt-2 space-y-2 px-4">
+                  <ul className="list-disc list-inside mt-2 space-y-2 text-left">
                     {pageData.whychoosesection.list.slice(1).map((item) => (
-                      <li key={item.id}>
+                      <li key={item.id} className="text-left">
                         <strong>{item.page}</strong>
                         <span> - {item.content}</span>
                       </li>
@@ -176,9 +187,9 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 </details>
 
                 {/* desktop – always expanded */}
-                <ul className="hidden md:block list-disc list-inside mt-2 space-y-2">
+                <ul className="hidden md:block list-disc list-inside mt-2 space-y-2 text-left">
                   {pageData.whychoosesection.list.map((item) => (
-                    <li key={item.id}>
+                    <li key={item.id} className="text-left">
                       <strong>{item.page}</strong>
                       <span> - {item.content}</span>
                     </li>
@@ -190,106 +201,73 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             )}
           </div>
 
+          {/* SERVICES SECTION - No collapse */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6">
             {pageData.servicessection?.heading ||
               "pageData.servicesSection.heading not written"}
           </h2>
-          {(() => {
-            const full =
-              pageData.servicessection?.paragraph1 ||
-              "pageData.servicesSection.paragraph1 not written";
-            const s = full.split(/(?<=[.!?])\s+/);
-            const preview = s.slice(0, 3).join(" ");
-            const rest = s.slice(3).join(" ");
+          <p className="mt-4 text-left">
+            {pageData.servicessection?.paragraph1 ||
+              "pageData.servicesSection.paragraph1 not written"}
+          </p>
 
-            return (
+          {/* OFFERINGS SECTION - No collapse */}
+          {/* ── Offerings section ─────────────────────────────────────── */}
+          <div className="text-left">
+            {/* heading */}
+            <h2 className="font-semibold">
+              {pageData.offeringssection?.heading ||
+                "pageData.offeringsSection.heading not written"}
+            </h2>
+
+            {/* paragraph */}
+            {pageData.offeringssection?.paragraph1 && (
+              <p className="mt-2">{pageData.offeringssection.paragraph1}</p>
+            )}
+
+            {/* OFFERINGS list ------------------------------------------- */}
+            {pageData.offeringssection?.list?.length ? (
               <>
                 {/* mobile accordion */}
-                <details className="w-full md:hidden group mt-4" role="group">
-                  <summary className="cursor-pointer marker:hidden">
-                    {preview}
-                    {rest && (
-                      <>
-                        <span className="ml-1 text-blue-600 group-open:hidden">
-                          see more&nbsp;…
-                        </span>
-                        <span className="ml-1 text-blue-600 hidden group-open:inline">
-                          see less
-                        </span>
-                      </>
-                    )}
+                <details className="w-full md:hidden group mt-2" role="group">
+                  <summary className="cursor-pointer marker:hidden list-none p-0">
+                    <Link
+                      href={pageData.offeringssection.list[0].path || "/"}
+                      className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                      aria-label={`Learn more about ${pageData.offeringssection.list[0].page}`}
+                    >
+                      {pageData.offeringssection.list[0].page}
+                    </Link>
+                    {" – "}
+                    {pageData.offeringssection.list[0].content}
+                    <span className="ml-1 text-blue-600 group-open:hidden">
+                      see more&nbsp;…
+                    </span>
+                    <span className="ml-1 text-blue-600 hidden group-open:inline">
+                      see less
+                    </span>
                   </summary>
-                  {rest && <p className="mt-2 px-4">{rest}</p>}
+
+                  <ul className="mt-2 space-y-2 pl-0 list-none">
+                    {pageData.offeringssection.list.slice(1).map((item) => (
+                      <li key={item.id}>
+                        <Link
+                          href={item.path || "/"}
+                          className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                          aria-label={`Learn more about ${item.page}`}
+                        >
+                          {item.page}
+                        </Link>
+                        {" – "}
+                        {item.content}
+                      </li>
+                    ))}
+                  </ul>
                 </details>
 
                 {/* desktop – always expanded */}
-                <p className="hidden md:block mt-4">{full}</p>
-              </>
-            );
-          })()}
-
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black dark:text-white mt-4 screen-size-10:text-left">
-            {pageData.offeringssection?.heading ||
-              "pageData.offeringsSection.heading not written"}
-          </h3>
-          {(() => {
-            const full = pageData.offeringssection?.paragraph1 || "";
-            if (!full) return null;
-            const s = full.split(/(?<=[.!?])\s+/);
-            const preview = s.slice(0, 3).join(" ");
-            const rest = s.slice(3).join(" ");
-
-            return (
-              <>
-                {/* mobile accordion */}
-                <details className="w-full md:hidden group mt-4" role="group">
-                  <summary className="cursor-pointer marker:hidden">
-                    {preview}
-                    {rest && (
-                      <>
-                        <span className="ml-1 text-blue-600 group-open:hidden">
-                          see more&nbsp;…
-                        </span>
-                        <span className="ml-1 text-blue-600 hidden group-open:inline">
-                          see less
-                        </span>
-                      </>
-                    )}
-                  </summary>
-                  {rest && <p className="mt-2 px-4">{rest}</p>}
-                </details>
-
-                {/* desktop – always expanded */}
-                <p className="hidden md:block mt-4">{full}</p>
-              </>
-            );
-          })()}
-
-          {/* OFFERINGS list with mobile toggle ---------------------------------- */}
-          {pageData.offeringssection?.list?.length ? (
-            <>
-              {/* mobile accordion */}
-              <details className="w-full md:hidden group mt-2" role="group">
-                <summary className="cursor-pointer marker:hidden">
-                  <Link
-                    href={pageData.offeringssection.list[0].path || "/"}
-                    className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                    aria-label={`Learn more about ${pageData.offeringssection.list[0].page}`}
-                  >
-                    {pageData.offeringssection.list[0].page}
-                  </Link>
-                  <span> - {pageData.offeringssection.list[0].content}</span>
-
-                  <span className="ml-1 text-blue-600 group-open:hidden">
-                    see more&nbsp;…
-                  </span>
-                  <span className="ml-1 text-blue-600 hidden group-open:inline">
-                    see less
-                  </span>
-                </summary>
-
-                <ul className="list-disc list-inside mt-2 space-y-2 px-4">
-                  {pageData.offeringssection.list.slice(1).map((item) => (
+                <ul className="hidden md:block mt-2 space-y-2 pl-0 list-none">
+                  {pageData.offeringssection.list.map((item) => (
                     <li key={item.id}>
                       <Link
                         href={item.path || "/"}
@@ -298,31 +276,16 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                       >
                         {item.page}
                       </Link>
-                      <span> - {item.content}</span>
+                      {" – "}
+                      {item.content}
                     </li>
                   ))}
                 </ul>
-              </details>
-
-              {/* desktop – always expanded */}
-              <ul className="hidden md:block list-disc list-inside mt-2 space-y-2">
-                {pageData.offeringssection.list.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      href={item.path || "/"}
-                      className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                      aria-label={`Learn more about ${item.page}`}
-                    >
-                      {item.page}
-                    </Link>
-                    <span> - {item.content}</span>
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : (
-            "pageData.offeringsSection?.list? not written"
-          )}
+              </>
+            ) : (
+              <p>No offerings available</p>
+            )}
+          </div>
         </div>
 
         {pageData.advancedfeatures?.heading && (

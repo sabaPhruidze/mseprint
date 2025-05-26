@@ -15,7 +15,7 @@ export default function CardsPagesStructure({ pageData }: PageStructureProps) {
         className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
         aria-labelledby="offset-printing-heading"
       >
-        <div className="relative w-full screen-size-5:h-[400px] h-[700px]">
+        <div className="relative w-full screen-size-5:h-[400px] h-[800px]">
           <SEOImage
             src={
               `/images/${pageData.mainimage.src}` ||
@@ -27,7 +27,7 @@ export default function CardsPagesStructure({ pageData }: PageStructureProps) {
             priority={pageData.mainimage.priority || false}
             loading={pageData.mainimage.priority ? undefined : "lazy"}
             sizes={pageData.mainimage.sizes || ""}
-            className="w-full h-[700px]  screen-size-5:h-[400px]"
+            className="w-full h-[800px]  screen-size-5:h-[400px]"
             fill={true}
             objectFit="cover"
           />
