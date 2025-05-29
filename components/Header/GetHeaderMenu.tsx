@@ -70,10 +70,10 @@ export default function GetHeaderMenu({
                   font-bold
                   screen-size-26:text-3xl
                   screen-size-20:text-2xl
-                 screen-size-18:text-[26px]
-               screen-size-15:text-[22px]
-               screen-size-13.5:text-2xl
-               screen-size-13:text-[22px]
+                  screen-size-18:text-[26px]
+                  screen-size-15:text-[22px]
+                  screen-size-13.5:text-2xl
+                  screen-size-13:text-[22px]
                   screen-size-5:text-2xl
                   text-md
                   flex

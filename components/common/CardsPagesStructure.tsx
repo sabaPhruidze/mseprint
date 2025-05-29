@@ -178,40 +178,11 @@ export default function CardsPagesStructure({ pageData }: PageStructureProps) {
             {pageData.servicessection?.heading ||
               "pageData.servicesSection.heading not written"}
           </h2>
-          {/* ===== paragraph1 with “see more / see less” (first 3 sentences preview) ===== */}
-          {(() => {
-            const full =
-              pageData.servicessection?.paragraph1 ??
-              "pageData.servicesSection.paragraph1 not written";
-            const sentences = full.split(/(?<=[.!?])\s+/);
-            const preview = sentences.slice(0, 3).join(" ");
-            const rest = sentences.slice(3).join(" ");
 
-            return (
-              <>
-                {/* mobile accordion */}
-                <details className="w-full md:hidden group mt-4" role="group">
-                  <summary className="cursor-pointer marker:hidden">
-                    {preview}
-                    {rest && (
-                      <>
-                        <span className="ml-1 text-blue-600 group-open:hidden">
-                          see more&nbsp;…
-                        </span>
-                        <span className="ml-1 text-blue-600 hidden group-open:inline">
-                          see less
-                        </span>
-                      </>
-                    )}
-                  </summary>
-                  {rest && <p className="mt-2 px-4">{rest}</p>}
-                </details>
-
-                {/* desktop – always expanded */}
-                <p className="hidden md:block mt-4">{full}</p>
-              </>
-            );
-          })()}
+          <p className="mt-4">
+            {pageData.servicessection?.paragraph1 ||
+              "pageData.servicesSection.paragraph1 not written"}
+          </p>
 
           {/* OFFERINGS SECTION --------------------------------------------------- */}
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-inter-medium text-black dark:text-white mt-4 screen-size-10:text-left">

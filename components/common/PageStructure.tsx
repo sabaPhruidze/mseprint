@@ -68,7 +68,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
         </div>
       </section>
 
-      <div className="container mx-auto p-8 max-w-[1500px] screen-size-10:text-left text-center">
+      <div className="container mx-auto p-8 max-w-[1500px] text-left">
         <div className="container py-8 max-w-[1500px]">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white my-6">
             {pageData.whychoosesection.heading ||
@@ -287,7 +287,6 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             )}
           </div>
         </div>
-
         {pageData.advancedfeatures?.heading && (
           <>
             {/* ─────────── ADVANCED FEATURES ─────────── */}
@@ -596,66 +595,66 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             )}
           </>
         )}
-
         {/* FAQs */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6 screen-size-10:text-left">
-          {pageData.faqs?.heading || "pageData.faqs?.heading not written"}
-        </h2>
+        <section className="text-left">
+          {/* heading */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6">
+            {pageData.faqs?.heading ?? "pageData.faqs?.heading not written"}
+          </h2>
 
-        {pageData.faqs?.list?.length ? (
-          <>
-            {/* ───── mobile: show first FAQ, toggle the rest ───── */}
-            <details className="w-full md:hidden group mt-2" role="group">
-              {/* preview = first FAQ */}
-              <summary className="cursor-pointer marker:hidden">
-                <span className="block font-inter-bold">
-                  Q:&nbsp;{pageData.faqs.list[0].question}
-                </span>
-                <span className="block">
-                  A:&nbsp;{pageData.faqs.list[0].answer}
-                </span>
+          {pageData.faqs?.list?.length ? (
+            <>
+              {/* ─── mobile: show first FAQ, toggle the rest ─── */}
+              <details className="w-full md:hidden group mt-2" role="group">
+                <summary className="cursor-pointer marker:hidden list-none p-0">
+                  <span className="block font-inter-bold">
+                    Q:&nbsp;{pageData.faqs.list[0].question}
+                  </span>
+                  <span className="block">
+                    A:&nbsp;{pageData.faqs.list[0].answer}
+                  </span>
 
-                <span className="ml-1 text-blue-600 group-open:hidden">
-                  see more&nbsp;…
-                </span>
-                <span className="ml-1 text-blue-600 hidden group-open:inline">
-                  see less
-                </span>
-              </summary>
+                  <span className="ml-1 text-blue-600 group-open:hidden">
+                    see more&nbsp;…
+                  </span>
+                  <span className="ml-1 text-blue-600 hidden group-open:inline">
+                    see less
+                  </span>
+                </summary>
 
-              {/* remaining FAQs */}
-              {pageData.faqs.list.slice(1).map((faqItem, idx) => (
-                <div className="mt-4 px-4" key={idx}>
-                  <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4 screen-size-10:text-left">
-                    Q:&nbsp;{faqItem.question}
-                  </h3>
-                  <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
-                </div>
-              ))}
-            </details>
+                {/* remaining FAQs */}
+                {pageData.faqs.list.slice(1).map((faqItem, idx) => (
+                  <div className="mt-4" key={idx}>
+                    <h3 className="text-xl lg:text-2xl font-inter-bold text-black dark:text-white">
+                      Q:&nbsp;{faqItem.question}
+                    </h3>
+                    <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
+                  </div>
+                ))}
+              </details>
 
-            {/* ───── desktop: all FAQs always visible ───── */}
-            <div className="hidden md:block">
-              {pageData.faqs.list.map((faqItem, idx) => (
-                <div className="mt-4" key={idx}>
-                  <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4 screen-size-10:text-left">
-                    Q:&nbsp;{faqItem.question}
-                  </h3>
-                  <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          "pageData.faqs?.items not written"
-        )}
-
+              {/* ─── desktop: all FAQs visible ─── */}
+              <div className="hidden md:block">
+                {pageData.faqs.list.map((faqItem, idx) => (
+                  <div className="mt-4" key={idx}>
+                    <h3 className="text-xl lg:text-2xl font-inter-bold text-black dark:text-white">
+                      Q:&nbsp;{faqItem.question}
+                    </h3>
+                    <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            "pageData.faqs?.list not written"
+          )}
+        </section>
+        {/* FAQ */}
         {/* Get Started Section */}
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6 screen-size-10:text-left">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6 text-left">
           {pageData.getstartedsection?.heading ??
             "pageData.getStartedSection?.heading not written"}
         </h2>
-
         <p className="mt-4">
           {pageData.getstartedsection?.steps?.map((item) => {
             // Normalise whitespace for cleaner matching
@@ -690,7 +689,6 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 <span className="text-blue-600 font-semibold">{content}</span>
               );
             }
-
             return (
               <span key={item.id}>
                 {item.page && <span>{` ${item.page} `}</span>}
@@ -699,7 +697,6 @@ export default function PageStructure({ pageData }: PageStructureProps) {
             );
           }) ?? "pageData.getStartedSection?.steps not written"}
         </p>
-
         <p className="mt-2">
           {pageData.getstartedsection?.finalParagraph ??
             "pageData.getStartedSection?.finalParagraph not written"}
