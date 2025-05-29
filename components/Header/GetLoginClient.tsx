@@ -59,7 +59,6 @@ export default function GetLoginClient() {
 
   return (
     <div className="flex justify-center px-4">
-      {/* keeps original width: 100 % up to 512 px (max-w-lg) */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="screen-size-5:w-[500px] screen-size-4:w-[330px] w-[300px] flex flex-col gap-6 mx-auto"
@@ -70,7 +69,7 @@ export default function GetLoginClient() {
               type={type}
               placeholder={placeholder}
               autoComplete={autoComplete}
-              className="w-full border rounded px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red"
+              className="w-full border rounded px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red dark:text-black"
               {...register(name, rules)}
             />
             {errors[name] && (

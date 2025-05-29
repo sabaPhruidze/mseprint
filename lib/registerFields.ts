@@ -63,7 +63,7 @@ export const getRequiredFields = (
     type: 'password',
     placeholder: 'Password *',
     autoComplete: 'new-password',
-    rules: { required: 'Password is required', minLength: 8 },
+    rules: { required: 'Password is required, write at least 8 letters or numbers', minLength: 8 },
   },
   {
     name: 'passwordVerification',
@@ -81,7 +81,15 @@ export const getRequiredFields = (
     type: 'tel',
     placeholder: 'Phone *',
     autoComplete: 'tel',
-    rules: { /* …same as before… */ },
+    rules: {
+      required: "Phone is required",
+      validate: (value: string) => {
+        const digits = value.replace(/\D/g, "");
+        if (digits.length === 0) return "Phone is required";
+        if (digits.length !== 10) return "Phone number must be 10 digits";
+        return true;
+      },
+    },
     onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
       (e.target.value = formatPhoneNumber(e.target.value)),
   },
