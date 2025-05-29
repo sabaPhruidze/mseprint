@@ -106,7 +106,7 @@ export default function RequestQuoteForm({ userDefaults }: Props) {
             STEP 1 OF 2{" "}
             <span className="font-inter-medium">PERSONAL INFORMATION</span>
           </h1>
-          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s">
+          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s text-black">
             <RQSFFirstStepRequired />
             <RQSFFirstStepOptional />
           </div>
@@ -117,7 +117,7 @@ export default function RequestQuoteForm({ userDefaults }: Props) {
           <h2 className="text-[36px] font-inter-extrabold mb-2 mt-8">
             STEP 2 OF 2 <span className="font-inter-medium">ABOUT PROJECT</span>
           </h2>
-          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s">
+          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s ">
             <RQSFSecondStepLeft />
             <RQSFSecondStepRight setDownloadUrl={setFileDownloadUrl} />
           </div>

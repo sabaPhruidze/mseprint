@@ -141,7 +141,7 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
             <label
               className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
               flex items-center justify-center hover:bg-black
-              transition-colors duration-700"
+              transition-colors duration-700  border-1 dark:border-white border border-white"
               onClick={(e) => e.stopPropagation()}
             >
               <span className="text-white font-inter-extrabold text-[20px]">
@@ -192,9 +192,9 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
               handleUpload();
             }}
             className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
-              flex items-center justify-center hover:bg-black
-              transition-colors duration-700 text-white font-inter-extrabold
-              text-[20px] mt-4"
+            flex items-center justify-center hover:bg-black border border-white
+            transition-colors duration-700 text-white font-inter-extrabold
+            text-[20px] mt-4 dark:border-white"
           >
             Upload
           </button>

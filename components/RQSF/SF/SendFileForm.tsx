@@ -104,7 +104,7 @@ export default function SendFileForm({ userDefaults }: Props) {
             STEP 2 OF 2{" "}
             <span className="font-inter-medium">PERSONAL INFORMATION</span>
           </h1>
-          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s">
+          <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s dark:text-black">
             <RQSFFirstStepRequired />
             <RQSFFirstStepOptional />
           </div>

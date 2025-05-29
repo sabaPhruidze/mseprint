@@ -28,7 +28,7 @@ const RQSFFirstStepRequired = () => {
             <input
               type={type}
               placeholder={placeholder}
-              className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
+              className="border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm "
               {...register(name, {
                 ...rules,
                 onChange,
