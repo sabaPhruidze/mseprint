@@ -25,7 +25,7 @@ export default async function GetHeaderRegister({ registerData }: Props) {
         className="flex items-center gap-4 screen-size-13:hidden screen-size-15:flex"
       >
         {/* user’s name */}
-        <span className="font-inter-extrabold whitespace-nowrap text-2xl screen-size-20:text-3xl">
+        <span className="font-inter-extrabold whitespace-nowrap screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-[26px] screen-size-15:text-[22px] text-2xl">
           {displayName}
         </span>
 
@@ -33,7 +33,7 @@ export default async function GetHeaderRegister({ registerData }: Props) {
         <form action={logoutAction}>
           <button
             type="submit"
-            className="font-inter-extrabold font-semibold transition-all screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-3xl text-2xl"
+            className="font-inter-extrabold font-semibold transition-all screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-[26px] screen-size-15:text-[22px] text-2xl"
           >
             Log&nbsp;out
           </button>
