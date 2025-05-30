@@ -1,4 +1,3 @@
-/* CTASection.tsx – Server Component (no "use client") */
 import Link from "next/link";
 import { PagePathTypes } from "../../types/commonTypes";
 
