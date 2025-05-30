@@ -1,8 +1,15 @@
+// app/(marketing)/blog/page.tsx
+import React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { getSpecialPagesData } from "db/GetSpecialPagesData"; // ← direct DB call
+
+/* ────── data helpers & components ────── */
+import { getSpecialPagesData } from "db/GetSpecialPagesData"; // direct DB call
+import PageStructure from "components/common/PageStructure";
 import FeaturedPosts from "components/blog/FeaturedPosts";
-import { BlogPost } from "types/commonTypes";
+
+/* ────── types ────── */
+import { BlogPost, PageStructureTypes } from "types/commonTypes";
 
 /* ────── SEO metadata (unchanged) ────── */
 export const metadata: Metadata = {
@@ -94,7 +101,7 @@ export const metadata: Metadata = {
   publisher: "MSE Printing",
 };
 
-/* — Schema.org Blog structured data for SEO — */
+/* ────── Schema.org structured data ────── */
 const BlogSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -125,20 +132,34 @@ const BlogSchema = () => {
   );
 };
 
+/* ────── Page Component ────── */
 export default async function BlogPage() {
-  /* ---------- fetch & shape ---------- */
-  const { blogData } = await getSpecialPagesData("/blog");
+  /* ---------- fetch data ---------- */
+  // The response is a heterogeneous object: we only care about two props.
+  type BlogPageData = {
+    BlogAdditionalPageData?: PageStructureTypes[];
+    blogData?: BlogPost[][];
+  };
 
-  // BlogPost[][] ➜ BlogPost[]
-  const posts: BlogPost[] = (blogData ?? [])
+  const data = (await getSpecialPagesData("/blog")) as BlogPageData;
+
+  /* ---------- shape ---------- */
+  const BlogAdditionalPageData = data.BlogAdditionalPageData ?? [];
+  const blogData = data.blogData ?? [];
+
+  /* ---- PageStructure payload ---- */
+  const pageData = BlogAdditionalPageData[0];
+
+  /* ---- Blog posts (flatten & sort newest→oldest) ---- */
+  const posts: BlogPost[] = blogData
     .flat()
-    // newest first feels more natural for a blog; flip if you prefer oldest→newest
     .sort(
       (a, b) =>
         new Date(b.published_on).getTime() - new Date(a.published_on).getTime()
     )
     .map((p, idx) => ({ ...p, id: idx + 1 }));
 
+  /* ---------- render ---------- */
   return (
     <>
       <BlogSchema />
@@ -153,10 +174,18 @@ export default async function BlogPage() {
           </p>
         </header>
 
+        {/* ─── featured posts ─── */}
         <section className="mt-12">
           <FeaturedPosts posts={posts} />
         </section>
+
+        {/* ─── CMS-driven additional content ─── */}
       </main>
+      {pageData && (
+        <section className="mt-12">
+          <PageStructure pageData={pageData} />
+        </section>
+      )}
     </>
   );
 }

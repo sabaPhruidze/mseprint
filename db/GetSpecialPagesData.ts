@@ -1,5 +1,5 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection, BlogPost,AboutUsSection, CardsPagesStructureTypes} from "../types/commonTypes";
+import { PageStructureTypes,accessibilityTypes,privacyPolicyTypes, termsConditionsTypes,EoeDiversitySection,EnvironmentalSection, BlogPost,AboutUsSection, CardsPagesStructureTypes} from "../types/commonTypes";
 
 export const getSpecialPagesData = async (pathname: string) => {
   try {
@@ -49,12 +49,7 @@ export const getSpecialPagesData = async (pathname: string) => {
               environmentalMessageData: environmentalMessageData ?? [],
             };
           }
-          case "/blog": {
-            const [blogData] = await Promise.all([
-              getDataPattern<BlogPost[]>("blog_post_page"),
-            ]);
-            return { blogData: blogData ?? [] };
-          }
+          
           case '/about-us': {
             const [aboutUsData] = await Promise.all([
               getDataPattern<AboutUsSection[]>('about_us_sections'), // 👈 same shape, new key
@@ -98,6 +93,19 @@ export const getSpecialPagesData = async (pathname: string) => {
             MarketingServicesCardPageData: MarketingServicesCardPageData ?? [],
           };
         }
+        case "/blog": {
+  const [blogData, blogAdditional] = await Promise.all([
+    getDataPattern<BlogPost[]>("blog_post_page"),
+    getDataPattern<PageStructureTypes>("blog_additional_page"),
+  ]);
+
+  return {
+    blogData: blogData ?? [],
+    BlogAdditionalPageData: blogAdditional ?? [],
+  };
+}
+
+
 
       default:
         return {};

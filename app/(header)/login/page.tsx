@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/header-images/about_us.webp",
+        url: "https://www.mseprinting.com/images/header-images/login.webp",
         width: 800,
         height: 630,
         alt: "MSE Printing – Sign In preview",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/header-images/about_us.webp",
+        url: "https://www.mseprinting.com/images/header-images/login.webp",
         alt: "MSE Printing – Sign In preview",
       },
     ],
