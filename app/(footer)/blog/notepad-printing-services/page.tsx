@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/notepad-printing-services.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
         width: 1200,
         height: 630,
         alt: "Custom notepads printed by MSE Printing with logos and binding options",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/additional/notepad-printing-services.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
         alt: "Branded sticky notes and notepad printing for Minneapolis businesses",
       },
     ],

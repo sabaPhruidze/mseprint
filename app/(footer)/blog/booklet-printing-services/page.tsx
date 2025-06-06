@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/booklet-printing-services.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
         width: 1200,
         height: 630,
         alt: "Custom printed booklets including manuals, reports, and catalogs",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/additional/booklet-printing-services.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
         alt: "Saddle-stitched and perfect-bound booklets printed by MSE Printing",
       },
     ],

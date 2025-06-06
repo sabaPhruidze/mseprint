@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/legal-document-printing.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/legal-document-printing.webp",
         width: 1200,
         height: 630,
         alt: "Secure and professional legal document printing services by MSE Printing",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/additional/legal-document-printing.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/legal-document-printing.webp",
         alt: "Legal contract and exhibit print services in Minneapolis",
       },
     ],

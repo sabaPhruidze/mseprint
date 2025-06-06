@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   category: "Corporate Printing",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
-    canonical: "https://www.mseprinting.com/blog-ppsfmcc",
+    canonical: "https://www.mseprinting.com/blog/corporate-printing-solutions",
   },
   robots: {
     index: true,
@@ -45,13 +45,13 @@ export const metadata: Metadata = {
     title: "Corporate Printing Solutions | MSE Print",
     description:
       "Minneapolis-based professional printing for corporate branding, marketing, and operations. Business cards, brochures, manuals, and more.",
-    url: "https://www.mseprinting.com/blog-ppsfmcc",
+    url: "https://www.mseprinting.com/blog/corporate-printing-solutions",
     siteName: "MSE Printing",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/1.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/corporate-printing-solutions.webp",
         width: 1200,
         height: 630,
         alt: "Corporate print services including stationery, brochures, and large-format graphics",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/additional/1.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/corporate-printing-solutions.webp",
         alt: "High-quality business and marketing print materials for corporations in Minneapolis",
       },
     ],

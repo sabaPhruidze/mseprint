@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/affordable-printing-solutions.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/affordable-printing-solutions.webp",
         width: 1200,
         height: 630,
         alt: "Affordable business printing in Minneapolis including cards, brochures, and signage",
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/additional/affordable-printing-solutions.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/affordable-printing-solutions.webp",
         alt: "Cost-effective printing services for Minneapolis businesses",
       },
     ],

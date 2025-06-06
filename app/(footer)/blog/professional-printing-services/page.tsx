@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/professional-printing-services.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
         width: 1200,
         height: 630,
         alt: "Custom corporate print materials by MSE Printing in Minneapolis",
