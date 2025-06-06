@@ -26,6 +26,17 @@ export const getBlogPagesData = async (pathname: string) => {
         BlogAffordablePrintingSolutionsPageData: BlogAffordablePrintingSolutionsPageData ?? [],
     };
     }
+  
+    case "/blog/local-printing-services": {
+    const [BlogLocalPrintingServicesPageData] = await Promise.all([
+        getDataPattern<PageStructureTypes>("blog_local_printing_services"),
+    ]);
+
+    return {
+        BlogLocalPrintingServicesPageData: BlogLocalPrintingServicesPageData ?? [],
+    };
+    }
+
 
 
       default:
