@@ -59,12 +59,21 @@ export const getBlogPagesData = async (pathname: string) => {
     const [BlogNotepadPrintingServicesPageData] = await Promise.all([
         getDataPattern<PageStructureTypes>("blog_notepad_printing_services"),
     ]);
-
+    
     return {
         BlogNotepadPrintingServicesPageData: BlogNotepadPrintingServicesPageData ?? [],
     };
     }
-      
+      case "/blog/legal-document-printing": {
+        const [BlogLegalDocumentPrintingPageData] = await Promise.all([
+            getDataPattern<PageStructureTypes>("blog_legal_document_printing"),
+        ]);
+
+        return {
+            BlogLegalDocumentPrintingPageData: BlogLegalDocumentPrintingPageData ?? [],
+        };
+        }
+
 
       default:
         return {};
