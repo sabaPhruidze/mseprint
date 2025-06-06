@@ -40,7 +40,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               pageData.mainimage.sizes ||
               "(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
             }
-            className="w-full h-[600px]  screen-size-5:h-[400px]"
+            className="w-full h-[700px]  screen-size-5:h-[400px]"
             fill={true}
             objectFit="cover"
           />

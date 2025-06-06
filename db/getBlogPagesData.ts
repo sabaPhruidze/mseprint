@@ -17,6 +17,17 @@ export const getBlogPagesData = async (pathname: string) => {
             blogCorporatePrintingSolutions ?? [],
         };
       }
+    case "/blog/affordable-printing-solutions": {
+    const [BlogAffordablePrintingSolutionsPageData] = await Promise.all([
+        getDataPattern<PageStructureTypes>("blog_affordable_printing_solutions"),
+    ]);
+
+    return {
+        BlogAffordablePrintingSolutionsPageData: BlogAffordablePrintingSolutionsPageData ?? [],
+    };
+    }
+
+
       default:
         return {};
     }
