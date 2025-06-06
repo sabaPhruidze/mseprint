@@ -55,7 +55,16 @@ export const getBlogPagesData = async (pathname: string) => {
             BlogBookletPrintingServicesPageData: BlogBookletPrintingServicesPageData ?? [],
         };
         }
+      case "/blog/notepad-printing-services": {
+    const [BlogNotepadPrintingServicesPageData] = await Promise.all([
+        getDataPattern<PageStructureTypes>("blog_notepad_printing_services"),
+    ]);
 
+    return {
+        BlogNotepadPrintingServicesPageData: BlogNotepadPrintingServicesPageData ?? [],
+    };
+    }
+      
 
       default:
         return {};
