@@ -35,6 +35,6 @@
     "pages",
     "components",
     ".next/types/app/(category)/direct-mail-mailing-services/page.tsx"
-  ],
+, "app/(footer)/blog/affordable-printing-solutions"  ],
   "exclude": ["node_modules"]
 }
