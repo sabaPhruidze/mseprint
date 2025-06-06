@@ -1,6 +1,8 @@
+// app/(marketing)/components/blog/FeaturedPosts.tsx      <-- or wherever it lives
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link"; // ➜ add
 import SEOImage from "components/common/SEOImage";
 import { BlogPost, SEOImageProps } from "types/commonTypes";
 
@@ -31,14 +33,20 @@ export default function FeaturedPosts({ posts }: Props) {
             alt: post.title,
           };
 
+          /* ---------- choose URL ----------
+             1. prefer explicit path (your new column)
+             2. fall back to /blog/{slug} if path is undefined             */
+          const href = post.path ?? `/blog/${post.slug}`;
+
           return (
-            <div
+            <Link /* wrapped in <Link /> now */
               key={post.id}
+              href={href}
               className="relative shrink-0 snap-start
                          w-[85%] sm:w-[60%] md:w-[45%] lg:w-[30%] xl:w-[25%]
                          h-64 rounded-2xl overflow-hidden
                          shadow hover:shadow-xl transition-shadow duration-300
-                         focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
+                         focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               <SEOImage
                 {...img}
@@ -47,7 +55,7 @@ export default function FeaturedPosts({ posts }: Props) {
                   img.sizes ??
                   "(min-width:1280px) 25vw, (min-width:1024px) 30vw, (min-width:640px) 45vw, 85vw"
                 }
-                className="w-full h-full transition-transform duration-500 hover:scale-105"
+                className="w-full h-full transition-transform duration-500 group-hover:scale-105"
                 fill
                 objectFit="cover"
               />
@@ -68,12 +76,12 @@ export default function FeaturedPosts({ posts }: Props) {
                   })}
                 </p>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
 
-      {/* nav arrows (now always visible) */}
+      {/* nav arrows (unchanged) */}
       <button
         aria-label="Previous"
         onClick={() => scrollBy("left")}

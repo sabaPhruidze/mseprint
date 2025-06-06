@@ -167,6 +167,7 @@ export interface BlogPost {
   published_on: string;
   image: SEOImageProps;
   slug?: string;
+  path: string;
 }
 
 //about us
