@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/additional/professional-printing-services.webp",
+        url: "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
         alt: "Marketing and business print production in Minneapolis",
       },
     ],
