@@ -5,6 +5,10 @@ import ContactUs from "components/common/ContactUs";
 
 export const metadata: Metadata = {
   title: "Contact Us | MSE Printing",
+  metadataBase: new URL("https://www.mseprinting.com"),
+  alternates: {
+    canonical: "https://www.mseprinting.com/contact-us",
+  },
   description:
     "Get in touch with MSE Printing – your Minneapolis partner for high‑quality printing, signage, and marketing solutions. Call, visit, or send us a message today.",
   keywords: [
