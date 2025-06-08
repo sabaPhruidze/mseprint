@@ -576,10 +576,4 @@
   <changefreq>yearly</changefreq>
   <priority>0.7</priority>
 </url>
-<url>
-  <loc>https://mseprinting.com/</loc>
-  <lastmod>2025-06-08</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>0.85</priority>
-</url>
 </urlset>
