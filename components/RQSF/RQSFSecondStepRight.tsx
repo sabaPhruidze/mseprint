@@ -1,10 +1,11 @@
 "use client";
 
+import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import JSZip from "jszip";
 
-const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024;
+const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024; // 1 GB
 
 interface Props {
   setDownloadUrl: (url: string) => void;
@@ -17,6 +18,8 @@ interface PresignResponse {
 
 export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
   const [files, setFiles] = useState<File[]>([]);
+  const [preparing, setPreparing] = useState(false);
+  const [zipProgress, setZipProgress] = useState(0);
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [uploadFinished, setUploadFinished] = useState(false);
@@ -59,19 +62,27 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
   async function handleUpload() {
     if (files.length === 0) return;
 
-    setUploading(true);
+    // reset UI
+    setPreparing(true);
+    setZipProgress(0);
+    setUploading(false);
     setUploadFinished(false);
     setProgress(0);
     setError(null);
 
     try {
+      /* ---------- 1. Build ZIP with progress ---------- */
       const zip = new JSZip();
       files.forEach((file) => zip.file(file.name, file));
-      const zipBlob = await zip.generateAsync({ type: "blob" });
+      const zipBlob = await zip.generateAsync({ type: "blob" }, ({ percent }) =>
+        setZipProgress(Math.round(percent))
+      );
+      setPreparing(false);
 
+      /* ---------- 2. Presign ---------- */
       const uniqueName = `RequestQuoteFiles-${Date.now()}-${Math.random()
         .toString(36)
-        .substring(2, 7)}.zip`;
+        .slice(2, 7)}.zip`;
 
       const presignRes = await fetch("/api/upload-s3", {
         method: "POST",
@@ -89,33 +100,31 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
       const { presignedUrl, downloadUrl } =
         (await presignRes.json()) as PresignResponse;
 
-      await fetch(presignedUrl, {
-        method: "PUT",
+      /* ---------- 3. Upload with Axios + progress ---------- */
+      setUploading(true);
+      await axios.put(presignedUrl, zipBlob, {
         headers: { "Content-Type": "application/zip" },
-        body: zipBlob,
+        onUploadProgress: (e) => {
+          const pct = Math.round((e.loaded / (e.total ?? zipBlob.size)) * 100);
+          setProgress(pct);
+        },
       });
 
-      let fake = 0;
-      const interval = setInterval(() => {
-        fake += 10;
-        setProgress(fake);
-        if (fake >= 100) {
-          clearInterval(interval);
-          setUploading(false);
-          setUploadFinished(true);
-          setDownloadUrl(downloadUrl);
-          // console.log("✅ File uploaded to:", downloadUrl);
-        }
-      }, 200);
+      /* ---------- 4. Finish ---------- */
+      setProgress(100);
+      setUploading(false);
+      setUploadFinished(true);
+      setDownloadUrl(downloadUrl);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : String(err);
       console.error(message);
       setError(message || "Upload failed.");
+      setPreparing(false);
       setUploading(false);
     }
   }
 
-  const showFileControls = !uploading && !uploadFinished;
+  const showFileControls = !preparing && !uploading && !uploadFinished;
 
   return (
     <div className="screen-size-12:w-full screen-size-5:w-[460px] w-[300px] mx-auto text-center screen-size-12:text-left">
@@ -200,6 +209,22 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
           </button>
         )}
 
+        {/* Preparing progress bar */}
+        {preparing && (
+          <div className="mt-4 w-full">
+            <div className="w-full bg-gray-200 h-2 rounded">
+              <div
+                className="bg-amber-500 h-2 rounded"
+                style={{ width: `${zipProgress}%` }}
+              />
+            </div>
+            <p className="mt-1 text-sm text-center">
+              {zipProgress}% Preparing files…
+            </p>
+          </div>
+        )}
+
+        {/* Uploading progress bar */}
         {uploading && (
           <div className="mt-4 w-full">
             <div className="w-full bg-gray-200 h-2 rounded">
