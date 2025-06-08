@@ -112,7 +112,7 @@ export default function FooterContent({
                     <Link
                       href={`/${category.path}`}
                       aria-label={`Navigate to ${category.title} page`}
-                      className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                      className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded "
                     >
                       {category.title}
                     </Link>
@@ -146,7 +146,7 @@ export default function FooterContent({
                         >
                           <Link
                             href={`/${sub.path}`}
-                            className="block py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                            className="block py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded  dark:text-white"
                             aria-label={`Navigate to ${sub.title} page`}
                           >
                             {sub.title}
@@ -211,7 +211,7 @@ export default function FooterContent({
                         <Link
                           href={`/${sub.path}`}
                           aria-label={`Navigate to ${sub.title} page`}
-                          className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+                          className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded "
                         >
                           {sub.title}
                         </Link>
