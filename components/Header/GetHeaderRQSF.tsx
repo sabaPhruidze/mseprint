@@ -9,9 +9,8 @@ interface GetRequestQuoteSendAFileProps {
 const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
   return (
     <nav
-      className="
-        w-full h-[60px] bg-purple flex items-center screen-size-13:justify-end justify-center screen-size-5:px-4 screen-size-4:px-2 px-0
-      "
+      className=" w-full h-[60px]  bg-[#3B0D6B]  flex items-center screen-size-13:justify-end justify-center screen-size-5:px-4 screen-size-4:px-2 px-0
++  "
       role="navigation"
       aria-label="Request a Quote and Order Navigation"
     >

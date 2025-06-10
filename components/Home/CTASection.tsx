@@ -35,12 +35,7 @@ export default function CTASection({ rqsafData = [] }: CTASectionProps) {
             <li key={id}>
               <Link
                 href={path || "/"}
-                className="
-                  mx-2 rounded-full border-2 border-red bg-red px-2 py-3
-                  font-inter-extrabold text-white transition-all duration-300
-                  hover:scale-105 hover:bg-red-700 hover:border-red-700
-                  focus:scale-95 screen-size-4:px-6
-                  dark:border-darkRed dark:bg-darkRed
+                className="mx-2 rounded-full border-2 border-[#B91C1C] bg-[#B91C1C] px-2 py-3 font-inter-extrabold text-white transition-all duration-300 hover:scale-105 hover:bg-[#8B1313] hover:border-[#8B1313] focus:scale-95 screen-size-4:px-6 dark:border-darkRed dark:bg-darkRed
                 "
                 aria-label={`Navigate to ${page}`}
               >
