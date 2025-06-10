@@ -41,8 +41,16 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
           placeholder="Search..."
           className="w-full h-full outline-none text-black p-3 text-xl"
         />
-        <button onClick={handleSearch} className="p-3">
-          <Search className="h-5 w-5 text-gray-500" />
+        <button
+          onClick={handleSearch}
+          className="p-3"
+          aria-label="Search" // <-- accessible name
+        >
+          <Search
+            className="h-5 w-5 text-gray-500"
+            aria-hidden="true" // hide the icon itself from SRs
+            focusable="false"
+          />
         </button>
       </div>
       {results.length > 0 && (
