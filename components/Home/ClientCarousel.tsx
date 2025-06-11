@@ -57,15 +57,16 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}
-              priority={carouselData[currentIndex].id === 1 ? true : false}
-              loading="eager"
-              sizes="100vw"
+              priority={currentIndex === 0}
+              height={400}
+              width={1920}
+              loading={currentIndex === 0 ? "eager" : "lazy"}
+              decoding={currentIndex === 0 ? "sync" : "async"}
+              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 80vw, 1200px"
               fill={true}
               className="w-full h-[400px]"
               objectFit="cover"
-              fetchPriority={
-                carouselData[currentIndex].id === 1 ? "hight" : "low"
-              }
+              fetchPriority={currentIndex === 0 ? "high" : "low"}
             />
           </motion.div>
         </AnimatePresence>
@@ -79,7 +80,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
             return null;
           return (
             <link
-              key={`preload-${index}`}
+              key={index}
               as="image"
               href={
                 item.src

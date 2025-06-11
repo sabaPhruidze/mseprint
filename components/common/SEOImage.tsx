@@ -14,6 +14,7 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
   objectFit,
   className = "",
   fetchPriority,
+  decoding,
 }) => {
   const structuredData = {
     "@context": "http://schema.org",
@@ -55,7 +56,7 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
           priority={priority}
           loading={priority ? undefined : "lazy"}
           sizes={sizes}
-          decoding="sync"
+          decoding={decoding ? "sync" : "async"}
           fill={fill}
           style={fill && objectFit ? { objectFit } : undefined}
           width={fill ? undefined : width}
