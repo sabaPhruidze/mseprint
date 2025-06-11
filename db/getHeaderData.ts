@@ -1,16 +1,15 @@
 import { getDataPattern } from "../lib/supabaseClient";
-import { headerEffectiveTextTypes} from "../types/Header/headerTypes"
-import { PagePathTypes } from "../types/commonTypes";
-import { SEOImageProps } from "../types/commonTypes";
+import { headerEffectiveTextTypes } from "../types/Header/headerTypes";
+import { PagePathTypes, SEOImageProps } from "../types/commonTypes";
+import { cache } from "react";
 
-
-export const getHeaderData = async () => {
+export const getHeaderData = cache(async () => {
   try {
-    const [headerMenuData, headerEffectiveTextData, headerRegisterData, requestQuoteSendAFileData,headerLogoData] = await Promise.all([
+    const [headerMenuData, headerEffectiveTextData, headerRegisterData, requestQuoteSendAFileData, headerLogoData] = await Promise.all([
       getDataPattern<PagePathTypes>("header_menu"),
       getDataPattern<headerEffectiveTextTypes>("header_effective_text"),
       getDataPattern<PagePathTypes>("header_register"),
-      getDataPattern<PagePathTypes>("header_request_quote_send_a_file") ,
+      getDataPattern<PagePathTypes>("header_request_quote_send_a_file"),
       getDataPattern<SEOImageProps>("header_logo")
     ]);
 
@@ -19,10 +18,9 @@ export const getHeaderData = async () => {
       headerEffectiveTextData: headerEffectiveTextData ?? [],
       headerRegisterData: headerRegisterData ?? [],
       requestQuoteSendAFileData: requestQuoteSendAFileData ?? [],
-      headerLogoData:headerLogoData?? []
+      headerLogoData: headerLogoData ?? []
     };
   } catch (error) {
-    
     return {
       headerMenuData: [],
       headerEffectiveTextData: [],
@@ -31,4 +29,4 @@ export const getHeaderData = async () => {
       headerLogoData: [],
     };
   }
-};
+});

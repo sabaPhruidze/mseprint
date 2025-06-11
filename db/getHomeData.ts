@@ -1,8 +1,9 @@
 import { getDataPattern } from "../lib/supabaseClient";
 import { SEOImageProps } from "../types/commonTypes";
 import { TitleContentTypes } from "../types/commonTypes";
+import { cache } from "react";
 
-export const getHomeData = async (pathname: string = "/") => {
+export const getHomeData = cache(async (pathname: string = "/") => {
   if (pathname !== "/") {
     return { heroSection: null, carouselData: [], cardsData: [], homeSpecialities: [] };
   }
@@ -16,7 +17,7 @@ export const getHomeData = async (pathname: string = "/") => {
     ]);
 
     return {
-      heroSection: heroSection?.[0] || null,  
+      heroSection: heroSection?.[0] || null,
       carouselData: carouselData ?? [],
       cardsData: cardsData ?? [],
       homeSpecialities: homeSpecialities ?? [],
@@ -30,4 +31,4 @@ export const getHomeData = async (pathname: string = "/") => {
       homeSpecialities: [],
     };
   }
-};
+});

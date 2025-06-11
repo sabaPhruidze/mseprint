@@ -6,6 +6,9 @@ import Cards from "components/Home/Cards";
 import HeroSection from "components/Home/HeroSection";
 import CTASection from "components/Home/CTASection";
 
+export const revalidate = 3600;
+export const runtime = "edge";
+
 export const metadata: Metadata = {
   title: "MSE Printing | Commercial Printing & Direct Mail Services",
   description:
