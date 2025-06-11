@@ -31,6 +31,8 @@ const Card: React.FC<CardProps> = ({ card, priority }) => {
             name={card.alt}
             geoData={card.geoData}
             priority={priority}
+            width={1920} // natural dimensions
+            height={1920}
             loading={priority ? undefined : "lazy"}
             sizes={card.sizes}
             fill
