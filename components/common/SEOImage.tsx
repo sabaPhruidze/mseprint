@@ -13,6 +13,7 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
   fill,
   objectFit,
   className = "",
+  fetchPriority,
 }) => {
   const structuredData = {
     "@context": "http://schema.org",
@@ -58,6 +59,7 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
           style={fill && objectFit ? { objectFit } : undefined}
           width={fill ? undefined : width}
           height={fill ? undefined : height}
+          fetchPriority={fetchPriority ? "high" : "low"}
         />
       </div>
     </>

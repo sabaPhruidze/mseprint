@@ -39,11 +39,11 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
       <div className="relative w-full h-[400px]">
         <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
 
-        <AnimatePresence mode="wait">
+        <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={carouselData[currentIndex].id}
             className="absolute w-full h-full"
-            initial={{ opacity: 0 }}
+            initial={currentIndex === 0 ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
@@ -63,6 +63,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               fill={true}
               className="w-full h-[400px]"
               objectFit="cover"
+              fetchPriority="high"
             />
           </motion.div>
         </AnimatePresence>
