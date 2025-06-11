@@ -57,15 +57,37 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}
-              priority={currentIndex === 0}
-              loading={currentIndex === 0 ? undefined : "lazy"}
-              sizes={carouselData[currentIndex].sizes}
+              priority={true}
+              loading="eager"
+              sizes="100vw"
               fill={true}
               className="w-full h-[400px]"
               objectFit="cover"
+              quality={90}
             />
           </motion.div>
         </AnimatePresence>
+
+        {/* Preload next images */}
+        {carouselData.map((item, index) => {
+          if (
+            index === currentIndex ||
+            index === (currentIndex + 1) % carouselData.length
+          )
+            return null;
+          return (
+            <link
+              key={`preload-${index}`}
+              rel="preload"
+              as="image"
+              href={
+                item.src
+                  ? `/images/${item.src}`
+                  : "/images/home-images/additional/offset_printing_right.webp"
+              }
+            />
+          );
+        })}
 
         <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center screen-size-13:items-start items-center screen-size-13:text-left text-center text-white">
           <div className="screen-size-23:w-[1200px] screen-size-10:w-[800px] w-[280px] screen-size-13:ml-20 ml-0">
