@@ -55,6 +55,7 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
           priority={priority}
           loading={priority ? undefined : "lazy"}
           sizes={sizes}
+          decoding="sync"
           fill={fill}
           style={fill && objectFit ? { objectFit } : undefined}
           width={fill ? undefined : width}

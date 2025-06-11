@@ -57,13 +57,15 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}
-              priority={true}
+              priority={carouselData[currentIndex].id === 1 ? true : false}
               loading="eager"
               sizes="100vw"
               fill={true}
               className="w-full h-[400px]"
               objectFit="cover"
-              fetchPriority="high"
+              fetchPriority={
+                carouselData[currentIndex].id === 1 ? "hight" : "low"
+              }
             />
           </motion.div>
         </AnimatePresence>
