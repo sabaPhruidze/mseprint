@@ -63,7 +63,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               fill={true}
               className="w-full h-[400px]"
               objectFit="cover"
-              quality={90}
             />
           </motion.div>
         </AnimatePresence>
