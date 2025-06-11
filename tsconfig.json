@@ -1,30 +1,34 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    /* language & libs ----------------------------------------------------- */
+    "target": "ES2018",
     "lib": ["dom", "dom.iterable", "esnext"],
+
+    /* JS / TS behaviour --------------------------------------------------- */
     "allowJs": true,
-
-    /* ↓ turn this on so TypeScript stops crawling the broken lib typings */
-    "skipLibCheck": true,               // CHANGED
-
     "strict": true,
     "noEmit": true,
+    "skipLibCheck": true,      // stop crawling broken .d.ts files
     "esModuleInterop": true,
+
+    /* module resolution --------------------------------------------------- */
     "module": "esnext",
+    "moduleResolution": "node",
 
-    /* ↓ switch from “bundler” to plain Node resolution */
-    "moduleResolution": "node",        // CHANGED
-
+    /* misc ---------------------------------------------------------------- */
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "plugins": [{ "name": "next" }],
     "paths": {
       "@types/*": ["types/*"]
-    }
+    },
+
+    /* Next.js TS plugin --------------------------------------------------- */
+    "plugins": [{ "name": "next" }]
   },
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",
@@ -34,7 +38,8 @@
     "src",
     "pages",
     "components",
-    ".next/types/app/(category)/direct-mail-mailing-services/page.tsx"
-, "app/(footer)/blog/affordable-printing-solutions"  ],
+    ".next/types/app/(category)/direct-mail-mailing-services/page.tsx",
+    "app/(footer)/blog/affordable-printing-solutions"
+  ],
   "exclude": ["node_modules"]
 }

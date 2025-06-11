@@ -81,7 +81,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
           return (
             <link
               key={index}
-              as="image"
               href={
                 item.src
                   ? `/images/${item.src}`
