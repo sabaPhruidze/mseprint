@@ -13,9 +13,7 @@ export const metadata: Metadata = {
   title: "MSE Printing | Commercial Printing & Direct Mail Services",
   description:
     "Professional commercial printing services including offset printing, digital printing, direct mail, signs, and custom online ordering portals. Quality printing solutions for businesses.",
-  alternates: {
-    canonical: "https://www.mseprinting.com/",
-  },
+  alternates: { canonical: "https://www.mseprinting.com/" },
   metadataBase: new URL("https://www.mseprinting.com"),
   openGraph: {
     title: "MSE Printing | Commercial Printing & Direct Mail Services",
