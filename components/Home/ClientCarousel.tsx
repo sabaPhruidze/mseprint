@@ -81,7 +81,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
           return (
             <link
               key={index}
-              rel="preload"
+              rel="prefetch"
               as="image"
               href={
                 item.src

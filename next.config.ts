@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     formats: ['image/webp'],
     minimumCacheTTL: 86400, // 24hr cache
   },
+  
 };
 
 export default nextConfig;

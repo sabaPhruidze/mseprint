@@ -1,9 +1,13 @@
+export const dynamic = "force-static";
+export const revalidate = 3600;
+
 import "../styles/globals.css";
 import localFont from "next/font/local";
 import Header from "../components/Header/Header";
 import { getHeaderData } from "../db/getHeaderData";
 import { getFooterData } from "../db/GetFooterData";
 import Footer from "../components/Footer/Footer";
+import { cache } from "react";
 
 const interBold = localFont({
   src: "../public/fonts/Inter_18pt-Bold.woff2",
@@ -205,13 +209,19 @@ const LocalBusinessSchema = () => {
   );
 };
 
+const getHeaderDataCached = cache(getHeaderData);
+const getFooterDataCached = cache(getFooterData);
+
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const headerData = await getHeaderData();
-  const footerData = await getFooterData();
+  const [headerData, footerData] = await Promise.all([
+    getHeaderDataCached(),
+    getFooterDataCached(),
+  ]);
+
   return (
     <html lang="en">
       <body
