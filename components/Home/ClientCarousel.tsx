@@ -76,7 +76,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               geoData={carouselData[currentIndex].geoData}
               priority={currentIndex === 0}
               height={400}
-              width={1920}
+              width={isMobile ? 640 : 1920}
               loading={currentIndex === 0 ? "eager" : "lazy"}
               decoding={currentIndex === 0 ? "sync" : "async"}
               sizes="(max-width: 640px) 100vw, (max-width: 1200px) 80vw, 1200px"
