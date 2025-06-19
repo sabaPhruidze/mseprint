@@ -3,27 +3,36 @@ export const revalidate = 3600;
 
 import "../styles/globals.css";
 import localFont from "next/font/local";
-import Header from "../components/Header/Header";
-import { getHeaderData } from "../db/getHeaderData";
-import { getFooterData } from "../db/GetFooterData";
-import Footer from "../components/Footer/Footer";
 import { cache } from "react";
 
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import { getHeaderData } from "../db/getHeaderData";
+import { getFooterData } from "../db/GetFooterData";
+
+// ──────────────────  Fonts (local) ────────────────────────────
 const interBold = localFont({
   src: "../public/fonts/Inter_18pt-Bold.woff2",
   variable: "--font-inter-bold",
+  display: "swap",
+  preload: true, // only one weight preloaded
 });
 
 const interExtraBold = localFont({
   src: "../public/fonts/Inter_18pt-ExtraBold.woff2",
   variable: "--font-inter-extrabold",
+  display: "swap",
+  preload: false,
 });
 
 const interMedium = localFont({
   src: "../public/fonts/Inter_18pt-Medium.woff2",
   variable: "--font-inter-medium",
+  display: "swap",
+  preload: false,
 });
 
+// ──────────────────  Structured-data helper  ──────────────────
 const LocalBusinessSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -194,6 +203,7 @@ const LocalBusinessSchema = () => {
   return (
     <script
       type="application/ld+json"
+      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
   );
@@ -202,6 +212,7 @@ const LocalBusinessSchema = () => {
 const getHeaderDataCached = cache(getHeaderData);
 const getFooterDataCached = cache(getFooterData);
 
+// ──────────────────  Root layout component  ───────────────────
 export default async function RootLayout({
   children,
 }: {
@@ -214,13 +225,14 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>{/* keep head minimal – no external font/CDN hints needed */}</head>
+
       <body
-        className={` ${interBold.variable}
-          ${interExtraBold.variable}
-          ${interMedium.variable} 
+        className={`${interBold.variable} ${interExtraBold.variable} ${interMedium.variable}
           min-h-screen flex flex-col font-inter-medium`}
       >
         <LocalBusinessSchema />
+
         <Header {...headerData} servicesData={footerData.footerContentData} />
         <main className="flex-grow">{children}</main>
         <Footer {...footerData} />
