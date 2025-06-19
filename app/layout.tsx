@@ -1,6 +1,3 @@
-export const dynamic = "force-static";
-export const revalidate = 3600;
-
 import "../styles/globals.css";
 import localFont from "next/font/local";
 

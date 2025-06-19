@@ -7,16 +7,11 @@ interface Props {
   registerData: PagePathTypes[];
 }
 
-/**
- * Header segment that shows:
- * •  “First Last” + **Log out** button when the user is signed-in
- * •  “Sign in / or / Sign up” links for guests
- */
 export default async function GetHeaderRegister({ registerData }: Props) {
   const cookieStore = await cookies();
   const displayName = cookieStore.get("displayName")?.value;
+  console.log(displayName);
 
-  /* ─────────────────────────────── logged-in view ───────────────────────────── */
   if (displayName) {
     return (
       <nav

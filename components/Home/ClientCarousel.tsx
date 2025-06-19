@@ -11,13 +11,6 @@ interface ClientCarouselProps {
   carouselData: SEOImageProps[];
 }
 
-/**
- * Build an image path that appends `"_64"` before the file extension when the
- * viewport width is < 640 px (mobile screens). This allows us to serve a
- * lower‑resolution asset for small devices, addressing the “Properly size
- * images” recommendation in Google Search Console while keeping the original
- * high‑resolution asset for larger screens.
- */
 const buildImagePath = (src: string | undefined, isMobile: boolean): string => {
   const fallback = "/images/home-images/additional/offset_printing_right.webp";
   const path = src ? `/images/${src}` : fallback;
@@ -32,15 +25,18 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Detect viewport < 640 px once on mount and on resize (client‑only)
+  // Detect viewport < 640 px once on mount and on resize (client-only)
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
-    const update = (e: MediaQueryList | MediaQueryListEvent) =>
-      setIsMobile(e.matches);
 
-    update(mq); // initialise
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update as any);
+    // Properly typed listener
+    const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+
+    // Initialise state
+    setIsMobile(mq.matches);
+
+    mq.addEventListener("change", handleChange);
+    return () => mq.removeEventListener("change", handleChange);
   }, []);
 
   if (!carouselData || carouselData.length === 0) return null;
