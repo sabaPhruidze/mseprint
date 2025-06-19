@@ -19,16 +19,6 @@ const interExtraBold = localFont({
   variable: "--font-inter-extrabold",
 });
 
-const interExtraLight = localFont({
-  src: "../public/fonts/Inter_18pt-ExtraLight.woff2",
-  variable: "--font-inter-extralight",
-});
-
-const interLight = localFont({
-  src: "../public/fonts/Inter_18pt-Light.woff2",
-  variable: "--font-inter-light",
-});
-
 const interMedium = localFont({
   src: "../public/fonts/Inter_18pt-Medium.woff2",
   variable: "--font-inter-medium",
@@ -227,8 +217,6 @@ export default async function RootLayout({
       <body
         className={` ${interBold.variable}
           ${interExtraBold.variable}
-          ${interExtraLight.variable}
-          ${interLight.variable}
           ${interMedium.variable} 
           min-h-screen flex flex-col font-inter-medium`}
       >

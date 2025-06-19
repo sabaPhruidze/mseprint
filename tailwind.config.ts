@@ -24,8 +24,6 @@ export default {
       fontFamily: {
         'inter-bold': ['var(--font-inter-bold)'],
         'inter-extrabold': ['var(--font-inter-extrabold)'],
-        'inter-light': ['var(--font-inter-light)'],
-        'inter-extralight': ['var(--font-inter-extralight)'],
         'inter-medium': ['var(--font-inter-medium)'],
       },
       screens: {
