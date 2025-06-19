@@ -10,7 +10,6 @@ interface Props {
 export default async function GetHeaderRegister({ registerData }: Props) {
   const cookieStore = await cookies();
   const displayName = cookieStore.get("displayName")?.value;
-  console.log(displayName);
 
   if (displayName) {
     return (
