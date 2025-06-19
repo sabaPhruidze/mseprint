@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SEOImage from "../common/SEOImage";
@@ -11,8 +11,37 @@ interface ClientCarouselProps {
   carouselData: SEOImageProps[];
 }
 
+/**
+ * Build an image path that appends `"_64"` before the file extension when the
+ * viewport width is < 640 px (mobile screens). This allows us to serve a
+ * lower‑resolution asset for small devices, addressing the “Properly size
+ * images” recommendation in Google Search Console while keeping the original
+ * high‑resolution asset for larger screens.
+ */
+const buildImagePath = (src: string | undefined, isMobile: boolean): string => {
+  const fallback = "/images/home-images/additional/offset_printing_right.webp";
+  const path = src ? `/images/${src}` : fallback;
+
+  if (!isMobile) return path;
+
+  // Insert _64 before the extension (e.g. image.webp -> image_64.webp)
+  return path.replace(/(\.[a-zA-Z0-9]+)$/i, "_64$1");
+};
+
 const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect viewport < 640 px once on mount and on resize (client‑only)
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 639px)");
+    const update = (e: MediaQueryList | MediaQueryListEvent) =>
+      setIsMobile(e.matches);
+
+    update(mq); // initialise
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update as any);
+  }, []);
 
   if (!carouselData || carouselData.length === 0) return null;
 
@@ -49,11 +78,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
             transition={{ duration: 0.5 }}
           >
             <SEOImage
-              src={
-                carouselData[currentIndex].src
-                  ? `/images/${carouselData[currentIndex].src}`
-                  : "/images/home-images/additional/offset_printing_right.webp"
-              }
+              src={buildImagePath(carouselData[currentIndex].src, isMobile)}
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}
@@ -71,6 +96,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
           </motion.div>
         </AnimatePresence>
 
+        {/* Prefetch the next (and one more) image, using the same mobile logic */}
         {carouselData.map((item, index) => {
           if (
             index === currentIndex ||
@@ -82,11 +108,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               key={index}
               rel="prefetch"
               as="image"
-              href={
-                item.src
-                  ? `/images/${item.src}`
-                  : "/images/home-images/additional/offset_printing_right.webp"
-              }
+              href={buildImagePath(item.src, isMobile)}
             />
           );
         })}

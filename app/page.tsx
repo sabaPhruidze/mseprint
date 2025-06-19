@@ -1,17 +1,14 @@
-// app/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 import Carousel from "components/Home/Carousel";
-import Cards from "components/Home/Cards"; // ← eager
+import Cards from "components/Home/Cards";
 import { getHomeData } from "db/getHomeData";
 import { getHeaderData } from "db/getHeaderData";
 
-// lazily load heavy, non-critical components (Cards stays eager)
-const HeroSection = dynamic(
-  () => import("components/Home/HeroSection"),
-  { ssr: true } // keeps full SEO
-);
+const HeroSection = dynamic(() => import("components/Home/HeroSection"), {
+  ssr: true,
+});
 const CTASection = dynamic(() => import("components/Home/CTASection"), {
   ssr: true,
 });
@@ -35,8 +32,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/main-page-images/offset-printing.webp",
-        width: 1200,
-        height: 630,
+        width: 1920,
+        height: 400,
         alt: "MSE Printing Services",
       },
     ],
