@@ -3,19 +3,19 @@ export const revalidate = 3600;
 
 import "../styles/globals.css";
 import localFont from "next/font/local";
-import { cache } from "react";
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { getHeaderData } from "../db/getHeaderData";
 import { getFooterData } from "../db/GetFooterData";
 
-// ──────────────────  Fonts (local) ────────────────────────────
+import { unstable_cache } from "next/cache";
+
 const interBold = localFont({
   src: "../public/fonts/Inter_18pt-Bold.woff2",
   variable: "--font-inter-bold",
   display: "swap",
-  preload: true, // only one weight preloaded
+  preload: true,
 });
 
 const interExtraBold = localFont({
@@ -32,7 +32,6 @@ const interMedium = localFont({
   preload: false,
 });
 
-// ──────────────────  Structured-data helper  ──────────────────
 const LocalBusinessSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -203,16 +202,18 @@ const LocalBusinessSchema = () => {
   return (
     <script
       type="application/ld+json"
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
   );
 };
 
-const getHeaderDataCached = cache(getHeaderData);
-const getFooterDataCached = cache(getFooterData);
+const getHeaderDataCached = unstable_cache(getHeaderData, ["header_v1"], {
+  revalidate: 3600,
+});
+const getFooterDataCached = unstable_cache(getFooterData, ["footer_v1"], {
+  revalidate: 3600,
+});
 
-// ──────────────────  Root layout component  ───────────────────
 export default async function RootLayout({
   children,
 }: {
@@ -225,8 +226,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>{/* keep head minimal – no external font/CDN hints needed */}</head>
-
       <body
         className={`${interBold.variable} ${interExtraBold.variable} ${interMedium.variable}
           min-h-screen flex flex-col font-inter-medium`}

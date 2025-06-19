@@ -71,7 +71,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Preload next images */}
         {carouselData.map((item, index) => {
           if (
             index === currentIndex ||
