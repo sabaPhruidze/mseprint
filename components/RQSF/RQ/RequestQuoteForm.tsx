@@ -1,14 +1,6 @@
-/* ------------------------------------------------------------------
-   RequestQuoteForm.tsx
-   ------------------------------------------------------------------
-   • Two-step “Request a Quote” wizard
-   • Receives `userDefaults` (optional) from the page component
-   • Uses react-hook-form for state / validation
-------------------------------------------------------------------- */
-
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
 import { CurrentUser } from "lib/getCurrentUser";
@@ -20,58 +12,55 @@ import SelectRepresentative from "../SelectRepresentative";
 import RQSFSecondStepLeft from "../RQSFSecondStepLeft";
 import RQSFSecondStepRight from "../RQSFSecondStepRight";
 
-/* ---------- props ---------- */
 interface Props {
-  /** Values pulled from the signed-in user’s row in the `users` table.
-      Undefined when the visitor is a guest. */
   userDefaults?: CurrentUser;
 }
 
-/* ------------------------------------------------------------------ */
 export default function RequestQuoteForm({ userDefaults }: Props) {
-  /* ---------- react-hook-form ---------- */
   const methods = useForm<FormData>({
     mode: "onBlur",
     defaultValues: {
-      // ----- Step 1 required -----
       firstname: userDefaults?.firstname ?? "",
       lastname: userDefaults?.lastname ?? "",
       email: userDefaults?.email ?? "",
       emailVerification: userDefaults?.email ?? "",
       phone: userDefaults?.phone ?? "",
 
-      // ----- Step 1 optional -----
       jobTitle: userDefaults?.jobTitle ?? "",
       company: userDefaults?.company ?? "",
       extension: userDefaults?.extension ?? "",
 
-      // ----- Step 2 & other blank fields (add more if you have them) -----
-      /* description: "",  quantity: "",  etc. */
+      fileLink: null,
     },
   });
 
-  /* ---------- local UI state ---------- */
+  const { setValue, trigger } = methods;
+
   const [fileDownloadUrl, setFileDownloadUrl] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  /* ---------- submit handler ---------- */
+  useEffect(() => {
+    setValue("fileLink", fileDownloadUrl);
+    trigger("fileLink");
+  }, [fileDownloadUrl, setValue, trigger]);
+
   const onSubmitRQ = async (data: FormData) => {
+    if (!data.fileLink) {
+      setErrorMessage("Please upload your project files before submitting.");
+      return;
+    }
+
     setSubmitting(true);
     setSuccessMessage(null);
     setErrorMessage(null);
-
-    const payload = {
-      ...data,
-      fileLink: fileDownloadUrl ?? null, // always include the key
-    };
 
     try {
       const res = await fetch("/api/requestQuote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(data), // fileLink already included
       });
       const result = await res.json();
 
@@ -100,10 +89,18 @@ export default function RequestQuoteForm({ userDefaults }: Props) {
                    flex flex-col gap-8 justify-center
                    screen-size-12:items-stretch items-center"
       >
-        {/* ───────────────────── STEP 1 ───────────────────── */}
+        {/* hidden field that makes the upload mandatory */}
+        <input
+          type="hidden"
+          {...methods.register("fileLink", {
+            required: "Please upload your project files.",
+          })}
+        />
+
+        {/* ───────────────────── STEP 1 ───────────────────── */}
         <div>
           <h1 className="text-[36px] font-inter-extrabold mb-2">
-            STEP 1 OF 2{" "}
+            STEP 1 OF 2{" "}
             <span className="font-inter-medium">PERSONAL INFORMATION</span>
           </h1>
           <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s text-black">
@@ -112,10 +109,10 @@ export default function RequestQuoteForm({ userDefaults }: Props) {
           </div>
         </div>
 
-        {/* ───────────────────── STEP 2 ───────────────────── */}
+        {/* ───────────────────── STEP 2 ───────────────────── */}
         <div>
           <h2 className="text-[36px] font-inter-extrabold mb-2 mt-8">
-            STEP 2 OF 2 <span className="font-inter-medium">ABOUT PROJECT</span>
+            STEP 2 OF 2 <span className="font-inter-medium">ABOUT PROJECT</span>
           </h2>
           <div className="grid grid-cols-1 screen-size-12:grid-cols-2 gap-4 mt-4s ">
             <RQSFSecondStepLeft />
@@ -130,7 +127,7 @@ export default function RequestQuoteForm({ userDefaults }: Props) {
         <div className="w-full h-[60px] flex justify-center items-center">
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !fileDownloadUrl}
             className="mt-6 bg-red text-white w-[300px] h-[50px] text-[22px]
                        font-inter-extrabold rounded hover:bg-red-700
                        disabled:opacity-50"
@@ -138,6 +135,11 @@ export default function RequestQuoteForm({ userDefaults }: Props) {
             {submitting ? "Submitting…" : "Submit"}
           </button>
         </div>
+        {!fileDownloadUrl && (
+          <p className="text-red-600 text-sm mt-2 text-center">
+            Please upload your project files before submitting.
+          </p>
+        )}
 
         {/* ---------- banners ---------- */}
         {successMessage && (

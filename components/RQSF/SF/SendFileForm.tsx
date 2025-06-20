@@ -1,9 +1,6 @@
-/* ------------------------------------------------------------------
-   SendFileForm.tsx  –  two-step “Send a File” wizard
-------------------------------------------------------------------- */
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
 import { CurrentUser } from "lib/getCurrentUser";
@@ -17,7 +14,7 @@ import RQSFSecondStepRight from "../RQSFSecondStepRight";
 
 /* ---------- props ---------- */
 interface Props {
-  /** Populated only when the visitor is logged-in */
+  /** Populated only when the visitor is logged‑in */
   userDefaults?: CurrentUser;
 }
 
@@ -27,7 +24,7 @@ export default function SendFileForm({ userDefaults }: Props) {
   const methods = useForm<FormData>({
     mode: "onBlur",
     defaultValues: {
-      /* personal (Step 2) */
+      /* personal (Step 2) */
       firstname: userDefaults?.firstname ?? "",
       lastname: userDefaults?.lastname ?? "",
       email: userDefaults?.email ?? "",
@@ -37,9 +34,14 @@ export default function SendFileForm({ userDefaults }: Props) {
       company: userDefaults?.company ?? "",
       extension: userDefaults?.extension ?? "",
 
+      /* NEW → required link injected after upload */
+      fileLink: null,
+
       /* add any other form keys here with "" as a fallback */
     },
   });
+
+  const { setValue, trigger } = methods;
 
   /* ---------- local UI state ---------- */
   const [fileDownloadUrl, setFileDownloadUrl] = useState<string | null>(null);
@@ -47,19 +49,29 @@ export default function SendFileForm({ userDefaults }: Props) {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  /* ---------- sync upload url into RHF ---------- */
+  useEffect(() => {
+    setValue("fileLink", fileDownloadUrl);
+    trigger("fileLink");
+  }, [fileDownloadUrl, setValue, trigger]);
+
   /* ---------- submit handler ---------- */
   const onSubmitRQ = async (data: FormData) => {
+    // Guard in case someone bypasses UI validation
+    if (!data.fileLink) {
+      setErrorMessage("Please upload your project files before submitting.");
+      return;
+    }
+
     setSubmitting(true);
     setSuccessMessage(null);
     setErrorMessage(null);
-
-    const payload = { ...data, fileLink: fileDownloadUrl ?? null };
 
     try {
       const res = await fetch("/api/sendFile", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(data), // fileLink already in `data`
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || result.message);
@@ -87,7 +99,15 @@ export default function SendFileForm({ userDefaults }: Props) {
                    flex flex-col gap-8 justify-center
                    screen-size-12:items-stretch items-center dark:bg-black"
       >
-        {/* ─────────────── STEP 1 – PROJECT DETAILS ─────────────── */}
+        {/* Hidden field → forces file upload to be required */}
+        <input
+          type="hidden"
+          {...methods.register("fileLink", {
+            required: "Please upload your project files.",
+          })}
+        />
+
+        {/* ─────────────── STEP 1 – PROJECT DETAILS ─────────────── */}
         <div>
           <h2 className="text-[36px] font-inter-extrabold mb-2">
             STEP 1 OF 2 <span className="font-inter-medium">ABOUT PROJECT</span>
@@ -98,7 +118,7 @@ export default function SendFileForm({ userDefaults }: Props) {
           </div>
         </div>
 
-        {/* ─────────────── STEP 2 – PERSONAL INFO ─────────────── */}
+        {/* ─────────────── STEP 2 – PERSONAL INFO ─────────────── */}
         <div>
           <h1 className="text-[36px] font-inter-extrabold mb-2 mt-8">
             STEP 2 OF 2{" "}
@@ -117,7 +137,7 @@ export default function SendFileForm({ userDefaults }: Props) {
         <div className="w-full h-[60px] flex justify-center items-center">
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || !fileDownloadUrl}
             className="mt-6 bg-red text-white w-[300px] h-[50px] text-[22px]
                        font-inter-extrabold rounded hover:bg-red-700
                        disabled:opacity-50"
@@ -125,6 +145,11 @@ export default function SendFileForm({ userDefaults }: Props) {
             {submitting ? "Submitting…" : "Submit"}
           </button>
         </div>
+        {!fileDownloadUrl && (
+          <p className="text-red-600 text-sm mt-2 text-center">
+            Please upload your project files before submitting.
+          </p>
+        )}
 
         {/* ---------- banners ---------- */}
         {successMessage && (

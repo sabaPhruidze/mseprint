@@ -108,6 +108,7 @@ export type FormData = {
   dueDate: string;
   terms: boolean;
   representative: string;
+  fileLink: string | null;
 };
 
 export interface ReceivingPriceType {

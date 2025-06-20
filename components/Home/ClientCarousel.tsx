@@ -88,7 +88,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Prefetch the next (and one more) image, using the same mobile logic */}
         {carouselData.map((item, index) => {
           if (
             index === currentIndex ||

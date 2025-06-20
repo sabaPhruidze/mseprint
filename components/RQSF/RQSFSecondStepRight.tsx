@@ -25,24 +25,40 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
   const [uploadFinished, setUploadFinished] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const valid = acceptedFiles.filter((file) => {
-      if (file.size > MAX_FILE_SIZE) {
-        alert(`File ${file.name} exceeds the 1 GB limit and was skipped.`);
-        return false;
-      }
-      return true;
-    });
-    setFiles((prev) => [...prev, ...valid]);
-  }, []);
+  /* ------------------------------------------------------------- */
+  /**
+   * Prevent additional uploads when we are preparing, uploading or
+   * already finished. Before clicking **Upload** the user can keep
+   * adding/removing files. As soon as the upload starts, the dropzone
+   * is locked and the "Add Files" button disappears.
+   */
+  const uploadLocked = preparing || uploading || uploadFinished;
+
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      if (uploadLocked) return; // safety – should already be disabled
+
+      const valid = acceptedFiles.filter((file) => {
+        if (file.size > MAX_FILE_SIZE) {
+          alert(`File ${file.name} exceeds the 1 GB limit and was skipped.`);
+          return false;
+        }
+        return true;
+      });
+      setFiles((prev) => [...prev, ...valid]);
+    },
+    [uploadLocked]
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     multiple: true,
     maxSize: MAX_FILE_SIZE,
+    disabled: uploadLocked, // ← hard lock once upload begins
   });
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (uploadLocked) return;
     if (!e.target.files) return;
     const chosen = Array.from(e.target.files);
     const valid = chosen.filter((file) => {
@@ -56,11 +72,13 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
   }
 
   function handleRemoveFile(index: number) {
+    if (uploadLocked) return;
     setFiles((prev) => prev.filter((_, i) => i !== index));
   }
 
+  /* --------------------------- Upload --------------------------- */
   async function handleUpload() {
-    if (files.length === 0) return;
+    if (files.length === 0 || uploadLocked) return;
 
     // reset UI
     setPreparing(true);
@@ -124,7 +142,7 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
     }
   }
 
-  const showFileControls = !preparing && !uploading && !uploadFinished;
+  const showFileControls = !uploadLocked; // simplified
 
   return (
     <div className="screen-size-12:w-full screen-size-5:w-[460px] w-[300px] mx-auto text-center screen-size-12:text-left">
@@ -134,13 +152,7 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
 
       <div
         {...getRootProps()}
-        className="
-          border-2 border-dashed border-gray-400 rounded
-          w-full min-h-[400px]
-          p-4 flex flex-col
-          items-center justify-center
-          cursor-pointer
-        "
+        className="border-2 border-dashed border-gray-400 rounded w-full min-h-[400px] p-4 flex flex-col items-center justify-center cursor-pointer"
       >
         <input {...getInputProps()} />
 
@@ -148,9 +160,7 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
           <p className="mb-2 text-base text-center">Drag files to upload, or</p>
           {showFileControls && (
             <label
-              className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
-              flex items-center justify-center hover:bg-black
-              transition-colors duration-700  border-1 dark:border-white border border-white"
+              className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px] flex items-center justify-center hover:bg-black transition-colors duration-700 border-1 dark:border-white border border-white"
               onClick={(e) => e.stopPropagation()}
             >
               <span className="text-white font-inter-extrabold text-[20px]">
@@ -170,12 +180,14 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
         </div>
 
         {files.length > 0 && (
-          <div className="mt-6 text-center">
+          <div className="mt-6 text-center max-w-full">
             <h4 className="text-md font-bold mb-1">Selected Files:</h4>
             <ul className="list-disc list-inside space-y-1 inline-block text-left">
               {files.map((file, index) => (
                 <li key={file.name} className="flex items-center gap-2">
-                  <span>{file.name}</span>
+                  <span className="max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
+                    {file.name}
+                  </span>
                   {showFileControls && (
                     <button
                       type="button"
@@ -200,16 +212,12 @@ export default function RQSFSecondStepRight({ setDownloadUrl }: Props) {
               e.stopPropagation();
               handleUpload();
             }}
-            className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px]
-            flex items-center justify-center hover:bg-black border border-white
-            transition-colors duration-700 text-white font-inter-extrabold
-            text-[20px] mt-4 dark:border-white"
+            className="bg-gray-700 p-2 rounded cursor-pointer w-[180px] h-[50px] flex items-center justify-center hover:bg-black border border-white transition-colors duration-700 text-white font-inter-extrabold text-[20px] mt-4 dark:border-white"
           >
             Upload
           </button>
         )}
 
-        {/* Preparing progress bar */}
         {preparing && (
           <div className="mt-4 w-full">
             <div className="w-full bg-gray-200 h-2 rounded">
