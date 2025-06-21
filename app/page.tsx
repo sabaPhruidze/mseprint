@@ -33,6 +33,15 @@ export const metadata: Metadata = {
   },
 };
 
+// Import the types you need
+import { SEOImageProps, PagePathTypes } from "../types/commonTypes";
+
+// Define proper types for the component props
+interface BelowFoldContentProps {
+  heroSection: SEOImageProps | null;
+  rqsafData: PagePathTypes[];
+}
+
 export default async function Home() {
   const [homeData, headerData] = await Promise.all([
     getHomeData("/"),
@@ -69,8 +78,11 @@ export default async function Home() {
   );
 }
 
-// Separate component for below-the-fold content
-async function BelowFoldContent({ heroSection, rqsafData }: any) {
+// Separate component for below-the-fold content with proper typing
+async function BelowFoldContent({
+  heroSection,
+  rqsafData,
+}: BelowFoldContentProps) {
   // This will be streamed after the above-the-fold content
   return (
     <>
