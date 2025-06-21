@@ -3,40 +3,75 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import SEOImage from "../common/SEOImage";
 import Link from "next/link";
 import { SEOImageProps } from "../../types/commonTypes";
+
+// Import the static Server Component for the LCP-optimized first slide
+import StaticCarouselFirstSlide from "./StaticCarouselFirstSlide";
+// Import the SEOImage component directly, as the logic is now in this file
+import SEOImage from "../common/SEOImage";
 
 interface ClientCarouselProps {
   carouselData: SEOImageProps[];
 }
 
+// Helper function to build image paths, now co-located with the component using it.
 const buildImagePath = (src: string | undefined, isMobile: boolean): string => {
   const fallback = "/images/home-images/additional/offset_printing_right.webp";
   const path = src ? `/images/${src}` : fallback;
 
   if (!isMobile) return path;
 
+  // Appends a suffix for mobile-specific images if needed
   return path.replace(/(\.[a-zA-Z0-9]+)$/i, "_64$1");
 };
 
+/**
+ * Client-side carousel component that improves performance and contains all client logic.
+ * - On the server and initial page load, it renders only the static, LCP-optimized first slide.
+ * - After the page becomes interactive, it seamlessly replaces the static slide
+ * with the full, interactive client-side carousel logic contained within this file.
+ */
 const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
+  // --- STATE MANAGEMENT ---
+  // State to track if the component has "mounted" on the client.
+  const [isClient, setIsClient] = useState(false);
+  // State for the interactive carousel functionality.
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
+  // --- EFFECTS ---
+  // This effect runs only on the client-side to switch from static to interactive.
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // This effect handles responsive logic for mobile images.
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
-
     const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
 
+    // Set initial state
     setIsMobile(mq.matches);
 
+    // Listen for changes
     mq.addEventListener("change", handleChange);
     return () => mq.removeEventListener("change", handleChange);
   }, []);
 
-  if (!carouselData || carouselData.length === 0) return null;
+  // --- GUARD CLAUSE ---
+  if (!carouselData || carouselData.length === 0) {
+    return null;
+  }
 
+  // --- RENDER LOGIC ---
+
+  // On the server OR for the very first client render, show the fast static component.
+  if (!isClient) {
+    return <StaticCarouselFirstSlide slideData={carouselData[0]} />;
+  }
+
+  // --- INTERACTIVE CAROUSEL LOGIC ---
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
   };
@@ -47,6 +82,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
     );
   };
 
+  // Once `isClient` is true, render the full interactive carousel.
   return (
     <section
       className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
@@ -58,13 +94,11 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
       </h2>
 
       <div className="relative w-full h-[400px]">
-        <div className="absolute top-0 left-0 w-full h-full bg-black/20"></div>
-
         <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={carouselData[currentIndex].id}
             className="absolute w-full h-full"
-            initial={currentIndex === 0 ? false : { opacity: 0 }}
+            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
@@ -74,42 +108,41 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               alt={carouselData[currentIndex].alt}
               name={carouselData[currentIndex].alt}
               geoData={carouselData[currentIndex].geoData}
-              priority={currentIndex === 0}
+              priority={false} // Priority is handled by the static slide
               height={400}
               width={isMobile ? 640 : 1920}
-              loading={currentIndex === 0 ? "eager" : "lazy"}
-              decoding={currentIndex === 0 ? "sync" : "async"}
+              loading="lazy"
+              decoding="async"
               sizes="(max-width: 640px) 100vw, (max-width: 1200px) 80vw, 1200px"
               fill={true}
               className="w-full h-[400px]"
               objectFit="cover"
-              fetchPriority={currentIndex === 0 ? "high" : "low"}
+              fetchPriority="low"
             />
           </motion.div>
         </AnimatePresence>
 
+        {/* Image prefetching logic */}
         {carouselData.map((item, index) => {
-          if (
-            index === currentIndex ||
-            index === (currentIndex + 1) % carouselData.length
-          )
-            return null;
-          return (
-            <link
-              key={index}
-              rel="prefetch"
-              as="image"
-              href={buildImagePath(item.src, isMobile)}
-            />
-          );
+          const nextIndex = (currentIndex + 1) % carouselData.length;
+          if (index !== currentIndex && index !== nextIndex) {
+            return (
+              <link
+                key={index}
+                rel="prefetch"
+                as="image"
+                href={buildImagePath(item.src, isMobile)}
+              />
+            );
+          }
+          return null;
         })}
 
-        <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center screen-size-13:items-start items-center screen-size-13:text-left text-center text-white">
+        <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center screen-size-13:items-start items-center screen-size-13:text-left text-center text-white z-10">
           <div className="screen-size-23:w-[1200px] screen-size-10:w-[800px] w-[280px] screen-size-13:ml-20 ml-0">
             <p className="screen-size-5:mt-4 mt-0 screen-size-23:text-2xl screen-size-10:text-xl screen-size-5:text-md text-sm screen-size-13:text-left text-center mb-2 leading-relaxed">
               {carouselData[currentIndex].description}
             </p>
-
             <Link
               href={carouselData[currentIndex].path || "/"}
               aria-label={`Learn more about ${carouselData[currentIndex].alt}`}
@@ -118,7 +151,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
                 Learn more about <br /> {carouselData[currentIndex].alt}
               </span>
             </Link>
-
             <h2 className="mt-6 screen-size-15:text-[50px] screen-size-10:text-[36px] text-[24px] font-extrabold screen-size-13:text-left text-center drop-shadow-md leading-tight">
               {carouselData[currentIndex].alt}
             </h2>
@@ -128,7 +160,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
 
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300 z-20"
         aria-label="Previous Slide"
       >
         <ChevronLeft size={24} />
@@ -136,7 +168,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/60 text-white p-3 rounded-full shadow-md border border-white hover:bg-black/80 transition-all duration-300 z-20"
         aria-label="Next Slide"
       >
         <ChevronRight size={24} />
