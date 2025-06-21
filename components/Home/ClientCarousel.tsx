@@ -6,32 +6,21 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { SEOImageProps } from "../../types/commonTypes";
 
-// Import the static Server Component for the LCP-optimized first slide
 import StaticCarouselFirstSlide from "./StaticCarouselFirstSlide";
-// Import the SEOImage component directly, as the logic is now in this file
 import SEOImage from "../common/SEOImage";
 
 interface ClientCarouselProps {
   carouselData: SEOImageProps[];
 }
 
-// Helper function to build image paths, now co-located with the component using it.
 const buildImagePath = (src: string | undefined, isMobile: boolean): string => {
   const fallback = "/images/home-images/additional/offset_printing_right.webp";
   const path = src ? `/images/${src}` : fallback;
 
   if (!isMobile) return path;
-
-  // Appends a suffix for mobile-specific images if needed
   return path.replace(/(\.[a-zA-Z0-9]+)$/i, "_64$1");
 };
 
-/**
- * Client-side carousel component that improves performance and contains all client logic.
- * - On the server and initial page load, it renders only the static, LCP-optimized first slide.
- * - After the page becomes interactive, it seamlessly replaces the static slide
- * with the full, interactive client-side carousel logic contained within this file.
- */
 const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
   // --- STATE MANAGEMENT ---
   // State to track if the component has "mounted" on the client.
@@ -122,7 +111,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Image prefetching logic */}
         {carouselData.map((item, index) => {
           const nextIndex = (currentIndex + 1) % carouselData.length;
           if (index !== currentIndex && index !== nextIndex) {

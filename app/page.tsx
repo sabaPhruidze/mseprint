@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-
+import { Suspense } from "react";
 import Carousel from "components/Home/Carousel";
 import Cards from "components/Home/Cards";
+import HeroSection from "components/Home/HeroSection";
+import CTASection from "components/Home/CTASection";
 import { getHomeData } from "db/getHomeData";
 import { getHeaderData } from "db/getHeaderData";
 
-const HeroSection = dynamic(() => import("components/Home/HeroSection"), {
-  ssr: true,
-});
-const CTASection = dynamic(() => import("components/Home/CTASection"), {
-  ssr: true,
-});
-
-export const runtime = "edge";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
@@ -41,7 +34,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  // Home data + small slice of header data for the CTA
   const [homeData, headerData] = await Promise.all([
     getHomeData("/"),
     getHeaderData(),
@@ -49,18 +41,41 @@ export default async function Home() {
 
   return (
     <div>
+      {/* Critical above-the-fold content */}
       <Carousel carouselData={homeData.carouselData} />
 
-      <div className="flex flex-col lg:flex-row gap-6 py-6">
+      {/* Cards - Hidden on mobile via CSS, no JS needed */}
+      <div className="hidden md:block">
         <Cards
           cardsData={homeData.cardsData}
           homeSpecialities={homeData.homeSpecialities}
         />
       </div>
 
-      <HeroSection heroSection={homeData.heroSection} />
-
-      <CTASection rqsafData={headerData.requestQuoteSendAFileData} />
+      {/* Below-the-fold content with Suspense for streaming */}
+      <Suspense
+        fallback={
+          <div className="min-h-[200px] flex items-center justify-center">
+            <div className="text-gray-500">Loading...</div>
+          </div>
+        }
+      >
+        <BelowFoldContent
+          heroSection={homeData.heroSection}
+          rqsafData={headerData.requestQuoteSendAFileData}
+        />
+      </Suspense>
     </div>
+  );
+}
+
+// Separate component for below-the-fold content
+async function BelowFoldContent({ heroSection, rqsafData }: any) {
+  // This will be streamed after the above-the-fold content
+  return (
+    <>
+      <HeroSection heroSection={heroSection} />
+      <CTASection rqsafData={rqsafData} />
+    </>
   );
 }
