@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { SEOImageProps } from "../../types/commonTypes";
 import SEOImage from "../common/SEOImage";
+import { buildImagePath } from "components/common/buildImagePath";
 
 interface HeroSectionProps {
   heroSection: SEOImageProps | null;
@@ -10,9 +11,8 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
   if (!heroSection) return null;
 
-  const imageSrc = heroSection.src
-    ? `/images/${heroSection.src}`
-    : "/images/home-images/additional/offset_printing_right.webp";
+  const desktopImageSrc = buildImagePath(heroSection.src, true);
+  const mobileImageSrc = buildImagePath(heroSection.src, false);
 
   return (
     <section className="mb-6">
@@ -24,14 +24,24 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
         {/* Background image */}
         <div className="absolute inset-0">
           <SEOImage
-            src={imageSrc}
+            src={desktopImageSrc}
             alt={heroSection.alt}
             name={heroSection.alt}
             geoData={heroSection.geoData}
             priority
-            sizes={heroSection.sizes}
+            sizes="(max-width: 639px) 100vw, (max-width: 1200px) 80vw, 1200px"
             fill
-            className="object-cover h-[600px] w-full screen-size-5:h-[500px]"
+            className="object-cover h-[600px] w-full screen-size-5:h-[500px] block sm:hidden"
+          />
+          <SEOImage
+            src={mobileImageSrc}
+            alt={heroSection.alt}
+            name={heroSection.alt}
+            geoData={heroSection.geoData}
+            priority
+            sizes="(max-width: 639px) 100vw, (max-width: 1200px) 80vw, 1200px"
+            fill
+            className="object-cover h-[600px] w-full screen-size-5:h-[500px] hidden sm:block"
           />
         </div>
         {/* Dark overlay */}

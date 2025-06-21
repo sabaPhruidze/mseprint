@@ -54,12 +54,11 @@ export default async function Home() {
       <Carousel carouselData={homeData.carouselData} />
 
       {/* Cards - Hidden on mobile via CSS, no JS needed */}
-      <div className="hidden md:block">
-        <Cards
-          cardsData={homeData.cardsData}
-          homeSpecialities={homeData.homeSpecialities}
-        />
-      </div>
+
+      <Cards
+        cardsData={homeData.cardsData}
+        homeSpecialities={homeData.homeSpecialities}
+      />
 
       {/* Below-the-fold content with Suspense for streaming */}
       <Suspense

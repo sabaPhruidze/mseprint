@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { SEOImageProps } from "../../types/commonTypes";
+import { buildImagePath } from "components/common/buildImagePath";
 
 import StaticCarouselFirstSlide from "./StaticCarouselFirstSlide";
 import SEOImage from "../common/SEOImage";
@@ -13,37 +14,21 @@ interface ClientCarouselProps {
   carouselData: SEOImageProps[];
 }
 
-const buildImagePath = (src: string | undefined, isMobile: boolean): string => {
-  const fallback = "/images/home-images/additional/offset_printing_right.webp";
-  const path = src ? `/images/${src}` : fallback;
-
-  if (!isMobile) return path;
-  return path.replace(/(\.[a-zA-Z0-9]+)$/i, "_64$1");
-};
-
 const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
-  // --- STATE MANAGEMENT ---
-  // State to track if the component has "mounted" on the client.
   const [isClient, setIsClient] = useState(false);
-  // State for the interactive carousel functionality.
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-  // --- EFFECTS ---
-  // This effect runs only on the client-side to switch from static to interactive.
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  // This effect handles responsive logic for mobile images.
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 639px)");
     const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
 
-    // Set initial state
     setIsMobile(mq.matches);
 
-    // Listen for changes
     mq.addEventListener("change", handleChange);
     return () => mq.removeEventListener("change", handleChange);
   }, []);
@@ -56,7 +41,7 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
   // --- RENDER LOGIC ---
 
   // On the server OR for the very first client render, show the fast static component.
-  if (!isClient) {
+  if (!isClient || isMobile === null) {
     return <StaticCarouselFirstSlide slideData={carouselData[0]} />;
   }
 
@@ -71,7 +56,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
     );
   };
 
-  // Once `isClient` is true, render the full interactive carousel.
   return (
     <section
       className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
