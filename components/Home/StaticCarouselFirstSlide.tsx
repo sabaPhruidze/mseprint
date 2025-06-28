@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import SEOImage from "../common/SEOImage";
 import { SEOImageProps } from "../../types/commonTypes";
 
 interface StaticSlideProps {
@@ -10,7 +9,7 @@ interface StaticSlideProps {
 /**
  * Renders a static, non-interactive version of the first carousel slide.
  * This component is optimized for the Largest Contentful Paint (LCP) by
- * being a Server Component and using priority props for the Next/Image.
+ * being a Server Component and using responsive images without JavaScript.
  */
 const StaticCarouselFirstSlide: React.FC<StaticSlideProps> = ({
   slideData,
@@ -20,6 +19,13 @@ const StaticCarouselFirstSlide: React.FC<StaticSlideProps> = ({
     return null;
   }
 
+  // Helper function to get the base filename without extension
+  const getBaseFilename = (src: string) => {
+    return src.replace(".webp", "");
+  };
+
+  const baseFilename = getBaseFilename(slideData.src);
+
   return (
     <section
       className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg"
@@ -28,27 +34,48 @@ const StaticCarouselFirstSlide: React.FC<StaticSlideProps> = ({
       <h2 id="carousel-heading" className="sr-only">
         Featured Services and Products
       </h2>
+
       <div className="relative w-full h-[400px]">
         {/* Semi-transparent overlay to ensure text is readable */}
         <div className="absolute top-0 left-0 w-full h-full bg-black/20 z-10"></div>
 
-        <SEOImage
-          src={`/images/${slideData.src}`}
-          alt={slideData.alt}
-          name={slideData.alt}
-          geoData={slideData.geoData}
-          // --- LCP OPTIMIZATION ATTRIBUTES ---
-          priority={true} // Tells Next.js to preload this image.
-          fetchPriority="high" // Tells the browser to fetch this resource with high priority.
-          decoding="sync" // Decode the image synchronously for a faster initial paint.
-          // --- END OF OPTIMIZATIONS ---
-          height={400}
-          width={1920} // Use the largest desktop image width for the initial render.
-          sizes="(max-width: 640px) 100vw, (max-width: 1200px) 80vw, 1200px"
-          fill={true}
-          className="w-full h-[400px]"
-          objectFit="cover"
-        />
+        {/* Responsive image using picture element - No JavaScript needed */}
+        <picture className="w-full h-full">
+          {/* For screens 640px and larger, use the full-size image */}
+          <source
+            media="(min-width: 640px)"
+            srcSet={`/images/${baseFilename}.webp`}
+            type="image/webp"
+            width="1920"
+            height="400"
+          />
+          {/* For screens smaller than 640px, use the optimized small image */}
+          <source
+            media="(max-width: 639px)"
+            srcSet={`/images/${baseFilename}_64.webp`}
+            type="image/webp"
+            width="640"
+            height="400"
+          />
+          {/* Fallback image */}
+          <img
+            src={`/images/${baseFilename}.webp`}
+            alt={slideData.alt}
+            width="1920"
+            height="400"
+            className="w-full h-[400px] object-cover"
+            style={{
+              width: "100%",
+              height: "400px",
+              objectFit: "cover",
+            }}
+            // --- LCP OPTIMIZATION ATTRIBUTES ---
+            loading="eager"
+            decoding="sync"
+            fetchPriority="high"
+            // --- END OF OPTIMIZATIONS ---
+          />
+        </picture>
 
         {/* Text content and Call to Action */}
         <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center screen-size-13:items-start items-center screen-size-13:text-left text-center text-white z-20">
@@ -70,6 +97,7 @@ const StaticCarouselFirstSlide: React.FC<StaticSlideProps> = ({
           </div>
         </div>
       </div>
+
       {/* Note: There are no interactive buttons here, as it's a static component. */}
     </section>
   );

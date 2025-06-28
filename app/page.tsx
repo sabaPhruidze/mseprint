@@ -50,11 +50,7 @@ export default async function Home() {
 
   return (
     <div>
-      {/* Critical above-the-fold content */}
       <Carousel carouselData={homeData.carouselData} />
-
-      {/* Cards - Hidden on mobile via CSS, no JS needed */}
-
       <Cards
         cardsData={homeData.cardsData}
         homeSpecialities={homeData.homeSpecialities}
