@@ -109,6 +109,10 @@ export type FormData = {
   terms: boolean;
   representative: string;
   fileLink: string | null;
+  pattern?: {
+    value: RegExp;
+    message: string;
+  };
 };
 
 export interface ReceivingPriceType {

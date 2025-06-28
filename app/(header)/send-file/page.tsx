@@ -116,8 +116,8 @@ const WebPageSchema = () => {
       },
     },
     inLanguage: "en-US",
-    datePublished: "2024-01-01", // Update as appropriate
-    dateModified: "2025-05-24", // Update dynamically if possible
+    datePublished: "2024-01-01",
+    dateModified: "2025-06-28",
     image: ["https://www.mseprinting.com/images/header-images/send_file.webp"],
   };
 
@@ -129,7 +129,6 @@ const WebPageSchema = () => {
   );
 };
 
-/* --- Page component --- */
 export default async function SendAFile() {
   const { sendFileContent } = await getRQSFData("/send-file");
   const userDefaults = await getCurrentUser();

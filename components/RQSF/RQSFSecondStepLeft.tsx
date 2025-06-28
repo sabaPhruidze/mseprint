@@ -30,12 +30,29 @@ export default function RQSFSecondStepLeft() {
       <div className="flex flex-col items-center screen-size-12:items-start">
         <input
           type="text"
+          inputMode="numeric"
+          pattern="[0-9]*"
           placeholder="Quantity *"
-          className=" text-black border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
-          {...register("quantity", { required: "This field is required" })}
+          className="text-black border p-2 screen-size-5:w-[460px] screen-size-5:h-[60px] rounded screen-size-5:text-base w-[300px] h-[45px] text-sm"
+          {...register("quantity", {
+            required: "This field is required",
+            pattern: /^\d+$/, // <- just RegExp
+          })}
+          onKeyDown={(e) => {
+            const allowed = [
+              "Backspace",
+              "Delete",
+              "ArrowLeft",
+              "ArrowRight",
+              "Tab",
+            ];
+            if (!/^[0-9]$/.test(e.key) && !allowed.includes(e.key))
+              e.preventDefault();
+          }}
         />
-        {errors.quantity && (
-          <p className="text-red text-sm mt-1">{errors.quantity.message}</p>
+
+        {errors.quantity?.type === "pattern" && (
+          <p className="text-red text-sm mt-1">Quantity must be digits only</p>
         )}
       </div>
 
