@@ -119,6 +119,8 @@ const ServiceSchema = () => {
     name: "Inventory Management",
     description:
       "Inventory control, warehousing, and fulfillment services for businesses. MSE Printing offers scalable solutions with real-time tracking and integration support.",
+
+    /* provider is already a LocalBusiness → attach rating here */
     provider: {
       "@type": "LocalBusiness",
       "@id": "https://www.mseprinting.com/#business",
@@ -134,7 +136,14 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
+      /* ⭐ VALID review snippet data ⭐ */
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.8",
+        reviewCount: "29",
+      },
     },
+
     areaServed: [
       { "@type": "City", name: "Minneapolis" },
       { "@type": "State", name: "Minnesota" },
@@ -142,6 +151,7 @@ const ServiceSchema = () => {
     ],
     serviceType: "Inventory Management",
     category: "Fulfillment & Logistics",
+
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Inventory & Fulfillment Services",
@@ -168,6 +178,7 @@ const ServiceSchema = () => {
         },
       ],
     },
+
     offers: {
       "@type": "Offer",
       url: "https://www.mseprinting.com/fulfillment-services/inventory-management",
@@ -176,11 +187,6 @@ const ServiceSchema = () => {
         "@type": "Service",
         name: "Inventory Management",
       },
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "29",
     },
   };
 
