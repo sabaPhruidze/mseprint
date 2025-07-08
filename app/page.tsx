@@ -14,17 +14,17 @@ export const metadata: Metadata = {
   description:
     "Professional commercial printing services including offset printing, digital printing, direct mail, signs, and custom online ordering portals. Quality printing solutions for businesses.",
   alternates: { canonical: "https://www.mseprinting.com/" },
-  metadataBase: new URL("https://www.mseprinting.com"),
+  metadataBase: new URL("https://www.mseprinting.com/"),
   openGraph: {
     title: "MSE Printing | Commercial Printing & Direct Mail Services",
     description:
       "Full-service commercial printing company offering offset printing, digital printing, direct mail services, and custom online ordering portals for businesses.",
-    url: "https://www.mseprinting.com",
+    url: "https://www.mseprinting.com/",
     siteName: "MSE Printing",
     type: "website",
     images: [
       {
-        url: "/images/main-page-images/offset-printing.webp",
+        url: "/images/home-images/offset_printing.webp",
         width: 1920,
         height: 400,
         alt: "MSE Printing Services",
@@ -33,10 +33,8 @@ export const metadata: Metadata = {
   },
 };
 
-// Import the types you need
 import { SEOImageProps, PagePathTypes } from "../types/commonTypes";
 
-// Define proper types for the component props
 interface BelowFoldContentProps {
   heroSection: SEOImageProps | null;
   rqsafData: PagePathTypes[];
@@ -56,7 +54,6 @@ export default async function Home() {
         homeSpecialities={homeData.homeSpecialities}
       />
 
-      {/* Below-the-fold content with Suspense for streaming */}
       <Suspense
         fallback={
           <div className="min-h-[200px] flex items-center justify-center">
@@ -73,12 +70,10 @@ export default async function Home() {
   );
 }
 
-// Separate component for below-the-fold content with proper typing
 async function BelowFoldContent({
   heroSection,
   rqsafData,
 }: BelowFoldContentProps) {
-  // This will be streamed after the above-the-fold content
   return (
     <>
       <HeroSection heroSection={heroSection} />

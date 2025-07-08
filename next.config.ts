@@ -1,41 +1,42 @@
-// next.config.ts
 import type { NextConfig } from 'next';
 
+/** Next.js configuration for mseprinting.com */
 const nextConfig: NextConfig = {
-  images: {
-    formats: ['image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    minimumCacheTTL: 86_400,
-  },
-
+  // Core behaviour
+  reactStrictMode: true,
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
 
+  // Image optimisation
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 86_400, // 24 h
+
+    // Accept anything served from *.mseprinting.com over HTTPS
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.mseprinting.com',
+      },
+    ],
+  },
+
+  // Redirect rules
   async redirects() {
     return [
-      /* 1) non-www  →  www  (http or https) */
+      // 1 — Add “www” if host is bare, also force HTTPS
       {
         source: '/:path*',
-        has: [
-          {
-            type: 'host',           // only type + value for host rule
-            value: 'mseprinting.com',
-          },
-        ],
+        has: [{ type: 'host', value: 'mseprinting.com' }],
         destination: 'https://www.mseprinting.com/:path*',
         permanent: true,
       },
-
-      /* 2) Force HTTPS (any host still on http) */
+      
       {
         source: '/:path*',
-        has: [
-          {
-            type: 'header',
-            key: 'x-forwarded-proto',
-            value: 'http',
-          },
-        ],
+        has: [{ type: 'header', key: 'x-forwarded-proto', value: 'http' }],
         destination: 'https://www.mseprinting.com/:path*',
         permanent: true,
       },
