@@ -178,11 +178,6 @@ const ServiceSchema = () => {
         name: "Tradeshow & Event Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "26",
-    },
   };
 
   return (

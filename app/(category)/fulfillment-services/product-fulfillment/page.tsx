@@ -177,11 +177,6 @@ const ServiceSchema = () => {
         name: "Product Fulfillment",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "40",
-    },
   };
 
   return (

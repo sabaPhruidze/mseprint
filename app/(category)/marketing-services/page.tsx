@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Marketing Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "28",
-    },
   };
 
   return (

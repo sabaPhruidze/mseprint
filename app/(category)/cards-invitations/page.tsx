@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Cards & Invitations",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "35",
-    },
   };
 
   return (

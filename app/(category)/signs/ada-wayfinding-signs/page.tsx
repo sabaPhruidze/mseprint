@@ -187,11 +187,6 @@ const ServiceSchema = () => {
         name: "ADA & Wayfinding Signs",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "11",
-    },
   };
 
   return (

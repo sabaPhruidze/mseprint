@@ -136,12 +136,6 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
-      /* ⭐ VALID review snippet data ⭐ */
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "4.8",
-        reviewCount: "29",
-      },
     },
 
     areaServed: [

@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "QR Codes & No-Touch Print Solutions",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "23",
-    },
   };
 
   return (

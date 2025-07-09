@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Safety Labels",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "14",
-    },
   };
 
   return (

@@ -185,11 +185,6 @@ const ServiceSchema = () => {
         name: "Political Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "41",
-    },
   };
 
   return (

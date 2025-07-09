@@ -145,11 +145,6 @@ const ServiceSchema = () => {
         name: "Local Printing Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "61",
-    },
   };
 
   return (

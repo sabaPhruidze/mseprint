@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Brochures & Collateral",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "38",
-    },
   };
 
   return (

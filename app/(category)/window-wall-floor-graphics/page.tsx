@@ -178,11 +178,6 @@ const ServiceSchema = () => {
         name: "Window, Wall & Floor Graphics",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "31",
-    },
   };
 
   return (

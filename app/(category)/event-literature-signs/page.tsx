@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Event Literature & Signs",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "31",
-    },
   };
 
   return (

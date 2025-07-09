@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Business Forms",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "41",
-    },
   };
 
   return (

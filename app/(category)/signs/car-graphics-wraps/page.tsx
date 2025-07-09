@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Car Graphics & Wraps",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "14",
-    },
   };
 
   return (

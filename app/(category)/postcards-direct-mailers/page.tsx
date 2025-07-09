@@ -190,11 +190,6 @@ const ServiceSchema = () => {
         name: "Postcards & Direct Mailers",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "21",
-    },
   };
 
   return (

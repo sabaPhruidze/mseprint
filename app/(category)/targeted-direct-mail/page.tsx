@@ -180,11 +180,6 @@ const ServiceSchema = () => {
         name: "Targeted Direct Mail",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "37",
-    },
   };
 
   return (

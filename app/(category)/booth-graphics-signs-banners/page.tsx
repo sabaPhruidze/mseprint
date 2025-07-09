@@ -198,11 +198,6 @@ const ServiceSchema = () => {
         name: "Custom Booth Graphics, Signs & Banners",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "42",
-    },
   };
 
   return (

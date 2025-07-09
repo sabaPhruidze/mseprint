@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Newsletters, Flyers & Rack Cards",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "25",
-    },
   };
 
   return (

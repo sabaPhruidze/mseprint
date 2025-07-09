@@ -145,11 +145,6 @@ const ServiceSchema = () => {
         name: "Legal Document Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "54",
-    },
   };
 
   return (

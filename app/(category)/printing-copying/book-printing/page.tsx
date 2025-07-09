@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Book Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "27",
-    },
   };
 
   return (

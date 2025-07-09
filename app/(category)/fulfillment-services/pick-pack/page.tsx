@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Pick & Pack Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "37",
-    },
   };
 
   return (

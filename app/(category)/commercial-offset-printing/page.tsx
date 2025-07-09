@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Commercial Offset Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "44",
-    },
   };
 
   return (

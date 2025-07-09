@@ -147,11 +147,6 @@ const ServiceSchema = () => {
         name: "Professional Printing Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "56",
-    },
   };
 
   return (

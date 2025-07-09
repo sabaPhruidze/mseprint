@@ -145,11 +145,6 @@ const ServiceSchema = () => {
         name: "Corporate Printing Solutions",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "38",
-    },
   };
 
   return (

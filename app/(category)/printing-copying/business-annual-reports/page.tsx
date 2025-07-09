@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Business & Annual Reports",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "132",
-    },
   };
 
   return (

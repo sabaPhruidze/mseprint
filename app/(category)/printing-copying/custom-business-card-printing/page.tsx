@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Business Card Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "17",
-    },
   };
 
   return (

@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Gifts, Awards & Incentives",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "22",
-    },
   };
 
   return (

@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Commercial Digital Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "39",
-    },
   };
 
   return (

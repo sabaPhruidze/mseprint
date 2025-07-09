@@ -184,11 +184,6 @@ const ServiceSchema = () => {
         name: "Online Ordering Portals",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "16",
-    },
   };
 
   return (

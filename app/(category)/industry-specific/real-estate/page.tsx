@@ -185,11 +185,6 @@ const ServiceSchema = () => {
         name: "Real Estate Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "47",
-    },
   };
 
   return (

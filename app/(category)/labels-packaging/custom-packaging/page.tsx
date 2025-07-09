@@ -182,11 +182,6 @@ const ServiceSchema = () => {
         name: "Custom Packaging",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "27",
-    },
   };
 
   return (

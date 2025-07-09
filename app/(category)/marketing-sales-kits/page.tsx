@@ -184,11 +184,6 @@ const ServiceSchema = () => {
         name: "Custom Marketing & Sales Kits",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "24",
-    },
   };
 
   return (

@@ -180,11 +180,6 @@ const ServiceSchema = () => {
         name: "Yard & Outdoor Signs",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "31",
-    },
   };
 
   return (

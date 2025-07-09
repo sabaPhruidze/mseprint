@@ -182,11 +182,6 @@ const ServiceSchema = () => {
         name: "Pre & Post-Show Direct Mail",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "17",
-    },
   };
 
   return (

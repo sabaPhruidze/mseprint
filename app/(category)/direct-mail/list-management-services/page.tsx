@@ -177,11 +177,6 @@ const ServiceSchema = () => {
         name: "List Management Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "27",
-    },
   };
 
   return (

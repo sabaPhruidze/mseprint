@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Custom Labels, Stickers & Decals",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "35",
-    },
   };
 
   return (

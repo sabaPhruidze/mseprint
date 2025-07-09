@@ -179,11 +179,6 @@ const ServiceSchema = () => {
         name: "Now Open Signs & Graphics",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "28",
-    },
   };
 
   return (

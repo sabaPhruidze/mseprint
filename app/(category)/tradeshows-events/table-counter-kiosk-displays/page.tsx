@@ -180,11 +180,6 @@ const ServiceSchema = () => {
         name: "Table, Counter & Kiosk Displays",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "21",
-    },
   };
 
   return (

@@ -185,11 +185,6 @@ const ServiceSchema = () => {
         name: "Complete Mailing Solutions",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "36",
-    },
   };
 
   return (

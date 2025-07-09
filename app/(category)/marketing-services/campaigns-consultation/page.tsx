@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Marketing Campaigns & Consultation",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "19",
-    },
   };
 
   return (

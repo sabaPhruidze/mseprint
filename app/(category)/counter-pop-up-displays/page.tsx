@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Counter & Pop-up Displays",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "33",
-    },
   };
 
   return (

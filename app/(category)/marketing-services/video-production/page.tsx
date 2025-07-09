@@ -192,11 +192,6 @@ const ServiceSchema = () => {
         name: "Video Production",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "18",
-    },
   };
 
   return (

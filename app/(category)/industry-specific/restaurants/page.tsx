@@ -185,11 +185,6 @@ const ServiceSchema = () => {
         name: "Restaurant Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "45",
-    },
   };
 
   return (

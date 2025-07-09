@@ -182,11 +182,6 @@ const ServiceSchema = () => {
         name: "Social Media Marketing & Management",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "21",
-    },
   };
 
   return (

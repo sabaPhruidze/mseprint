@@ -182,11 +182,6 @@ const ServiceSchema = () => {
         name: "Poster Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "19",
-    },
   };
 
   return (

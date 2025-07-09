@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Custom Kitting & Fulfillment",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "31",
-    },
   };
 
   return (

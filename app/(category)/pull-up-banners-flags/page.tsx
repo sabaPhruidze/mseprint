@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Pull-Up Banners & Flags",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "15",
-    },
   };
 
   return (

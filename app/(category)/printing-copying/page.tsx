@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Printing & Copying Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "29",
-    },
   };
 
   return (

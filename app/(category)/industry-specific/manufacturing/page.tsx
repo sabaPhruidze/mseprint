@@ -186,11 +186,6 @@ const ServiceSchema = () => {
         name: "Manufacturing Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "31",
-    },
   };
 
   return (

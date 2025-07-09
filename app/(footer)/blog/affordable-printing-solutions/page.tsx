@@ -146,11 +146,6 @@ const ServiceSchema = () => {
         name: "Affordable Printing Solutions",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.7",
-      reviewCount: "52",
-    },
   };
 
   return (

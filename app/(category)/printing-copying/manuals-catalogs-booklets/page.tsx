@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Manuals, Catalogs & Booklets",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "18",
-    },
   };
 
   return (

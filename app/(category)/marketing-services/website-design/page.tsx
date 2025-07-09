@@ -182,11 +182,6 @@ const ServiceSchema = () => {
         name: "Website Design",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "15",
-    },
   };
 
   return (

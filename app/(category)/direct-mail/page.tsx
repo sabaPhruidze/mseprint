@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Direct Mail & Mailing Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "52",
-    },
   };
 
   return (

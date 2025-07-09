@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Every Door Direct Mail®",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "42",
-    },
   };
 
   return (

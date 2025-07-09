@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Envelope Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "15",
-    },
   };
 
   return (

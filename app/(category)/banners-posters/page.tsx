@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Banners & Posters",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "47",
-    },
   };
 
   return (

@@ -175,11 +175,6 @@ const ServiceSchema = () => {
         name: "Education Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "24",
-    },
   };
 
   return (

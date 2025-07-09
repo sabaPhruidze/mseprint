@@ -183,11 +183,6 @@ const ServiceSchema = () => {
         name: "Letterhead Printing",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "13",
-    },
   };
 
   return (

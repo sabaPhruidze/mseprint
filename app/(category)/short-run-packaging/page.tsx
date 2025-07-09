@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Short Run Packaging",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "12",
-    },
   };
 
   return (

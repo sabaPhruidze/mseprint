@@ -190,11 +190,6 @@ const ServiceSchema = () => {
         name: "Interior Office & Lobby Décor",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "34",
-    },
   };
 
   return (

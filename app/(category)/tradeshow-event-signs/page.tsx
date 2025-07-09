@@ -179,11 +179,6 @@ const ServiceSchema = () => {
         name: "Tradeshow & Event Signs",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "29",
-    },
   };
 
   return (

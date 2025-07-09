@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Delivery & Takeout Signs",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "9",
-    },
   };
 
   return (

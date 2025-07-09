@@ -145,11 +145,6 @@ const ServiceSchema = () => {
         name: "Booklet Printing Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "44",
-    },
   };
 
   return (

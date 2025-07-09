@@ -145,11 +145,6 @@ const ServiceSchema = () => {
         name: "Notepad Printing Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "39",
-    },
   };
 
   return (

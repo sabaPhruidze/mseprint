@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Product Promotional Labels",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "15",
-    },
   };
 
   return (

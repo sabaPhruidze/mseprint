@@ -181,11 +181,6 @@ const ServiceSchema = () => {
         name: "Products & Services",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "23",
-    },
   };
 
   return (

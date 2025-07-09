@@ -182,11 +182,6 @@ const ServiceSchema = () => {
         name: "Presentation & Training Materials",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "13",
-    },
   };
 
   return (

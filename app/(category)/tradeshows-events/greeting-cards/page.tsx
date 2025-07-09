@@ -180,11 +180,6 @@ const ServiceSchema = () => {
         name: "Greeting Cards",
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "18",
-    },
   };
 
   return (
