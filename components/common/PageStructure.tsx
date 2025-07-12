@@ -30,7 +30,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               pageData.mainimage.geoData || {
                 latitude: 45.023,
                 longitude: -93.279,
-                location: "3839 N Washington Ave Ste. 101",
+                location: "3839 Washington Ave N Ste. 103",
                 addressRegion: "Minneapolis",
               }
             }
@@ -93,7 +93,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 pageData.secondaryimage?.geoData || {
                   latitude: 45.023,
                   longitude: -93.279,
-                  location: "3839 N Washington Ave Ste. 101",
+                  location: "3839 Washington Ave N Ste. 103",
                   addressRegion: "Minneapolis",
                 }
               }

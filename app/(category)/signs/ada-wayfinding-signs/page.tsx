@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     "geo.placename": "Minneapolis",
     "geo.position": "45.0230;-93.2790",
     ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 N Washington Ave Ste. 101",
+    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
     "business:contact_data:locality": "Minneapolis",
     "business:contact_data:region": "MN",
     "business:contact_data:postal_code": "55412",
@@ -128,7 +128,7 @@ const ServiceSchema = () => {
       email: "info@mseprinting.com",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "3839 N Washington Ave Ste. 101",
+        streetAddress: "3839 Washington Ave N Ste. 103",
         addressLocality: "Minneapolis",
         addressRegion: "MN",
         postalCode: "55412",

@@ -44,7 +44,7 @@ const LocalBusinessSchema = () => {
     foundingDate: "2002",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "3839 N Washington Ave Ste. 101",
+      streetAddress: "3839 Washington Ave N Ste. 103",
       addressLocality: "Minneapolis",
       addressRegion: "MN",
       postalCode: "55412",
