@@ -6,7 +6,7 @@ export const sql = neon(process.env.DATABASE_URL!);
 
 export const getDataPattern = cache(async <T extends object>(
   tableName: string,
-  limit: number = 100
+  limit: number = 1000
 ): Promise<T[]> => {
   try {
  

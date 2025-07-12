@@ -1,3 +1,4 @@
+/* app/layout.tsx — live data version */
 import "../styles/globals.css";
 import localFont from "next/font/local";
 
@@ -6,8 +7,13 @@ import Footer from "../components/Footer/Footer";
 import { getHeaderData } from "../db/getHeaderData";
 import { getFooterData } from "../db/GetFooterData";
 
-import { unstable_cache } from "next/cache";
+/** ------------------------------------------------------------
+ *  Disable the default Router Cache so every request re-queries
+ *  Neon instead of serving a stale snapshot.
+ *  ---------------------------------------------------------- */
+export const dynamic = "force-dynamic"; // 👈 REQUIRED for live updates
 
+/* ────────────  Local fonts  ──────────── */
 const interBold = localFont({
   src: "../public/fonts/Inter_18pt-Bold.woff2",
   variable: "--font-inter-bold",
@@ -29,7 +35,8 @@ const interMedium = localFont({
   preload: false,
 });
 
-const LocalBusinessSchema = () => {
+/* ────────────  LocalBusiness JSON-LD  ──────────── */
+function LocalBusinessSchema() {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -73,22 +80,10 @@ const LocalBusinessSchema = () => {
       geoRadius: "50000",
     },
     areaServed: [
-      {
-        "@type": "City",
-        name: "Minneapolis",
-      },
-      {
-        "@type": "City",
-        name: "St. Paul",
-      },
-      {
-        "@type": "State",
-        name: "Minnesota",
-      },
-      {
-        "@type": "Country",
-        name: "United States",
-      },
+      { "@type": "City", name: "Minneapolis" },
+      { "@type": "City", name: "St. Paul" },
+      { "@type": "State", name: "Minnesota" },
+      { "@type": "Country", name: "United States" },
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -202,30 +197,25 @@ const LocalBusinessSchema = () => {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
   );
-};
+}
 
-const getHeaderDataCached = unstable_cache(getHeaderData, ["header_v1"], {
-  revalidate: 3600,
-});
-const getFooterDataCached = unstable_cache(getFooterData, ["footer_v1"], {
-  revalidate: 3600,
-});
-
+/* ────────────  Root layout  ──────────── */
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  /* live DB queries – no caching */
   const [headerData, footerData] = await Promise.all([
-    getHeaderDataCached(),
-    getFooterDataCached(),
+    getHeaderData(),
+    getFooterData(),
   ]);
 
   return (
     <html lang="en">
       <body
         className={`${interBold.variable} ${interExtraBold.variable} ${interMedium.variable}
-          min-h-screen flex flex-col font-inter-medium`}
+        min-h-screen flex flex-col font-inter-medium`}
       >
         <LocalBusinessSchema />
 
