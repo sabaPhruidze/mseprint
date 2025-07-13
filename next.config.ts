@@ -1,27 +1,38 @@
+/* next.config.ts — project root */
 import type { NextConfig } from 'next'
+
 const CANONICAL_HOST = 'www.mseprinting.com'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  trailingSlash: false,
+  trailingSlash: false, // no implicit 308 slash redirects
 
   async redirects() {
     return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', key: 'host', value: 'mseprinting.com' }],
-        destination: `https://${CANONICAL_HOST}/:path*`,
-        permanent: true,
-      },
+      /* 1️⃣  non-www  (http OR https)  →  https://www…  */
       {
         source: '/:path*',
         has: [
-          { type: 'host',   key: 'host', value: CANONICAL_HOST },
+          
+          { type: 'host', value: 'mseprinting.com' },
+        ],
+        destination: `https://${CANONICAL_HOST}/:path*`,
+        permanent: true,
+      },
+
+      /* 2️⃣  www but http  →  https://www…  */
+      {
+        source: '/:path*',
+        has: [
+       
+          { type: 'host', value: CANONICAL_HOST },
           { type: 'header', key: 'x-forwarded-proto', value: 'http' },
         ],
         destination: `https://${CANONICAL_HOST}/:path*`,
         permanent: true,
       },
+
+      /* 3️⃣  (optional) fold /privacy-policy/ → /privacy-policy  */
       {
         source: '/privacy-policy/',
         destination: '/privacy-policy',
