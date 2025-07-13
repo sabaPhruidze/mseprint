@@ -3,7 +3,6 @@ const CANONICAL_HOST = 'www.mseprinting.com'
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   trailingSlash: false,
 
   async redirects() {
