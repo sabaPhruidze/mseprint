@@ -1,11 +1,40 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from 'next'
+const CANONICAL_HOST = 'www.mseprinting.com'
 
-/** Next.js configuration for mseprinting.com */
 const nextConfig: NextConfig = {
- 
-};
+  reactStrictMode: true,
+  swcMinify: true,
+  trailingSlash: false,
 
-export default nextConfig;
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', key: 'host', value: 'mseprinting.com' }],
+        destination: `https://${CANONICAL_HOST}/:path*`,
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [
+          { type: 'host',   key: 'host', value: CANONICAL_HOST },
+          { type: 'header', key: 'x-forwarded-proto', value: 'http' },
+        ],
+        destination: `https://${CANONICAL_HOST}/:path*`,
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy/',
+        destination: '/privacy-policy',
+        permanent: true,
+      },
+    ]
+  },
+}
+
+export default nextConfig
+
+
 
 
 //  // Core behaviour
