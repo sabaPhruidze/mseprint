@@ -66,12 +66,12 @@
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
 </url>
-<url>
-  <loc>https://www.mseprinting.com/</loc>
-  <lastmod>2025-06-19</lastmod>
-  <changefreq>weekly</changefreq>
-  <priority>1.0</priority>
-</url>
+ <url>
+    <loc>https://www.mseprinting.com/</loc>
+    <lastmod>2025-07-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 <url>
   <loc>https://www.mseprinting.com/sitemap</loc>
   <lastmod>2025-06-08</lastmod>
