@@ -3,25 +3,29 @@ import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 
-/* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Business Forms | MSE Print",
+  title: "Business Forms Minneapolis | Custom Printing Services | MSE Print",
   description:
-    "Streamline operations with custom business forms by MSE Printing. Professionally designed for invoices, receipts, contracts, and more.",
+    "Professional business forms printing in Minneapolis, MN. Custom NCR forms, invoices, receipts, contracts & carbonless forms. Fast turnaround, quality guaranteed. Serving Twin Cities area businesses.",
   keywords: [
+    "business forms Minneapolis",
+    "business forms Minneapolis MN",
     "custom business forms Minneapolis",
-    "NCR forms printing",
-    "invoice printing",
-    "receipt booklets",
+    "NCR forms printing Minneapolis",
+    "invoice printing Minneapolis",
+    "receipt booklets Minneapolis",
     "contract forms Minneapolis",
-    "carbonless form printing",
-    "business form printer Minnesota",
-    "custom forms USA",
-    "form printing company",
-    "professional business documentation",
+    "carbonless form printing Minneapolis",
+    "business form printer Minneapolis Minnesota",
+    "Minneapolis printing services business forms",
+    "Twin Cities business forms",
+    "Minneapolis commercial printing forms",
+    "professional business documentation Minneapolis",
+    "custom forms Minneapolis MN",
+    "business forms near me Minneapolis",
   ],
-  applicationName: "MSE Printing",
-  category: "Business Printing",
+  applicationName: "MSE Printing Minneapolis",
+  category: "Business Printing Minneapolis",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/business-forms",
@@ -38,43 +42,36 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with actual Search Console token
-  },
-
   openGraph: {
-    title: "Business Forms | MSE Print",
+    title: "Business Forms Minneapolis | Custom Printing Services | MSE Print",
     description:
-      "Customizable business forms designed to support efficient operations and professional documentation. NCR, carbonless, and branded formats available.",
+      "Professional business forms printing in Minneapolis, MN. Custom NCR forms, invoices, receipts & contracts. Serving Twin Cities businesses with quality printing solutions.",
     url: "https://www.mseprinting.com/business-forms",
-    siteName: "MSE Printing",
+    siteName: "MSE Printing Minneapolis",
     locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.mseprinting.com/images/home-images/card_business_forms.webp",
         width: 1200,
         height: 630,
-        alt: "Professionally printed business forms from MSE Printing in Minneapolis",
+        alt: "Professional business forms printing services in Minneapolis, MN - MSE Printing",
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "Business Forms | MSE Print",
+    title: "Business Forms Minneapolis | Custom Printing | MSE Print",
     description:
-      "NCR forms, invoices, and professional documentation customized by MSE Printing for your business needs.",
+      "Custom business forms printing in Minneapolis. NCR forms, invoices, contracts & more. Professional printing for Twin Cities businesses.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
       {
         url: "https://www.mseprinting.com/images/home-images/card_business_forms.webp",
-        alt: "Custom business forms printed by MSE Printing Minneapolis",
+        alt: "Custom business forms printing in Minneapolis - MSE Printing",
       },
     ],
   },
-
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
@@ -88,18 +85,21 @@ export const metadata: Metadata = {
     "business:contact_data:phone_number": "763-542-8812",
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
+    "business:hours:day": "monday tuesday wednesday thursday friday",
+    "business:hours:start": "08:00",
+    "business:hours:end": "17:00",
   },
-
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
-  creator: "MSE Printing",
-  publisher: "MSE Printing",
+  authors: [
+    { name: "MSE Printing Minneapolis", url: "https://www.mseprinting.com" },
+  ],
+  creator: "MSE Printing Minneapolis",
+  publisher: "MSE Printing Minneapolis",
 };
 
-/* ─────────────── VIEWPORT COLOR MODE ─────────────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -108,22 +108,29 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": ["Service", "LocalBusiness"],
     "@id": "https://www.mseprinting.com/business-forms#service",
-    name: "Business Forms",
+    name: "Business Forms Printing Minneapolis",
+    alternateName: [
+      "Custom Business Forms Minneapolis",
+      "NCR Forms Minneapolis",
+      "Business Form Printing Minneapolis MN",
+    ],
     description:
-      "Custom printed business forms including carbonless forms, invoices, receipts, and contracts. Designed for efficiency and branded professionalism by MSE Printing.",
+      "Professional business forms printing services in Minneapolis, MN. Custom NCR forms, carbonless forms, invoices, receipts, contracts and business documentation. Serving Minneapolis and Twin Cities area businesses with fast turnaround and quality guarantee.",
+
     provider: {
       "@type": "LocalBusiness",
       "@id": "https://www.mseprinting.com/#business",
       name: "MSE Printing",
+      legalName: "MSE Printing Company",
       url: "https://www.mseprinting.com",
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
+      priceRange: "$",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3839 Washington Ave N Ste. 103",
@@ -132,51 +139,168 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 45.023,
+        longitude: -93.279,
+      },
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "08:00",
+          closes: "17:00",
+        },
+      ],
     },
+
     areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
+      {
+        "@type": "City",
+        name: "Minneapolis",
+        "@id": "https://en.wikipedia.org/wiki/Minneapolis",
+      },
+      {
+        "@type": "City",
+        name: "Saint Paul",
+        "@id": "https://en.wikipedia.org/wiki/Saint_Paul,_Minnesota",
+      },
+      {
+        "@type": "State",
+        name: "Minnesota",
+        "@id": "https://en.wikipedia.org/wiki/Minnesota",
+      },
+      {
+        "@type": "Country",
+        name: "United States",
+        "@id": "https://en.wikipedia.org/wiki/United_States",
+      },
     ],
-    serviceType: "Business Form Printing",
-    category: "Custom Business Documents",
+
+    serviceArea: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: 45.023,
+        longitude: -93.279,
+      },
+      geoRadius: 50000,
+    },
+
+    serviceType: [
+      "Business Form Printing",
+      "NCR Forms Printing",
+      "Carbonless Forms Printing",
+      "Custom Business Documentation",
+    ],
+
+    category: [
+      "Business Forms Minneapolis",
+      "Commercial Printing Minneapolis",
+      "Custom Forms Printing",
+    ],
+
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Business Form Types",
+      name: "Business Forms Printing Services Minneapolis",
       itemListElement: [
         {
           "@type": "Offer",
-          url: "https://www.mseprinting.com/business-forms#ncr",
+          url: "https://www.mseprinting.com/business-forms#ncr-forms",
+          name: "NCR Forms Minneapolis",
+          description:
+            "Multi-part carbonless NCR forms for invoices, receipts, and duplicate records. Professional printing in Minneapolis.",
           itemOffered: {
             "@type": "Service",
-            name: "Carbonless NCR Forms",
+            name: "Carbonless NCR Forms Printing Minneapolis",
             description:
-              "Multi-part forms for duplicate records, ideal for invoices and receipts.",
+              "Professional NCR forms printing in Minneapolis - perfect for invoices, receipts, and business documentation requiring duplicate copies.",
           },
+          areaServed: { "@type": "City", name: "Minneapolis" },
+        },
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/business-forms#invoices",
+          name: "Custom Invoice Forms Minneapolis",
+          description:
+            "Professional invoice forms and booklets printed in Minneapolis for local businesses.",
+          itemOffered: {
+            "@type": "Service",
+            name: "Invoice Forms Printing Minneapolis",
+            description:
+              "Custom invoice forms and booklets designed and printed for Minneapolis area businesses.",
+          },
+          areaServed: { "@type": "City", name: "Minneapolis" },
         },
         {
           "@type": "Offer",
           url: "https://www.mseprinting.com/business-forms#contracts",
+          name: "Contract Forms Minneapolis",
+          description:
+            "Professional contract and agreement forms printed for Minneapolis businesses and organizations.",
           itemOffered: {
             "@type": "Service",
-            name: "Contracts & Agreements",
+            name: "Contract & Agreement Forms Minneapolis",
             description:
-              "Printed legal and business forms for internal or external use.",
+              "Custom printed contracts, agreements, and legal forms for Minneapolis businesses and organizations.",
           },
+          areaServed: { "@type": "City", name: "Minneapolis" },
         },
       ],
     },
+
     offers: {
-      "@type": "Offer",
+      "@type": "AggregateOffer",
       url: "https://www.mseprinting.com/business-forms",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Business Forms",
-      },
+      priceCurrency: "USD",
+      lowPrice: 25,
+      highPrice: 500,
+      offerCount: 50,
+      areaServed: { "@type": "City", name: "Minneapolis" },
     },
-  };
 
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/business-forms",
+    },
+
+    potentialAction: {
+      "@type": "ContactAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: "tel:763-542-8812",
+      },
+      name: "Call for Business Forms Quote",
+    },
+
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What types of business forms can you print in Minneapolis?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We print all types of business forms in Minneapolis including NCR carbonless forms, invoices, receipts, contracts, purchase orders, work orders, and custom business documentation for Twin Cities area businesses.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How long does business forms printing take in Minneapolis?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Most business forms orders in Minneapolis are completed within 2-5 business days. Rush printing services are available for urgent business forms needs in the Twin Cities area.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you offer delivery for business forms in Minneapolis?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, we offer delivery throughout Minneapolis and the Twin Cities area for business forms orders. Contact us for delivery options and scheduling.",
+        },
+      },
+    ],
+  } as const;
   return (
     <script
       type="application/ld+json"
@@ -185,7 +309,6 @@ const ServiceSchema = () => {
   );
 };
 
-/* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const BusinessForms = async () => {
   const data = await getCategoryPagesData("/business-forms");
   const pageData = data.BusinessFormsPageData?.[0];
