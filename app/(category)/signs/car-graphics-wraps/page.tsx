@@ -3,28 +3,26 @@ import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 
-// ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title: "Car Graphics & Wraps | Vehicle Branding | MSE Printing",
+  title:
+    "Car Graphics & Wraps in Minneapolis MN | Vehicle Branding | MSE Printing",
   description:
-    "Transform your vehicle into a moving advertisement with custom car graphics and wraps from MSE Printing. High-quality, full-color designs to boost brand visibility on the road.",
+    "High-impact car graphics and custom vehicle wraps in Minneapolis, MN. MSE Printing designs, prints, and installs full-color wraps, decals, and fleet branding so your vehicle becomes a moving billboard.",
   keywords: [
     "car graphics Minneapolis",
-    "custom vehicle wraps",
-    "car wrap printing Minnesota",
-    "fleet branding wraps",
-    "auto graphics Minneapolis",
-    "MSE Printing car wraps",
-    "mobile advertising graphics",
-    "vehicle signage Minnesota",
-    "car decal printing",
-    "vehicle branding wraps",
+    "vehicle wraps Minneapolis MN",
+    "custom car wraps Minneapolis",
+    "fleet vehicle branding",
+    "auto graphics Minnesota",
+    "mobile advertising wraps",
+    "car wrap design Minneapolis",
   ],
   applicationName: "MSE Printing",
   category: "Car Graphics & Wraps",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
-    canonical: "https://www.mseprinting.com/signs/car-graphics-wraps",
+    canonical:
+      "https://www.mseprinting.com/signs/car-graphics-wraps-minneapolis",
   },
   robots: {
     index: true,
@@ -38,13 +36,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
   openGraph: {
-    title: "Car Graphics & Wraps | Vehicle Branding | MSE Printing",
+    title: "Car Graphics & Wraps in Minneapolis MN | MSE Printing",
     description:
-      "High-quality custom vehicle wraps and graphics designed to boost brand visibility on the road.",
+      "Custom vehicle wraps and graphics printed and installed locally in Minneapolis by MSE Printing.",
     url: "https://www.mseprinting.com/signs/car-graphics-wraps",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -52,31 +47,31 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://www.mseprinting.com/images/signs-images/additional/car_graphics_wraps_right.webp",
-        width: 800,
+        width: 1200,
         height: 630,
-        alt: "Custom car graphics and vehicle wraps by MSE Printing in Minneapolis",
+        alt: "Car graphics & wraps in Minneapolis MN by MSE Printing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Car Graphics & Wraps | Vehicle Branding | MSE Printing",
+    title: "Car Graphics & Wraps in Minneapolis MN | MSE Printing",
     description:
-      "Get full-color custom car wraps and vehicle graphics for mobile advertising from MSE Printing.",
+      "Get full-color custom car wraps and vehicle graphics printed and installed in Minneapolis by MSE Printing.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
       {
         url: "https://www.mseprinting.com/images/signs-images/additional/car_graphics_wraps_right.webp",
-        alt: "Car graphics and wraps by MSE Printing, Minneapolis",
+        alt: "Vehicle wrap printing in Minneapolis MN by MSE Printing",
       },
     ],
   },
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
+    "geo.position": "44.97997;-93.26384",
+    ICBM: "44.97997, -93.26384",
     "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
     "business:contact_data:locality": "Minneapolis",
     "business:contact_data:region": "MN",
@@ -86,40 +81,23 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
-export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
-  ],
-  colorScheme: "normal",
-};
-
-// ---------- Service Schema Structured Data ----------
 const ServiceSchema = () => {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/signs/car-graphics-wraps#service",
-    name: "Car Graphics & Wraps",
-    description:
-      "Custom vehicle wraps and car graphics by MSE Printing. Turn your car into a mobile billboard with full-color, durable designs in Minneapolis and nationwide.",
-    provider: {
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+      "@id": "https://www.mseprinting.com/#localbusiness",
       name: "MSE Printing",
       url: "https://www.mseprinting.com",
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
+      priceRange: "$$",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3839 Washington Ave N Ste. 103",
@@ -128,60 +106,70 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
-    },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
-    ],
-    serviceType: "Car Graphics & Wraps",
-    category: "Print Services",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Vehicle Wrap & Graphics Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs/car-graphics-wraps#vehicle-wraps",
-          itemOffered: {
-            "@type": "Service",
-            name: "Vehicle Wraps",
-            description:
-              "Full-coverage wraps for cars, trucks, and vans to boost branding on the road.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs/car-graphics-wraps#car-decals",
-          itemOffered: {
-            "@type": "Service",
-            name: "Car Decals & Graphics",
-            description:
-              "Custom car decals, partial wraps, and vinyl graphics for mobile advertising.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs/car-graphics-wraps#design-install",
-          itemOffered: {
-            "@type": "Service",
-            name: "Design & Installation Services",
-            description:
-              "Professional design and installation for all vehicle graphics and wraps.",
-          },
-        },
-      ],
-    },
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/signs/car-graphics-wraps",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Car Graphics & Wraps",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 44.97997,
+        longitude: -93.26384,
       },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://www.mseprinting.com/signs/car-graphics-wraps#service",
+      name: "Car Graphics & Wraps in Minneapolis MN",
+      description:
+        "Design, print, and installation of custom car wraps, vehicle decals, and fleet graphics in Minneapolis, Minnesota.",
+      serviceType: "Vehicle Wrap Printing & Installation",
+      provider: { "@id": "https://www.mseprinting.com/#localbusiness" },
+      areaServed: [
+        { "@type": "City", name: "Minneapolis" },
+        { "@type": "State", name: "Minnesota" },
+        { "@type": "Country", name: "United States" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Vehicle Wrap & Graphics Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs/car-graphics-wraps#vehicle-wraps",
+            itemOffered: {
+              "@type": "Service",
+              name: "Full Vehicle Wraps",
+              description:
+                "Seamless, full-coverage wraps for cars, trucks, and vans.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs/car-graphics-wraps#partial-wraps",
+            itemOffered: {
+              "@type": "Service",
+              name: "Partial Wraps & Decals",
+              description:
+                "Cost-effective stripes, decals, and spot graphics to brand any vehicle.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs/car-graphics-wraps#design-install",
+            itemOffered: {
+              "@type": "Service",
+              name: "Design & Installation",
+              description:
+                "Professional creative design and certified installation for every wrap project.",
+            },
+          },
+        ],
+      },
+      offers: {
+        "@type": "Offer",
+        url: "https://www.mseprinting.com/images/signs-images/additional/car_graphics_wraps_right.webp",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "USD",
+      },
+    },
+  ];
 
   return (
     <script
@@ -191,7 +179,6 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
 const CarGraphicsWraps = async () => {
   const data = await getCategoryPagesData("/car-graphics-wraps");
   const pageData = data.CarGraphicsWrapsPageData?.[0];
