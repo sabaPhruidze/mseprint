@@ -5,20 +5,18 @@ import CardsPagesStructure from "components/common/CardsPagesStructure";
 
 // Fully corrected Metadata for SEO & Social Sharing
 export const metadata: Metadata = {
-  title: "Signs | MSE Printing",
+  title: "Custom Signs Printing in Minneapolis MN | MSE Printing",
   description:
-    "Discover high-quality signage solutions by MSE Printing. Eye-catching signs for businesses, events, real estate, and more—delivered fast in Minneapolis & USA.",
+    "Order custom indoor and outdoor signs printed in Minneapolis, MN. Business, event, and real-estate signage—all produced locally for fast turnaround by MSE Printing.",
   keywords: [
+    "signs Minneapolis",
+    "sign printing Minneapolis MN",
     "custom signs Minneapolis",
-    "business signage",
+    "business signage Minneapolis",
     "indoor signs Minnesota",
-    "outdoor signage Minneapolis",
-    "event signage",
-    "MSE Printing signs",
-    "real estate signs",
-    "trade show signs",
-    "professional sign printing",
-    "high-quality signage solutions",
+    "outdoor signs Minneapolis",
+    "event signage Minneapolis",
+    "real estate signs Minneapolis",
   ],
   applicationName: "MSE Printing",
   category: "Signs",
@@ -38,13 +36,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your actual Google Search Console code
-  },
   openGraph: {
-    title: "Signs | MSE Printing",
+    title: "Custom Signs Printing in Minneapolis MN | MSE Printing",
     description:
-      "High-quality signage solutions from MSE Printing. Custom indoor and outdoor signs for businesses and events in Minneapolis and beyond.",
+      "High-impact indoor & outdoor signs designed, printed, and delivered from Minneapolis by MSE Printing.",
     url: "https://www.mseprinting.com/signs",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -54,29 +49,29 @@ export const metadata: Metadata = {
         url: "https://www.mseprinting.com/images/home-images/signs.webp",
         width: 800,
         height: 630,
-        alt: "MSE Printing - Custom Business and Event Signs",
+        alt: "Custom business and event signs printed in Minneapolis MN by MSE Printing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Signs | MSE Printing",
+    title: "Custom Signs Printing in Minneapolis MN | MSE Printing",
     description:
-      "Explore high-quality signage solutions—custom signs, banners, and displays to elevate your brand. Fast turnaround from MSE Printing.",
+      "Eye-catching signs and banners printed locally in Minneapolis. Get a fast quote from MSE Printing.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
       {
         url: "https://www.mseprinting.com/images/home-images/signs.webp",
-        alt: "Eye-catching custom sign by MSE Printing in Minneapolis",
+        alt: "Professional sign printing in Minneapolis MN by MSE Printing",
       },
     ],
   },
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
+    "geo.position": "44.97997;-93.26384",
+    ICBM: "44.97997, -93.26384",
     "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
     "business:contact_data:locality": "Minneapolis",
     "business:contact_data:region": "MN",
@@ -86,10 +81,7 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
@@ -103,22 +95,17 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-// Service Schema for local SEO and Google Rich Results
 const ServiceSchema = () => {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/signs#service",
-    name: "Signs",
-    description:
-      "Comprehensive signage solutions by MSE Printing—custom indoor and outdoor signs for businesses, events, and real estate in Minneapolis, MN.",
-    provider: {
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+      "@id": "https://www.mseprinting.com/#localbusiness",
       name: "MSE Printing",
       url: "https://www.mseprinting.com",
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
+      priceRange: "$$",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3839 Washington Ave N Ste. 103",
@@ -127,60 +114,69 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
-    },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
-    ],
-    serviceType: "Signage Solutions",
-    category: "Business and Event Signs",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Signage Solutions",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs#indoor-signs",
-          itemOffered: {
-            "@type": "Service",
-            name: "Indoor Signs",
-            description:
-              "Custom indoor signage for offices, retail, and events.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs#outdoor-signs",
-          itemOffered: {
-            "@type": "Service",
-            name: "Outdoor Signs",
-            description:
-              "Weatherproof outdoor signs for business and promotional use.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs#real-estate-signs",
-          itemOffered: {
-            "@type": "Service",
-            name: "Real Estate Signs",
-            description:
-              "High-visibility yard signs and displays for real estate listings.",
-          },
-        },
-      ],
-    },
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/signs",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Signs",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 44.97997,
+        longitude: -93.26384,
       },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://www.mseprinting.com/signs#service",
+      name: "Sign Printing Services in Minneapolis MN",
+      description:
+        "Design, print, and installation of custom indoor & outdoor signs for businesses, events, and real-estate across Minneapolis and Minnesota.",
+      serviceType: "Sign Printing",
+      provider: { "@id": "https://www.mseprinting.com/#localbusiness" },
+      areaServed: [
+        { "@type": "City", name: "Minneapolis" },
+        { "@type": "State", name: "Minnesota" },
+        { "@type": "Country", name: "United States" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Sign Categories",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs#indoor-signs",
+            itemOffered: {
+              "@type": "Service",
+              name: "Indoor Signs",
+              description: "Custom office, retail, and lobby signage.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs#outdoor-signs",
+            itemOffered: {
+              "@type": "Service",
+              name: "Outdoor Signs",
+              description:
+                "Weather-resistant storefront and promotional signs.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs#real-estate-signs",
+            itemOffered: {
+              "@type": "Service",
+              name: "Real-Estate Signs",
+              description:
+                "High-visibility yard signs and riders for listings.",
+            },
+          },
+        ],
+      },
+      offers: {
+        "@type": "Offer",
+        url: "https://www.mseprinting.com/signs",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "USD",
+      },
+    },
+  ];
 
   return (
     <script
