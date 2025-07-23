@@ -1,24 +1,25 @@
 import React from "react";
+import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import CardsPagesStructure from "components/common/CardsPagesStructure";
-import { Metadata, Viewport } from "next";
 
-// ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title: "Printing & Copying Services | Fast Quality | MSE Printing",
+  title: "Printing & Copying Services in Minneapolis | MSE Printing",
   description:
-    "Fast, high-quality printing and copying solutions from MSE Printing. Perfect for documents, presentations, and everyday business needs in Minneapolis & nationwide.",
+    "Same‑day, high‑quality printing and copying services for businesses and individuals in Minneapolis & nationwide. Color & B/W, bulk jobs, binding and more.",
   keywords: [
-    "printing services Minneapolis",
-    "copying services Minnesota",
+    "printing Minneapolis",
+    "copying Minneapolis",
+    "minneapolis printing services",
+    "minnesota copying services",
     "business document printing",
-    "presentation printing Minneapolis",
-    "color copies Minnesota",
-    "MSE Printing copying",
+    "bulk printing Minneapolis",
+    "color copies Minneapolis",
     "black and white printing",
-    "bulk copying services",
-    "custom printing Minneapolis",
-    "same day printing Minnesota",
+    "same day printing Minneapolis",
+    "MSE Printing",
   ],
   applicationName: "MSE Printing",
   category: "Printing & Copying Services",
@@ -38,13 +39,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
   openGraph: {
-    title: "Printing & Copying Services | Fast Quality | MSE Printing",
+    title: "Printing & Copying Services in Minneapolis | MSE Printing",
     description:
-      "Reliable and professional printing and copying services at MSE Printing. From color prints to black-and-white copies, we handle jobs of any size with speed and precision.",
+      "Reliable, professional printing and copying services at MSE Printing. From color prints to B/W copies, we handle jobs of any size with speed and precision.",
     url: "https://www.mseprinting.com/printing-copying",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -60,9 +58,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Printing & Copying Services | Fast Quality | MSE Printing",
+    title:
+      "Printing & Copying Services in Minneapolis | Fast & High‑Quality | MSE Printing",
     description:
-      "Business printing, copying, and color or B/W solutions from MSE Printing.",
+      "Business printing & copying solutions from MSE Printing. Color or B/W, bulk or small runs – fast turnaround.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
@@ -95,24 +94,24 @@ export const metadata: Metadata = {
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+export const revalidate = 60 * 60 * 24;
+
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": "https://www.mseprinting.com/printing-copying#service",
-    name: "Printing & Copying Services",
+    name: "Printing & Copying Services in Minneapolis",
     description:
-      "Fast, high-quality printing and copying for businesses and individuals. Color and black-and-white solutions for documents, presentations, and more from MSE Printing in Minneapolis and nationwide.",
+      "Fast, high‑quality printing and copying for businesses and individuals. Color and B/W solutions for documents, presentations, and more from MSE Printing in Minneapolis and nationwide.",
     provider: {
       "@type": "LocalBusiness",
       "@id": "https://www.mseprinting.com/#business",
@@ -147,7 +146,7 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "Color Printing",
             description:
-              "Vivid, full-color prints for presentations, marketing, and displays.",
+              "Vivid, full‑color prints for presentations, marketing materials, and displays.",
           },
         },
         {
@@ -157,7 +156,7 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "Black & White Copying",
             description:
-              "Efficient, high-volume black-and-white copying for everyday needs.",
+              "Efficient, high‑volume black‑and‑white copying for everyday business needs.",
           },
         },
         {
@@ -184,27 +183,38 @@ const ServiceSchema = () => {
   };
 
   return (
-    <script
+    <Script
+      id="schema-printing-copying"
       type="application/ld+json"
+      strategy="afterInteractive"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
   );
 };
 
 // ---------- Main Page Component ----------
-const PrintingCopying = async () => {
+const PrintingCopyingPage = async () => {
   const data = await getCategoryPagesData("/printing-copying");
   const pageData = data.PrintingCopyingPageData?.[0];
+
   if (!pageData) {
-    return <div>Data not available.</div>;
+    return <p>Data not available. Please check back soon.</p>;
   }
 
   return (
-    <>
+    <main>
+      {/* Screen‑reader‑only H1 ensures a single, keyword‑rich primary heading */}
+      <h1 className="sr-only">
+        Printing & Copying Services in Minneapolis, MN – MSE Printing
+      </h1>
+
+      {/* Inject structured data for rich results */}
       <ServiceSchema />
+
+      {/* Core page content */}
       <CardsPagesStructure pageData={pageData} />
-    </>
+    </main>
   );
 };
 
-export default PrintingCopying;
+export default PrintingCopyingPage;
