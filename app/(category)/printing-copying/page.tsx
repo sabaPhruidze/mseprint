@@ -102,8 +102,6 @@ export const viewport: Viewport = {
   colorScheme: "light dark",
 };
 
-export const revalidate = 60 * 60 * 24;
-
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
