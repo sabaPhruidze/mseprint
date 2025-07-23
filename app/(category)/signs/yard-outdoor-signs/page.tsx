@@ -5,20 +5,17 @@ import PageStructure from "components/common/PageStructure";
 
 // Fully corrected metadata for SEO and Social Sharing
 export const metadata: Metadata = {
-  title: "Yard & Outdoor Signs | MSE Printing",
+  title: "Yard Signs & Outdoor Signs Printing in Minneapolis MN | MSE Printing",
   description:
-    "Boost your business visibility with high-impact yard signs, A-frames, and custom outdoor displays built to withstand any weather from MSE Printing.",
+    "Weather-proof yard signs, A-frames, and outdoor displays printed in Minneapolis, MN. MSE Printing designs, prints, and installs durable signage for real-estate, events, and local businesses.",
   keywords: [
     "yard signs Minneapolis",
-    "outdoor business signs",
-    "custom yard signs Minnesota",
-    "weatherproof signage Minneapolis",
-    "A-frame signs",
-    "yard display printing",
-    "real estate yard signs",
-    "event signage outdoor",
-    "durable outdoor signs",
-    "MSE Printing outdoor solutions",
+    "outdoor signs Minneapolis MN",
+    "custom yard sign printing",
+    "A-frame signs Minneapolis",
+    "real estate signs Minnesota",
+    "event yard signs Minneapolis",
+    "weatherproof outdoor signage",
   ],
   applicationName: "MSE Printing",
   category: "Outdoor Signage",
@@ -38,13 +35,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Google Search Console verification string
-  },
   openGraph: {
-    title: "Yard & Outdoor Signs | MSE Printing",
+    title: "Yard & Outdoor Signs Printing in Minneapolis MN | MSE Printing",
     description:
-      "Custom outdoor signage including weatherproof yard signs, A-frames, and promotional displays tailored for businesses and events in Minneapolis.",
+      "Custom yard signs, A-frames, and outdoor displays built for Minnesota weather by MSE Printing.",
     url: "https://www.mseprinting.com/signs/yard-outdoor-signs",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -52,31 +46,31 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://www.mseprinting.com/images/signs-images/additional/yard_outdoor_signs_right.webp",
-        width: 800,
+        width: 1200,
         height: 630,
-        alt: "MSE Printing - Weatherproof Yard and Outdoor Signs in Minneapolis",
+        alt: "Yard and outdoor signs printed in Minneapolis MN by MSE Printing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Yard & Outdoor Signs | MSE Printing",
+    title: "Yard & Outdoor Signs Printing in Minneapolis MN | MSE Printing",
     description:
-      "Promote your business outdoors with custom yard signs and durable displays from MSE Printing. Built for Minnesota weather.",
+      "Promote your business with durable outdoor signs and yard displays from MSE Printing in Minneapolis.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
       {
         url: "https://www.mseprinting.com/images/signs-images/additional/yard_outdoor_signs_right.webp",
-        alt: "Outdoor yard sign printed by MSE Printing in Minneapolis",
+        alt: "Outdoor yard sign printing in Minneapolis MN by MSE Printing",
       },
     ],
   },
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
+    "geo.position": "44.97997;-93.26384", // downtown coordinates :contentReference[oaicite:0]{index=0}
+    ICBM: "44.97997, -93.26384",
     "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
     "business:contact_data:locality": "Minneapolis",
     "business:contact_data:region": "MN",
@@ -86,10 +80,7 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
@@ -105,20 +96,16 @@ export const viewport: Viewport = {
 
 // Service Schema for Local SEO & Google Rich Results
 const ServiceSchema = () => {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/signs/yard-outdoor-signs#service",
-    name: "Yard & Outdoor Signs",
-    description:
-      "Weatherproof yard and outdoor signage, including A-frame signs, custom displays, and event signage by MSE Printing in Minneapolis, MN.",
-    provider: {
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+      "@id": "https://www.mseprinting.com/#localbusiness",
       name: "MSE Printing",
       url: "https://www.mseprinting.com",
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
+      priceRange: "$$",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3839 Washington Ave N Ste. 103",
@@ -127,60 +114,70 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
-    },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
-    ],
-    serviceType: "Outdoor Signage",
-    category: "Yard and Event Signs",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Outdoor Signage",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs/yard-outdoor-signs#yard-signs",
-          itemOffered: {
-            "@type": "Service",
-            name: "Custom Yard Signs",
-            description:
-              "Full-color, weather-resistant yard signs for businesses, events, and real estate.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs/yard-outdoor-signs#a-frame",
-          itemOffered: {
-            "@type": "Service",
-            name: "A-Frame Signs",
-            description:
-              "Durable A-frame sidewalk signs for outdoor advertising.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/signs/yard-outdoor-signs#event-signage",
-          itemOffered: {
-            "@type": "Service",
-            name: "Outdoor Event Signage",
-            description:
-              "Weatherproof signage solutions for events and promotions.",
-          },
-        },
-      ],
-    },
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/signs/yard-outdoor-signs",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Yard & Outdoor Signs",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 44.97997,
+        longitude: -93.26384,
       },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://www.mseprinting.com/signs/yard-outdoor-signs#service",
+      name: "Yard & Outdoor Signs Printing in Minneapolis MN",
+      description:
+        "Design, print, and installation of weatherproof yard signs, A-frames, and outdoor event signage in Minneapolis, Minnesota.",
+      serviceType: "Outdoor Sign Printing & Installation",
+      provider: { "@id": "https://www.mseprinting.com/#localbusiness" },
+      areaServed: [
+        { "@type": "City", name: "Minneapolis" },
+        { "@type": "State", name: "Minnesota" },
+        { "@type": "Country", name: "United States" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Outdoor Signage Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs/yard-outdoor-signs#yard-signs",
+            itemOffered: {
+              "@type": "Service",
+              name: "Custom Yard Signs",
+              description:
+                "Full-color, weather-resistant yard signs for businesses, events, and real-estate.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs/yard-outdoor-signs#a-frame",
+            itemOffered: {
+              "@type": "Service",
+              name: "A-Frame Signs",
+              description:
+                "Durable sidewalk A-frames perfect for outdoor advertising.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/signs/yard-outdoor-signs#event-signage",
+            itemOffered: {
+              "@type": "Service",
+              name: "Event & Directional Signage",
+              description:
+                "Weatherproof signage for races, festivals, and community events.",
+            },
+          },
+        ],
+      },
+      offers: {
+        "@type": "Offer",
+        url: "https://www.mseprinting.com/signs/yard-outdoor-signs",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "USD",
+      },
+    },
+  ];
 
   return (
     <script

@@ -87,6 +87,14 @@ export const metadata: Metadata = {
   publisher: "MSE Printing",
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+  colorScheme: "normal",
+};
+
 const ServiceSchema = () => {
   const schemaData = [
     {
