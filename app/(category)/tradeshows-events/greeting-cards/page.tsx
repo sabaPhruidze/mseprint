@@ -5,20 +5,18 @@ import PageStructure from "components/common/PageStructure";
 
 // Fully corrected Metadata for SEO & Social Sharing (title < 70 chars)
 export const metadata: Metadata = {
-  title: "Custom Greeting Cards for All Occasions | MSE Printing",
+  title:
+    "Greeting Cards Printing in Minneapolis MN | Custom Cards | MSE Printing",
   description:
-    "Thoughtful, custom greeting cards that add a personal touch to every occasion. Celebrate, appreciate, and connect with MSE Printing.",
+    "Custom greeting cards printed in Minneapolis, MN—holiday, thank-you, birthday, business and more. Design & print locally with MSE Printing for fast turnaround and premium quality.",
   keywords: [
-    "custom greeting cards",
-    "personalized cards Minneapolis",
-    "holiday cards Minnesota",
-    "business greeting cards",
-    "thank you cards",
+    "greeting cards Minneapolis",
+    "custom greeting cards Minneapolis MN",
+    "holiday card printing Minneapolis",
+    "business greeting cards Minnesota",
+    "thank you cards Minneapolis",
     "birthday cards printing",
-    "event invitations",
-    "custom printed cards",
-    "MSE Printing greeting cards",
-    "greeting card design",
+    "event invitations Minneapolis",
   ],
   applicationName: "MSE Printing",
   category: "Greeting Cards",
@@ -39,12 +37,12 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console verification string
+    google: "ABCD1234xyz", // leave your Search Console string
   },
   openGraph: {
-    title: "Custom Greeting Cards for All Occasions | MSE Printing",
+    title: "Greeting Cards Printing in Minneapolis MN | MSE Printing",
     description:
-      "Celebrate, appreciate, and connect with beautiful greeting cards designed and printed to make a lasting impression by MSE Printing.",
+      "Beautiful custom greeting cards designed and printed locally in Minneapolis by MSE Printing.",
     url: "https://www.mseprinting.com/tradeshows-events/greeting-cards",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -54,29 +52,29 @@ export const metadata: Metadata = {
         url: "https://www.mseprinting.com/images/tradeshows-events-images/additional/greeting_cards_right.webp",
         width: 800,
         height: 630,
-        alt: "Custom greeting cards printed by MSE Printing in Minneapolis",
+        alt: "Custom greeting cards printed in Minneapolis MN by MSE Printing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Custom Greeting Cards for All Occasions | MSE Printing",
+    title: "Greeting Cards Printing in Minneapolis MN | MSE Printing",
     description:
-      "Make every occasion memorable with custom greeting cards from MSE Printing, Minneapolis.",
+      "Make every occasion special with locally printed greeting cards from MSE Printing in Minneapolis.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
       {
         url: "https://www.mseprinting.com/images/tradeshows-events-images/additional/greeting_cards_right.webp",
-        alt: "Greeting cards by MSE Printing, Minneapolis",
+        alt: "Greeting cards printed in Minneapolis MN by MSE Printing",
       },
     ],
   },
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
+    "geo.position": "44.97997;-93.26384",
+    ICBM: "44.97997, -93.26384",
     "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
     "business:contact_data:locality": "Minneapolis",
     "business:contact_data:region": "MN",
@@ -86,10 +84,7 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
@@ -103,23 +98,17 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-// Service Schema for Google Rich Results & Local SEO
 const ServiceSchema = () => {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id":
-      "https://www.mseprinting.com/tradeshows-events/greeting-cards#service",
-    name: "Greeting Cards",
-    description:
-      "Custom greeting cards for holidays, business, and special occasions—designed and printed by MSE Printing in Minneapolis, MN.",
-    provider: {
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+      "@id": "https://www.mseprinting.com/#localbusiness",
       name: "MSE Printing",
       url: "https://www.mseprinting.com",
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
+      priceRange: "$$",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3839 Washington Ave N Ste. 103",
@@ -128,59 +117,71 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
-    },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
-    ],
-    serviceType: "Greeting Card Printing",
-    category: "Cards & Invitations",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Greeting Cards",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/tradeshows-events/greeting-cards#holiday-cards",
-          itemOffered: {
-            "@type": "Service",
-            name: "Holiday Cards",
-            description:
-              "Personalized holiday greeting cards for business or family.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/tradeshows-events/greeting-cards#thank-you-cards",
-          itemOffered: {
-            "@type": "Service",
-            name: "Thank You Cards",
-            description: "Custom thank you cards for client or personal use.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/tradeshows-events/greeting-cards#event-invitations",
-          itemOffered: {
-            "@type": "Service",
-            name: "Event Invitations",
-            description:
-              "Printed invitations for weddings, events, and business occasions.",
-          },
-        },
-      ],
-    },
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/tradeshows-events/greeting-cards",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Greeting Cards",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 44.97997,
+        longitude: -93.26384,
       },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id":
+        "https://www.mseprinting.com/tradeshows-events/greeting-cards#service",
+      name: "Greeting Cards Printing in Minneapolis MN",
+      description:
+        "Design, print, and finishing of custom greeting cards for holidays, business, and special occasions—serving Minneapolis and the Twin Cities.",
+      serviceType: "Greeting Card Printing",
+      provider: { "@id": "https://www.mseprinting.com/#localbusiness" },
+      areaServed: [
+        { "@type": "City", name: "Minneapolis" },
+        { "@type": "State", name: "Minnesota" },
+        { "@type": "Country", name: "United States" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Greeting Card Options",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/tradeshows-events/greeting-cards#holiday-cards",
+            itemOffered: {
+              "@type": "Service",
+              name: "Holiday Cards",
+              description:
+                "Personalized holiday greeting cards for clients, family, and friends.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/tradeshows-events/greeting-cards#thank-you-cards",
+            itemOffered: {
+              "@type": "Service",
+              name: "Thank-You Cards",
+              description:
+                "Custom thank-you cards to express gratitude with style.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/tradeshows-events/greeting-cards#event-invitations",
+            itemOffered: {
+              "@type": "Service",
+              name: "Event Invitations",
+              description:
+                "Printed invitations for weddings, corporate events, and parties.",
+            },
+          },
+        ],
+      },
+      offers: {
+        "@type": "Offer",
+        url: "https://www.mseprinting.com/tradeshows-events/greeting-cards",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "USD",
+      },
+    },
+  ];
 
   return (
     <script
