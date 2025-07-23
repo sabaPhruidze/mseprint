@@ -5,9 +5,9 @@ import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Cards & Invitations | MSE Print",
+  title: "Cards & Invitations Printing in Minneapolis MN",
   description:
-    "Design and print beautiful custom cards and invitations for any event or business need with MSE Printing. Elegant finishes, premium materials, and local support.",
+    "Design and print beautiful cards & invitations in Minneapolis, MN. Wedding, holiday, and business stationery printed locally at MSE Printing.",
   keywords: [
     "custom cards Minneapolis",
     "invitation printing",
@@ -19,6 +19,12 @@ export const metadata: Metadata = {
     "MSE Printing invitations",
     "personalized greeting cards",
     "premium custom cards USA",
+    "cards & invitations Minneapolis",
+    "invitation printing Minneapolis MN",
+    "custom greeting cards Minneapolis",
+    "wedding invitation printers Minneapolis",
+    "holiday cards printing",
+    "business invitations",
   ],
   applicationName: "MSE Printing",
   category: "Custom Cards & Invitations",
@@ -99,7 +105,6 @@ export const metadata: Metadata = {
   publisher: "MSE Printing",
 };
 
-/* ─────────────── VIEWPORT COLOR MODE ─────────────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -108,7 +113,6 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",

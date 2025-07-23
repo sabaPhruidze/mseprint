@@ -201,15 +201,7 @@ const PrintingCopyingPage = async () => {
 
   return (
     <main>
-      {/* Screen‑reader‑only H1 ensures a single, keyword‑rich primary heading */}
-      <h1 className="sr-only">
-        Printing & Copying Services in Minneapolis, MN – MSE Printing
-      </h1>
-
-      {/* Inject structured data for rich results */}
       <ServiceSchema />
-
-      {/* Core page content */}
       <CardsPagesStructure pageData={pageData} />
     </main>
   );
