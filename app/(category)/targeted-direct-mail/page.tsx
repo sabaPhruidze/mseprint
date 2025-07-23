@@ -3,22 +3,18 @@ import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 
-// Fully corrected Metadata for SEO & Social Sharing
 export const metadata: Metadata = {
-  title: "Targeted Direct Mail | MSE Printing",
+  title: "Targeted Direct Mail Services in Minneapolis MN | MSE Printing",
   description:
-    "Send smarter with targeted direct mail campaigns from MSE Printing. Reach the right audience with data-driven precision and maximize your marketing ROI.",
+    "Data-driven, targeted direct-mail campaigns printed and mailed from Minneapolis, MN. Segment lists, personalize every piece, and boost ROI with MSE Printing.",
   keywords: [
-    "targeted direct mail",
-    "direct mail campaigns Minneapolis",
-    "precision direct mail",
-    "custom mailing services",
-    "data-driven marketing Minneapolis",
-    "mail marketing Minnesota",
-    "personalized mailers",
-    "direct mail advertising",
-    "MSE Printing targeted mail",
-    "minneapolis direct mail company",
+    "targeted direct mail Minneapolis",
+    "direct mail services Minneapolis MN",
+    "data driven direct mail",
+    "custom mailing services Minneapolis",
+    "direct mail marketing Minnesota",
+    "personalized mailers Minneapolis",
+    "mailing list segmentation",
   ],
   applicationName: "MSE Printing",
   category: "Direct Mail Services",
@@ -39,12 +35,12 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "ABCD1234xyz", // Replace with your Google Search Console verification string
+    google: "ABCD1234xyz",
   },
   openGraph: {
-    title: "Targeted Direct Mail | MSE Printing",
+    title: "Targeted Direct Mail Services in Minneapolis MN | MSE Printing",
     description:
-      "Reach the right audience at the right time with precision-targeted direct mail campaigns designed to drive results from MSE Printing, Minneapolis.",
+      "Reach the right audience at the right time with precision direct-mail campaigns from MSE Printing, Minneapolis.",
     url: "https://www.mseprinting.com/targeted-direct-mail",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -54,29 +50,29 @@ export const metadata: Metadata = {
         url: "https://www.mseprinting.com/images/direct-mail-images/additional/targeted_direct_mail_right.webp",
         width: 800,
         height: 630,
-        alt: "MSE Printing - Targeted Direct Mail Campaigns in Minneapolis",
+        alt: "Targeted direct mail services in Minneapolis MN by MSE Printing",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Targeted Direct Mail | MSE Printing",
+    title: "Targeted Direct Mail Services in Minneapolis MN | MSE Printing",
     description:
-      "Smarter, targeted direct mail campaigns from MSE Printing. Personalize your message and maximize your marketing impact.",
+      "Smarter, data-driven direct-mail campaigns from MSE Printing in Minneapolis.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
       {
         url: "https://www.mseprinting.com/images/direct-mail-images/additional/targeted_direct_mail_right.webp",
-        alt: "Targeted direct mailer by MSE Printing, Minneapolis",
+        alt: "Precision direct mail printed in Minneapolis MN by MSE Printing",
       },
     ],
   },
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
+    "geo.position": "44.97997;-93.26384",
+    ICBM: "44.97997, -93.26384",
     "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
     "business:contact_data:locality": "Minneapolis",
     "business:contact_data:region": "MN",
@@ -86,10 +82,7 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
@@ -103,22 +96,17 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-// Service Schema for Google Rich Results & Local SEO
 const ServiceSchema = () => {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/targeted-direct-mail#service",
-    name: "Targeted Direct Mail",
-    description:
-      "Precision-targeted direct mail campaigns by MSE Printing—data-driven, personalized mailers and campaigns for higher response rates in Minneapolis, MN.",
-    provider: {
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+      "@id": "https://www.mseprinting.com/#localbusiness",
       name: "MSE Printing",
       url: "https://www.mseprinting.com",
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
+      priceRange: "$$",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3839 Washington Ave N Ste. 103",
@@ -127,60 +115,70 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
-    },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
-    ],
-    serviceType: "Targeted Direct Mail Marketing",
-    category: "Direct Mail Services",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Targeted Mail Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/targeted-direct-mail#personalized-campaigns",
-          itemOffered: {
-            "@type": "Service",
-            name: "Personalized Campaigns",
-            description:
-              "Data-driven mail campaigns customized to audience profiles.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/targeted-direct-mail#mailing-list-management",
-          itemOffered: {
-            "@type": "Service",
-            name: "Mailing List Management",
-            description:
-              "Audience list targeting, cleaning, and segmentation for campaigns.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/targeted-direct-mail#variable-data-printing",
-          itemOffered: {
-            "@type": "Service",
-            name: "Variable Data Printing",
-            description:
-              "Personalized printing for each mailer for increased engagement.",
-          },
-        },
-      ],
-    },
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/targeted-direct-mail",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Targeted Direct Mail",
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: 44.97997,
+        longitude: -93.26384,
       },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": "https://www.mseprinting.com/targeted-direct-mail#service",
+      name: "Targeted Direct Mail Services in Minneapolis MN",
+      description:
+        "Precision direct-mail campaigns with data segmentation, variable-data printing, and local delivery—serving Minneapolis and the Twin Cities.",
+      serviceType: "Direct Mail Marketing",
+      provider: { "@id": "https://www.mseprinting.com/#localbusiness" },
+      areaServed: [
+        { "@type": "City", name: "Minneapolis" },
+        { "@type": "State", name: "Minnesota" },
+        { "@type": "Country", name: "United States" },
+      ],
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Targeted Mail Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/targeted-direct-mail#personalized-campaigns",
+            itemOffered: {
+              "@type": "Service",
+              name: "Personalized Campaigns",
+              description:
+                "Data-driven mailers customized to each recipient for higher response rates.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/targeted-direct-mail#mailing-list-management",
+            itemOffered: {
+              "@type": "Service",
+              name: "Mailing List Management",
+              description:
+                "Targeting, cleaning, and segmenting your audience lists for accurate delivery.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: "https://www.mseprinting.com/targeted-direct-mail#variable-data-printing",
+            itemOffered: {
+              "@type": "Service",
+              name: "Variable Data Printing",
+              description:
+                "Personalization at scale—unique text, offers, or images on every mail piece.",
+            },
+          },
+        ],
+      },
+      offers: {
+        "@type": "Offer",
+        url: "https://www.mseprinting.com/targeted-direct-mail",
+        availability: "https://schema.org/InStock",
+        priceCurrency: "USD",
+      },
+    },
+  ];
 
   return (
     <script
