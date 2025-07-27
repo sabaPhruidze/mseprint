@@ -21,8 +21,7 @@ export const metadata: Metadata = {
   category: "Car Graphics & Wraps",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
-    canonical:
-      "https://www.mseprinting.com/signs/car-graphics-wraps-minneapolis",
+    canonical: "https://www.mseprinting.com/signs/car-graphics-wraps",
   },
   robots: {
     index: true,
