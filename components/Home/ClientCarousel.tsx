@@ -42,7 +42,6 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
   }
 
   const total = carouselData.length;
-  const nextIndex = (currentIndex + 1) % total;
 
   const nextSlide = () => setCurrentIndex((i) => (i + 1) % total);
   const prevSlide = () => setCurrentIndex((i) => (i - 1 + total) % total);
