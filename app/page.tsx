@@ -68,13 +68,13 @@ const localBusinessJsonLd = {
   description:
     "Commercial printing company in Minneapolis, MN specializing in offset printing, digital printing, direct mail and signage.",
   url: "https://www.mseprinting.com/",
-  telephone: "+1-763-542-8812", // <- replace if different
+  telephone: "+1-763-542-8812",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "YOUR STREET ADDRESS", // <- replace
+    streetAddress: "3839 Washington Ave N Ste. 103",
     addressLocality: "Minneapolis",
     addressRegion: "MN",
-    postalCode: "YOUR ZIP", // <- replace
+    postalCode: "55412",
     addressCountry: "US",
   },
   geo: {

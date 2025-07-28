@@ -1,4 +1,3 @@
-/* app/layout.tsx — live data version */
 import "../styles/globals.css";
 import localFont from "next/font/local";
 
@@ -7,11 +6,7 @@ import Footer from "../components/Footer/Footer";
 import { getHeaderData } from "../db/getHeaderData";
 import { getFooterData } from "../db/GetFooterData";
 
-/** ------------------------------------------------------------
- *  Disable the default Router Cache so every request re-queries
- *  Neon instead of serving a stale snapshot.
- *  ---------------------------------------------------------- */
-export const dynamic = "force-dynamic"; // 👈 REQUIRED for live updates
+export const dynamic = "force-dynamic";
 
 /* ────────────  Local fonts  ──────────── */
 const interBold = localFont({
@@ -36,17 +31,25 @@ const interMedium = localFont({
 });
 
 /* ────────────  LocalBusiness JSON-LD  ──────────── */
+/* app/layout.tsx */
 function LocalBusinessSchema() {
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "ProfessionalService"],
     "@id": "https://www.mseprinting.com/#business",
+    additionalType: "https://www.productontology.org/id/Printing",
     name: "MSE Printing",
-    alternateName: ["MSE Print", "MSE Printing Services"],
-    description:
-      "Professional printing services in Minneapolis specializing in custom booth graphics, trade show banners, business signs, and large-format printing with fast turnaround and nationwide shipping.",
+    legalName: "MSE Printing LLC",
+    alternateName: [
+      "MSE Print",
+      "MSE Printing Services",
+      "MSE Printing",
+      "MSEPrinting",
+    ],
     url: "https://www.mseprinting.com",
-    telephone: "763-542-8812",
+    description:
+      "Professional printing services in Minneapolis specializing in custom booth graphics, trade show banners, business signs, and large‑format printing with fast turnaround and nationwide shipping.",
+    telephone: "+1-763-542-8812",
     email: "info@mseprinting.com",
     foundingDate: "2002",
     address: {
@@ -62,6 +65,8 @@ function LocalBusinessSchema() {
       latitude: 45.023,
       longitude: -93.279,
     },
+    hasMap:
+      "https://www.google.com/maps/place/MSE+Graphics+LLC/@45.0252205,-93.2838849,17z/data=!3m1!4b1!4m6!3m5!1s0x52b334387bfcac35:0x69d1a3a0b8d6daf8!8m2!3d45.0252205!4d-93.2838849!16s%2Fg%2F1tf5pwpz?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D",
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -70,6 +75,9 @@ function LocalBusinessSchema() {
         closes: "18:00",
       },
     ],
+    priceRange: "$$",
+    currenciesAccepted: "USD",
+    paymentAccepted: ["Cash", "Credit Card", "Check", "PayPal"],
     serviceArea: {
       "@type": "GeoCircle",
       geoMidpoint: {
@@ -77,7 +85,7 @@ function LocalBusinessSchema() {
         latitude: 45.023,
         longitude: -93.279,
       },
-      geoRadius: "50000",
+      geoRadius: 50000,
     },
     areaServed: [
       { "@type": "City", name: "Minneapolis" },
@@ -87,107 +95,120 @@ function LocalBusinessSchema() {
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Printing Services",
+      name: "Professional Printing Services",
       itemListElement: [
         {
           "@type": "Offer",
+          name: "Custom Business Signs",
+          url: "https://www.mseprinting.com/signs",
+          category: "Signs",
           itemOffered: {
             "@type": "Service",
             name: "Signs",
+            serviceType: "Custom Signage",
             description:
-              "Custom indoor and outdoor signage for businesses, events, and promotions.",
+              "Custom indoor and outdoor signage for businesses, events, and promotions including vinyl banners, yard signs, and storefront displays.",
+            provider: { "@id": "https://www.mseprinting.com/#business" },
           },
+          areaServed: { "@id": "https://www.mseprinting.com/#serviceArea" },
         },
         {
           "@type": "Offer",
+          name: "Digital & Offset Printing",
+          url: "https://www.mseprinting.com/printing-copying",
+          category: "Printing Services",
           itemOffered: {
             "@type": "Service",
             name: "Printing & Copying",
+            serviceType: "Commercial Printing",
             description:
-              "High-quality digital and offset printing, copying, and duplicating services.",
+              "High‑quality digital and offset printing, copying, and duplicating services for business cards, brochures, flyers, and marketing materials.",
+            provider: { "@id": "https://www.mseprinting.com/#business" },
           },
         },
         {
           "@type": "Offer",
+          name: "Direct Mail Campaigns",
+          url: "https://www.mseprinting.com/direct-mail",
+          category: "Marketing Services",
           itemOffered: {
             "@type": "Service",
             name: "Direct Mail & Mailing Services",
+            serviceType: "Direct Mail Marketing",
             description:
-              "End-to-end direct mail campaigns including printing, addressing, and postal delivery.",
+              "End‑to‑end direct mail campaigns including printing, addressing, and postal delivery with USPS bulk mail discounts.",
+            provider: { "@id": "https://www.mseprinting.com/#business" },
           },
         },
         {
           "@type": "Offer",
+          name: "Web‑to‑Print Portals",
+          url: "https://www.mseprinting.com/online-ordering-portals",
+          category: "Digital Services",
           itemOffered: {
             "@type": "Service",
             name: "Online Ordering Portals",
+            serviceType: "Web‑to‑Print Solutions",
             description:
-              "Custom web-to-print portals for easy ordering of branded materials.",
+              "Custom web‑to‑print portals for easy ordering of branded materials with real‑time pricing and proofing.",
+            provider: { "@id": "https://www.mseprinting.com/#business" },
           },
         },
         {
           "@type": "Offer",
+          name: "Graphic Design",
+          url: "https://www.mseprinting.com/graphic-design",
+          category: "Design Services",
           itemOffered: {
             "@type": "Service",
             name: "Graphic Design",
+            serviceType: "Commercial Design",
             description:
-              "Professional design services for print materials, logos, and marketing assets.",
+              "Professional design services for print materials, logos, branding, and marketing assets.",
+            provider: { "@id": "https://www.mseprinting.com/#business" },
           },
         },
         {
           "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Marketing Services",
-            description:
-              "Targeted marketing solutions including strategy, design, and print execution.",
-          },
-        },
-        {
-          "@type": "Offer",
+          name: "Trade Show Materials",
+          url: "https://www.mseprinting.com/tradeshows-events",
+          category: "Event Services",
           itemOffered: {
             "@type": "Service",
             name: "Tradeshows & Events",
+            serviceType: "Trade Show Graphics",
             description:
-              "Event materials including booths, banners, backdrops, and branded giveaways.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Labels & Packaging",
-            description:
-              "Custom product labels and printed packaging for retail and business use.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Fulfillment Services",
-            description:
-              "Storage, assembly, and shipping of printed materials and kits for your business.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Industry Specific",
-            description:
-              "Printing and marketing services tailored for industries like healthcare, education, legal, and more.",
+              "Complete trade show materials including booth graphics, retractable banners, table throws, and branded promotional items.",
+            provider: { "@id": "https://www.mseprinting.com/#business" },
           },
         },
       ],
     },
+
     image: [
       "https://www.mseprinting.com/images/home-images/offset_printing.webp",
     ],
-    logo: "https://www.mseprinting.com/favicon.ico",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.mseprinting.com/favicon.ico",
+      width: 32,
+      height: 32,
+    },
+
     sameAs: [
       "https://www.facebook.com/MSEGRAPHICS",
-      "https://www.linkedin.com/company/highlight-printing/",
+      "https://www.linkedin.com/company/highlight-printing/posts/?feedView=all",
+      "https://www.google.com/maps/place/MSE+Graphics+LLC/@45.0252205,-93.2838849,17z/data=!3m1!4b1!4m6!3m5!1s0x52b334387bfcac35:0x69d1a3a0b8d6daf8!8m2!3d45.0252205!4d-93.2838849!16s%2Fg%2F1tf5pwpz?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D",
+    ],
+
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+1-763-542-8812",
+        contactType: "Customer Service",
+        availableLanguage: ["en"],
+        areaServed: "US",
+      },
     ],
   };
 
@@ -199,13 +220,11 @@ function LocalBusinessSchema() {
   );
 }
 
-/* ────────────  Root layout  ──────────── */
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  /* live DB queries – no caching */
   const [headerData, footerData] = await Promise.all([
     getHeaderData(),
     getFooterData(),
