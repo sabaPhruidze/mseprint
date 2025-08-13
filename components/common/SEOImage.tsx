@@ -1,7 +1,18 @@
+// components/common/SEOImage.tsx
 import Image from "next/image";
+import React from "react";
 import { SEOImageProps } from "../../types/commonTypes";
 
-const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
+type ComponentProps = Omit<SEOImageProps, "decoding" | "fetchPriority"> & {
+  className?: string;
+  objectFit?: React.CSSProperties["objectFit"];
+  decoding?: string; // accept any string from callers
+  fetchPriority?: string; // accept any string from callers
+  loading?: "eager" | "lazy";
+  withJsonLd?: boolean;
+};
+
+const SEOImage: React.FC<ComponentProps> = ({
   src,
   alt,
   name,
@@ -15,6 +26,8 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
   className = "",
   fetchPriority,
   decoding,
+  loading,
+  withJsonLd = true,
 }) => {
   const structuredData = {
     "@context": "http://schema.org",
@@ -43,25 +56,39 @@ const SEOImage: React.FC<SEOImageProps & { className?: string }> = ({
       : undefined,
   };
 
+  const resolvedSizes = sizes ?? "100vw";
+
+  // sanitize to Next/Image-accepted values
+  const nextDecoding =
+    decoding === "async" ? "async" : (undefined as "async" | undefined);
+  const nextFetchPriority =
+    fetchPriority === "high" ||
+    fetchPriority === "low" ||
+    fetchPriority === "auto"
+      ? (fetchPriority as "high" | "low" | "auto")
+      : undefined;
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      {withJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      )}
       <div className={`relative ${className}`}>
         <Image
           src={src}
           alt={alt}
           priority={priority}
-          loading={priority ? undefined : "lazy"}
-          sizes={sizes}
-          decoding={decoding ? "sync" : "async"}
+          loading={loading}
+          sizes={resolvedSizes}
+          decoding={nextDecoding}
+          fetchPriority={nextFetchPriority}
           fill={fill}
           style={fill && objectFit ? { objectFit } : undefined}
           width={fill ? undefined : width}
           height={fill ? undefined : height}
-          fetchPriority={fetchPriority ? "high" : "low"}
         />
       </div>
     </>

@@ -1,12 +1,11 @@
 import "../styles/globals.css";
 import localFont from "next/font/local";
+import Script from "next/script";
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import { getHeaderData } from "../db/getHeaderData";
 import { getFooterData } from "../db/GetFooterData";
-
-export const dynamic = "force-dynamic";
 
 /* ────────────  Local fonts  ──────────── */
 const interBold = localFont({
@@ -236,6 +235,21 @@ export default async function RootLayout({
         className={`${interBold.variable} ${interExtraBold.variable} ${interMedium.variable}
         min-h-screen flex flex-col font-inter-medium`}
       >
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+              page_path: window.location.pathname
+            });
+          `}
+        </Script>
+
         <LocalBusinessSchema />
 
         <Header {...headerData} servicesData={footerData.footerContentData} />
