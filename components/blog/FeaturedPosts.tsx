@@ -60,10 +60,8 @@ export default function FeaturedPosts({ posts }: Props) {
                 objectFit="cover"
               />
 
-              {/* gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-              {/* title & date */}
               <div className="absolute bottom-4 left-4 right-4 text-white">
                 <h3 className="text-lg font-semibold leading-snug line-clamp-2 drop-shadow">
                   {post.title}
