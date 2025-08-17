@@ -214,6 +214,7 @@ const AdvancedMailingServices = async () => {
 
   return (
     <>
+      <ServiceSchema />
       <PageStructure
         pageData={pageData}
         breadcrumbs={breadcrumbs} // ← ADD
