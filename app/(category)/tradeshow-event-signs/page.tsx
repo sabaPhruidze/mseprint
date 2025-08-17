@@ -200,7 +200,16 @@ const TradeshowEventSigns = async () => {
   return (
     <>
       <ServiceSchema />
-      <PageStructure pageData={pageData} />
+      <PageStructure
+        pageData={pageData}
+        tokens={{
+          city: "Minneapolis",
+          state: "Minnesota",
+          state_abbr: "MN",
+          brand: "MSE Printing",
+          phone: "763-542-8812",
+        }}
+      />
     </>
   );
 };

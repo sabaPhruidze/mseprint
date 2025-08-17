@@ -183,7 +183,16 @@ export default async function BlogPage() {
       </main>
       {pageData && (
         <section className="mt-12">
-          <PageStructure pageData={pageData} />
+          <PageStructure
+            pageData={pageData}
+            tokens={{
+              city: "Minneapolis",
+              state: "Minnesota",
+              state_abbr: "MN",
+              brand: "MSE Printing",
+              phone: "763-542-8812",
+            }}
+          />
         </section>
       )}
     </>

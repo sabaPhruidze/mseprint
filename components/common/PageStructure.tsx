@@ -3,11 +3,31 @@ import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { PageStructureTypes } from "types/commonTypes";
 
-interface PageStructureProps {
-  pageData: PageStructureTypes;
+type LocationTokens = {
+  city?: string;
+  state?: string;
+  state_abbr?: string;
+  brand?: string;
+  phone?: string;
+};
+
+function applyTokens(input?: string, t?: LocationTokens) {
+  if (!input || !t) return input ?? "";
+  return input.replace(
+    /\{\{\s*(city|state|state_abbr|brand|phone)\s*\}\}/g,
+    (_m, key) => (t as any)[key] ?? _m
+  );
 }
 
-export default function PageStructure({ pageData }: PageStructureProps) {
+interface PageStructureProps {
+  pageData: PageStructureTypes;
+  tokens?: LocationTokens;
+}
+
+export default function PageStructure({
+  pageData,
+  tokens,
+}: PageStructureProps) {
   return (
     <>
       <a
@@ -52,25 +72,21 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                   addressRegion: "Minneapolis",
                 }
               }
-              priority={pageData.mainimage.priority || false}
-              loading={pageData.mainimage.priority ? undefined : "lazy"}
-              sizes={
-                pageData.mainimage.sizes ||
-                "(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 60vw"
-              }
+              priority={true}
+              sizes="100vw"
               className="w-full h-[700px]  screen-size-5:h-[400px]"
-              fill={true}
+              fill
               objectFit="cover"
             />
 
             <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center items-start text-white screen-size-15:text-left text-center">
               <div className="screen-size-15:w-[1200px] max-w-[1500px] screen-size-15:ml-20 ml-0">
                 <h1 className="screen-size-10:text-[50px] text-[30px] font-extrabold leading-tight text-white max-w-full">
-                  {pageData.introsection.heading ||
+                  {applyTokens(pageData.introsection.heading, tokens) ||
                     "pageData.introSection.heading not written"}
                 </h1>
                 <p className="mb-2 leading-relaxed screen-size-15:my-8 my-0 screen-size-15:text-2xl text-xl">
-                  {pageData.introsection.paragraph ||
+                  {applyTokens(pageData.introsection.paragraph, tokens) ||
                     "pageData.introSection.paragraph not written"}
                 </p>
                 {/* write only request a quote and will be static for all  */}
@@ -79,7 +95,10 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                   aria-label={`Request a Quote`}
                   className="inline-block bg-[#ff0015] text-white font-bold border-none rounded-[10px] px-8 py-5 transition duration-300 ease-in-out hover:bg-[#ff0015] hover:text-white focus:scale-90"
                 >
-                  Request a Quote
+                  {applyTokens(
+                    "Request a Quote in {{city}}, {{state_abbr}}",
+                    tokens
+                  )}
                 </Link>
               </div>
             </div>
@@ -120,12 +139,9 @@ export default function PageStructure({ pageData }: PageStructureProps) {
                 }
                 priority={pageData.secondaryimage?.priority || false}
                 loading={pageData.secondaryimage?.priority ? undefined : "lazy"}
-                sizes={
-                  pageData.secondaryimage?.sizes ||
-                  "(min-width: 768px) 600px, 100vw"
-                }
+                sizes="(min-width: 768px) 500px, 100vw"
                 className="w-full h-full"
-                fill={true}
+                fill
                 objectFit="cover"
               />
             </div>
@@ -229,7 +245,7 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               id="services"
               className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6"
             >
-              {pageData.servicessection?.heading ||
+              {applyTokens(pageData.servicessection?.heading, tokens) ||
                 "pageData.servicesSection.heading not written"}
             </h2>
             <p className="mt-4 text-left">
@@ -650,7 +666,8 @@ export default function PageStructure({ pageData }: PageStructureProps) {
               id="faqs"
               className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6"
             >
-              {pageData.faqs?.heading ?? "pageData.faqs?.heading not written"}
+              {applyTokens(pageData.faqs?.heading, tokens) ??
+                "pageData.faqs?.heading not written"}
             </h2>
 
             {pageData.faqs?.list?.length ? (
