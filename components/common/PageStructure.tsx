@@ -3,19 +3,31 @@ import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { PageStructureTypes } from "types/commonTypes";
 
-type LocationTokens = {
-  city?: string;
-  state?: string;
-  state_abbr?: string;
-  brand?: string;
-  phone?: string;
-};
+// Put near the top of PageStructure.tsx
+
+const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
+type TokenKey = (typeof TOKEN_KEYS)[number];
+
+// Optional/partial values are fine:
+type LocationTokens = Partial<Record<TokenKey, string>>;
+
+function isTokenKey(k: string): k is TokenKey {
+  return (TOKEN_KEYS as readonly string[]).includes(k);
+}
 
 function applyTokens(input?: string, t?: LocationTokens) {
-  if (!input || !t) return input ?? "";
+  if (!input) return input ?? "";
+  if (!t) return input;
+
   return input.replace(
     /\{\{\s*(city|state|state_abbr|brand|phone)\s*\}\}/g,
-    (_m, key) => (t as any)[key] ?? _m
+    (_match: string, key: string) => {
+      if (isTokenKey(key)) {
+        const val = t[key];
+        return typeof val === "string" ? val : _match;
+      }
+      return _match;
+    }
   );
 }
 
