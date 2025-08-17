@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getFooterData } from "db/GetFooterData";
 import { ServicesPathTypes } from "types/commonTypes";
+import { buildStaticBreadcrumbs } from "lib/breadcrumbs";
 
 export const metadata = {
   title: "Sitemap | MSE Graphics",
@@ -157,6 +158,8 @@ export default async function Sitemap() {
   const { footerContentData } = await getFooterData();
   const serviceData = footerContentData as ServicesPathTypes[];
 
+  const breadcrumbs = buildStaticBreadcrumbs("Sitemap", "/sitemap");
+
   const parentItems = serviceData
     .filter((it) => it.parent_id === null)
     .sort((a, b) => a.id - b.id);
@@ -166,6 +169,27 @@ export default async function Sitemap() {
     <>
       <WebPageSchema />
       <main className="max-w-screen-lg mx-auto px-4 py-10">
+        <nav aria-label="Breadcrumb" className="mb-4">
+          <ol className="flex flex-wrap gap-2 text-sm text-gray-600">
+            {breadcrumbs.map((bc, i) => {
+              const isLast = i === breadcrumbs.length - 1;
+              return (
+                <li key={bc.href} className="flex items-center">
+                  {i > 0 && <span className="mx-1">›</span>}
+                  {isLast ? (
+                    <span aria-current="page" className="font-semibold">
+                      {bc.label}
+                    </span>
+                  ) : (
+                    <Link href={bc.href} className="hover:underline">
+                      {bc.label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
         <h1 className="text-4xl font-bold mb-8 text-center">SITEMAP</h1>
 
         <nav aria-label="Sitemap">

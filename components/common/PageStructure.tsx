@@ -31,14 +31,18 @@ function applyTokens(input?: string, t?: LocationTokens) {
   );
 }
 
+type BreadcrumbItem = { href: string; label: string };
+
 interface PageStructureProps {
   pageData: PageStructureTypes;
   tokens?: LocationTokens;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
 export default function PageStructure({
   pageData,
   tokens,
+  breadcrumbs,
 }: PageStructureProps) {
   return (
     <>
@@ -62,7 +66,7 @@ export default function PageStructure({
 
       <main id="main-content" className="text-lg" role="main">
         <section className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg">
-          <div className="relative w-full screen-size-5:h-[400px] h-[700px]">
+          <div className="relative w-full screen-size-5:h-[400px] h-[800px]">
             <SEOImage
               src={
                 pageData.mainimage?.src
@@ -86,13 +90,64 @@ export default function PageStructure({
               }
               priority={true}
               sizes="100vw"
-              className="w-full h-[700px]  screen-size-5:h-[400px]"
+              className="w-full h-[800px]  screen-size-5:h-[400px]"
               fill
               objectFit="cover"
             />
 
             <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center items-start text-white screen-size-15:text-left text-center">
               <div className="screen-size-15:w-[1200px] max-w-[1500px] screen-size-15:ml-20 ml-0">
+                {/* Breadcrumbs (UI + JSON-LD) */}
+                {breadcrumbs?.length ? (
+                  <nav
+                    aria-label="Breadcrumb"
+                    className="absolute top-[0px] left-[2px] z-20 px-2 py-1 rounded bg-black/30 backdrop-blur-sm"
+                  >
+                    <script
+                      type="application/ld+json"
+                      dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                          "@context": "https://schema.org",
+                          "@type": "BreadcrumbList",
+                          itemListElement: breadcrumbs.map((bc, i) => ({
+                            "@type": "ListItem",
+                            position: i + 1,
+                            name: bc.label,
+                            item: bc.href.startsWith("http")
+                              ? bc.href
+                              : `https://www.mseprinting.com${bc.href.startsWith("/") ? "" : "/"}${bc.href}`,
+                          })),
+                        }),
+                      }}
+                    />
+                    <ol className="flex flex-wrap gap-1 text-[12px] sm:text-sm text-white/90">
+                      {breadcrumbs.map((bc, i) => {
+                        const isLast = i === breadcrumbs.length - 1;
+                        return (
+                          <li key={bc.href} className="flex items-center">
+                            {i > 0 && <span className="mx-1">›</span>}
+                            {isLast ? (
+                              <span
+                                aria-current="page"
+                                className="font-semibold"
+                              >
+                                {bc.label}
+                              </span>
+                            ) : (
+                              <Link
+                                href={bc.href}
+                                className="underline-offset-2 hover:underline"
+                              >
+                                {bc.label}
+                              </Link>
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </nav>
+                ) : null}
+
                 <h1 className="screen-size-10:text-[50px] text-[30px] font-extrabold leading-tight text-white max-w-full">
                   {applyTokens(pageData.introsection.heading, tokens) ||
                     "pageData.introSection.heading not written"}
@@ -270,8 +325,7 @@ export default function PageStructure({
             <div className="text-left">
               {/* heading */}
               <h2 id="offerings" className="font-semibold">
-                {pageData.offeringssection?.heading ||
-                  "pageData.offeringsSection.heading not written"}
+                Related services in Minneapolis, MN
               </h2>
 
               {/* paragraph */}

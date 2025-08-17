@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData"; // ← ADD
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs"; // ← ADD
 
 export const metadata: Metadata = {
   title: "Interior Office & Lobby Décor in Minneapolis | MSE Printing",
@@ -254,6 +256,13 @@ const InteriorOfficeLobbyDecor = async () => {
   const data = await getCategoryPagesData("/signs/interior-office-lobby-decor");
   const pageData = data.InteriorOfficeLobbyDecorPageData?.[0];
 
+  // ← ADD: fetch sitemap hierarchy and build crumbs
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "signs/interior-office-lobby-decor", // must match the DB `path`
+    footerContentData
+  );
+
   if (!pageData) {
     return <div>Data not available.</div>;
   }
@@ -263,6 +272,7 @@ const InteriorOfficeLobbyDecor = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
