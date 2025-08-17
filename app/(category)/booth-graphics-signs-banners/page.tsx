@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Printing Minneapolis & USA | Custom Signs, Banners, Booth Graphics ",
@@ -212,6 +214,12 @@ const BoothGraphicsSignsBanners = async () => {
   const data = await getCategoryPagesData("/booth-graphics-signs-banners");
   const pageData = data.BoothGraphicsSignsBannersPageData?.[0];
 
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "booth-graphics-signs-banners", // must match the DB `path`
+    footerContentData
+  );
+
   if (!pageData) {
     return <div>Data not available.</div>;
   }
@@ -221,6 +229,7 @@ const BoothGraphicsSignsBanners = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs} // ← ADD
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
