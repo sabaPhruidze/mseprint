@@ -92,7 +92,6 @@ export const metadata: Metadata = {
   publisher: "MSE Printing",
 };
 
-/* ─────────────── VIEWPORT COLOR MODE ─────────────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -101,7 +100,6 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -152,7 +150,6 @@ const ServiceSchema = () => {
   );
 };
 
-/* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const BookletPrintingServices = async () => {
   const data = await getBlogPagesData("/blog/booklet-printing-services");
   const pageData = data.BlogBookletPrintingServicesPageData?.[0];
