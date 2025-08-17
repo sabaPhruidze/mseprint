@@ -1,579 +1,649 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
  <url>
   <loc>https://www.mseprinting.com/blog</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/booth-graphics-signs-banners</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/counter-pop-up-displays</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/signs/ada-wayfinding-signs</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/labels-stickers-decals</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/signs/delivery-takeout-signs</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/signs/now-open-signs-graphics</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/signs/yard-outdoor-signs</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.9</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/signs/car-graphics-wraps</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/signs/interior-office-lobby-decor</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/tradeshow-event-signs</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
 </url>
  <url>
     <loc>https://www.mseprinting.com/</loc>
-    <lastmod>2025-07-17</lastmod>
+    <lastmod>2025-08-17T03:00:54-05:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 <url>
   <loc>https://www.mseprinting.com/sitemap</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.85</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/window-wall-floor-graphics</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/advanced-mailing-services</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/banners-posters</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/brochures-collateral</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/business-forms</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/cards-invitations</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/direct-mail</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/direct-mail/list-management-services</loc>
-  <lastmod>2025-06-08</lastmod>
+  <lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.8</priority>
+  <priority>0.80</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/direct-mail-images/list_management_services.webp</image:loc>
+    <image:title>Direct mail list management services in Minneapolis – accurate targeting for campaigns</image:title>
+    <image:caption>Professional list management services by MSE Printing to maximize direct mail campaign performance</image:caption>
+  </image:image>
 </url>
+
 <url>
   <loc>https://www.mseprinting.com/marketing-services/campaigns-consultation</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/apparel-uniforms</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/book-printing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/business-annual-reports</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/targeted-direct-mail</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/about-us</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/accessibility</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/contact-us</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/environmental-message</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/eoe-diversity</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/event-literature-signs</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/every-door-direct-mail</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/fulfillment-services</loc>
-  <lastmod>2025-06-08</lastmod>
+  <lastmod>2025-08-17T12:18:17+04:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.75</priority>
+  <priority>0.85</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/fulfillment-services-images/product_fulfillment.webp</image:loc>
+    <image:title>Fulfillment services in Minneapolis – inventory, pick & pack, product fulfillment</image:title>
+    <image:caption>MSE Printing fulfillment: secure warehousing, precise kitting, and fast multi-carrier shipping</image:caption>
+  </image:image>
 </url>
+
 <url>
   <loc>https://www.mseprinting.com/fulfillment-services/inventory-management</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/fulfillment-services/pick-pack</loc>
-  <lastmod>2025-06-08</lastmod>
+  <lastmod>2025-08-17T12:18:17+04:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.75</priority>
+  <priority>0.85</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/fulfillment-services-images/pick_pack.webp</image:loc>
+    <image:title>Pick and pack fulfillment services in Minneapolis – fast and accurate order handling</image:title>
+    <image:caption>MSE Printing provides reliable pick and pack solutions with precise inventory control and nationwide shipping</image:caption>
+  </image:image>
 </url>
+
 <url>
   <loc>https://www.mseprinting.com/fulfillment-services/product-fulfillment</loc>
-  <lastmod>2025-06-08</lastmod>
+  <lastmod>2025-08-17T12:18:17+04:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.75</priority>
+  <priority>0.85</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/fulfillment-services-images/product_fulfillment.webp</image:loc>
+    <image:title>Product fulfillment services in Minneapolis – streamlined warehousing and shipping</image:title>
+    <image:caption>MSE Printing provides complete product fulfillment solutions including inventory management, pick & pack, and nationwide delivery</image:caption>
+  </image:image>
 </url>
+
 <url>
   <loc>https://www.mseprinting.com/industry-specific</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/education</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/finance</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/healthcare</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/legal</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/manufacturing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/political</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/real-estate</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/restaurants</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/industry-specific/retail</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/kitting-fulfillment</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/labels-packaging</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/labels-packaging/custom-packaging</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/labels-packaging/qr-codes-no-touch-options</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/login</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/marketing-sales-kits</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/marketing-services</loc>
-  <lastmod>2025-06-08</lastmod>
+  <lastmod>2025-08-17T12:18:17+04:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.75</priority>
+  <priority>0.85</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/marketing-services-images/campaigns_consultation.webp</image:loc>
+    <image:title>Marketing services in Minneapolis – campaign strategy, design, and print integration</image:title>
+    <image:caption>MSE Printing provides full marketing services including consultation, campaign design, and integrated print solutions</image:caption>
+  </image:image>
 </url>
+
 <url>
   <loc>https://www.mseprinting.com/marketing-services/social-media</loc>
-  <lastmod>2025-06-08</lastmod>
+  <lastmod>2025-08-17T12:18:17+04:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/marketing-services-images/social_media.webp</image:loc>
+    <image:title>Social media marketing services in Minneapolis – strategy, design, and campaign management</image:title>
+    <image:caption>MSE Printing helps businesses build brand visibility with custom social media marketing solutions</image:caption>
+  </image:image>
 </url>
+
 <url>
   <loc>https://www.mseprinting.com/marketing-services/video-production</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/marketing-services/website-design</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/newsletters-flyers-rack-cards</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/postcards-direct-mailers</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/premium-private-labels</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/presentation-training-materials</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/custom-business-card-printing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/custom-envelope-printing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/custom-letterheads</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/legal-copying</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/manuals-catalogs-booklets</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/printing-copying/poster-printing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/privacy-policy</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/product-promotional-labels</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/pull-up-banners-flags</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/register</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/request-quote</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/safety-labels</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/send-file</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/short-run-packaging</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/signs</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/standard-direct-mail</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/terms-conditions</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/tradeshows-events</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/tradeshows-events/greeting-cards</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/tradeshows-events/pre-post-show-direct-mail</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/tradeshows-events/table-counter-kiosk-displays</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.75</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/products-services</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.72</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/commercial-offset-printing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.71</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/commercial-digital-printing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.71</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/graphic-design</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/online-ordering-portals</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/affordable-printing-solutions</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.7</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/booklet-printing-services</loc>
-  <lastmod>2025-06-08</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.7</priority>
+  <lastmod>2025-07-15T09:24:00-05:00</lastmod> <!-- use your real timestamp -->
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp</image:loc>
+    <image:title>Booklet printing services in Minneapolis – saddle stitch, perfect bound, spiral</image:title>
+    <image:caption>Custom printed booklets for catalogs, manuals and event programs by MSE Printing</image:caption>
+  </image:image>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/corporate-printing-solutions</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.7</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/legal-document-printing</loc>
-  <lastmod>2025-06-08</lastmod>
+<lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.7</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/local-printing-services</loc>
-  <lastmod>2025-06-08</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.7</priority>
+  <lastmod>2025-08-17T03:00:54-05:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.70</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/blog/pages/additional/local-printing-services.webp</image:loc>
+    <image:title>Local printing services in Minneapolis – fast turnaround and professional quality</image:title>
+    <image:caption>Custom printing services for businesses and events in Minneapolis by MSE Printing</image:caption>
+  </image:image>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/notepad-printing-services</loc>
-  <lastmod>2025-06-08</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.7</priority>
+  <lastmod>2025-08-17T03:00:54-05:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.85</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp</image:loc>
+    <image:title>Custom notepad printing services in Minneapolis – branded office stationery</image:title>
+    <image:caption>Personalized notepads and memo pads printed for businesses by MSE Printing</image:caption>
+  </image:image>
 </url>
+
 <url>
   <loc>https://www.mseprinting.com/blog/professional-printing-services</loc>
-  <lastmod>2025-06-08</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.7</priority>
+  <lastmod>2025-08-17T03:00:54-05:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp</image:loc>
+    <image:title>Professional printing services in Minneapolis – high-quality business and marketing materials</image:title>
+    <image:caption>Full-service professional printing for reports, brochures, and marketing campaigns by MSE Printing</image:caption>
+  </image:image>
 </url>
+
 </urlset>

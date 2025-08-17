@@ -38,9 +38,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz",
-  },
   openGraph: {
     title: "Booklet Printing Services | MSE Print",
     description:
