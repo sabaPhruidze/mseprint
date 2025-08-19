@@ -1,6 +1,8 @@
 import React from "react";
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import CardsPagesStructure from "components/common/CardsPagesStructure";
@@ -194,6 +196,11 @@ const ServiceSchema = () => {
 const PrintingCopyingPage = async () => {
   const data = await getCategoryPagesData("/printing-copying");
   const pageData = data.PrintingCopyingPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "printing-copying", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <p>Data not available. Please check back soon.</p>;
@@ -202,7 +209,17 @@ const PrintingCopyingPage = async () => {
   return (
     <main>
       <ServiceSchema />
-      <CardsPagesStructure pageData={pageData} />
+      <CardsPagesStructure
+        pageData={pageData}
+        breadcrumbs={breadcrumbs}
+        tokens={{
+          city: "Minneapolis",
+          state: "Minnesota",
+          state_abbr: "MN",
+          brand: "MSE Printing",
+          phone: "763-542-8812",
+        }}
+      />
     </main>
   );
 };

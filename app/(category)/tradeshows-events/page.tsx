@@ -3,6 +3,9 @@ import { Metadata, Viewport } from "next";
 import { getSpecialPagesData } from "db/GetSpecialPagesData";
 import CardsPagesStructure from "components/common/CardsPagesStructure";
 
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
+
 // Fully corrected Metadata for SEO & Social Sharing (title < 70 chars)
 export const metadata: Metadata = {
   title: "Tradeshow & Event Printing Solutions | MSE Printing",
@@ -192,6 +195,12 @@ const TradeshowsEvents = async () => {
   const data = await getSpecialPagesData("/tradeshows-events");
   const pageData = data.TradeshowsEventsPageCardPageData?.[0];
 
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "tradeshows-events", // must match the DB `path`
+    footerContentData
+  );
+
   if (!pageData) {
     return <div>Data not available.</div>;
   }
@@ -199,7 +208,17 @@ const TradeshowsEvents = async () => {
   return (
     <>
       <ServiceSchema />
-      <CardsPagesStructure pageData={pageData} />
+      <CardsPagesStructure
+        pageData={pageData}
+        breadcrumbs={breadcrumbs}
+        tokens={{
+          city: "Minneapolis",
+          state: "Minnesota",
+          state_abbr: "MN",
+          brand: "MSE Printing",
+          phone: "763-542-8812",
+        }}
+      />
     </>
   );
 };

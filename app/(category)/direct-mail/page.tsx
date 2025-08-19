@@ -3,6 +3,9 @@ import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import CardsPagesStructure from "components/common/CardsPagesStructure";
 
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
+
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
   title: "Direct Mail & Mailing Services | MSE Print",
@@ -189,6 +192,11 @@ const ServiceSchema = () => {
 const DirectMailMailingServices = async () => {
   const data = await getCategoryPagesData("/direct-mail");
   const pageData = data.DirectMailMailingServicesPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "direct-mail", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -197,7 +205,17 @@ const DirectMailMailingServices = async () => {
   return (
     <>
       <ServiceSchema />
-      <CardsPagesStructure pageData={pageData} />
+      <CardsPagesStructure
+        pageData={pageData}
+        breadcrumbs={breadcrumbs}
+        tokens={{
+          city: "Minneapolis",
+          state: "Minnesota",
+          state_abbr: "MN",
+          brand: "MSE Printing",
+          phone: "763-542-8812",
+        }}
+      />
     </>
   );
 };

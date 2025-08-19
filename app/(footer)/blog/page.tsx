@@ -2,6 +2,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ────── data helpers & components ────── */
 import { getSpecialPagesData } from "db/GetSpecialPagesData"; // direct DB call
@@ -142,6 +144,11 @@ export default async function BlogPage() {
   };
 
   const data = (await getSpecialPagesData("/blog")) as BlogPageData;
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "blog", // must match the DB `path`
+    footerContentData
+  );
 
   /* ---------- shape ---------- */
   const BlogAdditionalPageData = data.BlogAdditionalPageData ?? [];
@@ -185,6 +192,7 @@ export default async function BlogPage() {
         <section className="mt-12">
           <PageStructure
             pageData={pageData}
+            breadcrumbs={breadcrumbs}
             tokens={{
               city: "Minneapolis",
               state: "Minnesota",

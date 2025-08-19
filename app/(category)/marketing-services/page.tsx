@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getSpecialPagesData } from "db/GetSpecialPagesData";
 import CardsPagesStructure from "components/common/CardsPagesStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
@@ -197,6 +199,11 @@ const ServiceSchema = () => {
 const MarketingServices = async () => {
   const data = await getSpecialPagesData("/marketing-services");
   const pageData = data.MarketingServicesCardPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "marketing-services", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -205,7 +212,17 @@ const MarketingServices = async () => {
   return (
     <>
       <ServiceSchema />
-      <CardsPagesStructure pageData={pageData} />
+      <CardsPagesStructure
+        pageData={pageData}
+        breadcrumbs={breadcrumbs}
+        tokens={{
+          city: "Minneapolis",
+          state: "Minnesota",
+          state_abbr: "MN",
+          brand: "MSE Printing",
+          phone: "763-542-8812",
+        }}
+      />
     </>
   );
 };
