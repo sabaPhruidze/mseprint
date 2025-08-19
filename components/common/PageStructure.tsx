@@ -2,13 +2,11 @@ import React from "react";
 import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { PageStructureTypes } from "types/commonTypes";
-
-// Put near the top of PageStructure.tsx
+import ContactUs from "./ContactUs";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
 
-// Optional/partial values are fine:
 type LocationTokens = Partial<Record<TokenKey, string>>;
 
 function isTokenKey(k: string): k is TokenKey {
@@ -63,7 +61,6 @@ export default function PageStructure({
       >
         Skip to content
       </a>
-
       <main id="main-content" className="text-lg" role="main">
         <section className="relative w-full max-w-full mx-auto overflow-hidden shadow-lg">
           <div className="relative w-full screen-size-5:h-[400px] h-[800px]">
@@ -840,6 +837,7 @@ export default function PageStructure({
           </p>
         </div>
       </main>
+      <ContactUs />
     </>
   );
 }

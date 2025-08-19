@@ -4,10 +4,6 @@ import SEOImage from "./SEOImage";
 import { CardsPagesStructureTypes } from "types/commonTypes";
 import ContactUs from "./ContactUs";
 
-interface PageStructureProps {
-  pageData: CardsPagesStructureTypes;
-}
-
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
 
@@ -851,6 +847,7 @@ export default function CardsPagesStructure({
           </p>
         </div>
       </main>
+      <ContactUs />
     </>
   );
 }
