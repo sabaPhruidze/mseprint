@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 // Fully corrected Metadata for SEO & Social Sharing (title < 70 chars)
 export const metadata: Metadata = {
@@ -195,6 +197,11 @@ const TableCounterKioskDisplays = async () => {
     "/tradeshows-events/table-counter-kiosk-displays"
   );
   const pageData = data.TableCounterKioskDisplaysPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "tradeshows-events/table-counter-kiosk-displays", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -205,6 +212,7 @@ const TableCounterKioskDisplays = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",

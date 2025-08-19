@@ -3,6 +3,9 @@ import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
+
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
   title: "Business & Annual Reports | MSE Printing",
@@ -199,6 +202,11 @@ const BusinessAnnualReports = async () => {
     "/printing-copying/business-annual-reports"
   );
   const pageData = data.BusinessAnnualReportsPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "printing-copying/business-annual-reports", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -209,6 +217,7 @@ const BusinessAnnualReports = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs} // ← ADD
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",

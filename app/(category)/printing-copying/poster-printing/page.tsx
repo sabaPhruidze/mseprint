@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
@@ -196,7 +198,11 @@ const ServiceSchema = () => {
 const PosterPrinting = async () => {
   const data = await getCategoryPagesData("/printing-copying/poster-printing");
   const pageData = data.PosterPrintingPageData?.[0];
-  // console.log(pageData?.mainimage.src); // Optionally keep for dev/debug
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "printing-copying/poster-printing", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -207,6 +213,7 @@ const PosterPrinting = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs} // ← ADD
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",

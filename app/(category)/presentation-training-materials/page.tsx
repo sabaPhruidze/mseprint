@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
@@ -196,6 +198,11 @@ const ServiceSchema = () => {
 const PresentationTrainingMaterials = async () => {
   const data = await getCategoryPagesData("/presentation-training-materials");
   const pageData = data.PresentationTrainingMaterialsPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "presentation-training-materials", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -206,6 +213,7 @@ const PresentationTrainingMaterials = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs} // ← ADD
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",

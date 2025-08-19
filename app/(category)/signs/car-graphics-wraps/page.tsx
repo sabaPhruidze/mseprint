@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title:
@@ -189,6 +191,11 @@ const ServiceSchema = () => {
 const CarGraphicsWraps = async () => {
   const data = await getCategoryPagesData("/car-graphics-wraps");
   const pageData = data.CarGraphicsWrapsPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "signs/car-graphics-wraps", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -199,6 +206,7 @@ const CarGraphicsWraps = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",

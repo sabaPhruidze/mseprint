@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Targeted Direct Mail Services in Minneapolis MN | MSE Printing",
@@ -191,6 +193,11 @@ const ServiceSchema = () => {
 const TargetedDirectMail = async () => {
   const data = await getCategoryPagesData("/targeted-direct-mail");
   const pageData = data.TargetedDirectMailPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "targeted-direct-mail", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -201,6 +208,7 @@ const TargetedDirectMail = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",

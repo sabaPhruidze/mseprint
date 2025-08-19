@@ -2,6 +2,8 @@ import React from "react";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
+import { getFooterData } from "db/GetFooterData";
+import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 // ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
@@ -195,6 +197,11 @@ const ServiceSchema = () => {
 const ProductPromotionalLabels = async () => {
   const data = await getCategoryPagesData("/product-promotional-labels");
   const pageData = data.ProductPromotionalLabelsPageData?.[0];
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "product-promotional-labels", // must match the DB `path`
+    footerContentData
+  );
 
   if (!pageData) {
     return <div>Data not available.</div>;
@@ -205,6 +212,7 @@ const ProductPromotionalLabels = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
+        breadcrumbs={breadcrumbs} // ← ADD
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
