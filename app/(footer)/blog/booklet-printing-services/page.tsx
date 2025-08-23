@@ -1,27 +1,15 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getBlogPagesData } from "db/getBlogPagesData";
 import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Booklet Printing Services | MSE Print",
+  title:
+    "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil | MSE Printing",
   description:
-    "Get custom booklet printing services in Minneapolis by MSE Print. Ideal for catalogs, reports, manuals, and more—delivered with professional quality.",
-  keywords: [
-    "booklet printing Minneapolis",
-    "custom booklets",
-    "manual printing",
-    "event program printing",
-    "catalog printing",
-    "spiral bound booklets",
-    "saddle stitch booklets",
-    "perfect binding",
-    "training booklets",
-    "MSE booklet services",
-  ],
-  applicationName: "MSE Printing",
-  category: "Booklet Printing",
+    "A practical buyer’s guide to booklet printing: page counts, binding choices (saddle stitch, perfect bound, coil/spiral), paper weights, bleeds, and timeline tips from MSE Printing in Minneapolis, Minnesota.",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/blog/booklet-printing-services",
@@ -34,64 +22,45 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-video-preview": -1,
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
   openGraph: {
-    title: "Booklet Printing Services | MSE Print",
-    description:
-      "Professional booklet printing in Minneapolis for catalogs, reports, manuals, and promotional booklets with various binding options.",
+    type: "article", // important: it's a blog article
     url: "https://www.mseprinting.com/blog/booklet-printing-services",
     siteName: "MSE Printing",
+    title:
+      "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil | MSE Printing",
+    description:
+      "How to choose binding, paper, and timelines for catalogs, manuals, and programs. Practical tips from a Minneapolis production team.",
     locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
         width: 1200,
         height: 630,
-        alt: "Custom printed booklets including manuals, reports, and catalogs",
+        alt: "Examples of saddle-stitched, perfect-bound, and coil-bound booklets",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Booklet Printing Services | MSE Print",
+    title: "Booklet Printing Guide — Binding, Paper & Timelines",
     description:
-      "Get expert booklet printing in Minneapolis. Professional results for catalogs, event programs, and more.",
-    site: "@MSEPrinting",
-    creator: "@MSEPrinting",
+      "Saddle stitch vs perfect bind vs coil, page count rules, paper weights, and lead times.",
     images: [
-      {
-        url: "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
-        alt: "Saddle-stitched and perfect-bound booklets printed by MSE Printing",
-      },
+      "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
     ],
-  },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
-  creator: "MSE Printing",
-  publisher: "MSE Printing",
+  // removed: keywords, page-level geo/business contact, verification
 };
 
+/* ─────────────── VIEWPORT COLOR MODE ─────────────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -100,67 +69,98 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-const ServiceSchema = () => {
-  const schemaData = {
+/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
+/** Article + optional FAQ + Breadcrumbs (better for a blog URL) */
+function StructuredData() {
+  const article = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/blog/booklet-printing-services#service",
-    name: "Booklet Printing Services",
-    description:
-      "High-quality booklet printing services in Minneapolis—perfect-bound, saddle-stitched, or spiral booklets for any professional need.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
-      name: "MSE Printing",
-      url: "https://www.mseprinting.com",
-      telephone: "763-542-8812",
-      email: "info@mseprinting.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
-        addressLocality: "Minneapolis",
-        addressRegion: "MN",
-        postalCode: "55412",
-        addressCountry: "US",
-      },
+    "@type": "Article",
+    headline: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/blog/booklet-printing-services",
     },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
+    datePublished: "2025-07-15",
+    dateModified: new Date().toISOString().slice(0, 10),
+    author: { "@type": "Organization", name: "MSE Printing" },
+    publisher: { "@type": "Organization", name: "MSE Printing" },
+    image: [
+      "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
     ],
-    serviceType: "Booklet Printing",
-    category: "Marketing Materials",
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/blog/booklet-printing-services",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Booklet Printing Services",
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Blog",
+        item: "https://www.mseprinting.com/blog",
       },
-    },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+        item: "https://www.mseprinting.com/blog/booklet-printing-services",
+      },
+    ],
+  };
+
+  // If you have on-page FAQs, keep this; otherwise remove it
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What binding should I choose for my booklet?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Saddle stitch works best for 8–64 pages and fast timelines. Perfect bind suits 60+ pages for a square spine. Coil/spiral is durable and lays flat for manuals and training books.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What paper weights are typical?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Common interiors: 80–100# text (gloss or silk). Covers: 10–14pt cover with optional soft-touch or gloss lamination for durability.",
+        },
+      },
+    ],
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+    </>
   );
-};
+}
 
+/* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const BookletPrintingServices = async () => {
   const data = await getBlogPagesData("/blog/booklet-printing-services");
-  const pageData = data.BlogBookletPrintingServicesPageData?.[0];
+  const pageData = data?.BlogBookletPrintingServicesPageData?.[0];
 
-  if (!pageData) {
-    return <div>Data not available.</div>;
-  }
+  // If there is no content, return 404 (avoid thin 200/soft-404)
+  if (!pageData) return notFound();
 
   return (
     <>
-      <ServiceSchema />
+      <StructuredData />
       <PageStructure
         pageData={pageData}
         tokens={{

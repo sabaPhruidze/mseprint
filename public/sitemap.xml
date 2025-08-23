@@ -621,9 +621,9 @@
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/booklet-printing-services</loc>
-  <lastmod>2025-07-15T09:24:00-05:00</lastmod> <!-- use your real timestamp -->
+  <lastmod>2025-08-23T12:00:00+04:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
+  <priority>0.85</priority>
 
   <image:image>
     <image:loc>https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp</image:loc>
@@ -633,13 +633,13 @@
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/corporate-printing-solutions</loc>
-<lastmod>2025-08-17T03:00:54-05:00</lastmod>
+  <lastmod>2025-08-23T12:00:00+04:00</lastmod>
   <changefreq>yearly</changefreq>
-  <priority>0.8</priority>
+  <priority>0.85</priority>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/legal-document-printing</loc>
-<lastmod>2025-08-17T03:00:54-05:00</lastmod>
+  <lastmod>2025-08-17T03:00:54-05:00</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.8</priority>
 </url>
