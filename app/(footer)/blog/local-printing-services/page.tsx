@@ -1,27 +1,15 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getBlogPagesData } from "db/getBlogPagesData";
 import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Local Printing Services | MSE Print",
+  title:
+    "Local Printing Guide — Same-Day & Pickup Options in Minneapolis | MSE Printing",
   description:
-    "Get professional results with MSE Print’s local printing services in Minneapolis. Convenient, fast, and tailored for your business.",
-  keywords: [
-    "local printing Minneapolis",
-    "printing near me",
-    "Minneapolis print shop",
-    "local business printing",
-    "same day printing Minneapolis",
-    "pickup printing",
-    "walk-in printing services",
-    "digital printing near me",
-    "MSE local printing",
-    "affordable local prints",
-  ],
-  applicationName: "MSE Printing",
-  category: "Local Printing",
+    "A practical guide to local printing in Minneapolis: same-day options, pickup/delivery, file prep, paper choices, and when to choose digital vs offset.",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/blog/local-printing-services",
@@ -34,65 +22,42 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-video-preview": -1,
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz",
-  },
   openGraph: {
-    title: "Local Printing Services | MSE Print",
-    description:
-      "Local printing services in Minneapolis for fast turnaround, walk-in support, and high-quality output. Your neighborhood print partner.",
+    type: "article", // blog article, not website
     url: "https://www.mseprinting.com/blog/local-printing-services",
     siteName: "MSE Printing",
+    title:
+      "Local Printing Guide — Same-Day & Pickup Options in Minneapolis | MSE Printing",
+    description:
+      "Turnaround expectations, pickup/delivery, and file prep tips from a Minneapolis production team serving Minnesota and the USA.",
     locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.mseprinting.com/images/blog/pages/additional/local-printing-services.webp",
         width: 1200,
         height: 630,
-        alt: "Fast and reliable local printing services in Minneapolis by MSE Printing",
+        alt: "Local printing guide for fast, reliable turnarounds",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Local Printing Services | MSE Print",
+    title: "Local Printing Guide — Same-Day & Pickup Options",
     description:
-      "Speedy, reliable, and community-based printing services tailored for Minneapolis businesses.",
-    site: "@MSEPrinting",
-    creator: "@MSEPrinting",
+      "When to use same-day printing, how pickup/delivery works, and how to prep files for best results.",
     images: [
-      {
-        url: "https://www.mseprinting.com/images/blog/pages/additional/local-printing-services.webp",
-        alt: "Pickup and same-day printing solutions in Minneapolis",
-      },
+      "https://www.mseprinting.com/images/blog/pages/additional/local-printing-services.webp",
     ],
-  },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
-  creator: "MSE Printing",
-  publisher: "MSE Printing",
+  // Removed: keywords, page-level verification, and LocalBusiness contact/geo meta (keep those site-wide)
 };
 
 /* ─────────────── VIEWPORT COLOR MODE ─────────────── */
@@ -105,68 +70,97 @@ export const viewport: Viewport = {
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-const ServiceSchema = () => {
-  const schemaData = {
+/** Use Article (+ optional FAQ + BreadcrumbList) on a blog URL. */
+function StructuredData() {
+  const article = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/blog/local-printing-services#service",
-    name: "Local Printing Services",
-    description:
-      "Fast, walk-in local printing in Minneapolis. Business cards, brochures, reports, and more—ready on your schedule.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
-      name: "MSE Printing",
-      url: "https://www.mseprinting.com",
-      telephone: "763-542-8812",
-      email: "info@mseprinting.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
-        addressLocality: "Minneapolis",
-        addressRegion: "MN",
-        postalCode: "55412",
-        addressCountry: "US",
-      },
+    "@type": "Article",
+    headline: "Local Printing Guide — Same-Day & Pickup Options in Minneapolis",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/blog/local-printing-services",
     },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
+    datePublished: "2025-08-01",
+    dateModified: new Date().toISOString().slice(0, 10),
+    author: { "@type": "Organization", name: "MSE Printing" },
+    publisher: { "@type": "Organization", name: "MSE Printing" },
+    image: [
+      "https://www.mseprinting.com/images/blog/pages/additional/local-printing-services.webp",
     ],
-    serviceType: "Local Printing",
-    category: "Local Business Printing",
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/blog/local-printing-services",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Local Printing Services",
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Blog",
+        item: "https://www.mseprinting.com/blog",
       },
-    },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Local Printing Guide — Same-Day & Pickup Options in Minneapolis",
+        item: "https://www.mseprinting.com/blog/local-printing-services",
+      },
+    ],
+  };
+
+  // Keep only if you render matching on-page FAQs; otherwise remove
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Do you offer same-day local printing?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes—qualifying digital jobs can be completed the same day depending on file readiness, quantity, and finishing.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I pick up my order?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes—pickup is available from our Minneapolis location, and local delivery or nationwide shipping can be arranged.",
+        },
+      },
+    ],
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+    </>
   );
-};
+}
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const LocalPrintingServices = async () => {
   const data = await getBlogPagesData("/blog/local-printing-services");
-  const pageData = data.BlogLocalPrintingServicesPageData?.[0];
+  const pageData = data?.BlogLocalPrintingServicesPageData?.[0];
 
-  if (!pageData) {
-    return <div>Data not available.</div>;
-  }
+  // Avoid thin 200s (soft-404): 404 if no content
+  if (!pageData) return notFound();
 
   return (
     <>
-      <ServiceSchema />
+      <StructuredData />
       <PageStructure
         pageData={pageData}
         tokens={{
