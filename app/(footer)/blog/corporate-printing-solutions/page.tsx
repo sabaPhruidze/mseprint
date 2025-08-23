@@ -1,27 +1,15 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getBlogPagesData } from "db/getBlogPagesData";
 import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Corporate Printing Solutions | MSE Print",
+  title:
+    "Corporate Printing in Minneapolis — Practical Buyer’s Guide | MSE Printing",
   description:
-    "Discover high-impact corporate printing solutions by MSE Print in Minneapolis. From business cards to large-format graphics, ensure professional results.",
-  keywords: [
-    "corporate printing Minneapolis",
-    "business printing services",
-    "marketing materials",
-    "custom stationery",
-    "large-format corporate prints",
-    "brochure printing",
-    "professional printing Minneapolis",
-    "MSE corporate printing",
-    "office printing solutions",
-    "annual report printing",
-  ],
-  applicationName: "MSE Printing",
-  category: "Corporate Printing",
+    "Straightforward guidance for corporate printing in Minneapolis: timelines, file prep, paper & finish choices, budget ranges, and a mini case study from MSE Printing.",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/blog/corporate-printing-solutions",
@@ -34,65 +22,42 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-video-preview": -1,
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz",
-  },
   openGraph: {
-    title: "Corporate Printing Solutions | MSE Print",
-    description:
-      "Minneapolis-based professional printing for corporate branding, marketing, and operations. Business cards, brochures, manuals, and more.",
+    type: "article", // ← important
     url: "https://www.mseprinting.com/blog/corporate-printing-solutions",
     siteName: "MSE Printing",
+    title:
+      "Corporate Printing in Minneapolis — Practical Buyer’s Guide | MSE Printing",
+    description:
+      "Timelines, file setup, paper & finishing choices, and budget tiers for corporate printing in Minneapolis.",
     locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.mseprinting.com/images/blog/pages/additional/corporate-printing-solutions.webp",
         width: 1200,
         height: 630,
-        alt: "Corporate print services including stationery, brochures, and large-format graphics",
+        alt: "Corporate printing guide overview",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Corporate Printing Solutions | MSE Print",
+    title: "Corporate Printing in Minneapolis — Practical Buyer’s Guide",
     description:
-      "Boost your corporate identity with expertly produced materials by MSE Printing. Fast turnaround and precision guaranteed.",
-    site: "@MSEPrinting",
-    creator: "@MSEPrinting",
+      "What to send, when to send it, and how to choose papers, finishes, and quantities for reliable results.",
     images: [
-      {
-        url: "https://www.mseprinting.com/images/blog/pages/additional/corporate-printing-solutions.webp",
-        alt: "High-quality business and marketing print materials for corporations in Minneapolis",
-      },
+      "https://www.mseprinting.com/images/blog/pages/additional/corporate-printing-solutions.webp",
     ],
-  },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
-  creator: "MSE Printing",
-  publisher: "MSE Printing",
+  // Remove page-level geo/contact/verification/keywords here
 };
 
 /* ─────────────── VIEWPORT COLOR MODE ─────────────── */
@@ -105,68 +70,97 @@ export const viewport: Viewport = {
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-const ServiceSchema = () => {
-  const schemaData = {
+/** Use Article + optional FAQ + Breadcrumbs on a blog post. */
+function StructuredData() {
+  const article = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/blog-ppsfmcc#service",
-    name: "Corporate Printing Solutions",
-    description:
-      "Corporate printing services tailored for Minneapolis businesses—business cards, manuals, brochures, and large-format signage.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
-      name: "MSE Printing",
-      url: "https://www.mseprinting.com",
-      telephone: "763-542-8812",
-      email: "info@mseprinting.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
-        addressLocality: "Minneapolis",
-        addressRegion: "MN",
-        postalCode: "55412",
-        addressCountry: "US",
-      },
+    "@type": "Article",
+    headline: "Corporate Printing in Minneapolis — Practical Buyer’s Guide",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/blog/corporate-printing-solutions",
     },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
+    datePublished: "2025-07-24",
+    dateModified: new Date().toISOString().slice(0, 10),
+    author: { "@type": "Organization", name: "MSE Printing" },
+    publisher: { "@type": "Organization", name: "MSE Printing" },
+    image: [
+      "https://www.mseprinting.com/images/blog/pages/additional/corporate-printing-solutions.webp",
     ],
-    serviceType: "Corporate Printing",
-    category: "Corporate Printing Services",
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/blog-ppsfmcc",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Corporate Printing Solutions",
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Blog",
+        item: "https://www.mseprinting.com/blog",
       },
-    },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Corporate Printing in Minneapolis — Practical Buyer’s Guide",
+        item: "https://www.mseprinting.com/blog/corporate-printing-solutions",
+      },
+    ],
+  };
+
+  // Optional: add FAQPage if you have real on-page FAQs
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Which file format works best for printing?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "High-resolution PDFs with fonts embedded at 300 DPI. Native files are OK if links and fonts are packaged.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can you match our Pantone® brand colors?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. Calibrated presses and spectrophotometers keep brand colors consistent across runs.",
+        },
+      },
+    ],
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+    </>
   );
-};
+}
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const CorporatePrintingSolutions = async () => {
   const data = await getBlogPagesData("/blog/corporate-printing-solutions");
-  const pageData = data.blogCorporatePrintingSolutions?.[0];
+  const pageData = data?.blogCorporatePrintingSolutions?.[0];
 
-  if (!pageData) {
-    return <div>Data not available.</div>;
-  }
+  // If we have no content, 404 instead of returning a thin 200 page
+  if (!pageData) return notFound();
 
   return (
     <>
-      <ServiceSchema />
+      <StructuredData />
       <PageStructure
         pageData={pageData}
         tokens={{
