@@ -154,6 +154,32 @@ const FOOTER_STATIC = [
   { title: "Environmental Message", path: "/environmental-message" },
 ] as const;
 
+// Show these under the "Blog" item in the footer section
+const BLOG_POSTS = [
+  {
+    title: "Affordable Printing Solutions",
+    path: "/blog/affordable-printing-solutions",
+  },
+  {
+    title: "Booklet Printing Services",
+    path: "/blog/booklet-printing-services",
+  },
+  {
+    title: "Corporate Printing Solutions",
+    path: "/blog/corporate-printing-solutions",
+  },
+  { title: "Legal Document Printing", path: "/blog/legal-document-printing" },
+  { title: "Local Printing Services", path: "/blog/local-printing-services" },
+  {
+    title: "Notepad Printing Services",
+    path: "/blog/notepad-printing-services",
+  },
+  {
+    title: "Professional Printing Services",
+    path: "/blog/professional-printing-services",
+  },
+] as const;
+
 export default async function Sitemap() {
   const { footerContentData } = await getFooterData();
   const serviceData = footerContentData as ServicesPathTypes[];
@@ -234,13 +260,29 @@ export default async function Sitemap() {
               </li>
             ))}
 
-            {FOOTER_STATIC.map((link) => (
-              <li key={link.path} className="text-red">
-                <Link href={link.path} className="hover:underline ml-2">
-                  {link.title}
-                </Link>
-              </li>
-            ))}
+            {FOOTER_STATIC.map((link) => {
+              const isBlog = link.title === "Blog";
+              return (
+                <li key={link.path} className="text-red">
+                  <Link href={link.path} className="hover:underline ml-2">
+                    {link.title}
+                  </Link>
+
+                  {/* If it's the Blog item, show child posts beneath it */}
+                  {isBlog && (
+                    <ul className="mt-2 ml-8 space-y-1 list-disc list-inside">
+                      {BLOG_POSTS.map((post) => (
+                        <li key={post.path} className="text-green-600">
+                          <Link href={post.path} className="hover:underline">
+                            {post.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </main>
