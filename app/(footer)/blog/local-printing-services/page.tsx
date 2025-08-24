@@ -6,8 +6,7 @@ import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title:
-    "Local Printing Guide — Same-Day & Pickup Options in Minneapolis | MSE Printing",
+  title: "Local Printing Guide in Minneapolis | MSE Printing",
   description:
     "A practical guide to local printing in Minneapolis: same-day options, pickup/delivery, file prep, paper choices, and when to choose digital vs offset.",
   metadataBase: new URL("https://www.mseprinting.com"),
