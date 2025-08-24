@@ -1,29 +1,15 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-/* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "List Management Services | MSE Print",
+  title: "List Management Services | MSE Printing",
   description:
-    "Optimize your mailing list for accuracy, deliverability, and better campaign results with MSE Printing’s expert list management solutions.",
-  keywords: [
-    "list management services",
-    "mailing list cleaning",
-    "address list de-duplication",
-    "data segmentation Minneapolis",
-    "USPS mailing list optimization",
-    "bulk mail list accuracy",
-    "direct mail data services",
-    "NCOA list update Minneapolis",
-    "postal list verification USA",
-    "campaign response targeting",
-  ],
-  applicationName: "MSE Printing",
-  category: "Mailing & Data Services",
+    "Improve direct mail ROI with accurate, deliverable data. We provide list cleaning, validation, de-duplication, NCOA updates, and segmentation for targeted campaigns.",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical:
@@ -37,18 +23,14 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-video-preview": -1,
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Google Search Console verification string
-  },
-
   openGraph: {
-    title: "List Management Services | MSE Print",
+    title: "List Management Services | MSE Printing",
     description:
-      "Ensure every message hits the right mailbox with professional list cleaning, de-duplication, and segmentation services from MSE Printing.",
+      "USPS-ready list cleaning, de-duplication, NCOA updates, and data segmentation to deliver more mail to the right households.",
     url: "https://www.mseprinting.com/direct-mail/list-management-services",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -62,44 +44,18 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "List Management Services | MSE Print",
+    title: "List Management Services | MSE Printing",
     description:
-      "Improve delivery and ROI with clean, deduplicated, and segmented mailing lists from MSE Printing.",
-    site: "@MSEPrinting",
-    creator: "@MSEPrinting",
+      "Clean, verify, and segment your lists for higher deliverability and response rates.",
     images: [
-      {
-        url: "https://www.mseprinting.com/images/direct-mail-images/additional/list_management_services_right.webp",
-        alt: "Professional list management tools from MSE Printing",
-      },
+      "https://www.mseprinting.com/images/direct-mail-images/additional/list_management_services_right.webp",
     ],
   },
-
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
-  creator: "MSE Printing",
-  publisher: "MSE Printing",
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
+  // Note: page-level keywords & verification removed to reduce over-optimization;
+  // keep Search Console verification at the site level instead.
 };
 
 /* ─────────────── VIEWPORT COLOR MODE ─────────────── */
@@ -112,22 +68,22 @@ export const viewport: Viewport = {
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-const ServiceSchema = () => {
-  const schemaData = {
+/** Keep Service schema for a service-category URL and add BreadcrumbList. */
+function StructuredData() {
+  const service = {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id":
       "https://www.mseprinting.com/direct-mail/list-management-services#service",
     name: "List Management Services",
     description:
-      "Mailing list services that include cleaning, validation, de-duplication, and segmentation. Improve your direct mail ROI with accurate data from MSE Printing.",
+      "Mailing list cleaning, validation, de-duplication, NCOA updates, and segmentation for USPS-ready direct mail and higher response rates.",
     provider: {
       "@type": "LocalBusiness",
       "@id": "https://www.mseprinting.com/#business",
       name: "MSE Printing",
       url: "https://www.mseprinting.com",
       telephone: "763-542-8812",
-      email: "info@mseprinting.com",
       address: {
         "@type": "PostalAddress",
         streetAddress: "3839 Washington Ave N Ste. 103",
@@ -155,7 +111,7 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "List Cleaning & Validation",
             description:
-              "Correct formatting, remove invalid or undeliverable addresses, and prepare for postal automation.",
+              "Fix formatting, remove invalid/undeliverable addresses, and standardize to USPS guidelines.",
           },
         },
         {
@@ -165,7 +121,27 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "Segmentation & Targeting",
             description:
-              "Split your data for more effective, personalized direct mail campaigns.",
+              "Segment by geography, demographics, or behavior to increase response and reduce waste.",
+          },
+        },
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/direct-mail/list-management-services#ncoa",
+          itemOffered: {
+            "@type": "Service",
+            name: "NCOA Updates",
+            description:
+              "National Change of Address processing to keep lists current and improve deliverability.",
+          },
+        },
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/direct-mail/list-management-services#dedupe",
+          itemOffered: {
+            "@type": "Service",
+            name: "De-duplication",
+            description:
+              "Remove duplicates across households and contacts to lower postage and printing costs.",
           },
         },
       ],
@@ -174,43 +150,65 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/direct-mail/list-management-services",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "List Management Services",
-      },
+      itemOffered: { "@type": "Service", name: "List Management Services" },
     },
   };
 
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Direct Mail",
+        item: "https://www.mseprinting.com/direct-mail",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "List Management Services",
+        item: "https://www.mseprinting.com/direct-mail/list-management-services",
+      },
+    ],
+  };
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(service) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+    </>
   );
-};
+}
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const ListManagementServices = async () => {
   const data = await getCategoryPagesData(
     "/direct-mail/list-management-services"
   );
-  const pageData = data.ListManagementServicesPageData?.[0];
+  const pageData = data?.ListManagementServicesPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "direct-mail/list-management-services", // must match the DB `path`
+    "direct-mail/list-management-services",
     footerContentData
   );
 
-  if (!pageData) {
-    return <div>Data not available.</div>;
-  }
+  // Avoid thin 200s (soft-404): return a proper 404 if there is no content
+  if (!pageData) return notFound();
 
   return (
     <>
-      <ServiceSchema />
+      <StructuredData />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
