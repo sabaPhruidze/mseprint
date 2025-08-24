@@ -1,27 +1,14 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getBlogPagesData } from "db/getBlogPagesData";
 import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Professional Printing Services | MSE Print",
+  title: "Corporate Materials, Labels & Large Format | MSE Printing",
   description:
-    "MSE Printing delivers expert printing services in Minneapolis—brochures, labels, corporate reports, and more with precision and care.",
-  keywords: [
-    "professional printing Minneapolis",
-    "corporate printing services",
-    "custom printing",
-    "large format posters",
-    "business card design",
-    "Minneapolis print shop",
-    "marketing print services",
-    "presentation printing",
-    "label printing Minneapolis",
-    "direct mail printers",
-  ],
-  applicationName: "MSE Printing",
-  category: "Professional Printing",
+    "A practical guide to professional printing in Minneapolis: brochures, labels, large-format graphics, paper/finish choices, file prep, and when to use digital vs offset.",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical:
@@ -35,65 +22,39 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-video-preview": -1,
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz",
-  },
   openGraph: {
-    title: "Professional Printing Services | MSE Print",
-    description:
-      "Explore Minneapolis-based professional printing for corporate materials, marketing collateral, and more.",
+    type: "article", // blog article, not website
     url: "https://www.mseprinting.com/blog/professional-printing-services",
     siteName: "MSE Printing",
+    title: "Corporate Materials, Labels & Large Format | MSE Printing",
+    description:
+      "Turnaround expectations, color management, and file prep tips from a Minneapolis production team serving Minnesota and the USA.",
     locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
         width: 1200,
         height: 630,
-        alt: "Custom corporate print materials by MSE Printing in Minneapolis",
+        alt: "Examples of corporate printing: brochures, labels, and large-format displays",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Printing Services | MSE Print",
+    title:
+      "Professional Printing Guide — Corporate Materials, Labels & Large Format",
     description:
-      "Precision, quality, and fast turnaround—get your business printing done right with MSE Printing.",
-    site: "@MSEPrinting",
-    creator: "@MSEPrinting",
+      "Paper & finishes, color accuracy, file prep, and when to choose digital vs offset for business printing.",
     images: [
-      {
-        url: "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
-        alt: "Marketing and business print production in Minneapolis",
-      },
+      "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
-  creator: "MSE Printing",
-  publisher: "MSE Printing",
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
+  // Removed: keywords, page-level verification, LocalBusiness contact/geo meta (keep site-wide)
 };
 
 /* ─────────────── VIEWPORT COLOR MODE ─────────────── */
@@ -106,69 +67,97 @@ export const viewport: Viewport = {
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-const ServiceSchema = () => {
-  const schemaData = {
+/** Use Article (+ optional FAQ + BreadcrumbList) on a blog URL. */
+function StructuredData() {
+  const article = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id":
-      "https://www.mseprinting.com/blog/professional-printing-services#service",
-    name: "Professional Printing Services",
-    description:
-      "Reliable professional printing for Minneapolis businesses—marketing materials, reports, signage, labels, and more.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
-      name: "MSE Printing",
-      url: "https://www.mseprinting.com",
-      telephone: "763-542-8812",
-      email: "info@mseprinting.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
-        addressLocality: "Minneapolis",
-        addressRegion: "MN",
-        postalCode: "55412",
-        addressCountry: "US",
-      },
+    "@type": "Article",
+    headline:
+      "Professional Printing Guide — Corporate Materials, Labels & Large Format",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/blog/professional-printing-services",
     },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
+    datePublished: "2025-08-01",
+    dateModified: new Date().toISOString().slice(0, 10),
+    author: { "@type": "Organization", name: "MSE Printing" },
+    publisher: { "@type": "Organization", name: "MSE Printing" },
+    image: [
+      "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
     ],
-    serviceType: "Professional Printing",
-    category: "Business Printing Services",
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/blog/professional-printing-services",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Professional Printing Services",
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Blog",
+        item: "https://www.mseprinting.com/blog",
       },
-    },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Professional Printing Guide — Corporate Materials, Labels & Large Format",
+        item: "https://www.mseprinting.com/blog/professional-printing-services",
+      },
+    ],
+  };
+
+  // Optional FAQ schema — include only if matching on-page Q&As are rendered
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "When should I choose digital vs offset printing?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Digital suits short runs, fast turnarounds, or variable data; offset suits large volumes with exacting color consistency and lower per-unit cost at scale.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I prep files for best results?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: 'Export press-ready PDF with fonts embedded, 300 DPI images, CMYK or Pantone profiles, and 0.125" bleeds; include live text outlines when needed.',
+        },
+      },
+    ],
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+    </>
   );
-};
+}
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const ProfessionalPrintingServices = async () => {
   const data = await getBlogPagesData("/blog/professional-printing-services");
-  const pageData = data.BlogProfessionalPrintingServicesPageData?.[0];
+  const pageData = data?.BlogProfessionalPrintingServicesPageData?.[0];
 
-  if (!pageData) {
-    return <div>Data not available.</div>;
-  }
+  if (!pageData) return notFound();
 
   return (
     <>
-      <ServiceSchema />
+      <StructuredData />
       <PageStructure
         pageData={pageData}
         tokens={{
