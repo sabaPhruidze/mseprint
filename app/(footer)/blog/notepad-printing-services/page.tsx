@@ -1,27 +1,14 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getBlogPagesData } from "db/getBlogPagesData";
 import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Notepad Printing Services | MSE Print",
+  title: "Custom Notepad Printing Guide — in Minneapolis | MSE Printing",
   description:
-    "Boost your brand visibility with custom notepad printing in Minneapolis. MSE Print offers full-color, branded notepads for offices, giveaways, and events.",
-  keywords: [
-    "custom notepads",
-    "branded notepad printing",
-    "memo pad printing",
-    "Minneapolis notepad printers",
-    "sticky note printing",
-    "notepad giveaways",
-    "legal pads",
-    "personalized notepads",
-    "notepad design",
-    "eco-friendly notepads",
-  ],
-  applicationName: "MSE Printing",
-  category: "Notepad Printing",
+    "A practical guide to custom notepad printing: pad types (glue/tear, spiral, sticky), sheet counts, paper weights, and branding tips from our Minneapolis production team.",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/blog/notepad-printing-services",
@@ -34,65 +21,41 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       "max-image-preview": "large",
-      "max-video-preview": -1,
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz",
-  },
   openGraph: {
-    title: "Notepad Printing Services | MSE Print",
-    description:
-      "Branded notepad printing in Minneapolis for trade shows, team use, and client gifts. Glued, spiral, sticky, and legal pads customized to your brand.",
+    type: "article", // important: blog article, not website
     url: "https://www.mseprinting.com/blog/notepad-printing-services",
     siteName: "MSE Printing",
+    title: "Custom Notepad Printing Guide — in Minneapolis | MSE Printing",
+    description:
+      "Choose the right notepad: glue-bound, spiral, sticky notes, legal pads. Sheet counts, chipboard backing, bleed, and file prep tips for brand-ready pads.",
     locale: "en_US",
-    type: "website",
     images: [
       {
         url: "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
         width: 1200,
         height: 630,
-        alt: "Custom notepads printed by MSE Printing with logos and binding options",
+        alt: "Examples of branded notepads, sticky notes, and legal pads",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Notepad Printing Services | MSE Print",
+    title: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
     description:
-      "Design and print your own branded notepads with MSE Printing. Great for promotions, meetings, and everyday branding.",
-    site: "@MSEPrinting",
-    creator: "@MSEPrinting",
+      "Binding styles, sheet counts, paper choices, and file prep for brand-ready notepads printed in Minneapolis.",
     images: [
-      {
-        url: "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
-        alt: "Branded sticky notes and notepad printing for Minneapolis businesses",
-      },
+      "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
     ],
-  },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
   },
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
   },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
-  creator: "MSE Printing",
-  publisher: "MSE Printing",
+  // Removed: keywords, page-level verification, and LocalBusiness/geo meta (keep those site-wide or on the LocalBusiness page)
 };
 
 /* ─────────────── VIEWPORT COLOR MODE ─────────────── */
@@ -105,68 +68,97 @@ export const viewport: Viewport = {
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-const ServiceSchema = () => {
-  const schemaData = {
+/** Use Article (+ optional FAQ + BreadcrumbList) for a blog URL. */
+function StructuredData() {
+  const article = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/blog/notepad-printing-services#service",
-    name: "Notepad Printing Services",
-    description:
-      "Full-service custom notepad printing in Minneapolis—from sticky notes to legal pads and branded memo books, MSE delivers.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
-      name: "MSE Printing",
-      url: "https://www.mseprinting.com",
-      telephone: "763-542-8812",
-      email: "info@mseprinting.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
-        addressLocality: "Minneapolis",
-        addressRegion: "MN",
-        postalCode: "55412",
-        addressCountry: "US",
-      },
+    "@type": "Article",
+    headline: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": "https://www.mseprinting.com/blog/notepad-printing-services",
     },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
+    datePublished: "2025-07-15",
+    dateModified: new Date().toISOString().slice(0, 10),
+    author: { "@type": "Organization", name: "MSE Printing" },
+    publisher: { "@type": "Organization", name: "MSE Printing" },
+    image: [
+      "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
     ],
-    serviceType: "Notepad Printing",
-    category: "Custom Office Supplies",
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/blog/notepad-printing-services",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Notepad Printing Services",
+  };
+
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Blog",
+        item: "https://www.mseprinting.com/blog",
       },
-    },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
+        item: "https://www.mseprinting.com/blog/notepad-printing-services",
+      },
+    ],
+  };
+
+  // Optional FAQ schema — keep only if you render matching on-page FAQs
+  const faq = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What’s the best sheet count for branded notepads?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Common pad counts are 25, 50, or 100 sheets per pad. Choose 25–50 for giveaways and events, 50–100 for daily office use.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you offer chipboard backing and perforation?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, sturdy chipboard backers are standard on glue-bound pads, and micro-perf can be added for clean tear-off sheets.",
+        },
+      },
+    ],
   };
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
+      />
+    </>
   );
-};
+}
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const NotepadPrintingServices = async () => {
   const data = await getBlogPagesData("/blog/notepad-printing-services");
-  const pageData = data.BlogNotepadPrintingServicesPageData?.[0];
+  const pageData = data?.BlogNotepadPrintingServicesPageData?.[0];
 
-  if (!pageData) {
-    return <div>Data not available.</div>;
-  }
+  // Important: return 404 when no content to avoid thin 200 / soft-404
+  if (!pageData) return notFound();
 
   return (
     <>
-      <ServiceSchema />
+      <StructuredData />
       <PageStructure
         pageData={pageData}
         tokens={{
