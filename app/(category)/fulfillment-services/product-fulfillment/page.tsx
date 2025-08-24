@@ -1,28 +1,17 @@
+// app/fulfillment-services/product-fulfillment/page.tsx
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
-
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Product Fulfillment | MSE Print",
+  title: "Product Fulfillment | MSE Printing",
   description:
     "Deliver confidence with flexible and reliable product fulfillment services from MSE Printing. From storage to shipping, we handle it all.",
-  keywords: [
-    "product fulfillment Minneapolis",
-    "order fulfillment USA",
-    "custom packaging services",
-    "business fulfillment provider",
-    "brand-aligned shipping",
-    "eCommerce fulfillment",
-    "MSE Printing fulfillment center",
-    "warehouse and shipping solutions",
-    "branded order fulfillment",
-    "direct-to-customer shipping",
-  ],
   applicationName: "MSE Printing",
   category: "Fulfillment Services",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -42,14 +31,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with actual Search Console verification string
-  },
-
+  // Site verification + LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title: "Product Fulfillment | MSE Print",
+    title: "Product Fulfillment in minneapolis | MSE Printing",
     description:
-      "Reliable, flexible, and brand-aligned—MSE Printing takes your product the final mile with professional fulfillment solutions.",
+      "Reliable, flexible, and brand-aligned—MSE Printing takes your product the final mile with professional fulfillment solutions in minneapolis.",
     url: "https://www.mseprinting.com/fulfillment-services/product-fulfillment",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -63,10 +49,9 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "Product Fulfillment | MSE Print",
+    title: "Product Fulfillment in minneapolis | MSE Printing",
     description:
       "MSE Printing handles your product fulfillment from shelf to shipment with speed and care. Trusted by brands across the U.S.",
     site: "@MSEPrinting",
@@ -78,26 +63,7 @@ export const metadata: Metadata = {
       },
     ],
   },
-
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
@@ -109,7 +75,7 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
@@ -175,10 +141,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/fulfillment-services/product-fulfillment",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Product Fulfillment",
-      },
+      itemOffered: { "@type": "Service", name: "Product Fulfillment" },
     },
   };
 
@@ -191,19 +154,19 @@ const ServiceSchema = () => {
 };
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
-const ProductFulfillment = async () => {
+export default async function ProductFulfillment() {
   const data = await getCategoryPagesData(
     "/fulfillment-services/product-fulfillment"
   );
   const pageData = data.ProductFulfillmentPageData?.[0];
-  const { footerContentData } = await getFooterData();
-  const breadcrumbs = buildServiceBreadcrumbs(
-    "fulfillment-services/product-fulfillment", // must match the DB `path`
-    footerContentData
-  );
+
+  // If you also want breadcrumbs here, re-enable the footer fetch + builder:
+  // const { footerContentData } = await getFooterData();
+  // const breadcrumbs = buildServiceBreadcrumbs('fulfillment-services/product-fulfillment', footerContentData);
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid a thin 200; return a true 404 to prevent soft-404 signals
+    notFound();
   }
 
   return (
@@ -211,7 +174,7 @@ const ProductFulfillment = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        // breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
@@ -222,6 +185,4 @@ const ProductFulfillment = async () => {
       />
     </>
   );
-};
-
-export default ProductFulfillment;
+}
