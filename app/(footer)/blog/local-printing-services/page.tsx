@@ -27,11 +27,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "article", // blog article, not website
+    type: "article",
     url: "https://www.mseprinting.com/blog/local-printing-services",
     siteName: "MSE Printing",
-    title:
-      "Local Printing Guide — Same-Day & Pickup Options in Minneapolis | MSE Printing",
+    title: "Local Printing Guide in Minneapolis | MSE Printing",
     description:
       "Turnaround expectations, pickup/delivery, and file prep tips from a Minneapolis production team serving Minnesota and the USA.",
     locale: "en_US",
