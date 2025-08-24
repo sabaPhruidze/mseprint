@@ -54,11 +54,8 @@ export const metadata: Metadata = {
     ],
   },
   icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
-  // Note: page-level keywords & verification removed to reduce over-optimization;
-  // keep Search Console verification at the site level instead.
 };
 
-/* ─────────────── VIEWPORT COLOR MODE ─────────────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -67,8 +64,6 @@ export const viewport: Viewport = {
   colorScheme: "normal",
 };
 
-/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-/** Keep Service schema for a service-category URL and add BreadcrumbList. */
 function StructuredData() {
   const service = {
     "@context": "https://schema.org",
