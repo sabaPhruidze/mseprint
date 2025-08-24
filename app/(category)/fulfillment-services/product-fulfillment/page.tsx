@@ -161,8 +161,11 @@ export default async function ProductFulfillment() {
   const pageData = data.ProductFulfillmentPageData?.[0];
 
   // If you also want breadcrumbs here, re-enable the footer fetch + builder:
-  // const { footerContentData } = await getFooterData();
-  // const breadcrumbs = buildServiceBreadcrumbs('fulfillment-services/product-fulfillment', footerContentData);
+  const { footerContentData } = await getFooterData();
+  const breadcrumbs = buildServiceBreadcrumbs(
+    "fulfillment-services/product-fulfillment",
+    footerContentData
+  );
 
   if (!pageData) {
     // Avoid a thin 200; return a true 404 to prevent soft-404 signals
@@ -174,7 +177,7 @@ export default async function ProductFulfillment() {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        // breadcrumbs={breadcrumbs}
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
