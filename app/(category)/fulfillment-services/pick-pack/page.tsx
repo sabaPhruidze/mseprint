@@ -1,5 +1,7 @@
+// app/fulfillment-services/pick-pack/page.tsx
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
@@ -7,21 +9,9 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Pick & Pack | MSE Print",
+  title: "Pick & Pack | MSE Printing",
   description:
     "Streamline your shipping process with professional pick & pack services from MSE Printing. Efficient, accurate order fulfillment tailored to your needs.",
-  keywords: [
-    "pick and pack services Minneapolis",
-    "order fulfillment USA",
-    "custom packing and shipping",
-    "print order logistics",
-    "warehouse fulfillment",
-    "MSE Printing pick pack",
-    "bulk shipping management",
-    "efficient packing services",
-    "pick pack warehouse MN",
-    "eCommerce fulfillment Minneapolis",
-  ],
   applicationName: "MSE Printing",
   category: "Fulfillment Services",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -40,12 +30,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your actual Google verification token
-  },
-
+  // Put site verification and LocalBusiness/geo once in app/layout.tsx, not per page.
   openGraph: {
-    title: "Pick & Pack | MSE Print",
+    title: "Pick & Pack | MSE Printing",
     description:
       "Fast, accurate, and scalable—MSE Printing’s pick & pack services ensure every order is fulfilled with care and delivered on time.",
     url: "https://www.mseprinting.com/fulfillment-services/pick-pack",
@@ -61,10 +48,9 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "Pick & Pack | MSE Print",
+    title: "Pick & Pack | MSE Printing",
     description:
       "Pick & pack order fulfillment from MSE Printing. Accurate sorting, labeling, packaging, and shipping tailored for your business.",
     site: "@MSEPrinting",
@@ -76,22 +62,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
@@ -107,7 +77,7 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
@@ -172,10 +142,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/fulfillment-services/pick-pack",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Pick & Pack Services",
-      },
+      itemOffered: { "@type": "Service", name: "Pick & Pack Services" },
     },
   };
 
@@ -188,17 +155,18 @@ const ServiceSchema = () => {
 };
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
-const PickPack = async () => {
+export default async function PickPack() {
   const data = await getCategoryPagesData("/fulfillment-services/pick-pack");
   const pageData = data.PickPackPageData?.[0];
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "fulfillment-services/pick-pack", // must match the DB `path`
+    "fulfillment-services/pick-pack",
     footerContentData
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid a thin 200; return a true 404 to prevent soft-404 signals
+    notFound();
   }
 
   return (
@@ -206,7 +174,7 @@ const PickPack = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
@@ -217,6 +185,4 @@ const PickPack = async () => {
       />
     </>
   );
-};
-
-export default PickPack;
+}
