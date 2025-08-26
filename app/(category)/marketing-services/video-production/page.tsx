@@ -1,28 +1,20 @@
+// app/marketing-services/video-production/page.tsx
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// ---------- SEO & Social Metadata ----------
+export const revalidate = 86400;
+
+/* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
   title:
-    "Video Production Minneapolis | Brand Storytelling & Content | MSE Printing",
+    "Video Production in Minneapolis | Brand Storytelling & Content | MSE Printing",
   description:
     "Engage your audience with high-quality video content tailored to your brand and message. Scriptwriting, filming, editing, and animation for Minneapolis & nationwide.",
-  keywords: [
-    "video production Minneapolis",
-    "brand video services Minnesota",
-    "corporate video Minneapolis",
-    "video editing services",
-    "commercial video production",
-    "MSE Printing video",
-    "social media video production",
-    "marketing video Minneapolis",
-    "video storytelling Minnesota",
-    "product video production",
-  ],
   applicationName: "MSE Printing",
   category: "Video Production",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -42,12 +34,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+  // Site verification & LocalBusiness/geo go in app/layout.tsx (site-wide), not per page.
   openGraph: {
     title:
-      "Video Production Minneapolis | Brand Storytelling & Content | MSE Printing",
+      "Video Production in Minneapolis | Brand Storytelling & Content | MSE Printing",
     description:
       "From concept to final cut, our video production services help you tell your story and drive results through compelling visuals.",
     url: "https://www.mseprinting.com/marketing-services/video-production",
@@ -72,7 +62,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Video Production Minneapolis | Brand Storytelling & Content | MSE Printing",
+      "Video Production in Minneapolis | Brand Storytelling & Content | MSE Printing",
     description:
       "Scriptwriting, filming, editing, and animation services. Tell your brand story with compelling video by MSE Printing.",
     site: "@MSEPrinting",
@@ -84,39 +74,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
+/* ───────── Viewport Theme Colors ───────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+/* ───────── Service Schema Structured Data ───────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -189,10 +162,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/marketing-services/video-production",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Video Production",
-      },
+      itemOffered: { "@type": "Service", name: "Video Production" },
     },
   };
 
@@ -204,20 +174,22 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
-const VideoProduction = async () => {
+/* ───────── Main Page Component ───────── */
+export default async function VideoProduction() {
   const data = await getCategoryPagesData(
     "/marketing-services/video-production"
   );
   const pageData = data.VideoProductionPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "marketing-services/video-production", // must match the DB `path`
+    "marketing-services/video-production",
     footerContentData
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
+    notFound();
   }
 
   return (
@@ -225,7 +197,7 @@ const VideoProduction = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
@@ -236,6 +208,4 @@ const VideoProduction = async () => {
       />
     </>
   );
-};
-
-export default VideoProduction;
+}
