@@ -1,27 +1,20 @@
+// app/marketing-services/page.tsx
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getSpecialPagesData } from "db/GetSpecialPagesData";
 import CardsPagesStructure from "components/common/CardsPagesStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// ---------- SEO & Social Metadata ----------
+export const revalidate = 86400; // helps keep sitemap lastmod fresh
+
+/* ─────────────── SEO METADATA (lean, non-spammy) ─────────────── */
 export const metadata: Metadata = {
-  title: "Marketing Services Minneapolis | Websites | Printing | MSE Printing",
+  title:
+    "Marketing Services in Minneapolis | Strategy, Web & Print | MSE Printing",
   description:
-    "Strategy-fueled, story-driven marketing solutions that connect and convert—powered by MSE Printing. Campaigns, consultation, video, web, and social media marketing for Minneapolis & nationwide.",
-  keywords: [
-    "marketing services Minneapolis",
-    "marketing strategy Minnesota",
-    "campaign planning Minneapolis",
-    "website design marketing",
-    "video marketing Minneapolis",
-    "consultation marketing",
-    "digital marketing services Minnesota",
-    "MSE Printing marketing",
-    "brand storytelling Minneapolis",
-    "online marketing Minneapolis",
-  ],
+    "Strategy-led marketing from MSE Printing: campaigns, consultation, websites, video, and social—built to convert for Minneapolis brands and beyond.",
   applicationName: "MSE Printing",
   category: "Marketing Services",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -40,14 +33,12 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+  // Site verification + LocalBusiness/geo belong site-wide in app/layout.tsx, not per page.
   openGraph: {
     title:
-      "Marketing Services Minneapolis | Websites | Printing | MSE Printing",
+      "Marketing Services in Minneapolis | Strategy, Web & Print | MSE Printing",
     description:
-      "From campaigns and consultation to websites and video, MSE Printing delivers data‑driven marketing that generates results.",
+      "From campaigns and consultation to websites and video, MSE Printing delivers data-driven marketing that generates results.",
     url: "https://www.mseprinting.com/marketing-services",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -64,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Marketing Services Minneapolis | Websites | Printing | MSE Printing",
+      "Marketing Services in Minneapolis | Strategy, Web & Print | MSE Printing",
     description:
       "Integrated marketing: campaigns, web design, video, and social media by MSE Printing.",
     site: "@MSEPrinting",
@@ -76,39 +67,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
+/* ─────────────── VIEWPORT THEME COLORS ─────────────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+/* ─────────────── STRUCTURED DATA / SCHEMA.ORG (Service page) ─────────────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -180,10 +154,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/marketing-services",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Marketing Services",
-      },
+      itemOffered: { "@type": "Service", name: "Marketing Services" },
     },
   };
 
@@ -195,18 +166,19 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
-const MarketingServices = async () => {
+/* ─────────────── MAIN PAGE COMPONENT ─────────────── */
+export default async function MarketingServices() {
   const data = await getSpecialPagesData("/marketing-services");
   const pageData = data.MarketingServicesCardPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "marketing-services", // must match the DB `path`
+    "marketing-services",
     footerContentData
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    notFound();
   }
 
   return (
@@ -225,6 +197,4 @@ const MarketingServices = async () => {
       />
     </>
   );
-};
-
-export default MarketingServices;
+}
