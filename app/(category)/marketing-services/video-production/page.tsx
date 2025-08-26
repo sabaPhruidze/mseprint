@@ -11,8 +11,7 @@ export const revalidate = 86400;
 
 /* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
-  title:
-    "Video Production in Minneapolis | Brand Storytelling & Content | MSE Printing",
+  title: "Video Production in Minneapolis | MSE Printing",
   description:
     "Engage your audience with high-quality video content tailored to your brand and message. Scriptwriting, filming, editing, and animation for Minneapolis & nationwide.",
   applicationName: "MSE Printing",
@@ -36,8 +35,7 @@ export const metadata: Metadata = {
   },
   // Site verification & LocalBusiness/geo go in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title:
-      "Video Production in Minneapolis | Brand Storytelling & Content | MSE Printing",
+    title: "Video Production in Minneapolis | MSE Printing",
     description:
       "From concept to final cut, our video production services help you tell your story and drive results through compelling visuals.",
     url: "https://www.mseprinting.com/marketing-services/video-production",
@@ -61,8 +59,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Video Production in Minneapolis | Brand Storytelling & Content | MSE Printing",
+    title: "Video Production in Minneapolis | MSE Printing",
     description:
       "Scriptwriting, filming, editing, and animation services. Tell your brand story with compelling video by MSE Printing.",
     site: "@MSEPrinting",
