@@ -1,27 +1,19 @@
+// app/marketing-services/social-media/page.tsx
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// ---------- SEO & Social Metadata ----------
+export const revalidate = 86400;
+
+/* ───────── SEO & Social Metadata (lean) ───────── */
 export const metadata: Metadata = {
-  title: "Social Media Marketing Minneapolis | MSE Printing",
+  title: "Social Media Marketing in Minneapolis | MSE Printing",
   description:
-    "Boost your online presence with expert social media marketing and management services from MSE Printing. Content creation, ads, and community growth for Minneapolis & nationwide.",
-  keywords: [
-    "social media marketing Minneapolis",
-    "social media management Minnesota",
-    "content creation services Minneapolis",
-    "social media ads Minneapolis",
-    "brand awareness marketing",
-    "MSE Printing social media",
-    "Instagram marketing Minneapolis",
-    "Facebook advertising Minnesota",
-    "social media campaigns",
-    "digital marketing Minneapolis",
-  ],
+    "Boost your online presence with expert social media marketing and management from MSE Printing. Content, ads, and community growth for Minneapolis & nationwide.",
   applicationName: "MSE Printing",
   category: "Social Media Marketing",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -40,11 +32,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+
   openGraph: {
-    title: "Social Media Marketing Minneapolis | MSE Printing",
+    title: "Social Media Marketing in Minneapolis | MSE Printing",
     description:
       "From content creation to ad campaigns, we help your business grow with strategic social media solutions tailored for success.",
     url: "https://www.mseprinting.com/marketing-services/social-media",
@@ -62,7 +52,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Social Media Marketing Minneapolis | MSE Printing",
+    title: "Social Media Marketing in Minneapolis | MSE Printing",
     description:
       "Grow your business with expert social media marketing and management by MSE Printing. Strategy, content, ads, and more.",
     site: "@MSEPrinting",
@@ -74,39 +64,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
+/* ───────── Viewport Theme Colors ───────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+/* ───────── Service Schema Structured Data ───────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -170,7 +143,7 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "Community Management",
             description:
-              "Managing engagement, responses, and reputation across all major social channels.",
+              "Managing engagement, responses, and reputation across major social channels.",
           },
         },
       ],
@@ -194,18 +167,19 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
-const SocialMedia = async () => {
+/* ───────── Main Page Component ───────── */
+export default async function SocialMedia() {
   const data = await getCategoryPagesData("/marketing-services/social-media");
   const pageData = data.SocialMediaPageData?.[0];
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "marketing-services/social-media", // must match the DB `path`
+    "marketing-services/social-media",
     footerContentData
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid thin 200 → real 404 prevents soft-404
+    notFound();
   }
 
   return (
@@ -213,7 +187,7 @@ const SocialMedia = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
@@ -224,6 +198,4 @@ const SocialMedia = async () => {
       />
     </>
   );
-};
-
-export default SocialMedia;
+}

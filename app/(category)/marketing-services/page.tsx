@@ -11,8 +11,7 @@ export const revalidate = 86400; // helps keep sitemap lastmod fresh
 
 /* ─────────────── SEO METADATA (lean, non-spammy) ─────────────── */
 export const metadata: Metadata = {
-  title:
-    "Marketing Services in Minneapolis | Strategy, Web & Print | MSE Printing",
+  title: "Marketing Services in Minneapolis |  MSE Printing",
   description:
     "Strategy-led marketing from MSE Printing: campaigns, consultation, websites, video, and social—built to convert for Minneapolis brands and beyond.",
   applicationName: "MSE Printing",
@@ -54,8 +53,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Marketing Services in Minneapolis | Strategy, Web & Print | MSE Printing",
+    title: "Marketing Services in Minneapolis | MSE Printing",
     description:
       "Integrated marketing: campaigns, web design, video, and social media by MSE Printing.",
     site: "@MSEPrinting",
