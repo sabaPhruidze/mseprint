@@ -460,8 +460,37 @@ export default function CardsPagesStructure({
                     </summary>
 
                     <ul className="mt-2 space-y-2 pl-0 list-none">
-                      {pageData.offeringssection.list.slice(1).map((item) => (
-                        <li key={item.id}>
+                      {pageData.offeringssection.list.slice(1).map((item) => {
+                        const anchorId =
+                          (item as any).anchorId ?? slugify(item.page);
+                        return (
+                          <li id={anchorId} key={item.id}>
+                            <Link
+                              href={item.path || "/"}
+                              className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                              aria-label={`Learn more about ${item.page}`}
+                            >
+                              {item.page}
+                            </Link>
+                            {" – "}
+                            {item.content}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </details>
+
+                  {/* desktop – always expanded */}
+                  <ul className="hidden md:block mt-2 space-y-2 pl-0 list-none">
+                    {pageData.offeringssection.list.map((item) => {
+                      const anchorId =
+                        (item as any).anchorId ?? slugify(item.page);
+                      return (
+                        <li
+                          id={anchorId}
+                          key={item.id}
+                          className="scroll-mt-24"
+                        >
                           <Link
                             href={item.path || "/"}
                             className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
@@ -472,25 +501,8 @@ export default function CardsPagesStructure({
                           {" – "}
                           {item.content}
                         </li>
-                      ))}
-                    </ul>
-                  </details>
-
-                  {/* desktop – always expanded */}
-                  <ul className="hidden md:block mt-2 space-y-2 pl-0 list-none">
-                    {pageData.offeringssection.list.map((item) => (
-                      <li key={item.id}>
-                        <Link
-                          href={item.path || "/"}
-                          className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                          aria-label={`Learn more about ${item.page}`}
-                        >
-                          {item.page}
-                        </Link>
-                        {" – "}
-                        {item.content}
-                      </li>
-                    ))}
+                      );
+                    })}
                   </ul>
                 </>
               ) : (
@@ -880,7 +892,10 @@ export default function CardsPagesStructure({
                 <div className="hidden md:block">
                   {pageData.faqs.list.map((faqItem, idx) => (
                     <div className="mt-4" key={idx}>
-                      <h3 className="text-xl lg:text-2xl font-inter-bold text-black dark:text-white">
+                      <h3
+                        id={`faq-${slugify(faqItem.question)}`}
+                        className="scroll-mt-24 text-xl lg:text-2xl font-inter-bold text-black dark:text-white"
+                      >
                         Q:&nbsp;{faqItem.question}
                       </h3>
                       <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
