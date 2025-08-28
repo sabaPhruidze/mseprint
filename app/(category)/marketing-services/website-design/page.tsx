@@ -1,27 +1,20 @@
+// app/marketing-services/website-design/page.tsx
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// ---------- SEO & Social Metadata ----------
+export const revalidate = 86400;
+
+/* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
-  title: "Website Design Minneapolis | Web Design | MSE Printing",
+  title:
+    "Website Design in Minneapolis | Responsive, SEO-Optimized | MSE Printing",
   description:
-    "Modern, mobile-friendly websites that reflect your brand and convert visitors into customers. Responsive, SEO-optimized, and stunning web design in Minneapolis & nationwide.",
-  keywords: [
-    "website design Minneapolis",
-    "mobile-friendly web design Minnesota",
-    "responsive website Minneapolis",
-    "SEO web design Minneapolis",
-    "custom web design Minnesota",
-    "MSE Printing websites",
-    "business website design Minneapolis",
-    "branding web design",
-    "professional web development Minnesota",
-    "website redesign Minneapolis",
-  ],
+    "Modern, mobile-friendly websites that reflect your brand and convert visitors into customers. Responsive, SEO-optimized web design for Minneapolis & nationwide.",
   applicationName: "MSE Printing",
   category: "Website Design",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -40,11 +33,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+  // Site verification + LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title: "Website Design Minneapolis | Web Design | MSE Printing",
+    title:
+      "Website Design in Minneapolis | Responsive, SEO-Optimized | MSE Printing",
     description:
       "We design responsive, SEO-optimized websites that look stunning and perform flawlessly across all devices.",
     url: "https://www.mseprinting.com/marketing-services/website-design",
@@ -62,7 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Website Design Minneapolis | Web Design | MSE Printing",
+    title:
+      "Website Design in Minneapolis | Responsive, SEO-Optimized | MSE Printing",
     description:
       "Grow your business with modern, SEO-focused, mobile-friendly website design by MSE Printing.",
     site: "@MSEPrinting",
@@ -74,39 +67,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
+/* ───────── Viewport Theme Colors ───────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+/* ───────── Service Schema Structured Data ───────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -170,7 +146,7 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "Brand Integration",
             description:
-              "Custom website branding and visuals that reflect your company's identity.",
+              "Custom website branding and visuals that reflect your company’s identity.",
           },
         },
       ],
@@ -179,10 +155,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/marketing-services/website-design",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Website Design",
-      },
+      itemOffered: { "@type": "Service", name: "Website Design" },
     },
   };
 
@@ -194,18 +167,20 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
-const WebsiteDesign = async () => {
+/* ───────── Main Page Component ───────── */
+export default async function WebsiteDesign() {
   const data = await getCategoryPagesData("/marketing-services/website-design");
   const pageData = data.WebsiteDesignPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "marketing-services/website-design", // must match the DB `path`
+    "marketing-services/website-design",
     footerContentData
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
+    notFound();
   }
 
   return (
@@ -213,7 +188,7 @@ const WebsiteDesign = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
@@ -224,6 +199,4 @@ const WebsiteDesign = async () => {
       />
     </>
   );
-};
-
-export default WebsiteDesign;
+}
