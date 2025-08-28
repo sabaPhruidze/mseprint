@@ -70,81 +70,76 @@ export const viewport: Viewport = {
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 /** Use Article (+ optional FAQ + BreadcrumbList) on a blog URL. */
 function StructuredData() {
-  const article = {
+  const graph = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Local Printing Guide — Same-Day & Pickup Options in Minneapolis",
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://www.mseprinting.com/blog/local-printing-services",
-    },
-    datePublished: "2025-08-01",
-    dateModified: new Date().toISOString().slice(0, 10),
-    author: { "@type": "Organization", name: "MSE Printing" },
-    publisher: { "@type": "Organization", name: "MSE Printing" },
-    image: [
-      "https://www.mseprinting.com/images/blog/pages/additional/local-printing-services.webp",
-    ],
-  };
-
-  const breadcrumbs = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
+    "@graph": [
       {
-        "@type": "ListItem",
-        position: 1,
-        name: "Blog",
-        item: "https://www.mseprinting.com/blog",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Local Printing Guide — Same-Day & Pickup Options in Minneapolis",
-        item: "https://www.mseprinting.com/blog/local-printing-services",
-      },
-    ],
-  };
-
-  // Keep only if you render matching on-page FAQs; otherwise remove
-  const faq = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Do you offer same-day local printing?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes—qualifying digital jobs can be completed the same day depending on file readiness, quantity, and finishing.",
+        "@type": "Article",
+        "@id":
+          "https://www.mseprinting.com/blog/local-printing-services#article",
+        headline:
+          "Local Printing Guide — Same-Day & Pickup Options in Minneapolis",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": "https://www.mseprinting.com/blog/local-printing-services",
         },
+        datePublished: "2025-08-01",
+        dateModified: new Date().toISOString().slice(0, 10),
+        author: { "@type": "Organization", name: "MSE Printing" },
+        publisher: { "@type": "Organization", name: "MSE Printing" },
+        image: [
+          "https://www.mseprinting.com/images/blog/pages/additional/local-printing-services.webp",
+        ],
       },
       {
-        "@type": "Question",
-        name: "Can I pick up my order?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes—pickup is available from our Minneapolis location, and local delivery or nationwide shipping can be arranged.",
-        },
+        "@type": "BreadcrumbList",
+        "@id":
+          "https://www.mseprinting.com/blog/local-printing-services#breadcrumbs",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Blog",
+            item: "https://www.mseprinting.com/blog",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Local Printing Guide — Same-Day & Pickup Options in Minneapolis",
+            item: "https://www.mseprinting.com/blog/local-printing-services",
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.mseprinting.com/blog/local-printing-services#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "Do you offer same-day local printing?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes—qualifying digital jobs can be completed the same day depending on file readiness, quantity, and finishing.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Can I pick up my order?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes—pickup is available from our Minneapolis location, and local delivery or nationwide shipping can be arranged.",
+            },
+          },
+        ],
       },
     ],
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+    />
   );
 }
 

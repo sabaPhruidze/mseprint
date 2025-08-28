@@ -70,81 +70,76 @@ export const viewport: Viewport = {
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 /** Use Article (+ optional FAQ + BreadcrumbList) for a blog URL. */
 function StructuredData() {
-  const article = {
+  const graph = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://www.mseprinting.com/blog/notepad-printing-services",
-    },
-    datePublished: "2025-07-15",
-    dateModified: new Date().toISOString().slice(0, 10),
-    author: { "@type": "Organization", name: "MSE Printing" },
-    publisher: { "@type": "Organization", name: "MSE Printing" },
-    image: [
-      "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
-    ],
-  };
-
-  const breadcrumbs = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
+    "@graph": [
       {
-        "@type": "ListItem",
-        position: 1,
-        name: "Blog",
-        item: "https://www.mseprinting.com/blog",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
-        item: "https://www.mseprinting.com/blog/notepad-printing-services",
-      },
-    ],
-  };
-
-  // Optional FAQ schema — keep only if you render matching on-page FAQs
-  const faq = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "What’s the best sheet count for branded notepads?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Common pad counts are 25, 50, or 100 sheets per pad. Choose 25–50 for giveaways and events, 50–100 for daily office use.",
+        "@type": "Article",
+        "@id":
+          "https://www.mseprinting.com/blog/notepad-printing-services#article",
+        headline:
+          "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": "https://www.mseprinting.com/blog/notepad-printing-services",
         },
+        datePublished: "2025-07-15",
+        dateModified: new Date().toISOString().slice(0, 10),
+        author: { "@type": "Organization", name: "MSE Printing" },
+        publisher: { "@type": "Organization", name: "MSE Printing" },
+        image: [
+          "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
+        ],
       },
       {
-        "@type": "Question",
-        name: "Do you offer chipboard backing and perforation?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Yes, sturdy chipboard backers are standard on glue-bound pads, and micro-perf can be added for clean tear-off sheets.",
-        },
+        "@type": "BreadcrumbList",
+        "@id":
+          "https://www.mseprinting.com/blog/notepad-printing-services#breadcrumbs",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Blog",
+            item: "https://www.mseprinting.com/blog",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
+            item: "https://www.mseprinting.com/blog/notepad-printing-services",
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.mseprinting.com/blog/notepad-printing-services#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What’s the best sheet count for branded notepads?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Common pad counts are 25, 50, or 100 sheets per pad. Choose 25–50 for giveaways and events, 50–100 for daily office use.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Do you offer chipboard backing and perforation?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes, sturdy chipboard backers are standard on glue-bound pads, and micro-perf can be added for clean tear-off sheets.",
+            },
+          },
+        ],
       },
     ],
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+    />
   );
 }
 

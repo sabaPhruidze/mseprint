@@ -72,81 +72,75 @@ export const viewport: Viewport = {
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 /** Article + optional FAQ + Breadcrumbs (better for a blog URL) */
 function StructuredData() {
-  const article = {
+  const graph = {
     "@context": "https://schema.org",
-    "@type": "Article",
-    headline: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": "https://www.mseprinting.com/blog/booklet-printing-services",
-    },
-    datePublished: "2025-07-15",
-    dateModified: new Date().toISOString().slice(0, 10),
-    author: { "@type": "Organization", name: "MSE Printing" },
-    publisher: { "@type": "Organization", name: "MSE Printing" },
-    image: [
-      "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
-    ],
-  };
-
-  const breadcrumbs = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
+    "@graph": [
       {
-        "@type": "ListItem",
-        position: 1,
-        name: "Blog",
-        item: "https://www.mseprinting.com/blog",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
-        item: "https://www.mseprinting.com/blog/booklet-printing-services",
-      },
-    ],
-  };
-
-  // If you have on-page FAQs, keep this; otherwise remove it
-  const faq = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "What binding should I choose for my booklet?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Saddle stitch works best for 8–64 pages and fast timelines. Perfect bind suits 60+ pages for a square spine. Coil/spiral is durable and lays flat for manuals and training books.",
+        "@type": "Article",
+        "@id":
+          "https://www.mseprinting.com/blog/booklet-printing-services#article",
+        headline: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": "https://www.mseprinting.com/blog/booklet-printing-services",
         },
+        datePublished: "2025-07-15",
+        dateModified: new Date().toISOString().slice(0, 10),
+        author: { "@type": "Organization", name: "MSE Printing" },
+        publisher: { "@type": "Organization", name: "MSE Printing" },
+        image: [
+          "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
+        ],
       },
       {
-        "@type": "Question",
-        name: "What paper weights are typical?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: "Common interiors: 80–100# text (gloss or silk). Covers: 10–14pt cover with optional soft-touch or gloss lamination for durability.",
-        },
+        "@type": "BreadcrumbList",
+        "@id":
+          "https://www.mseprinting.com/blog/booklet-printing-services#breadcrumbs",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Blog",
+            item: "https://www.mseprinting.com/blog",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+            item: "https://www.mseprinting.com/blog/booklet-printing-services",
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.mseprinting.com/blog/booklet-printing-services#faq",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What binding should I choose for my booklet?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Saddle stitch works best for 8–64 pages and fast timelines. Perfect bind suits 60+ pages for a square spine. Coil/spiral is durable and lays flat for manuals and training books.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What paper weights are typical?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Common interiors: 80–100# text (gloss or silk). Covers: 10–14pt cover with optional soft-touch or gloss lamination for durability.",
+            },
+          },
+        ],
       },
     ],
   };
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faq) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+    />
   );
 }
 
@@ -155,7 +149,6 @@ const BookletPrintingServices = async () => {
   const data = await getBlogPagesData("/blog/booklet-printing-services");
   const pageData = data?.BlogBookletPrintingServicesPageData?.[0];
 
-  // If there is no content, return 404 (avoid thin 200/soft-404)
   if (!pageData) return notFound();
 
   return (
