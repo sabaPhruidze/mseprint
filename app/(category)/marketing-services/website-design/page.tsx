@@ -7,12 +7,9 @@ import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-export const revalidate = 86400;
-
 /* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
-  title:
-    "Website Design in Minneapolis | Responsive, SEO-Optimized | MSE Printing",
+  title: "Website Design in Minneapolis | MSE Printing",
   description:
     "Modern, mobile-friendly websites that reflect your brand and convert visitors into customers. Responsive, SEO-optimized web design for Minneapolis & nationwide.",
   applicationName: "MSE Printing",
@@ -35,8 +32,7 @@ export const metadata: Metadata = {
   },
   // Site verification + LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title:
-      "Website Design in Minneapolis | Responsive, SEO-Optimized | MSE Printing",
+    title: "Website Design in Minneapolis | MSE Printing",
     description:
       "We design responsive, SEO-optimized websites that look stunning and perform flawlessly across all devices.",
     url: "https://www.mseprinting.com/marketing-services/website-design",
@@ -54,8 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Website Design in Minneapolis | Responsive, SEO-Optimized | MSE Printing",
+    title: "Website Design in Minneapolis | MSE Printing",
     description:
       "Grow your business with modern, SEO-focused, mobile-friendly website design by MSE Printing.",
     site: "@MSEPrinting",

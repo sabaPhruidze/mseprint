@@ -6,12 +6,9 @@ import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-export const revalidate = 86400;
-
 /* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
-  title:
-    "Online Ordering Portals in Minneapolis | Custom Web Portals | MSE Printing",
+  title: "Online Ordering Portals in Minneapolis | MSE Printing",
   description:
     "Streamline printing and marketing with custom online ordering portals from MSE Printing. Simplify ordering, boost productivity, and keep brand consistency in Minneapolis & nationwide.",
   applicationName: "MSE Printing",
@@ -34,8 +31,7 @@ export const metadata: Metadata = {
   },
   // Site verification & LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title:
-      "Online Ordering Portals in Minneapolis | Custom Web Portals | MSE Printing",
+    title: "Online Ordering Portals in Minneapolis | MSE Printing",
     description:
       "Customized online ordering solutions designed to enhance operations, productivity, and brand consistency.",
     url: "https://www.mseprinting.com/online-ordering-portals",
@@ -53,8 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Online Ordering Portals in Minneapolis | Custom Web Portals | MSE Printing",
+    title: "Online Ordering Portals in Minneapolis | MSE Printing",
     description:
       "Empower your business with branded, secure online ordering portals from MSE Printing. Efficient, accurate, always available.",
     site: "@MSEPrinting",

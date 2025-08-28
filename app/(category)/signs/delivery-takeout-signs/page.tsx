@@ -1,27 +1,19 @@
+// app/signs/delivery-takeout-signs/page.tsx
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// ---------- SEO & Social Metadata ----------
+export const revalidate = 86400;
+
+/* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
-  title: "Delivery & Takeout Signs | Food Service | MSE Printing",
+  title: "Delivery & Takeout Signs in Minneapolis | MSE Printing",
   description:
-    "Boost visibility and efficiency with professional delivery and takeout signs from MSE Printing. Durable, branded signage that helps customers find you fast and enhances food service operations.",
-  keywords: [
-    "delivery signs printing",
-    "takeout signage Minneapolis",
-    "restaurant delivery signs",
-    "MSE Printing food service signs",
-    "custom takeout banners",
-    "branded delivery signage",
-    "outdoor takeout signs",
-    "food pickup signage Minnesota",
-    "fast food signs Minneapolis",
-    "restaurant signs printing",
-  ],
+    "Durable, branded delivery and takeout signs to help customers find you fast and streamline food-service operations. Designed and printed by MSE Printing.",
   applicationName: "MSE Printing",
   category: "Delivery & Takeout Signs",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -40,13 +32,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
   openGraph: {
     title: "Delivery & Takeout Signs | Food Service | MSE Printing",
     description:
-      "Durable and branded delivery and takeout signage that helps customers find you fast and boosts your food service operations.",
+      "Durable and branded delivery & takeout signage that helps customers find you and boosts operations.",
     url: "https://www.mseprinting.com/signs/delivery-takeout-signs",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -74,39 +63,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
+/* ───────── Viewport Theme Colors ───────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+/* ───────── Service Schema Structured Data ───────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -114,7 +86,7 @@ const ServiceSchema = () => {
     "@id": "https://www.mseprinting.com/signs/delivery-takeout-signs#service",
     name: "Delivery & Takeout Signs",
     description:
-      "Professional delivery and takeout sign printing by MSE Printing. Durable, branded signage for restaurants and food service. Help customers find you and boost your business in Minneapolis and nationwide.",
+      "Professional delivery and takeout sign printing by MSE Printing. Durable, branded signage for restaurants and food service in Minneapolis and nationwide.",
     provider: {
       "@type": "LocalBusiness",
       "@id": "https://www.mseprinting.com/#business",
@@ -149,7 +121,7 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "Delivery Signs",
             description:
-              "Custom signage for restaurants and food delivery operations.",
+              "Custom signage for restaurants and delivery operations.",
           },
         },
         {
@@ -169,7 +141,7 @@ const ServiceSchema = () => {
             "@type": "Service",
             name: "Branding & Custom Design",
             description:
-              "Professional design services for branded food service signage.",
+              "Professional design services for food service signage.",
           },
         },
       ],
@@ -178,10 +150,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/signs/delivery-takeout-signs",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Delivery & Takeout Signs",
-      },
+      itemOffered: { "@type": "Service", name: "Delivery & Takeout Signs" },
     },
   };
 
@@ -193,18 +162,20 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
-const DeliveryTakeoutSigns = async () => {
+/* ───────── Main Page Component ───────── */
+export default async function DeliveryTakeoutSigns() {
   const data = await getCategoryPagesData("/signs/delivery-takeout-signs");
   const pageData = data.DeliveryTakeoutSignsPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "signs/delivery-takeout-signs", // must match the DB `path`
+    "signs/delivery-takeout-signs",
     footerContentData
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
+    notFound();
   }
 
   return (
@@ -223,6 +194,4 @@ const DeliveryTakeoutSigns = async () => {
       />
     </>
   );
-};
-
-export default DeliveryTakeoutSigns;
+}
