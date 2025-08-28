@@ -37,6 +37,14 @@ interface PageStructureProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
+function slugify(s: string) {
+  return (s || "")
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
 export default function PageStructure({
   pageData,
   tokens,
@@ -86,6 +94,8 @@ export default function PageStructure({
                 }
               }
               priority={true}
+              fetchPriority="high"
+              decoding="async"
               sizes="100vw"
               className="w-full h-[800px]  screen-size-5:h-[400px]"
               fill
@@ -168,7 +178,88 @@ export default function PageStructure({
             </div>
           </div>
         </section>
-
+        <nav
+          aria-label="On this page"
+          className="hidden md:block container mx-auto px-8 max-w-[1500px] mt-4"
+        >
+          <h2 className="sr-only">On this page</h2>
+          <ul className="flex flex-wrap gap-3 text-sm text-blue-600">
+            {[
+              {
+                id: "why-choose",
+                label: "Why choose",
+                exists: Boolean(pageData.whychoosesection?.heading),
+              },
+              {
+                id: "services",
+                label: "Services",
+                exists: Boolean(pageData.servicessection?.heading),
+              },
+              {
+                id: "offerings",
+                label: "Related services",
+                exists: Boolean(pageData.offeringssection?.list?.length),
+              },
+              {
+                id: "advanced-features",
+                label: "Advanced features",
+                exists: Boolean(pageData.advancedfeatures?.heading),
+              },
+              {
+                id: "customization-finishing",
+                label: "Customization & finishing",
+                exists: Boolean(
+                  pageData.advancedfeatures?.customizationFinishing?.heading
+                ),
+              },
+              {
+                id: "bulk-printing",
+                label: "Bulk printing",
+                exists: Boolean(
+                  pageData.advancedfeatures?.bulkPrinting?.heading
+                ),
+              },
+              {
+                id: "convenient-printing",
+                label: "Convenient printing",
+                exists: Boolean(
+                  pageData.advancedfeatures?.convenientPrinting?.heading
+                ),
+              },
+              {
+                id: "how-to-get-started",
+                label: "Get started",
+                exists: Boolean(pageData.howtogetstarted?.heading),
+              },
+              {
+                id: "why-trust-us",
+                label: "Why trust us",
+                exists: Boolean(pageData.whytrustus?.heading),
+              },
+              {
+                id: "faqs",
+                label: "FAQs",
+                exists: Boolean(pageData.faqs?.list?.length),
+              },
+              {
+                id: "get-started",
+                label: "Contact / CTA",
+                exists: Boolean(pageData.getstartedsection?.heading),
+              },
+            ]
+              .filter((x) => x.exists)
+              .map((t) => (
+                <li key={t.id}>
+                  <a
+                    href={`#${t.id}`}
+                    className="underline-offset-2 hover:underline"
+                  >
+                    {t.label}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </nav>
         <div className="container mx-auto p-8 max-w-[1500px] text-left">
           <div className="container py-8 max-w-[1500px]">
             <h2
@@ -202,6 +293,8 @@ export default function PageStructure({
                   }
                 }
                 priority={pageData.secondaryimage?.priority || false}
+                fetchPriority="high"
+                decoding="async"
                 loading={pageData.secondaryimage?.priority ? undefined : "lazy"}
                 sizes="(min-width: 768px) 500px, 100vw"
                 className="w-full h-full"
@@ -210,7 +303,6 @@ export default function PageStructure({
               />
             </div>
             <div className="mt-4 text-left">
-              {/* WHY CHOOSE – paragraphs 1 & 2 with mobile toggle */}
               {(() => {
                 const p1 =
                   pageData.whychoosesection.paragraph1 ??
@@ -322,7 +414,8 @@ export default function PageStructure({
             <div className="text-left">
               {/* heading */}
               <h2 id="offerings" className="font-semibold">
-                Related services in Minneapolis, MN
+                Related services in{" "}
+                {applyTokens("{{city}}, {{state_abbr}}", tokens)}
               </h2>
 
               {/* paragraph */}
@@ -354,8 +447,36 @@ export default function PageStructure({
                     </summary>
 
                     <ul className="mt-2 space-y-2 pl-0 list-none">
-                      {pageData.offeringssection.list.slice(1).map((item) => (
-                        <li key={item.id}>
+                      {pageData.offeringssection.list.slice(1).map((item) => {
+                        const anchorId =
+                          (item as any).anchorId ?? slugify(item.page);
+                        return (
+                          <li id={anchorId} key={item.id}>
+                            <Link
+                              href={item.path || "/"}
+                              className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                              aria-label={`Learn more about ${item.page}`}
+                            >
+                              {item.page}
+                            </Link>
+                            {item.content}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </details>
+
+                  {/* desktop – always expanded */}
+                  <ul className="hidden md:block mt-2 space-y-2 pl-0 list-none">
+                    {pageData.offeringssection.list.map((item) => {
+                      const anchorId =
+                        (item as any).anchorId ?? slugify(item.page);
+                      return (
+                        <li
+                          id={anchorId}
+                          key={item.id}
+                          className="scroll-mt-24"
+                        >
                           <Link
                             href={item.path || "/"}
                             className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
@@ -366,25 +487,8 @@ export default function PageStructure({
                           {" – "}
                           {item.content}
                         </li>
-                      ))}
-                    </ul>
-                  </details>
-
-                  {/* desktop – always expanded */}
-                  <ul className="hidden md:block mt-2 space-y-2 pl-0 list-none">
-                    {pageData.offeringssection.list.map((item) => (
-                      <li key={item.id}>
-                        <Link
-                          href={item.path || "/"}
-                          className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                          aria-label={`Learn more about ${item.page}`}
-                        >
-                          {item.page}
-                        </Link>
-                        {" – "}
-                        {item.content}
-                      </li>
-                    ))}
+                      );
+                    })}
                   </ul>
                 </>
               ) : (
@@ -403,7 +507,10 @@ export default function PageStructure({
               </h2>
 
               {/* ── Customisation & Finishing ── */}
-              <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4">
+              <h3
+                id="customization-finishing"
+                className="scroll-mt-24 text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4"
+              >
                 {pageData.advancedfeatures.customizationFinishing?.heading ||
                   "pageData.advancedFeatures.customizationFinishing.heading not written"}
               </h3>
@@ -502,7 +609,10 @@ export default function PageStructure({
               )}
 
               {/* ── Bulk Printing ── */}
-              <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4 screen-size-10:text-left">
+              <h3
+                id="bulk-printing"
+                className="scroll-mt-24 text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4 screen-size-10:text-left"
+              >
                 {pageData.advancedfeatures.bulkPrinting?.heading ||
                   "pageData.advancedFeatures.bulkPrinting.heading not written"}
               </h3>
@@ -756,7 +866,10 @@ export default function PageStructure({
                   {/* remaining FAQs */}
                   {pageData.faqs.list.slice(1).map((faqItem, idx) => (
                     <div className="mt-4" key={idx}>
-                      <h3 className="text-xl lg:text-2xl font-inter-bold text-black dark:text-white">
+                      <h3
+                        id={`faq-${slugify(faqItem.question)}`}
+                        className="scroll-mt-24 text-xl lg:text-2xl font-inter-bold text-black dark:text-white"
+                      >
                         Q:&nbsp;{faqItem.question}
                       </h3>
                       <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
@@ -768,7 +881,10 @@ export default function PageStructure({
                 <div className="hidden md:block">
                   {pageData.faqs.list.map((faqItem, idx) => (
                     <div className="mt-4" key={idx}>
-                      <h3 className="text-xl lg:text-2xl font-inter-bold text-black dark:text-white">
+                      <h3
+                        id={`faq-${slugify(faqItem.question)}`}
+                        className="scroll-mt-24 text-xl lg:text-2xl font-inter-bold text-black dark:text-white"
+                      >
                         Q:&nbsp;{faqItem.question}
                       </h3>
                       <p className="mt-2">A:&nbsp;{faqItem.answer}</p>

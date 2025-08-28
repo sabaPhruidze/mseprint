@@ -38,6 +38,14 @@ interface CardsPagesStructure {
   breadcrumbs?: BreadcrumbItem[];
 }
 
+function slugify(s: string) {
+  return (s || "")
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
 export default function CardsPagesStructure({
   pageData,
   tokens,
@@ -91,6 +99,8 @@ export default function CardsPagesStructure({
               }
               priority={true}
               sizes="100vw"
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-[800px]  screen-size-5:h-[400px]"
               fill
               objectFit="cover"
@@ -171,6 +181,88 @@ export default function CardsPagesStructure({
             </div>
           </div>
         </section>
+        <nav
+          aria-label="On this page"
+          className="hidden md:block container mx-auto px-8 max-w-[1500px] mt-4"
+        >
+          <h2 className="sr-only">On this page</h2>
+          <ul className="flex flex-wrap gap-3 text-sm text-blue-600">
+            {[
+              {
+                id: "why-choose",
+                label: "Why choose",
+                exists: Boolean(pageData.whychoosesection?.heading),
+              },
+              {
+                id: "services",
+                label: "Services",
+                exists: Boolean(pageData.servicessection?.heading),
+              },
+              {
+                id: "offerings",
+                label: "Related services",
+                exists: Boolean(pageData.offeringssection?.list?.length),
+              },
+              {
+                id: "advanced-features",
+                label: "Advanced features",
+                exists: Boolean(pageData.advancedfeatures?.heading),
+              },
+              {
+                id: "customization-finishing",
+                label: "Customization & finishing",
+                exists: Boolean(
+                  pageData.advancedfeatures?.customizationFinishing?.heading
+                ),
+              },
+              {
+                id: "bulk-printing",
+                label: "Bulk printing",
+                exists: Boolean(
+                  pageData.advancedfeatures?.bulkPrinting?.heading
+                ),
+              },
+              {
+                id: "convenient-printing",
+                label: "Convenient printing",
+                exists: Boolean(
+                  pageData.advancedfeatures?.convenientPrinting?.heading
+                ),
+              },
+              {
+                id: "how-to-get-started",
+                label: "Get started",
+                exists: Boolean(pageData.howtogetstarted?.heading),
+              },
+              {
+                id: "why-trust-us",
+                label: "Why trust us",
+                exists: Boolean(pageData.whytrustus?.heading),
+              },
+              {
+                id: "faqs",
+                label: "FAQs",
+                exists: Boolean(pageData.faqs?.list?.length),
+              },
+              {
+                id: "get-started",
+                label: "Contact / CTA",
+                exists: Boolean(pageData.getstartedsection?.heading),
+              },
+            ]
+              .filter((x) => x.exists)
+              .map((t) => (
+                <li key={t.id}>
+                  <a
+                    href={`#${t.id}`}
+                    className="underline-offset-2 hover:underline"
+                  >
+                    {t.label}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </nav>
         <div className="grid grid-cols-1 screen-size-5:grid-cols-2 screen-size-8:grid-cols-3 screen-size-10:grid-cols-4 gap-6 max-w-[1500px] mx-auto p-8">
           {pageData.secondaryimages?.map((img, index) => {
             const cardPath = img.path || "/";
@@ -214,7 +306,10 @@ export default function CardsPagesStructure({
 
         <div className="container mx-auto px-8 py-8 max-w-[1500px] text-left">
           <div className="container py-8 max-w-[1500px] text-left">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6">
+            <h2
+              id="why-choose"
+              className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white my-6"
+            >
               {pageData.whychoosesection.heading ||
                 "pageData.whyChooseSection.heading not written"}
             </h2>
@@ -332,7 +427,8 @@ export default function CardsPagesStructure({
             <div className="text-left">
               {/* heading */}
               <h2 id="offerings" className="font-semibold">
-                Related services in Minneapolis, MN
+                Related services in{" "}
+                {applyTokens("{{city}}, {{state_abbr}}", tokens)}
               </h2>
 
               {/* paragraph */}
@@ -413,7 +509,10 @@ export default function CardsPagesStructure({
               </h2>
 
               {/* ── Customisation & Finishing ── */}
-              <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4">
+              <h3
+                id="customization-finishing"
+                className="scroll-mt-24 text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4"
+              >
                 {pageData.advancedfeatures.customizationFinishing?.heading ||
                   "pageData.advancedFeatures.customizationFinishing.heading not written"}
               </h3>
@@ -512,7 +611,10 @@ export default function CardsPagesStructure({
               )}
 
               {/* ── Bulk Printing ── */}
-              <h3 className="text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4 screen-size-10:text-left">
+              <h3
+                id="bulk-printing"
+                className="scroll-mt-24 text-xl sm:text-xl lg:text-2xl font-inter-bold text-black dark:text-white mt-4 screen-size-10:text-left"
+              >
                 {pageData.advancedfeatures.bulkPrinting?.heading ||
                   "pageData.advancedFeatures.bulkPrinting.heading not written"}
               </h3>
