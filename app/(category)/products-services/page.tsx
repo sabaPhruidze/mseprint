@@ -1,27 +1,18 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// ---------- SEO & Social Metadata ----------
+export const revalidate = 86400;
+
+/* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
-  title: "Products & Services | Full-Service Printing | MSE Printing",
+  title: "Printing Products & Services in Minneapolis | MSE Printing",
   description:
-    "Explore MSE Printing’s complete lineup of printing, signage, mailing, and marketing solutions. Offset, digital printing, direct mail, packaging, and more in Minneapolis & nationwide.",
-  keywords: [
-    "printing services Minneapolis",
-    "products and services printing",
-    "signage solutions Minnesota",
-    "direct mail printing",
-    "labels and packaging Minneapolis",
-    "creative marketing support",
-    "MSE Printing services",
-    "digital printing Minneapolis",
-    "full-service printing Minnesota",
-    "offset printing Minneapolis",
-  ],
+    "Explore printing, signage, mailing, labels, packaging, and more from MSE Printing. Offset, digital, and large format—serving Minneapolis & nationwide.",
   applicationName: "MSE Printing",
   category: "Products & Services",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -40,11 +31,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+  // Site verification + LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title: "Products & Services | Full-Service Printing | MSE Printing",
+    title: "Printing Products & Services in Minneapolis ",
     description:
       "From offset and digital printing to direct mail, labels, packaging, and creative services—MSE Printing delivers full-service support for your brand.",
     url: "https://www.mseprinting.com/products-services",
@@ -62,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Products & Services | Full-Service Printing | MSE Printing",
+    title: "Products & Services | MSE Printing",
     description:
       "Discover all printing, signage, and marketing solutions with MSE Printing.",
     site: "@MSEPrinting",
@@ -74,39 +63,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
+/* ───────── Viewport Theme Colors ───────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+/* ───────── Service Schema Structured Data ───────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -178,10 +150,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/products-services",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Products & Services",
-      },
+      itemOffered: { "@type": "Service", name: "Products & Services" },
     },
   };
 
@@ -193,10 +162,11 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
-const ProductsServices = async () => {
+/* ───────── Main Page Component ───────── */
+export default async function ProductsServices() {
   const data = await getCategoryPagesData("/products-services");
   const pageData = data.ProductsServicesPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
     "products-services",
@@ -204,7 +174,8 @@ const ProductsServices = async () => {
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
+    notFound();
   }
 
   return (
@@ -212,7 +183,7 @@ const ProductsServices = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
@@ -223,6 +194,4 @@ const ProductsServices = async () => {
       />
     </>
   );
-};
-
-export default ProductsServices;
+}
