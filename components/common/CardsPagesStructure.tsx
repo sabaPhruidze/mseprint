@@ -30,6 +30,27 @@ function applyTokens(input?: string, t?: LocationTokens) {
   );
 }
 
+type FAQItem = { question: string; answer: string };
+
+function stripTags(s: string) {
+  return (s || "").replace(/<[^>]*>/g, "").trim();
+}
+
+function buildFaqJsonLd(list: FAQItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: list.map((it) => ({
+      "@type": "Question",
+      name: stripTags(it.question).slice(0, 200), // safety clamp
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: stripTags(it.answer).slice(0, 5000),
+      },
+    })),
+  };
+}
+
 type BreadcrumbItem = { href: string; label: string };
 
 interface CardsPagesStructure {
@@ -51,6 +72,18 @@ export default function CardsPagesStructure({
   tokens,
   breadcrumbs,
 }: CardsPagesStructure) {
+  // Build FAQ JSON-LD from the same data we render (prevents drift)
+  const faqListForSchema: FAQItem[] = (pageData.faqs?.list ?? [])
+    .filter(Boolean)
+    .map((x: any) => ({
+      question: String(x.question || ""),
+      answer: String(x.answer || ""),
+    }));
+
+  const faqJsonLd = faqListForSchema.length
+    ? buildFaqJsonLd(faqListForSchema)
+    : null;
+
   return (
     <>
       <a
@@ -461,8 +494,7 @@ export default function CardsPagesStructure({
 
                     <ul className="mt-2 space-y-2 pl-0 list-none">
                       {pageData.offeringssection.list.slice(1).map((item) => {
-                        const anchorId =
-                          (item as any).anchorId ?? slugify(item.page);
+                        const anchorId = slugify(item.page);
                         return (
                           <li id={anchorId} key={item.id}>
                             <Link
@@ -483,8 +515,7 @@ export default function CardsPagesStructure({
                   {/* desktop – always expanded */}
                   <ul className="hidden md:block mt-2 space-y-2 pl-0 list-none">
                     {pageData.offeringssection.list.map((item) => {
-                      const anchorId =
-                        (item as any).anchorId ?? slugify(item.page);
+                      const anchorId = slugify(item.page);
                       return (
                         <li
                           id={anchorId}
