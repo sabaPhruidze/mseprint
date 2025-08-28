@@ -29,19 +29,19 @@ function applyTokens(input?: string, t?: LocationTokens) {
   );
 }
 
-type FAQItem = { question: string; answer: string };
+type FAQListItem = { question: string; answer: string };
 
 function stripTags(s: string) {
   return (s || "").replace(/<[^>]*>/g, "").trim();
 }
 
-function buildFaqJsonLd(list: FAQItem[]) {
+function buildFaqJsonLd(list: FAQListItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: list.map((it) => ({
       "@type": "Question",
-      name: stripTags(it.question).slice(0, 200), // safety clamp
+      name: stripTags(it.question).slice(0, 200),
       acceptedAnswer: {
         "@type": "Answer",
         text: stripTags(it.answer).slice(0, 5000),
@@ -71,12 +71,13 @@ export default function PageStructure({
   tokens,
   breadcrumbs,
 }: PageStructureProps) {
-  const faqListForSchema: FAQItem[] = (pageData.faqs?.list ?? [])
-    .filter(Boolean)
-    .map((x: any) => ({
-      question: String(x.question || ""),
-      answer: String(x.answer || ""),
-    }));
+  const rawFaqs = (pageData.faqs?.list ?? []) as Array<Partial<FAQListItem>>;
+  const faqListForSchema: FAQListItem[] = rawFaqs
+    .map(({ question, answer }) => ({
+      question: typeof question === "string" ? question : "",
+      answer: typeof answer === "string" ? answer : "",
+    }))
+    .filter((f) => f.question && f.answer);
 
   const faqJsonLd = faqListForSchema.length
     ? buildFaqJsonLd(faqListForSchema)
@@ -863,6 +864,13 @@ export default function PageStructure({
             </>
           )}
           {/* FAQs */}
+          {/* FAQs + synced JSON-LD */}
+          {faqJsonLd && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+            />
+          )}
           <section className="text-left">
             {/* heading */}
             <h2
