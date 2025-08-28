@@ -1,28 +1,19 @@
 import React from "react";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// ---------- SEO & Social Metadata ----------
+export const revalidate = 86400;
+
+/* ───────── SEO & Social Metadata (Fix 2) ───────── */
 export const metadata: Metadata = {
   title:
-    "Online Ordering Portals Minneapolis | Custom Web Portals | MSE Printing",
+    "Online Ordering Portals in Minneapolis | Custom Web Portals | MSE Printing",
   description:
-    "Streamline your printing and marketing processes with custom online ordering portals from MSE Printing. Simplify ordering, enhance productivity, and maintain brand consistency in Minneapolis & nationwide.",
-  keywords: [
-    "online ordering portals Minneapolis",
-    "custom ordering portal Minnesota",
-    "web to print solutions",
-    "online print portal Minneapolis",
-    "brand ordering portals",
-    "MSE Printing online portals",
-    "business ordering systems Minnesota",
-    "corporate ordering web portal",
-    "order management system Minneapolis",
-    "customized print portals",
-  ],
+    "Streamline printing and marketing with custom online ordering portals from MSE Printing. Simplify ordering, boost productivity, and keep brand consistency in Minneapolis & nationwide.",
   applicationName: "MSE Printing",
   category: "Online Ordering Portals",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -41,14 +32,12 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+  // Site verification & LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
     title:
-      "Online Ordering Portals Minneapolis | Custom Web Portals | MSE Printing",
+      "Online Ordering Portals in Minneapolis | Custom Web Portals | MSE Printing",
     description:
-      "Customized online ordering solutions designed specifically to enhance your business operations, productivity, and brand consistency.",
+      "Customized online ordering solutions designed to enhance operations, productivity, and brand consistency.",
     url: "https://www.mseprinting.com/online-ordering-portals",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -65,9 +54,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Online Ordering Portals Minneapolis | Custom Web Portals | MSE Printing",
+      "Online Ordering Portals in Minneapolis | Custom Web Portals | MSE Printing",
     description:
-      "Empower your business with branded, secure online ordering portals from MSE Printing. Efficient, accurate, and always available.",
+      "Empower your business with branded, secure online ordering portals from MSE Printing. Efficient, accurate, always available.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
@@ -77,39 +66,22 @@ export const metadata: Metadata = {
       },
     ],
   },
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
 
-// ---------- Viewport Theme Colors ----------
+/* ───────── Viewport Theme Colors ───────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-// ---------- Service Schema Structured Data ----------
+/* ───────── Service Schema Structured Data ───────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -181,10 +153,7 @@ const ServiceSchema = () => {
       "@type": "Offer",
       url: "https://www.mseprinting.com/online-ordering-portals",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Online Ordering Portals",
-      },
+      itemOffered: { "@type": "Service", name: "Online Ordering Portals" },
     },
   };
 
@@ -196,18 +165,20 @@ const ServiceSchema = () => {
   );
 };
 
-// ---------- Main Page Component ----------
-const OnlineOrderingPortals = async () => {
+/* ───────── Main Page Component ───────── */
+export default async function OnlineOrderingPortals() {
   const data = await getCategoryPagesData("/online-ordering-portals");
   const pageData = data.OnlineOrderingPortalsPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "online-ordering-portals", // must match the DB `path`
+    "online-ordering-portals",
     footerContentData
   );
 
   if (!pageData) {
-    return <div>Data not available.</div>;
+    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
+    notFound();
   }
 
   return (
@@ -215,7 +186,7 @@ const OnlineOrderingPortals = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
@@ -226,6 +197,4 @@ const OnlineOrderingPortals = async () => {
       />
     </>
   );
-};
-
-export default OnlineOrderingPortals;
+}
