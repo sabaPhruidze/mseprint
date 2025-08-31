@@ -68,7 +68,7 @@ export const viewport: Viewport = {
 };
 
 function StructuredData({ hasVisibleFAQ = false }) {
-  const graph: any[] = [
+  const graph: Record<string, unknown>[] = [
     {
       "@type": "Article",
       "@id": "https://www.mseprinting.com/blog/local-printing-services#article",

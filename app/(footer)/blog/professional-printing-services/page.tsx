@@ -67,79 +67,85 @@ export const viewport: Viewport = {
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-/** Use Article (+ optional FAQ + BreadcrumbList) on a blog URL. */
-function StructuredData() {
-  const graph = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Article",
+function StructuredData({ hasVisibleFAQ = false }) {
+  const graph: Record<string, unknown>[] = [
+    {
+      "@type": "Article",
+      "@id":
+        "https://www.mseprinting.com/blog/professional-printing-services#article",
+      headline:
+        "Professional Printing Guide — Corporate Materials, Labels & Large Format",
+      mainEntityOfPage: {
+        "@type": "WebPage",
         "@id":
-          "https://www.mseprinting.com/blog/professional-printing-services#article",
-        headline:
-          "Professional Printing Guide — Corporate Materials, Labels & Large Format",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id":
-            "https://www.mseprinting.com/blog/professional-printing-services",
+          "https://www.mseprinting.com/blog/professional-printing-services",
+      },
+      datePublished: "2025-08-01",
+      dateModified: "2025-08-31", // stable YYYY-MM-DD (avoid dynamic date)
+      inLanguage: "en-US",
+      author: { "@type": "Organization", name: "MSE Printing" },
+      publisher: { "@type": "Organization", name: "MSE Printing" },
+      image: [
+        "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id":
+        "https://www.mseprinting.com/blog/professional-printing-services#breadcrumbs",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Blog",
+          item: "https://www.mseprinting.com/blog",
         },
-        datePublished: "2025-08-01",
-        dateModified: new Date().toISOString().slice(0, 10),
-        author: { "@type": "Organization", name: "MSE Printing" },
-        publisher: { "@type": "Organization", name: "MSE Printing" },
-        image: [
-          "https://www.mseprinting.com/images/blog/pages/additional/professional-printing-services.webp",
-        ],
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id":
-          "https://www.mseprinting.com/blog/professional-printing-services#breadcrumbs",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Blog",
-            item: "https://www.mseprinting.com/blog",
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Professional Printing Guide — Corporate Materials, Labels & Large Format",
+          item: "https://www.mseprinting.com/blog/professional-printing-services",
+        },
+      ],
+    },
+  ];
+
+  if (hasVisibleFAQ) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id":
+        "https://www.mseprinting.com/blog/professional-printing-services#faq",
+      inLanguage: "en-US",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "When should I choose digital vs offset printing?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Digital suits short runs, fast turnarounds, or variable data; offset suits large volumes with exacting color consistency and lower per-unit cost at scale.",
           },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Professional Printing Guide — Corporate Materials, Labels & Large Format",
-            item: "https://www.mseprinting.com/blog/professional-printing-services",
+        },
+        {
+          "@type": "Question",
+          name: "How do I prep files for best results?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: 'Export press-ready PDF with fonts embedded, 300 DPI images, CMYK or Pantone profiles, and 0.125" bleeds; include live text outlines when needed.',
           },
-        ],
-      },
-      {
-        "@type": "FAQPage",
-        "@id":
-          "https://www.mseprinting.com/blog/professional-printing-services#faq",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "When should I choose digital vs offset printing?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Digital suits short runs, fast turnarounds, or variable data; offset suits large volumes with exacting color consistency and lower per-unit cost at scale.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How do I prep files for best results?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: 'Export press-ready PDF with fonts embedded, 300 DPI images, CMYK or Pantone profiles, and 0.125" bleeds; include live text outlines when needed.',
-            },
-          },
-        ],
-      },
-    ],
-  };
+        },
+      ],
+    });
+  }
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": graph,
+        }),
+      }}
     />
   );
 }
@@ -153,7 +159,7 @@ const ProfessionalPrintingServices = async () => {
 
   return (
     <>
-      <StructuredData />
+      <StructuredData hasVisibleFAQ={true} />
       <PageStructure
         pageData={pageData}
         tokens={{

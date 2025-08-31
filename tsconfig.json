@@ -13,7 +13,7 @@
 
     /* module resolution --------------------------------------------------- */
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
 
     /* misc ---------------------------------------------------------------- */
     "resolveJsonModule": true,

@@ -72,7 +72,7 @@ export const viewport: Viewport = {
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 /** Article + optional FAQ + Breadcrumbs (better for a blog URL) */
 function StructuredData({ hasVisibleFAQ = false }) {
-  const graph: any[] = [
+  const graph: Record<string, unknown>[] = [
     {
       "@type": "Article",
       "@id":
