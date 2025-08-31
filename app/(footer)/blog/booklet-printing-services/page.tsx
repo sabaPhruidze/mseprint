@@ -71,75 +71,85 @@ export const viewport: Viewport = {
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 /** Article + optional FAQ + Breadcrumbs (better for a blog URL) */
-function StructuredData() {
-  const graph = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Article",
-        "@id":
-          "https://www.mseprinting.com/blog/booklet-printing-services#article",
-        headline: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
-        mainEntityOfPage: {
-          "@type": "WebPage",
-          "@id": "https://www.mseprinting.com/blog/booklet-printing-services",
+function StructuredData({ hasVisibleFAQ = false }) {
+  const graph: any[] = [
+    {
+      "@type": "Article",
+      "@id":
+        "https://www.mseprinting.com/blog/booklet-printing-services#article",
+      headline: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": "https://www.mseprinting.com/blog/booklet-printing-services",
+      },
+      datePublished: "2025-07-15",
+      dateModified: "2025-08-31", // use a stable YYYY-MM-DD string
+      inLanguage: "en-US",
+      author: { "@type": "Organization", name: "MSE Printing" },
+      publisher: {
+        "@type": "Organization",
+        name: "MSE Printing",
+      },
+      image: [
+        "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id":
+        "https://www.mseprinting.com/blog/booklet-printing-services#breadcrumbs",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Blog",
+          item: "https://www.mseprinting.com/blog",
         },
-        datePublished: "2025-07-15",
-        dateModified: new Date().toISOString().slice(0, 10),
-        author: { "@type": "Organization", name: "MSE Printing" },
-        publisher: { "@type": "Organization", name: "MSE Printing" },
-        image: [
-          "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
-        ],
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id":
-          "https://www.mseprinting.com/blog/booklet-printing-services#breadcrumbs",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Blog",
-            item: "https://www.mseprinting.com/blog",
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+          item: "https://www.mseprinting.com/blog/booklet-printing-services",
+        },
+      ],
+    },
+  ];
+
+  if (hasVisibleFAQ) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": "https://www.mseprinting.com/blog/booklet-printing-services#faq",
+      inLanguage: "en-US",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "What binding should I choose for my booklet?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Saddle stitch works best for 8–64 pages and fast timelines. Perfect bind suits 60+ pages for a square spine. Coil/spiral is durable and lays flat for manuals and training books.",
           },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
-            item: "https://www.mseprinting.com/blog/booklet-printing-services",
+        },
+        {
+          "@type": "Question",
+          name: "What paper weights are typical?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Common interiors: 80–100# text (gloss or silk). Covers: 10–14pt cover with optional soft-touch or gloss lamination for durability.",
           },
-        ],
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://www.mseprinting.com/blog/booklet-printing-services#faq",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "What binding should I choose for my booklet?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Saddle stitch works best for 8–64 pages and fast timelines. Perfect bind suits 60+ pages for a square spine. Coil/spiral is durable and lays flat for manuals and training books.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What paper weights are typical?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Common interiors: 80–100# text (gloss or silk). Covers: 10–14pt cover with optional soft-touch or gloss lamination for durability.",
-            },
-          },
-        ],
-      },
-    ],
-  };
+        },
+      ],
+    });
+  }
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": graph,
+        }),
+      }}
     />
   );
 }
@@ -153,7 +163,7 @@ const BookletPrintingServices = async () => {
 
   return (
     <>
-      <StructuredData />
+      <StructuredData hasVisibleFAQ={true} />
       <PageStructure
         pageData={pageData}
         tokens={{
