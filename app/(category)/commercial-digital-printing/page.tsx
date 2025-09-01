@@ -7,23 +7,17 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Commercial Digital Printing | MSE Print",
+  title: "Commercial Digital Printing | MSE Printing",
   description:
-    "Professional digital printing services from MSE Printing. High-quality, fast, and cost-effective printing solutions for businesses of all sizes.",
+    "Fast, high-quality commercial digital printing in Minneapolis. Short-run, variable data, and quick turnarounds from MSE Printing.",
   keywords: [
+    "commercial digital printing",
     "digital printing Minneapolis",
-    "commercial digital print services",
+    "short-run printing Minnesota",
+    "variable data printing",
     "on-demand printing",
-    "short run printing Minnesota",
     "business printing solutions",
-    "custom digital print materials",
-    "fast turnaround digital printing",
-    "color digital printing USA",
-    "digital print shop Minneapolis",
-    "cost-effective commercial printing",
   ],
-  applicationName: "MSE Printing",
-  category: "Digital Printing Services",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/commercial-digital-printing",
@@ -40,14 +34,10 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Google verification string
-  },
-
   openGraph: {
-    title: "Commercial Digital Printing | MSE Print",
+    title: "Commercial Digital Printing | MSE Printing",
     description:
-      "Digital printing revolutionizes the way businesses approach their printing needs, offering unmatched versatility, speed, and customization for small to medium-sized projects.",
+      "Commercial digital printing services with quick turnaround, crisp color, and flexible quantities from MSE Printing in Minneapolis.",
     url: "https://www.mseprinting.com/commercial-digital-printing",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -57,41 +47,20 @@ export const metadata: Metadata = {
         url: "https://www.mseprinting.com/images/home-images/digital_printing.webp",
         width: 1200,
         height: 630,
-        alt: "MSE Printing - Commercial Digital Printing Services",
+        alt: "MSE Printing – Commercial Digital Printing press in operation",
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "Commercial Digital Printing | MSE Print",
+    title: "Commercial Digital Printing | MSE Printing",
     description:
-      "High-quality commercial digital printing with fast turnaround and customized options from MSE Printing in Minneapolis.",
+      "High-quality, fast commercial digital printing in Minneapolis. Short-run, variable data, and on-demand solutions.",
+    images:
+      "https://www.mseprinting.com/images/home-images/digital_printing.webp",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
-    images: [
-      {
-        url: "https://www.mseprinting.com/images/home-images/digital_printing.webp",
-        alt: "Commercial digital print press at MSE Printing Minneapolis",
-      },
-    ],
   },
-
-  other: {
-    "geo.region": "US-MN",
-    "geo.placename": "Minneapolis",
-    "geo.position": "45.0230;-93.2790",
-    ICBM: "45.0230, -93.2790",
-    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
-    "business:contact_data:locality": "Minneapolis",
-    "business:contact_data:region": "MN",
-    "business:contact_data:postal_code": "55412",
-    "business:contact_data:country_name": "USA",
-    "business:contact_data:phone_number": "763-542-8812",
-    "og:email": "info@mseprinting.com",
-    "og:phone_number": "763-542-8812",
-  },
-
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
@@ -101,13 +70,12 @@ export const metadata: Metadata = {
   publisher: "MSE Printing",
 };
 
-/* ─────────────── VIEWPORT COLOR MODE ─────────────── */
+/* ─────────────── VIEWPORT ─────────────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
@@ -187,13 +155,49 @@ const ServiceSchema = () => {
   );
 };
 
-/* ─────────────── MAIN PAGE COMPONENT ─────────────── */
+const BreadcrumbSchema = () => {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.mseprinting.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: "https://www.mseprinting.com/services",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "Commercial Digital Printing",
+        item: "https://www.mseprinting.com/commercial-digital-printing",
+      },
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+};
+
+/* ─────────────── MAIN PAGE COMPONENT ───────────────
+   NOTE: Ensure PageStructure renders the main copy on the server
+   (no "use client" for the primary content), so Google sees it in the HTML. */
 const CommercialDigitalPrinting = async () => {
   const data = await getCategoryPagesData("/commercial-digital-printing");
   const pageData = data.CommercialDigitalPrintingPageData?.[0];
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "commercial-digital-printing", // must match the DB `path`
+    "commercial-digital-printing",
     footerContentData
   );
 
@@ -204,9 +208,10 @@ const CommercialDigitalPrinting = async () => {
   return (
     <>
       <ServiceSchema />
+      <BreadcrumbSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
