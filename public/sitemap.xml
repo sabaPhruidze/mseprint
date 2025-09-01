@@ -590,7 +590,7 @@
 </url>
 <url>
     <loc>https://www.mseprinting.com/commercial-digital-printing</loc>
-    <lastmod>2025-08-30T00:00:00+00:00</lastmod>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
 
@@ -645,9 +645,15 @@
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/legal-document-printing</loc>
-  <lastmod>2025-08-28T16:24:16+00:00</lastmod>
+  <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   <changefreq>yearly</changefreq>
-  <priority>0.8</priority>
+  <priority>0.85</priority>
+
+  <image:image>
+    <image:loc>https://www.mseprinting.com/images/blog/pages/additional/legal-document-printing.webp</image:loc>
+    <image:title>Legal Document Printing in Minneapolis, MN — MSE Printing</image:title>
+    <image:caption>Confidential, court-ready briefs, tabbed exhibits, pleadings, and contracts printed in Minneapolis, MN (USA). Pickup at 3839 Washington Ave N Ste 103 Minneapolis, MN 55412.</image:caption>
+  </image:image>
 </url>
 <url>
   <loc>https://www.mseprinting.com/blog/local-printing-services</loc>
