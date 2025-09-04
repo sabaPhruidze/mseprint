@@ -71,33 +71,29 @@ export const viewport: Viewport = {
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 /** Article + optional FAQ + Breadcrumbs (better for a blog URL) */
+/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
+/** Article + optional FAQ + Breadcrumbs */
 function StructuredData({ hasVisibleFAQ = false }) {
+  const url = "https://www.mseprinting.com/blog/booklet-printing-services";
+  const img =
+    "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp";
+
   const graph: Record<string, unknown>[] = [
     {
       "@type": "Article",
-      "@id":
-        "https://www.mseprinting.com/blog/booklet-printing-services#article",
+      "@id": `${url}#article`,
       headline: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": "https://www.mseprinting.com/blog/booklet-printing-services",
-      },
+      mainEntityOfPage: { "@type": "WebPage", "@id": url },
       datePublished: "2025-07-15",
-      dateModified: "2025-08-31", // use a stable YYYY-MM-DD string
+      dateModified: "2025-08-23", // align with sitemap <lastmod>
       inLanguage: "en-US",
       author: { "@type": "Organization", name: "MSE Printing" },
-      publisher: {
-        "@type": "Organization",
-        name: "MSE Printing",
-      },
-      image: [
-        "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
-      ],
+      publisher: { "@type": "Organization", name: "MSE Printing" },
+      image: [img],
     },
     {
       "@type": "BreadcrumbList",
-      "@id":
-        "https://www.mseprinting.com/blog/booklet-printing-services#breadcrumbs",
+      "@id": `${url}#breadcrumbs`,
       itemListElement: [
         {
           "@type": "ListItem",
@@ -109,7 +105,7 @@ function StructuredData({ hasVisibleFAQ = false }) {
           "@type": "ListItem",
           position: 2,
           name: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
-          item: "https://www.mseprinting.com/blog/booklet-printing-services",
+          item: url,
         },
       ],
     },
@@ -118,23 +114,78 @@ function StructuredData({ hasVisibleFAQ = false }) {
   if (hasVisibleFAQ) {
     graph.push({
       "@type": "FAQPage",
-      "@id": "https://www.mseprinting.com/blog/booklet-printing-services#faq",
+      "@id": `${url}#faq`,
+      mainEntityOfPage: { "@type": "WebPage", "@id": url },
       inLanguage: "en-US",
       mainEntity: [
         {
           "@type": "Question",
-          name: "What binding should I choose for my booklet?",
+          "@id": `${url}#q-format`,
+          name: "Which file formats should we submit for professional printing?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Saddle stitch works best for 8–64 pages and fast timelines. Perfect bind suits 60+ pages for a square spine. Coil/spiral is durable and lays flat for manuals and training books.",
+            "@id": `${url}#a-format`,
+            text: "The most reliable format for professional printing is a high-resolution PDF with all fonts embedded and images at 300 DPI or higher. This ensures consistent results and prevents common issues like font substitutions or blurry graphics. We also accept Adobe InDesign, Illustrator, or Photoshop files if all links and fonts are included. Our pre-press specialists in Minneapolis review every file before production to check bleeds, resolution, and color profiles—helping businesses across Minnesota and the USA avoid delays and achieve flawless final results.",
           },
         },
         {
           "@type": "Question",
-          name: "What paper weights are typical?",
+          "@id": `${url}#q-pantone`,
+          name: "Can you match Pantone® brand colors for our print projects?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Common interiors: 80–100# text (gloss or silk). Covers: 10–14pt cover with optional soft-touch or gloss lamination for durability.",
+            "@id": `${url}#a-pantone`,
+            text: "Yes. We use calibrated presses and spectrophotometer technology to reproduce Pantone® and custom brand colors with precision. This guarantees consistency across all your print materials, whether business cards, brochures, or annual reports. Our Minneapolis production team carefully monitors every run, so your brand colors remain vibrant and accurate for both small local projects and large national campaigns.",
+          },
+        },
+        {
+          "@type": "Question",
+          "@id": `${url}#q-eco`,
+          name: "Do you offer eco-friendly paper options for our printing needs?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            "@id": `${url}#a-eco`,
+            text: "We are committed to sustainable printing practices. Options include FSC-certified and 100% post-consumer recycled papers, soy-based inks, and carbon-neutral printing processes. Many Minnesota companies choose these eco-friendly solutions to meet their environmental goals while still receiving durable, high-quality materials. Selecting these papers helps reduce your carbon footprint and supports responsible forestry without sacrificing professional results.",
+          },
+        },
+        {
+          "@type": "Question",
+          "@id": `${url}#q-turn`,
+          name: "How fast can you turn a large corporate report printing project?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            "@id": `${url}#a-turn`,
+            text: "Large projects like annual reports or catalogs are usually completed within 3–5 business days, depending on page count and finishing. For urgent deadlines, we offer expedited services—often same-day or next-day using high-speed digital presses. Our team evaluates each project to recommend the fastest and most efficient production method, helping Twin Cities businesses and nationwide clients meet critical timelines without compromising quality.",
+          },
+        },
+        {
+          "@type": "Question",
+          "@id": `${url}#q-digital-offset`,
+          name: "What is the difference between digital and offset printing, and which is right for my project?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            "@id": `${url}#a-digital-offset`,
+            text: "Digital printing is ideal for short runs, variable data, and projects that require quick turnaround. Offset printing, by contrast, is best for large-volume jobs because of its lower cost per unit and exceptional consistency across thousands of pieces. In practice, a Minnesota business might choose digital for 200 personalized booklets, but offset for 20,000 catalogs. We guide each client toward the most cost-effective method for their project.",
+          },
+        },
+        {
+          "@type": "Question",
+          "@id": `${url}#q-proof`,
+          name: "What is your proofing process for print jobs?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            "@id": `${url}#a-proof`,
+            text: "Every project includes a proofing stage. For most jobs, we provide digital PDF proofs to confirm layout and content. For color-critical or high-value projects, we recommend physical proofs printed on the chosen paper stock. This allows you to evaluate color, finish, and binding before the full run begins. We only move forward once you provide written approval, ensuring peace of mind and eliminating surprises.",
+          },
+        },
+        {
+          "@type": "Question",
+          "@id": `${url}#q-ship`,
+          name: "Do you offer delivery or shipping for completed printing orders?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            "@id": `${url}#a-ship`,
+            text: "Yes. We provide local delivery throughout Minneapolis and the greater Twin Cities area, and ship nationally via trusted carriers with full tracking. Clients are also welcome to pick up their orders directly from our Minneapolis print shop for added convenience. Whether you’re in Minnesota or across the USA, we make sure your materials arrive on time and in excellent condition.",
           },
         },
       ],
