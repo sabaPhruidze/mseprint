@@ -79,7 +79,7 @@ function StructuredData({ hasVisibleFAQ = false }) {
         "@id": "https://www.mseprinting.com/blog/local-printing-services",
       },
       datePublished: "2025-08-01",
-      dateModified: "2025-08-31", // use a stable YYYY-MM-DD (don’t generate dynamically)
+      dateModified: "2025-08-31",
       inLanguage: "en-US",
       author: { "@type": "Organization", name: "MSE Printing" },
       publisher: { "@type": "Organization", name: "MSE Printing" },
@@ -157,7 +157,7 @@ const LocalPrintingServices = async () => {
 
   return (
     <>
-      <StructuredData hasVisibleFAQ={true} />
+      <StructuredData hasVisibleFAQ={false} />
       <PageStructure
         pageData={pageData}
         tokens={{

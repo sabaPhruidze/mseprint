@@ -71,13 +71,23 @@ export default function PageStructure({
   tokens,
   breadcrumbs,
 }: PageStructureProps) {
+  type FAQListItem = { question: string; answer: string };
+
   const rawFaqs = (pageData.faqs?.list ?? []) as Array<Partial<FAQListItem>>;
+
   const faqListForSchema: FAQListItem[] = rawFaqs
-    .map(({ question, answer }) => ({
-      question: typeof question === "string" ? question : "",
-      answer: typeof answer === "string" ? answer : "",
-    }))
-    .filter((f) => f.question && f.answer);
+    .map(({ question, answer }) => {
+      const q = stripTags(typeof question === "string" ? question : "").slice(
+        0,
+        200
+      );
+      const a = stripTags(typeof answer === "string" ? answer : "").slice(
+        0,
+        5000
+      );
+      return { question: q, answer: a };
+    })
+    .filter((f) => f.question.length > 0 && f.answer.length > 0);
 
   const faqJsonLd = faqListForSchema.length
     ? buildFaqJsonLd(faqListForSchema)
