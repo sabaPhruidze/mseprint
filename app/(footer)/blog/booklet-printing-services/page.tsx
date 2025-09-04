@@ -214,7 +214,7 @@ const BookletPrintingServices = async () => {
 
   return (
     <>
-      <StructuredData hasVisibleFAQ={true} />
+      <StructuredData hasVisibleFAQ={false} />
       <PageStructure
         pageData={pageData}
         tokens={{

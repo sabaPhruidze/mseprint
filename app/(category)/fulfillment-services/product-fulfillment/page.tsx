@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   },
   // Site verification + LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title: "Product Fulfillment in minneapolis | MSE Printing",
+    title: "Product Fulfillment in Minneapolis | MSE Printing",
     description:
-      "Reliable, flexible, and brand-aligned—MSE Printing takes your product the final mile with professional fulfillment solutions in minneapolis.",
+      "Reliable, flexible, and brand-aligned—MSE Printing takes your product the final mile with professional fulfillment solutions in Minneapolis.",
     url: "https://www.mseprinting.com/fulfillment-services/product-fulfillment",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -50,8 +50,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Product Fulfillment in minneapolis | MSE Printing",
+    title: "Product Fulfillment in Minneapolis | MSE Printing",
     description:
       "MSE Printing handles your product fulfillment from shelf to shipment with speed and care. Trusted by brands across the U.S.",
     site: "@MSEPrinting",

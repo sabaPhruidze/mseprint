@@ -81,7 +81,7 @@ function StructuredData({ hasVisibleFAQ = false }) {
           "https://www.mseprinting.com/blog/professional-printing-services",
       },
       datePublished: "2025-08-01",
-      dateModified: "2025-08-31", // stable YYYY-MM-DD (avoid dynamic date)
+      dateModified: "2025-09-04", // stable YYYY-MM-DD (avoid dynamic date)
       inLanguage: "en-US",
       author: { "@type": "Organization", name: "MSE Printing" },
       publisher: { "@type": "Organization", name: "MSE Printing" },
@@ -159,7 +159,7 @@ const ProfessionalPrintingServices = async () => {
 
   return (
     <>
-      <StructuredData hasVisibleFAQ={true} />
+      <StructuredData hasVisibleFAQ={false} />
       <PageStructure
         pageData={pageData}
         tokens={{

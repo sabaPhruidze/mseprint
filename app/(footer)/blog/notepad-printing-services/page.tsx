@@ -80,7 +80,7 @@ function StructuredData({ hasVisibleFAQ = false }) {
         "@id": "https://www.mseprinting.com/blog/notepad-printing-services",
       },
       datePublished: "2025-07-15",
-      dateModified: "2025-08-31", // keep this a stable YYYY-MM-DD string
+      dateModified: "2025-09-04", // keep this a stable YYYY-MM-DD string
       inLanguage: "en-US",
       author: { "@type": "Organization", name: "MSE Printing" },
       publisher: { "@type": "Organization", name: "MSE Printing" },
@@ -158,7 +158,7 @@ const NotepadPrintingServices = async () => {
 
   return (
     <>
-      <StructuredData hasVisibleFAQ={true} />
+      <StructuredData hasVisibleFAQ={false} />
       <PageStructure
         pageData={pageData}
         tokens={{

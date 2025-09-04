@@ -79,7 +79,7 @@ function StructuredData({ hasVisibleFAQ = false }) {
         "@id": "https://www.mseprinting.com/blog/local-printing-services",
       },
       datePublished: "2025-08-01",
-      dateModified: "2025-08-31",
+      dateModified: "2025-09-04",
       inLanguage: "en-US",
       author: { "@type": "Organization", name: "MSE Printing" },
       publisher: { "@type": "Organization", name: "MSE Printing" },
