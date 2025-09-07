@@ -272,84 +272,6 @@ const ServiceSchema = () => {
           name: "Call for Business Forms Quote",
         },
       },
-      {
-        "@type": "FAQPage",
-        "@id": "https://www.mseprinting.com/business-forms#faq",
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "What types of business forms are available for customization?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "We specialize in a comprehensive array of custom business forms in Minneapolis, designed to meet the operational needs of any industry. Our printing services cover everything from multi-part carbonless NCR forms, detailed invoices, and purchase orders to professional work orders, bill of lading forms, and service agreements. Whether you need continuous forms for dot-matrix printers or padded individual forms, our Minneapolis printing solutions ensure your business documentation is clear, professional, and perfectly suited to your workflow.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Can I include specific fields and branding elements on my business forms?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes, absolutely. Every aspect of our business forms in Minneapolis is fully customizable. We can incorporate your company's logo, specific branding colors, and complete contact information. Our custom printing process allows for unique fields, legal disclaimers, terms and conditions, and specialized layouts. We also offer advanced features like sequential numbering for tracking, perforation for easy tear-offs, and hole punching for organized binder storage, ensuring your forms function exactly as you need them to.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Are carbonless (NCR) forms a good alternative to traditional receipt books?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "NCR (No Carbon Required) business forms are an excellent, modern alternative to messy carbon paper. These carbonless forms create clean, sharp duplicate (2-part), triplicate (3-part), or quadruplicate (4-part) copies with a single pen stroke. For businesses in Minneapolis, from HVAC technicians to legal consultants, NCR forms are essential for providing instant receipts, work order copies, or signed contracts. They streamline record-keeping and enhance professionalism by eliminating smudges and illegible copies.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What paper and format options are available for business forms?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Our printing services for business forms in Minneapolis offer a wide selection of paper stocks and formats. You can choose from various paper weights and colors to differentiate multi-part forms (e.g., white, canary, pink). Formats include individual cut-sheet forms, edge-glued sets, forms padded with a chipboard backer, and wrap-around booklet forms. Our team can help you select the most durable and cost-effective option for your specific application, whether for office use or on-the-go field service.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "How long does it take to print custom business forms?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Our standard turnaround time for printing custom business forms in Minneapolis is typically 5-7 business days after proof approval. However, this can vary based on the complexity and quantity of your order. We understand that businesses sometimes have urgent needs, which is why we offer rush printing services. If you have a tight deadline, please let us know, and we will work to expedite your order to ensure you get your forms when you need them.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Is it easy to reorder forms once I’ve placed my first order?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes, reordering is incredibly simple and efficient. We securely archive all digital files from your past orders for business forms in Minneapolis. When you need a reprint, simply contact us with your previous order number or company name. We can quickly process an identical reorder or make any necessary updates to fields, contact information, or design elements. This ensures brand consistency and saves you the time and effort of starting from scratch.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Do you offer eco-friendly printing options for business forms?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "We are committed to offering sustainable printing solutions for businesses in Minneapolis. We provide a selection of eco-friendly options for your business forms, including paper stocks with high post-consumer recycled content and printing with environmentally friendly, soy-based inks. Choosing these options allows your company to maintain its commitment to sustainability without compromising on the quality or professionalism of your business documents.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Can I review a digital proof before printing my forms?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Absolutely. We believe in getting it right the first time. For every new order of custom business forms in Minneapolis, we provide a complimentary digital proof in PDF format. This allows you to meticulously review every detail—including layout, text, branding, and field placement—before we proceed with the full printing run. Your approval ensures complete satisfaction and guarantees your final forms are accurate and error-free.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What is the minimum order quantity for custom business forms?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "We offer flexible minimum order quantities to accommodate businesses of all sizes in Minneapolis. While larger orders provide better per-unit pricing, we can produce smaller runs for startups, small businesses, or for those who need to test a new form design. Our goal is to provide cost-effective printing solutions that align with your budget and inventory needs, without requiring a massive upfront commitment.",
-            },
-          },
-        ],
-      },
     ],
   } as const;
 
@@ -366,7 +288,7 @@ const BusinessForms = async () => {
   const pageData = data.BusinessFormsPageData?.[0];
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "business-forms", // must match the DB `path`
+    "business-forms",
     footerContentData
   );
 
