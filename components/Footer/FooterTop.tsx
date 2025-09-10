@@ -57,7 +57,12 @@ const FooterTop: React.FC<FooterTopProps> = ({ footerTopData }) => {
               }`}
               alt={icon.alt}
               name={icon.alt}
-              geoData={icon.geoData}
+              geoData={{
+                latitude: 45.0229,
+                longitude: -93.2793,
+                location: "3839 Washington Ave N Ste. 103",
+                addressRegion: "Minneapolis",
+              }}
               priority={icon.priority}
               loading={icon.priority ? undefined : "lazy"}
               width={icon.width}

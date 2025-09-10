@@ -31,7 +31,12 @@ const Card: React.FC<CardProps> = ({ card, priority }) => {
             src={mobileImageSrc}
             alt={card.alt}
             name={card.alt}
-            geoData={card.geoData}
+            geoData={{
+              latitude: 45.0229,
+              longitude: -93.2793,
+              location: "3839 Washington Ave N Ste. 103",
+              addressRegion: "Minneapolis",
+            }}
             priority={priority}
             loading={priority ? undefined : "lazy"}
             sizes={card.sizes}
@@ -43,7 +48,12 @@ const Card: React.FC<CardProps> = ({ card, priority }) => {
             src={desktopImageSrc}
             alt={card.alt}
             name={card.alt}
-            geoData={card.geoData}
+            geoData={{
+              latitude: 45.0229,
+              longitude: -93.2793,
+              location: "3839 Washington Ave N Ste. 103",
+              addressRegion: "Minneapolis",
+            }}
             priority={priority}
             loading={priority ? undefined : "lazy"}
             sizes={card.sizes}

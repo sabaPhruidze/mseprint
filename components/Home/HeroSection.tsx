@@ -28,7 +28,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
             src={mobileImageSrc}
             alt={heroSection.alt}
             name={heroSection.alt}
-            geoData={heroSection.geoData}
+            geoData={{
+              latitude: 45.0229,
+              longitude: -93.2793,
+              location: "3839 Washington Ave N Ste. 103",
+              addressRegion: "Minneapolis",
+            }}
             // Highest LCP benefit on mobile PSI
             priority
             fetchPriority="high"
@@ -43,7 +48,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ heroSection }) => {
             src={desktopImageSrc}
             alt={heroSection.alt}
             name={heroSection.alt}
-            geoData={heroSection.geoData}
+            geoData={{
+              latitude: 45.0229,
+              longitude: -93.2793,
+              location: "3839 Washington Ave N Ste. 103",
+              addressRegion: "Minneapolis",
+            }}
             // Keep low so it doesn’t compete on mobile
             priority={false}
             fetchPriority="low"

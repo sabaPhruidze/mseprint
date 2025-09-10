@@ -128,14 +128,12 @@ export default function PageStructure({
               name={
                 pageData.mainimage.alt || "Printing services in Minneapolis"
               }
-              geoData={
-                pageData.mainimage.geoData || {
-                  latitude: 45.023,
-                  longitude: -93.279,
-                  location: "3839 Washington Ave N Ste. 103",
-                  addressRegion: "Minneapolis",
-                }
-              }
+              geoData={{
+                latitude: 45.0229,
+                longitude: -93.2793,
+                location: "3839 Washington Ave N Ste. 103",
+                addressRegion: "Minneapolis",
+              }}
               priority={true}
               fetchPriority="high"
               decoding="async"
@@ -327,14 +325,12 @@ export default function PageStructure({
                   pageData.secondaryimage?.alt ||
                   "MSE Printing | print your product here"
                 }
-                geoData={
-                  pageData.secondaryimage?.geoData || {
-                    latitude: 45.023,
-                    longitude: -93.279,
-                    location: "3839 Washington Ave N Ste. 103",
-                    addressRegion: "Minneapolis",
-                  }
-                }
+                geoData={{
+                  latitude: 45.0229,
+                  longitude: -93.2793,
+                  location: "3839 Washington Ave N Ste. 103",
+                  addressRegion: "Minneapolis",
+                }}
                 priority={pageData.secondaryimage?.priority || false}
                 fetchPriority="high"
                 decoding="async"

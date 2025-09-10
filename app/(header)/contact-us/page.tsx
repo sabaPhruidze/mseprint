@@ -102,7 +102,7 @@ const ContactUsPage = () => {
                 <address className="not-italic leading-relaxed">
                   MSE Printing
                   <br />
-                  3839 N Washington Ave Ste&nbsp;101
+                  3839 N Washington Ave Ste&nbsp;103
                   <br />
                   Minneapolis, MN&nbsp;55412
                 </address>

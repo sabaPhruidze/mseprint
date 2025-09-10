@@ -123,14 +123,12 @@ export default function CardsPagesStructure({
               name={
                 pageData.mainimage.alt || "Printing services in Minneapolis"
               }
-              geoData={
-                pageData.mainimage.geoData || {
-                  latitude: 45.023,
-                  longitude: -93.279,
-                  location: "3839 Washington Ave N Ste. 103",
-                  addressRegion: "Minneapolis",
-                }
-              }
+              geoData={{
+                latitude: 45.0229,
+                longitude: -93.2793,
+                location: "3839 Washington Ave N Ste. 103",
+                addressRegion: "Minneapolis",
+              }}
               priority={true}
               sizes="100vw"
               fetchPriority="high"
@@ -316,7 +314,12 @@ export default function CardsPagesStructure({
                     src={`/images/${img.src}`}
                     alt={img.alt || ""}
                     name={img.name || img.alt || ""}
-                    geoData={img.geoData}
+                    geoData={{
+                      latitude: 45.0229,
+                      longitude: -93.2793,
+                      location: "3839 Washington Ave N Ste. 103",
+                      addressRegion: "Minneapolis",
+                    }}
                     priority={img.priority}
                     loading={img.priority ? undefined : "lazy"}
                     sizes={img.sizes || ""}

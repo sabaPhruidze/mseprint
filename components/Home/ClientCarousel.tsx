@@ -78,7 +78,12 @@ const ClientCarousel: React.FC<ClientCarouselProps> = ({ carouselData }) => {
               src={buildImagePath(current.src, isMobile!)}
               alt={current.alt}
               name={current.alt}
-              geoData={current.geoData}
+              geoData={{
+                latitude: 45.0229,
+                longitude: -93.2793,
+                location: "3839 Washington Ave N Ste. 103",
+                addressRegion: "Minneapolis",
+              }}
               priority={false}
               fetchPriority="low"
               height={400}

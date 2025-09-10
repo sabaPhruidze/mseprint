@@ -17,7 +17,12 @@ const GetHeaderLogo = ({ LogoData }: { LogoData: SEOImageProps }) => {
           src={mobileLogo}
           alt={LogoData.alt}
           name={LogoData.name}
-          geoData={LogoData.geoData}
+          geoData={{
+            latitude: 45.0229,
+            longitude: -93.2793,
+            location: "3839 Washington Ave N Ste. 103",
+            addressRegion: "Minneapolis",
+          }}
           priority={LogoData.priority}
           sizes={LogoData.sizes}
           fill={true}
@@ -27,7 +32,12 @@ const GetHeaderLogo = ({ LogoData }: { LogoData: SEOImageProps }) => {
           src={desktopLogo}
           alt={LogoData.alt}
           name={LogoData.name}
-          geoData={LogoData.geoData}
+          geoData={{
+            latitude: 45.0229,
+            longitude: -93.2793,
+            location: "3839 Washington Ave N Ste. 103",
+            addressRegion: "Minneapolis",
+          }}
           priority={LogoData.priority}
           sizes={LogoData.sizes}
           fill={true}
