@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Finance Printing | MSE Print",
+  title: "Finance Printing | MSE Printing",
   description:
     "Secure, compliant, and professional finance printing services tailored for financial institutions. Trusted by banks, credit unions, and investment firms.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Finance Printing | MSE Print",
+    title: "Finance Printing | MSE Printing",
     description:
       "From statements to disclosures and branded stationery—MSE Printing delivers trusted printing services for the finance sector.",
     url: "https://www.mseprinting.com/industry-specific/finance",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Finance Printing | MSE Print",
+    title: "Finance Printing | MSE Printing",
     description:
       "Compliant, secure, and on-brand printing solutions for financial organizations—statements, disclosures, and more.",
     site: "@MSEPrinting",

@@ -7,9 +7,9 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Banners & Posters | MSE Print",
+  title: "Banners & Posters | MSE Printing",
   description:
-    "Explore premium banners and posters by MSE Print for impactful advertising and strong brand presence. Fast turnaround available in Minneapolis & nationwide.",
+    "Explore premium banners and posters by MSE Printing for impactful advertising and strong brand presence. Fast turnaround available in Minneapolis & nationwide.",
   keywords: [
     "banner printing Minneapolis",
     "custom banners Minneapolis",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Banners & Posters | MSE Print",
+    title: "Banners & Posters | MSE Printing",
     description:
       "High-quality banners and posters that enhance visibility and promote your brand effectively. Ideal for businesses, events, and campaigns.",
     url: "https://www.mseprinting.com/banners-posters",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Banners & Posters | MSE Print",
+    title: "Banners & Posters | MSE Printing",
     description:
       "Custom printed banners and posters by MSE Printing to maximize brand visibility. Same-day service available.",
     site: "@MSEPrinting",

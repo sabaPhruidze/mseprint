@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Cards & Invitations | MSE Print",
+    title: "Cards & Invitations | MSE Printing",
     description:
       "Create elegant, heartfelt cards and invitations with custom finishes and expert printing from MSE Printing. Available locally and nationwide.",
     url: "https://www.mseprinting.com/cards-invitations",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Cards & Invitations | MSE Print",
+    title: "Cards & Invitations | MSE Printing",
     description:
       "Celebrate every moment with beautifully printed invitations and custom cards by MSE Printing.",
     site: "@MSEPrinting",

@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Event Literature & Signs | MSE Print",
+  title: "Event Literature & Signs | MSE Printing",
   description:
     "Make a bold impression at your next event with custom signage and printed materials by MSE Printing. Trade shows, expos, and conferences covered.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Event Literature & Signs | MSE Print",
+    title: "Event Literature & Signs | MSE Printing",
     description:
       "Trade show signs, brochures, banners, and more—professionally printed and ready to represent your brand at any event.",
     url: "https://www.mseprinting.com/event-literature-signs",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Event Literature & Signs | MSE Print",
+    title: "Event Literature & Signs | MSE Printing",
     description:
       "Custom event materials from MSE Printing—signs, banners, brochures, and more, printed to elevate your presence.",
     site: "@MSEPrinting",

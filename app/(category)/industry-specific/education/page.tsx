@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Education Printing | MSE Print",
+  title: "Education Printing | MSE Printing",
   description:
     "Enhance learning, promote events, and streamline school operations with professional education printing from MSE Printing.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Education Printing | MSE Print",
+    title: "Education Printing | MSE Printing",
     description:
       "From classrooms to campuses—MSE Printing delivers quality printed materials that empower student success and strengthen school identity.",
     url: "https://www.mseprinting.com/industry-specific/education",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Education Printing | MSE Print",
+    title: "Education Printing | MSE Printing",
     description:
       "Trusted by schools and universities—MSE Printing helps institutions communicate and educate through professionally printed materials.",
     site: "@MSEPrinting",

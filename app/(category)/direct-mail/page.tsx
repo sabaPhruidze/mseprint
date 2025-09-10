@@ -8,7 +8,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Direct Mail & Mailing Services | MSE Print",
+  title: "Direct Mail & Mailing Services | MSE Printing",
   description:
     "Professional direct mail and mailing services by MSE Printing. End-to-end solutions for design, list management, printing, and USPS delivery.",
   keywords: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Direct Mail & Mailing Services | MSE Print",
+    title: "Direct Mail & Mailing Services | MSE Printing",
     description:
       "Boost brand awareness and engagement with MSE Printing's direct mail solutions. Expert printing, processing, and USPS coordination.",
     url: "https://www.mseprinting.com/direct-mail",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Direct Mail & Mailing Services | MSE Print",
+    title: "Direct Mail & Mailing Services | MSE Printing",
     description:
       "End-to-end direct mail solutions by MSE Printing. Printing, targeting, and USPS mailing—all in one place.",
     site: "@MSEPrinting",

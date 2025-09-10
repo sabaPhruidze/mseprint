@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Brochures & Collateral | MSE Print",
+  title: "Brochures & Collateral | MSE Printing",
   description:
     "Discover professionally designed brochures and marketing collateral by MSE Printing. Effective, polished, and custom printed to elevate your brand.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Brochures & Collateral | MSE Print",
+    title: "Brochures & Collateral | MSE Printing",
     description:
       "High-quality brochures and marketing collateral designed to elevate your brand and engage your audience. Fast, affordable service in Minneapolis and beyond.",
     url: "https://www.mseprinting.com/brochures-collateral",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Brochures & Collateral | MSE Print",
+    title: "Brochures & Collateral | MSE Printing",
     description:
       "Custom brochures, rack cards, and corporate collateral by MSE Printing. Perfect for branding and sales support.",
     site: "@MSEPrinting",

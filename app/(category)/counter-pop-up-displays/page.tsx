@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Counter & Pop-up Displays | MSE Print",
+  title: "Counter & Pop-up Displays | MSE Printing",
   description:
     "Create instant impact with portable counter and pop-up displays from MSE Printing. Ideal for trade shows, events, and retail environments.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Counter & Pop-up Displays | MSE Print",
+    title: "Counter & Pop-up Displays | MSE Printing",
     description:
       "Custom-designed counter and pop-up displays to make your brand shine at events, trade shows, or in-store promotions. Easy to transport, fast to set up.",
     url: "https://www.mseprinting.com/counter-pop-up-displays",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Counter & Pop-up Displays | MSE Print",
+    title: "Counter & Pop-up Displays | MSE Printing",
     description:
       "Portable displays by MSE Printing for events, trade shows, and retail marketing. Make a big impact on a small footprint.",
     site: "@MSEPrinting",

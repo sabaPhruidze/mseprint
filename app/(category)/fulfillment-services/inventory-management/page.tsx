@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Inventory Management | MSE Print",
+  title: "Inventory Management | MSE Printing",
   description:
     "Track, store, and manage with confidence using MSE Printing’s inventory management solutions. Real-time visibility, scalable storage, and seamless fulfillment.",
   keywords: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Inventory Management | MSE Print",
+    title: "Inventory Management | MSE Printing",
     description:
       "Gain control of your stock with real-time tracking, scalable storage, and seamless fulfillment integration from MSE Printing.",
     url: "https://www.mseprinting.com/fulfillment-services/inventory-management",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Inventory Management | MSE Print",
+    title: "Inventory Management | MSE Printing",
     description:
       "Smart inventory control and fulfillment services tailored to your business. Trusted by brands nationwide.",
     site: "@MSEPrinting",

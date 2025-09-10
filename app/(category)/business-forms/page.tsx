@@ -6,7 +6,7 @@ import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const metadata: Metadata = {
-  title: "Business Forms Minneapolis | Custom Printing Services | MSE Print",
+  title: "Business Forms Minneapolis | Custom Printing Services | MSE Printing",
   description:
     "Professional business forms printing in Minneapolis, MN. Custom NCR forms, invoices, receipts, contracts & carbonless forms. Fast turnaround, quality guaranteed. Serving Twin Cities area businesses.",
   keywords: [
@@ -45,7 +45,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Business Forms Minneapolis | Custom Printing Services | MSE Print",
+    title:
+      "Business Forms Minneapolis | Custom Printing Services | MSE Printing",
     description:
       "Professional business forms printing in Minneapolis, MN. Custom NCR forms, invoices, receipts & contracts. Serving Twin Cities businesses with quality printing solutions.",
     url: "https://www.mseprinting.com/business-forms",
@@ -62,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Business Forms Minneapolis | Custom Printing | MSE Print",
+    title: "Business Forms Minneapolis | Custom Printing | MSE Printing",
     description:
       "Custom business forms printing in Minneapolis. NCR forms, invoices, contracts & more. Professional printing for Twin Cities businesses.",
     site: "@MSEPrinting",

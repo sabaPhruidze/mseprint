@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Every Door Direct Mail® | MSE Print",
+  title: "Every Door Direct Mail® | MSE Printing",
   description:
     "Launch a high-visibility local campaign with Every Door Direct Mail® from MSE Printing—no list required. Target by zip code, routes, or neighborhoods.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Every Door Direct Mail® | MSE Print",
+    title: "Every Door Direct Mail® | MSE Printing",
     description:
       "Reach every mailbox in your neighborhood with EDDM services from MSE Printing—affordable, efficient, and impactful. Ideal for local businesses and promotions.",
     url: "https://www.mseprinting.com/every-door-direct-mail",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "Every Door Direct Mail® | MSE Print",
+    title: "Every Door Direct Mail® | MSE Printing",
     description:
       "EDDM service by MSE Printing—no mailing list needed. Target neighborhoods with custom postcards and flyers.",
     site: "@MSEPrinting",

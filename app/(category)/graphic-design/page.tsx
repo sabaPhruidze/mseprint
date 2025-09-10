@@ -7,7 +7,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title: "Graphic Design | MSE Print",
+  title: "Graphic Design | MSE Printing",
   description:
     "Creative and strategic graphic design services that bring your brand to life. From logos to layouts, we design to impress and convert.",
   keywords: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
 
   openGraph: {
-    title: "Graphic Design | MSE Print",
+    title: "Graphic Design | MSE Printing",
     description:
       "From branding to brochures, our expert graphic designers craft visual assets that communicate and convert.",
     url: "https://www.mseprinting.com/graphic-design",
