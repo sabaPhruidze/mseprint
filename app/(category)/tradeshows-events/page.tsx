@@ -4,7 +4,10 @@ import { getSpecialPagesData } from "db/GetSpecialPagesData";
 import CardsPagesStructure from "components/common/CardsPagesStructure";
 
 import { getFooterData } from "db/GetFooterData";
-import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
+import {
+  buildServiceBreadcrumbs,
+  buildBreadcrumbListJsonLd,
+} from "lib/breadcrumbs";
 
 // Fully corrected Metadata for SEO & Social Sharing (title < 70 chars)
 export const metadata: Metadata = {
@@ -197,8 +200,12 @@ const TradeshowsEvents = async () => {
 
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "tradeshows-events", // must match the DB `path`
+    "/tradeshows-events",
     footerContentData
+  );
+  const breadcrumbJsonLd = buildBreadcrumbListJsonLd(
+    breadcrumbs,
+    "https://www.mseprinting.com"
   );
 
   if (!pageData) {
@@ -208,6 +215,11 @@ const TradeshowsEvents = async () => {
   return (
     <>
       <ServiceSchema />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
       <CardsPagesStructure
         pageData={pageData}
         breadcrumbs={breadcrumbs}
