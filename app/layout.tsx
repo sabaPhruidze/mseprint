@@ -76,9 +76,9 @@ function SiteGraphSchema() {
       ],
       logo: {
         "@type": "ImageObject",
-        url: "https://www.mseprinting.com/favicon.ico",
-        width: 32,
-        height: 32,
+        url: "https://www.mseprinting.com/images/header-images/logo_64.webp",
+        width: 486,
+        height: 122,
       },
       image: [
         "https://www.mseprinting.com/images/home-images/offset_printing.webp",
