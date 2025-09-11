@@ -40,10 +40,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Google Search Console verification string
-  },
-
   openGraph: {
     title: "Graphic Design | MSE Printing",
     description:
@@ -51,7 +47,7 @@ export const metadata: Metadata = {
     url: "https://www.mseprinting.com/graphic-design",
     siteName: "MSE Printing",
     locale: "en_US",
-    type: "website",
+    type: "article",
     images: [
       {
         url: "https://www.mseprinting.com/images/graphic-design-images/additional/graphic_design_right.webp",
@@ -61,10 +57,9 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
-    title: "Graphic Design | MSE Print",
+    title: "Graphic Design | MSE Printing",
     description:
       "Strategic graphic design services tailored to your brand—from concept to final print.",
     site: "@MSEPrinting",
@@ -76,7 +71,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   other: {
     "geo.region": "US-MN",
     "geo.placename": "Minneapolis",
@@ -91,7 +85,6 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-
   icons: {
     icon: "/favicon.ico",
     apple: "/favicon.ico",
@@ -107,7 +100,8 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  // Valid values per Next types: 'light', 'dark', 'only light', 'only dark' or a space-separated list.
+  colorScheme: "light dark",
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
@@ -119,6 +113,8 @@ const ServiceSchema = () => {
     name: "Graphic Design",
     description:
       "Professional graphic design services including branding, logos, flyers, and layout design. MSE Printing creates visuals that resonate and deliver results.",
+    image:
+      "https://www.mseprinting.com/images/graphic-design-images/additional/graphic_design_right.webp",
     provider: {
       "@type": "LocalBusiness",
       "@id": "https://www.mseprinting.com/#business",
@@ -134,6 +130,13 @@ const ServiceSchema = () => {
         postalCode: "55412",
         addressCountry: "US",
       },
+      sameAs: [
+        // Add/keep only profiles you actually own:
+        "https://www.facebook.com/mseprinting",
+        "https://www.instagram.com/mseprinting",
+        "https://www.linkedin.com/company/mse-printing",
+      ],
+      priceRange: "$$",
     },
     areaServed: [
       { "@type": "City", name: "Minneapolis" },
@@ -206,7 +209,7 @@ const GraphicDesign = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
