@@ -4,28 +4,27 @@ import { getBlogPagesData } from "db/getBlogPagesData";
 import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
+const CANONICAL =
+  "https://www.mseprinting.com/blog/affordable-printing-solutions";
+
 export const metadata: Metadata = {
-  title: "Affordable Printing Solutions | MSE Print",
+  title: "Affordable Printing Solutions | MSE Printing",
   description:
-    "Discover affordable printing services for businesses in Minneapolis. MSE Print delivers professional quality at a price that fits your budget.",
+    "Discover affordable printing services for Minneapolis businesses. Practical tips and options to keep print quality high while controlling costs.",
   keywords: [
     "affordable printing Minneapolis",
     "budget printing solutions",
-    "cheap business cards",
     "low-cost brochures",
     "cost-effective flyers",
-    "minneapolis print shop",
+    "Minneapolis print shop",
     "discount printing services",
     "custom print deals",
-    "MSE budget prints",
     "digital printing Minneapolis",
   ],
   applicationName: "MSE Printing",
-  category: "Affordable Printing",
+  category: "Blog: Affordable Printing",
   metadataBase: new URL("https://www.mseprinting.com"),
-  alternates: {
-    canonical: "https://www.mseprinting.com/blog/affordable-printing-solutions",
-  },
+  alternates: { canonical: CANONICAL },
   robots: {
     index: true,
     follow: true,
@@ -38,17 +37,18 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  // Tip: put site verification in app/layout.tsx to apply sitewide.
   verification: {
     google: "ABCD1234xyz",
   },
   openGraph: {
-    title: "Affordable Printing Solutions | MSE Print",
+    title: "Affordable Printing Solutions | MSE Printing",
     description:
-      "Professional quality printing tailored for your business needs and budget. Explore MSE Print's cost-efficient solutions in Minneapolis.",
-    url: "https://www.mseprinting.com/blog/affordable-printing-solutions",
+      "Professional quality printing tailored to your budget. Explore cost-efficient options in Minneapolis.",
+    url: CANONICAL,
     siteName: "MSE Printing",
     locale: "en_US",
-    type: "website",
+    type: "article",
     images: [
       {
         url: "https://www.mseprinting.com/images/blog/pages/additional/affordable-printing-solutions.webp",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Affordable Printing Solutions | MSE Print",
+    title: "Affordable Printing Solutions | MSE Printing",
     description:
       "Budget-friendly print services that make your brand look professional without overspending.",
     site: "@MSEPrinting",
@@ -86,10 +86,7 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
@@ -101,51 +98,43 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-const ServiceSchema = () => {
+/* ─────────────── STRUCTURED DATA / SCHEMA.ORG (BlogPosting) ─────────────── */
+function BlogPostingSchema(props: {
+  headline: string;
+  description: string;
+  image: string;
+  datePublished?: string;
+  dateModified?: string;
+}) {
   const schemaData = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "@id":
-      "https://www.mseprinting.com/blog/affordable-printing-solutions#service",
-    name: "Affordable Printing Solutions",
-    description:
-      "Affordable printing options for Minneapolis businesses including flyers, brochures, cards, and more. Professional results at budget pricing.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+    "@type": "BlogPosting",
+    "@id": `${CANONICAL}#blogposting`,
+    mainEntityOfPage: CANONICAL,
+    headline: props.headline,
+    description: props.description,
+    image: [props.image],
+    author: {
+      "@type": "Organization",
       name: "MSE Printing",
       url: "https://www.mseprinting.com",
-      telephone: "763-542-8812",
-      email: "info@mseprinting.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
-        addressLocality: "Minneapolis",
-        addressRegion: "MN",
-        postalCode: "55412",
-        addressCountry: "US",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "MSE Printing",
+      url: "https://www.mseprinting.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.mseprinting.com/favicon.ico",
       },
     },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
-    ],
-    serviceType: "Affordable Printing",
-    category: "Budget Printing Services",
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/blog/affordable-printing-solutions",
-      availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Affordable Printing Solutions",
-      },
-    },
+    datePublished: props.datePublished || undefined,
+    dateModified: props.dateModified || props.datePublished || undefined,
+    articleSection: "Printing",
+    url: CANONICAL,
   };
 
   return (
@@ -154,22 +143,71 @@ const ServiceSchema = () => {
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
   );
+}
+
+/* ─────────────── TYPES ─────────────── */
+type BlogPageData = {
+  title?: string;
+  metaDescription?: string;
+  excerpt?: string;
+  ogImage?: string;
+  image?: string;
+  heroImage?: string;
+  publishedAt?: string | Date;
+  updatedAt?: string | Date;
+  createdAt?: string | Date;
+  seo?: { title?: string; description?: string };
 };
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
 const AffordablePrintingSolutions = async () => {
   const data = await getBlogPagesData("/blog/affordable-printing-solutions");
-  const pageData = data.BlogAffordablePrintingSolutionsPageData?.[0];
+  const pageDataRaw = data?.BlogAffordablePrintingSolutionsPageData?.[0];
 
-  if (!pageData) {
+  if (!pageDataRaw) {
     return <div>Data not available.</div>;
   }
 
+  const pageData = pageDataRaw as BlogPageData;
+
+  const headline =
+    (pageData.seo && pageData.seo.title) ||
+    pageData.title ||
+    "Affordable Printing Solutions";
+
+  const descriptionText =
+    (pageData.seo && pageData.seo.description) ||
+    pageData.metaDescription ||
+    pageData.excerpt ||
+    "Discover affordable printing services for Minneapolis businesses.";
+
+  const heroImage =
+    pageData.ogImage ||
+    pageData.image ||
+    pageData.heroImage ||
+    "https://www.mseprinting.com/images/blog/pages/additional/affordable-printing-solutions.webp";
+
+  const published = pageData.publishedAt
+    ? new Date(pageData.publishedAt).toISOString()
+    : pageData.createdAt
+      ? new Date(pageData.createdAt).toISOString()
+      : undefined;
+
+  const modified = pageData.updatedAt
+    ? new Date(pageData.updatedAt).toISOString()
+    : published;
+
   return (
     <>
-      <ServiceSchema />
+      <BlogPostingSchema
+        headline={headline}
+        description={descriptionText}
+        image={heroImage}
+        datePublished={published}
+        dateModified={modified}
+      />
       <PageStructure
-        pageData={pageData}
+        pageData={pageDataRaw}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",
