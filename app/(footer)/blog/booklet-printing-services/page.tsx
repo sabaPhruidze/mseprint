@@ -7,9 +7,9 @@ import PageStructure from "components/common/PageStructure";
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
   title:
-    "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil | MSE Printing",
+    "Booklet Printing in Minneapolis — Guide to Saddle Stitch, Perfect Bind & Coil | MSE Printing",
   description:
-    "A practical buyer’s guide to booklet printing: page counts, binding choices (saddle stitch, perfect bound, coil/spiral), paper weights, bleeds, and timeline tips from MSE Printing in Minneapolis, Minnesota.",
+    "Minneapolis booklet printing guide: page counts, saddle stitch vs perfect bound vs coil, paper weights, bleeds, proofing, and turnaround tips from MSE Printing in MN.",
   metadataBase: new URL("https://www.mseprinting.com"),
   alternates: {
     canonical: "https://www.mseprinting.com/blog/booklet-printing-services",
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "article", // important: it's a blog article
+    type: "article",
     url: "https://www.mseprinting.com/blog/booklet-printing-services",
     siteName: "MSE Printing",
     title:
-      "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil | MSE Printing",
+      "Booklet Printing in Minneapolis — Guide to Saddle Stitch, Perfect Bind & Coil | MSE Printing",
     description:
-      "How to choose binding, paper, and timelines for catalogs, manuals, and programs. Practical tips from a Minneapolis production team.",
+      "Choose the right binding, paper, and timeline for catalogs, manuals, and programs. Practical tips from a Minneapolis production team.",
     locale: "en_US",
     images: [
       {
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Booklet Printing Guide — Binding, Paper & Timelines",
+    title: "Booklet Printing in Minneapolis — Binding, Paper & Turnaround Tips",
     description:
-      "Saddle stitch vs perfect bind vs coil, page count rules, paper weights, and lead times.",
+      "Saddle stitch vs perfect bind vs coil, page-count rules, paper weights, bleeds, proofing, and lead times.",
     images: [
       "https://www.mseprinting.com/images/blog/pages/additional/booklet-printing-services.webp",
     ],
@@ -70,8 +70,6 @@ export const viewport: Viewport = {
 };
 
 /* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
-/** Article + optional FAQ + Breadcrumbs (better for a blog URL) */
-/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
 /** Article + optional FAQ + Breadcrumbs */
 function StructuredData({ hasVisibleFAQ = false }) {
   const url = "https://www.mseprinting.com/blog/booklet-printing-services";
@@ -82,10 +80,11 @@ function StructuredData({ hasVisibleFAQ = false }) {
     {
       "@type": "Article",
       "@id": `${url}#article`,
-      headline: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+      headline:
+        "Booklet Printing in Minneapolis — Guide to Saddle Stitch, Perfect Bind & Coil",
       mainEntityOfPage: { "@type": "WebPage", "@id": url },
       datePublished: "2025-07-15",
-      dateModified: "2025-08-23", // align with sitemap <lastmod>
+      dateModified: "2025-09-12",
       inLanguage: "en-US",
       author: { "@type": "Organization", name: "MSE Printing" },
       publisher: { "@type": "Organization", name: "MSE Printing" },
@@ -104,7 +103,7 @@ function StructuredData({ hasVisibleFAQ = false }) {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Booklet Printing Guide — Saddle Stitch, Perfect Bind, Coil",
+          name: "Booklet Printing in Minneapolis — Guide to Saddle Stitch, Perfect Bind & Coil",
           item: url,
         },
       ],
