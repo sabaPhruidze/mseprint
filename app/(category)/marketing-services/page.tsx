@@ -7,11 +7,11 @@ import CardsPagesStructure from "components/common/CardsPagesStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-export const revalidate = 86400; // helps keep sitemap lastmod fresh
+export const revalidate = 86400; // keep sitemap lastmod fresh
 
-/* ─────────────── SEO METADATA (lean, non-spammy) ─────────────── */
+/* ─────────────── SEO METADATA (clean + consistent) ─────────────── */
 export const metadata: Metadata = {
-  title: "Marketing Services in Minneapolis |  MSE Printing",
+  title: "Marketing Services in Minneapolis | MSE Printing",
   description:
     "Strategy-led marketing from MSE Printing: campaigns, consultation, websites, video, and social—built to convert for Minneapolis brands and beyond.",
   applicationName: "MSE Printing",
@@ -23,16 +23,8 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    "max-image-preview": "large",
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-video-preview": -1,
-      "max-snippet": -1,
-    },
+    // keep these simple; avoid over-prescriptive max-* that can conflict
   },
-  // Site verification + LocalBusiness/geo belong site-wide in app/layout.tsx, not per page.
   openGraph: {
     title:
       "Marketing Services in Minneapolis | Strategy, Web & Print | MSE Printing",
@@ -56,13 +48,9 @@ export const metadata: Metadata = {
     title: "Marketing Services in Minneapolis | MSE Printing",
     description:
       "Integrated marketing: campaigns, web design, video, and social media by MSE Printing.",
-    site: "@MSEPrinting",
-    creator: "@MSEPrinting",
+    // keep handles only if they’re real/active; otherwise omit
     images: [
-      {
-        url: "https://www.mseprinting.com/images/marketing-services-images/campaigns_consultation.webp",
-        alt: "Marketing consultation services by MSE Printing, Minneapolis",
-      },
+      "https://www.mseprinting.com/images/marketing-services-images/campaigns_consultation.webp",
     ],
   },
   icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
@@ -98,7 +86,7 @@ const ServiceSchema = () => {
       email: "info@mseprinting.com",
       address: {
         "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
+        streetAddress: "3839 Washington Ave N Ste 103",
         addressLocality: "Minneapolis",
         addressRegion: "MN",
         postalCode: "55412",
@@ -159,6 +147,7 @@ const ServiceSchema = () => {
   return (
     <script
       type="application/ld+json"
+      // stringify without spacing for smaller payload
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
     />
   );
