@@ -3,6 +3,7 @@ import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { CardsPagesStructureTypes } from "types/commonTypes";
 import ContactUs from "./ContactUs";
+import { normalizeHref, absUrl } from "src/helpers/urls";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -155,9 +156,10 @@ export default function CardsPagesStructure({
                             "@type": "ListItem",
                             position: i + 1,
                             name: bc.label,
+                            // ⬇⬇ HERE
                             item: bc.href.startsWith("http")
-                              ? bc.href
-                              : `https://www.mseprinting.com${bc.href.startsWith("/") ? "" : "/"}${bc.href}`,
+                              ? bc.href.trim()
+                              : absUrl("https://www.mseprinting.com/", bc.href),
                           })),
                         }),
                       }}

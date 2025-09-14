@@ -56,7 +56,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             role="option"
             className={`
               transition-colors duration-200
-              hover:bg-purple-600
+              hover:bg-purple
               text-gray-800 hover:text-white
               ${index !== 0 ? "border-t border-gray-100" : ""}
             `}
