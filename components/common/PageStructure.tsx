@@ -185,7 +185,7 @@ export default function PageStructure({
                               </span>
                             ) : (
                               <Link
-                                href={bc.href}
+                                href={normalizeHref(bc.href)}
                                 className="underline-offset-2 hover:underline"
                               >
                                 {bc.label}
@@ -486,7 +486,9 @@ export default function PageStructure({
                     <div className="mt-2">
                       <p className="mb-2">
                         <Link
-                          href={`/${(pageData.offeringssection.list[0].path || "/").replace(/^\/+/, "")}`}
+                          href={normalizeHref(
+                            pageData.offeringssection.list[0].path
+                          )}
                           className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
                           aria-label={`Learn more about ${pageData.offeringssection.list[0].page}`}
                         >
@@ -500,7 +502,7 @@ export default function PageStructure({
                         {pageData.offeringssection.list.slice(1).map((item) => (
                           <li key={item.id}>
                             <Link
-                              href={`/${(item.path || "/").replace(/^\/+/, "")}`}
+                              href={normalizeHref(item.path)}
                               className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
                               aria-label={`Learn more about ${item.page}`}
                             >
@@ -525,7 +527,7 @@ export default function PageStructure({
                           className="scroll-mt-24"
                         >
                           <Link
-                            href={item.path || "/"}
+                            href={normalizeHref(item.path)}
                             className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
                             aria-label={`Learn more about ${item.page}`}
                           >

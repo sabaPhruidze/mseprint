@@ -179,7 +179,7 @@ export default function CardsPagesStructure({
                               </span>
                             ) : (
                               <Link
-                                href={bc.href}
+                                href={normalizeHref(bc.href)}
                                 className="underline-offset-2 hover:underline"
                               >
                                 {bc.label}
@@ -307,7 +307,7 @@ export default function CardsPagesStructure({
             return (
               <Link
                 key={index}
-                href={cardPath}
+                href={normalizeHref(cardPath)}
                 aria-label={cardTitle}
                 className="block overflow-hidden rounded-xl border border-gray-200 hover:shadow-xl transition-shadow duration-300 bg-white dark:bg-black"
               >
@@ -499,7 +499,9 @@ export default function CardsPagesStructure({
                       {/* first item, now linked outside summary */}
                       <p className="mb-2">
                         <Link
-                          href={`/${(pageData.offeringssection.list[0].path || "/").replace(/^\/+/, "")}`}
+                          href={normalizeHref(
+                            pageData.offeringssection.list[0].path
+                          )}
                           className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
                           aria-label={`Learn more about ${pageData.offeringssection.list[0].page}`}
                         >
@@ -514,7 +516,7 @@ export default function CardsPagesStructure({
                         {pageData.offeringssection.list.slice(1).map((item) => (
                           <li key={item.id}>
                             <Link
-                              href={`/${(item.path || "/").replace(/^\/+/, "")}`}
+                              href={normalizeHref(item.path)}
                               className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
                               aria-label={`Learn more about ${item.page}`}
                             >
@@ -539,7 +541,7 @@ export default function CardsPagesStructure({
                           className="scroll-mt-24"
                         >
                           <Link
-                            href={item.path || "/"}
+                            href={normalizeHref(item.path)}
                             className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
                             aria-label={`Learn more about ${item.page}`}
                           >

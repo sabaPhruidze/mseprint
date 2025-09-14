@@ -2,38 +2,37 @@ import type { ServicesPathTypes } from "types/commonTypes";
 
 export type Crumb = { href: string; label: string };
 
-/** Normalize a path/slug: strip leading/trailing slashes */
+/** Normalize a slug/path: trim whitespace and strip leading/trailing slashes */
 function normPath(p: string): string {
-  return String(p || "").replace(/^\/|\/$/g, "");
+  return String(p || "").trim().replace(/^\/+|\/+$/g, "");
 }
 
-/** Ensure a site-relative href begins with a single leading slash */
-function toHref(p: string): string {
-  const s = normPath(p);
-  return s ? `/${s}` : "/";
+/** Site-relative href with a single leading slash (and URI-encoded) */
+function normalizeHref(p?: string): string {
+  const s = normPath(String(p || ""));
+  return s ? `/${encodeURI(s)}` : "/";
 }
 
-/** Absolute URL from a site-relative href ("/...") */
-function abs(base: string, href: string): string {
-  const b = base.replace(/\/$/, "");
-  const h = toHref(href);
-  return `${b}${h === "/" ? "" : h}`;
+/** Absolute URL from a base + possibly messy href.
+ * If href is already absolute, returns a trimmed version of it. */
+function absUrl(base: string, href: string): string {
+  const h = String(href || "").trim();
+  if (/^https?:\/\//i.test(h)) return h;
+  const b = String(base || "").replace(/\/+$/, "");
+  const rel = normalizeHref(h);
+  return `${b}${rel === "/" ? "" : rel}`;
 }
 
 /**
- * Path-chain overrides for exceptional cases where DB parent_id is known to be wrong.
+ * Path-chain overrides for exceptional cases where DB parent_id is known wrong.
  * - Keys: leaf page slugs (no leading slash).
- * - Values: ordered list of ancestor slugs (top → bottom), *excluding* the leaf.
- *
- * NOTE: We removed the incorrect "printing-copying/signs" override that caused /printing-copying/signs 404s.
- * Only keep TRUE, existing ancestors here.
+ * - Values: ordered ancestor slugs (top → bottom), *excluding* the leaf.
  */
 const PATH_CHAIN_OVERRIDES: Record<string, string[]> = {
-  // Example: /brochures-collateral → Home / Printing & Copying / Brochures & Collateral
+  // /brochures-collateral → Home / Printing & Copying / Brochures & Collateral
   "brochures-collateral": ["printing-copying"],
-
-  // If you need a forced chain for banners-posters, it should be:
-  // "banners-posters": ["signs"],  // (only if you *must* override DB parents)
+  // If you ever need banners-posters forced:
+  // "banners-posters": ["signs"],
 };
 
 /** Deduplicate crumbs while preserving order (href+label pair) */
@@ -41,10 +40,11 @@ function dedupeCrumbs(list: Crumb[]): Crumb[] {
   const seen = new Set<string>();
   const out: Crumb[] = [];
   for (const c of list) {
-    const key = `${toHref(c.href)}|${c.label}`;
+    const href = normalizeHref(c.href);
+    const key = `${href}|${c.label}`;
     if (!seen.has(key)) {
       seen.add(key);
-      out.push({ href: toHref(c.href), label: c.label });
+      out.push({ href, label: c.label });
     }
   }
   return out;
@@ -71,7 +71,7 @@ export function buildServiceBreadcrumbs(
 
   if (!node) return crumbs; // no data; show just Home
 
-  // 1) If we have an explicit path-chain override, validate each ancestor against DB.
+  // 1) If explicit override exists, validate each ancestor against DB.
   const rawOverride = PATH_CHAIN_OVERRIDES[curSlug];
   if (rawOverride && rawOverride.length) {
     const validAncestors = rawOverride
@@ -79,7 +79,6 @@ export function buildServiceBreadcrumbs(
       .filter((slug) => {
         const exists = byPath.has(slug);
         if (!exists && process.env.NODE_ENV !== "production") {
-          // Log only in non-prod to avoid noisy logs
           // eslint-disable-next-line no-console
           console.warn(
             `[breadcrumbs] Missing override ancestor in DB: "${slug}" for leaf "${curSlug}"`
@@ -90,11 +89,11 @@ export function buildServiceBreadcrumbs(
 
     for (const ancestorSlug of validAncestors) {
       const a = byPath.get(ancestorSlug)!;
-      crumbs.push({ href: toHref(a.path), label: a.title });
+      crumbs.push({ href: normalizeHref(a.path), label: a.title });
     }
 
     // Finally the leaf
-    crumbs.push({ href: toHref(node.path), label: node.title });
+    crumbs.push({ href: normalizeHref(node.path), label: node.title });
     return dedupeCrumbs(crumbs);
   }
 
@@ -112,7 +111,7 @@ export function buildServiceBreadcrumbs(
   }
 
   for (const it of chain) {
-    crumbs.push({ href: toHref(it.path), label: it.title });
+    crumbs.push({ href: normalizeHref(it.path), label: it.title });
   }
 
   return dedupeCrumbs(crumbs);
@@ -123,7 +122,7 @@ export function buildBlogBreadcrumbs(title: string, slug: string): Crumb[] {
   return [
     { href: "/", label: "Home" },
     { href: "/blog", label: "Blog" },
-    { href: `/blog/${normPath(slug)}`, label: title },
+    { href: normalizeHref(`/blog/${normPath(slug)}`), label: title },
   ];
 }
 
@@ -131,7 +130,7 @@ export function buildBlogBreadcrumbs(title: string, slug: string): Crumb[] {
 export function buildStaticBreadcrumbs(label: string, href: string): Crumb[] {
   return [
     { href: "/", label: "Home" },
-    { href: toHref(href), label },
+    { href: normalizeHref(href), label },
   ];
 }
 
@@ -144,7 +143,7 @@ export function buildBreadcrumbListJsonLd(
     "@type": "ListItem",
     position: i + 1,
     name: c.label,
-    item: abs(siteBaseUrl, c.href),
+    item: absUrl(siteBaseUrl, c.href),
   }));
   return {
     "@context": "https://schema.org",
