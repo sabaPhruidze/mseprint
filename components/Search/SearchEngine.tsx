@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import SearchResults from "./SearchResults";
 import { ServicesPathTypes } from "../../types/commonTypes";
 import { Search } from "lucide-react";
@@ -12,49 +12,64 @@ interface GetSearchEngineProps {
 const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<ServicesPathTypes[]>([]);
+  const listId = useMemo(() => "site-search-results", []);
 
   const handleSearch = useCallback(() => {
-    if (query.trim().length === 0) {
+    const q = query.trim().toLowerCase();
+    if (!q) {
       setResults([]);
       return;
     }
-
     setResults(
-      searchEngineData.filter((item) =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-      )
+      searchEngineData.filter((item) => item.title.toLowerCase().includes(q))
     );
   }, [query, searchEngineData]);
 
-  // A helper to reset results
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     setResults([]);
-  };
+  }, []);
 
   return (
     <div className="relative screen-size-23:w-96 screen-size-13:w-80 w-[350px] screen-size-13:mt-0 mt-5">
-      <div className="flex items-center border border-gray-300 rounded-md p-4 bg-white screen-size-23:h-16 h-14">
+      <form
+        role="search"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch();
+        }}
+        className="flex items-center border border-gray-300 rounded-md p-4 bg-white screen-size-23:h-16 h-14"
+      >
+        <label htmlFor="site-search" className="sr-only">
+          Search the site
+        </label>
         <input
-          type="text"
+          id="site-search"
+          name="q"
+          type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search..."
+          placeholder="Search…"
           className="w-full h-full outline-none text-black p-3 text-xl"
+          aria-label="Search the site"
+          aria-controls={listId}
+          aria-expanded={results.length > 0}
+          autoComplete="off"
         />
-        <button
-          onClick={handleSearch}
-          className="p-3"
-          aria-label="Search" // <-- accessible name
-        >
+        <button type="submit" className="p-3" aria-label="Search">
           <Search
             className="h-5 w-5 text-gray-500"
-            aria-hidden="true" // hide the icon itself from SRs
+            aria-hidden="true"
             focusable="false"
           />
         </button>
-      </div>
+      </form>
+
       {results.length > 0 && (
-        <SearchResults results={results} onReset={handleReset} />
+        <SearchResults
+          results={results}
+          onReset={handleReset}
+          listId={listId}
+        />
       )}
     </div>
   );

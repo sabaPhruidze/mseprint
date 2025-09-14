@@ -468,15 +468,11 @@ export default function PageStructure({
                   {/* mobile accordion */}
                   <details className="w-full md:hidden group mt-2" role="group">
                     <summary className="cursor-pointer marker:hidden list-none p-0">
-                      <Link
-                        href={pageData.offeringssection.list[0].path || "/"}
-                        className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                        aria-label={`Learn more about ${pageData.offeringssection.list[0].page}`}
-                      >
+                      <span className="font-bold">
                         {pageData.offeringssection.list[0].page}
-                      </Link>
+                      </span>
                       {" – "}
-                      {pageData.offeringssection.list[0].content}
+                      <span>{pageData.offeringssection.list[0].content}</span>
                       <span className="ml-1 text-blue-600 group-open:hidden">
                         see more&nbsp;…
                       </span>
@@ -485,23 +481,35 @@ export default function PageStructure({
                       </span>
                     </summary>
 
-                    <ul className="mt-2 space-y-2 pl-0 list-none">
-                      {pageData.offeringssection.list.slice(1).map((item) => {
-                        const anchorId = slugify(item.page);
-                        return (
-                          <li id={anchorId} key={item.id}>
+                    <div className="mt-2">
+                      <p className="mb-2">
+                        <Link
+                          href={`/${(pageData.offeringssection.list[0].path || "/").replace(/^\/+/, "")}`}
+                          className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                          aria-label={`Learn more about ${pageData.offeringssection.list[0].page}`}
+                        >
+                          {pageData.offeringssection.list[0].page}
+                        </Link>
+                        {" – "}
+                        {pageData.offeringssection.list[0].content}
+                      </p>
+
+                      <ul className="mt-2 space-y-2 pl-0 list-none">
+                        {pageData.offeringssection.list.slice(1).map((item) => (
+                          <li key={item.id}>
                             <Link
-                              href={item.path || "/"}
+                              href={`/${(item.path || "/").replace(/^\/+/, "")}`}
                               className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
                               aria-label={`Learn more about ${item.page}`}
                             >
                               {item.page}
                             </Link>
+                            {" – "}
                             {item.content}
                           </li>
-                        );
-                      })}
-                    </ul>
+                        ))}
+                      </ul>
+                    </div>
                   </details>
 
                   {/* desktop – always expanded */}

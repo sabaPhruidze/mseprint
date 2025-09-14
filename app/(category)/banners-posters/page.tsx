@@ -40,10 +40,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console verification
-  },
-
   openGraph: {
     title: "Banners & Posters | MSE Printing",
     description:
@@ -194,7 +190,7 @@ const BannersPosters = async () => {
 
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "banners-posters", // must match the DB `path`
+    "banners-posters",
     footerContentData
   );
 
@@ -207,7 +203,7 @@ const BannersPosters = async () => {
       <ServiceSchema />
       <PageStructure
         pageData={pageData}
-        breadcrumbs={breadcrumbs} // ← ADD
+        breadcrumbs={breadcrumbs}
         tokens={{
           city: "Minneapolis",
           state: "Minnesota",

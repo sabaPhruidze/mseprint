@@ -2,35 +2,55 @@ import type { ServicesPathTypes } from "types/commonTypes";
 
 export type Crumb = { href: string; label: string };
 
-/** Normalize a path to a slug with no leading/trailing slashes */
+/** Normalize a path/slug: strip leading/trailing slashes */
 function normPath(p: string): string {
   return String(p || "").replace(/^\/|\/$/g, "");
 }
 
+/** Ensure a site-relative href begins with a single leading slash */
+function toHref(p: string): string {
+  const s = normPath(p);
+  return s ? `/${s}` : "/";
+}
+
 /** Absolute URL from a site-relative href ("/...") */
 function abs(base: string, href: string): string {
-  return `${base.replace(/\/$/, "")}${href === "/" ? "" : href}`;
+  const b = base.replace(/\/$/, "");
+  const h = toHref(href);
+  return `${b}${h === "/" ? "" : h}`;
 }
 
 /**
- * Some pages are mis-parented in the DB (parent_id points to Tradeshows & Events).
- * Use path-level overrides to force the correct ancestry.
+ * Path-chain overrides for exceptional cases where DB parent_id is known to be wrong.
+ * - Keys: leaf page slugs (no leading slash).
+ * - Values: ordered list of ancestor slugs (top → bottom), *excluding* the leaf.
  *
- * Keys and values are normalized slugs (no leading slash).
- * Values are the ordered list of ancestor slugs (top → bottom, excluding the leaf).
+ * NOTE: We removed the incorrect "printing-copying/signs" override that caused /printing-copying/signs 404s.
+ * Only keep TRUE, existing ancestors here.
  */
 const PATH_CHAIN_OVERRIDES: Record<string, string[]> = {
-  // Fixes reported issues:
-  // /brochures-collateral → Home / Printing & Copying / Brochures & Collateral
+  // Example: /brochures-collateral → Home / Printing & Copying / Brochures & Collateral
   "brochures-collateral": ["printing-copying"],
 
-  // /banners-posters → Home / Printing & Copying / Signs / Banners & Posters
-  "banners-posters": ["printing-copying", "printing-copying/signs"],
-
-  // Add future exceptions here as needed...
+  // If you need a forced chain for banners-posters, it should be:
+  // "banners-posters": ["signs"],  // (only if you *must* override DB parents)
 };
 
-/** Build breadcrumbs for service pages using footerContentData hierarchy, with overrides */
+/** Deduplicate crumbs while preserving order (href+label pair) */
+function dedupeCrumbs(list: Crumb[]): Crumb[] {
+  const seen = new Set<string>();
+  const out: Crumb[] = [];
+  for (const c of list) {
+    const key = `${toHref(c.href)}|${c.label}`;
+    if (!seen.has(key)) {
+      seen.add(key);
+      out.push({ href: toHref(c.href), label: c.label });
+    }
+  }
+  return out;
+}
+
+/** Build breadcrumbs for service pages using footerContentData hierarchy, with safe overrides */
 export function buildServiceBreadcrumbs(
   currentPath: string,
   serviceData: ServicesPathTypes[]
@@ -51,26 +71,34 @@ export function buildServiceBreadcrumbs(
 
   if (!node) return crumbs; // no data; show just Home
 
-  // 1) If we have an explicit path-chain override, honor it and skip DB parents.
-  const overrideChain = PATH_CHAIN_OVERRIDES[curSlug];
-  if (overrideChain && overrideChain.length) {
-    for (const ancestorSlug of overrideChain) {
-      const a = byPath.get(normPath(ancestorSlug));
-      if (a) crumbs.push({ href: `/${normPath(a.path)}`, label: a.title });
-      else
-        // Fallback: derive label from slug if the ancestor is missing in DB
-        crumbs.push({
-          href: `/${normPath(ancestorSlug)}`,
-          label: normPath(ancestorSlug).split("/").pop()!.replace(/-/g, " "),
-        });
+  // 1) If we have an explicit path-chain override, validate each ancestor against DB.
+  const rawOverride = PATH_CHAIN_OVERRIDES[curSlug];
+  if (rawOverride && rawOverride.length) {
+    const validAncestors = rawOverride
+      .map((slug) => normPath(slug))
+      .filter((slug) => {
+        const exists = byPath.has(slug);
+        if (!exists && process.env.NODE_ENV !== "production") {
+          // Log only in non-prod to avoid noisy logs
+          // eslint-disable-next-line no-console
+          console.warn(
+            `[breadcrumbs] Missing override ancestor in DB: "${slug}" for leaf "${curSlug}"`
+          );
+        }
+        return exists;
+      });
+
+    for (const ancestorSlug of validAncestors) {
+      const a = byPath.get(ancestorSlug)!;
+      crumbs.push({ href: toHref(a.path), label: a.title });
     }
-    // Finally the leaf:
-    crumbs.push({ href: `/${normPath(node.path)}`, label: node.title });
+
+    // Finally the leaf
+    crumbs.push({ href: toHref(node.path), label: node.title });
     return dedupeCrumbs(crumbs);
   }
 
-  // 2) Default: climb the DB tree via parent_id
-  // Add simple cycle protection just in case.
+  // 2) Default: climb the DB tree via parent_id (with simple cycle protection)
   const visited = new Set<number>();
   const chain: ServicesPathTypes[] = [];
   let cur: ServicesPathTypes | undefined = node;
@@ -84,7 +112,7 @@ export function buildServiceBreadcrumbs(
   }
 
   for (const it of chain) {
-    crumbs.push({ href: `/${normPath(it.path)}`, label: it.title });
+    crumbs.push({ href: toHref(it.path), label: it.title });
   }
 
   return dedupeCrumbs(crumbs);
@@ -103,22 +131,8 @@ export function buildBlogBreadcrumbs(title: string, slug: string): Crumb[] {
 export function buildStaticBreadcrumbs(label: string, href: string): Crumb[] {
   return [
     { href: "/", label: "Home" },
-    { href, label },
+    { href: toHref(href), label },
   ];
-}
-
-/** Remove accidental duplicates while preserving order */
-function dedupeCrumbs(list: Crumb[]): Crumb[] {
-  const seen = new Set<string>();
-  const out: Crumb[] = [];
-  for (const c of list) {
-    const key = `${c.href}|${c.label}`;
-    if (!seen.has(key)) {
-      seen.add(key);
-      out.push(c);
-    }
-  }
-  return out;
 }
 
 /** Emit BreadcrumbList JSON-LD from crumbs */
