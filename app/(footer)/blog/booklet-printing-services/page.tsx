@@ -6,8 +6,7 @@ import PageStructure from "components/common/PageStructure";
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
-  title:
-    "Booklet Printing in Minneapolis — Guide to Saddle Stitch, Perfect Bind & Coil | MSE Printing",
+  title: "Booklet Printing in Minneapolis | MSE Printing",
   description:
     "Minneapolis booklet printing guide: page counts, saddle stitch vs perfect bound vs coil, paper weights, bleeds, proofing, and turnaround tips from MSE Printing in MN.",
   metadataBase: new URL("https://www.mseprinting.com"),
@@ -30,8 +29,7 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://www.mseprinting.com/blog/booklet-printing-services",
     siteName: "MSE Printing",
-    title:
-      "Booklet Printing in Minneapolis — Guide to Saddle Stitch, Perfect Bind & Coil | MSE Printing",
+    title: "Booklet Printing in Minneapolis | MSE Printing",
     description:
       "Choose the right binding, paper, and timeline for catalogs, manuals, and programs. Practical tips from a Minneapolis production team.",
     locale: "en_US",

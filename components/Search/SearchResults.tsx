@@ -32,23 +32,12 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       className="absolute w-full z-50"
       aria-live="polite"
     >
-      {/* Top row with a dismiss button */}
-      <div className="flex justify-end bg-white border border-gray-200 border-b-0 rounded-t-lg">
-        <button
-          type="button"
-          onClick={onReset}
-          className="px-3 py-2 text-sm text-gray-600 hover:text-gray-800 cursor-pointer"
-          aria-label="Hide search results"
-          title="Hide results"
-        >
-          ×
-        </button>
-      </div>
-
+      {/* Removed the extra X here to avoid duplicates */}
       <ul
         id={listId}
+        role="listbox"
         className="
-          bg-white border border-gray-200 rounded-b-lg shadow-lg
+          bg-white border border-gray-200 rounded-lg shadow-lg
           w-full max-h-40 overflow-y-auto scroll-smooth
           [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-gray-100
@@ -60,26 +49,31 @@ const SearchResults: React.FC<SearchResultsProps> = ({
           scrollbar-width-thin
         "
       >
-        {uniqueResults.slice(0, 5).map((result, index) => (
-          <li
-            key={`${result.id}-${index}`}
-            className={`
-              transition-colors duration-200
-              hover:bg-purple
-              text-gray-800 hover:text-white
-              ${index !== 0 ? "border-t border-gray-100" : ""}
-            `}
-          >
-            <Link
-              href={normalizeHref(result.path)}
-              className="p-4 block w-full h-full"
-              onClick={onReset}
-              title={`Navigate to ${result.title}`}
+        {uniqueResults.slice(0, 5).map((result, index) => {
+          const href = normalizeHref(result.path);
+          return (
+            <li
+              key={`${result.id}-${index}`}
+              role="option"
+              className={`
+                transition-colors duration-200
+                hover:bg-purple text-gray-800 hover:text-white
+                ${index !== 0 ? "border-t border-gray-100" : ""}
+              `}
             >
-              <span className="line-clamp-1">{result.title}</span>
-            </Link>
-          </li>
-        ))}
+              <Link
+                href={href}
+                className="p-4 block w-full h-full"
+                onClick={onReset}
+                title={`Open ${result.title} | MSE Printing`}
+                aria-label={`Go to ${result.title}`}
+              >
+                {/* Good anchor text for SEO */}
+                <span className="line-clamp-1">{result.title}</span>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
