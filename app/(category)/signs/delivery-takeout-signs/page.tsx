@@ -317,7 +317,6 @@ export default async function DeliveryTakeoutSigns() {
   return (
     <>
       <ServiceSchema />
-      <FAQSchema />
     </>
   );
 }
