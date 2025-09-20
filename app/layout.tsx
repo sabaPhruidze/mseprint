@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import localFont from "next/font/local";
 import Script from "next/script";
 import React from "react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -224,6 +225,7 @@ export default async function RootLayout({
         <div className="flex-grow">{children}</div>
         <Footer {...footerData} />
       </body>
+      <SpeedInsights />
     </html>
   );
 }
