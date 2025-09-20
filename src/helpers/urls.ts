@@ -2,7 +2,6 @@ export const normalizeHref = (p?: string) => {
   const raw = String(p ?? "").trim().replace(/\s+/g, " ");
   if (!raw) return "/";
 
-  // remove leading slashes, collapse multiple slashes later
   const noLead = raw.replace(/^\/+/, "");
   const segments = noLead.split("/").filter(Boolean).map(s => encodeURIComponent(s));
   return "/" + segments.join("/");
