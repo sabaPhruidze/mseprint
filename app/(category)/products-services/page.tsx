@@ -8,7 +8,6 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const revalidate = 86400;
 
-/* ───────── SEO & Social Metadata ───────── */
 export const metadata: Metadata = {
   title: "Printing Products & Services in Minneapolis | MSE Printing",
   description:
@@ -40,18 +39,16 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     images: [
-      // რეკომენდებული 1200x630 (მართკუთხედი)
       {
-        url: "/images/products-services-images/og/products-services-1200x630.jpg",
+        url: "https://www.mseprinting.com/images/products-services-images/products_services.webp",
         width: 1200,
         height: 630,
         alt: "MSE Printing Products & Services in Minneapolis – Printing, Signs, Direct Mail",
       },
-      // სურვილისამებრ კვადრატული fallback პლატფორმებისთვის
       {
-        url: "/images/products-services-images/og/products-services-1200x1200.jpg",
-        width: 1200,
-        height: 1200,
+        url: "https://www.mseprinting.com/images/products-services-images/additional/products_services_right.webp",
+        width: 832,
+        height: 832,
         alt: "MSE Printing – Products & Services (square preview)",
       },
     ],
@@ -64,7 +61,6 @@ export const metadata: Metadata = {
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
-      // რეკომენდებული 1200x675 (Twitter large)
       {
         url: "/images/products-services-images/og/products-services-1200x675.jpg",
         alt: "MSE Printing Products & Services – Twitter Card",
@@ -77,7 +73,6 @@ export const metadata: Metadata = {
   publisher: "MSE Printing",
 };
 
-/* ───────── Viewport Theme Colors ───────── */
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
@@ -86,7 +81,6 @@ export const viewport: Viewport = {
   colorScheme: "light dark",
 };
 
-/* ───────── Service Schema Structured Data ───────── */
 const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -228,9 +222,12 @@ const CollectionSchema = () => {
     },
     {
       name: "Fulfillment Services",
-      url: "https://www.mseprinting.com/fulfillment",
+      url: "https://www.mseprinting.com/fulfillment-services",
     },
-    { name: "Industry Specific", url: "https://www.mseprinting.com/industry" },
+    {
+      name: "Industry Specific",
+      url: "https://www.mseprinting.com/industry-specific",
+    },
   ];
 
   const data = {
