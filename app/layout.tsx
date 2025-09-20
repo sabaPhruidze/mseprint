@@ -224,8 +224,8 @@ export default async function RootLayout({
         <Header {...headerData} servicesData={footerData.footerContentData} />
         <div className="flex-grow">{children}</div>
         <Footer {...footerData} />
+        <SpeedInsights />
       </body>
-      <SpeedInsights />
     </html>
   );
 }
