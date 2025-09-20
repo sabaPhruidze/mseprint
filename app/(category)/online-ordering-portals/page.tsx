@@ -1,3 +1,4 @@
+// app/online-ordering-portals/page.tsx
 import React from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
@@ -6,7 +7,9 @@ import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-/* ───────── SEO & Social Metadata (Fix 2) ───────── */
+export const revalidate = 86400;
+
+/* ───────── SEO & Social Metadata ───────── */
 export const metadata: Metadata = {
   title: "Online Ordering Portals in Minneapolis | MSE Printing",
   description:
@@ -29,7 +32,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // Site verification & LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
     title: "Online Ordering Portals in Minneapolis | MSE Printing",
     description:
@@ -40,6 +42,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
+        // ← keeps your original link
         url: "https://www.mseprinting.com/images/home-images/online_ordering.webp",
         width: 1200,
         height: 630,
@@ -56,6 +59,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
+        // ← keeps your original link
         url: "https://www.mseprinting.com/images/home-images/online_ordering.webp",
         alt: "Custom online ordering portal by MSE Printing, Minneapolis",
       },
@@ -76,86 +80,117 @@ export const viewport: Viewport = {
   colorScheme: "light dark",
 };
 
-/* ───────── Service Schema Structured Data ───────── */
+/* ───────── Structured Data (WebPage + Service + Breadcrumb) ───────── */
 const ServiceSchema = () => {
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": "https://www.mseprinting.com/online-ordering-portals#service",
-    name: "Online Ordering Portals",
-    description:
-      "Custom online ordering portals by MSE Printing. Streamline print and marketing processes, maintain brand consistency, and simplify business ordering in Minneapolis and nationwide.",
-    provider: {
-      "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
-      name: "MSE Printing",
-      url: "https://www.mseprinting.com",
-      telephone: "763-542-8812",
-      email: "info@mseprinting.com",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "3839 Washington Ave N Ste. 103",
-        addressLocality: "Minneapolis",
-        addressRegion: "MN",
-        postalCode: "55412",
-        addressCountry: "US",
+  const base = "https://www.mseprinting.com/online-ordering-portals";
+  const businessId = "https://www.mseprinting.com/#business";
+  const image =
+    // ← keeps your original link
+    "https://www.mseprinting.com/images/home-images/online_ordering.webp";
+
+  const graph = [
+    {
+      "@type": "WebPage",
+      "@id": `${base}#webpage`,
+      url: base,
+      name: "Online Ordering Portals in Minneapolis | MSE Printing",
+      description:
+        "Streamline printing and marketing with custom online ordering portals from MSE Printing. Simplify ordering, boost productivity, and keep brand consistency in Minneapolis & nationwide.",
+      isPartOf: {
+        "@type": "WebSite",
+        "@id": "https://www.mseprinting.com/#website",
+      },
+      primaryImageOfPage: { "@type": "ImageObject", url: image },
+      inLanguage: "en-US",
+      breadcrumb: { "@id": `${base}#breadcrumbs` },
+    },
+    {
+      "@type": "Service",
+      "@id": `${base}#service`,
+      name: "Online Ordering Portals",
+      image,
+      description:
+        "Custom online ordering portals by MSE Printing. Streamline print and marketing processes, maintain brand consistency, and simplify business ordering in Minneapolis and nationwide.",
+      provider: { "@type": "LocalBusiness", "@id": businessId },
+      areaServed: [
+        { "@type": "City", name: "Minneapolis" },
+        { "@type": "State", name: "Minnesota" },
+        { "@type": "Country", name: "United States" },
+      ],
+      serviceType: "Online Ordering Portals",
+      category: "Web to Print Solutions",
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Online Ordering Portal Services",
+        itemListElement: [
+          {
+            "@type": "Offer",
+            url: base,
+            itemOffered: {
+              "@type": "Service",
+              name: "Custom Portal Development",
+              description:
+                "Build tailored online portals for efficient, secure ordering and management of business materials.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: base,
+            itemOffered: {
+              "@type": "Service",
+              name: "Brand Integration",
+              description:
+                "Ensure consistent branding and user experience across all ordering platforms.",
+            },
+          },
+          {
+            "@type": "Offer",
+            url: base,
+            itemOffered: {
+              "@type": "Service",
+              name: "Support & Maintenance",
+              description:
+                "Ongoing portal support, updates, and training for your business needs.",
+            },
+          },
+        ],
+      },
+      offers: {
+        "@type": "Offer",
+        url: base,
+        availability: "https://schema.org/InStock",
+        itemOffered: { "@type": "Service", name: "Online Ordering Portals" },
       },
     },
-    areaServed: [
-      { "@type": "City", name: "Minneapolis" },
-      { "@type": "State", name: "Minnesota" },
-      { "@type": "Country", name: "United States" },
-    ],
-    serviceType: "Online Ordering Portals",
-    category: "Web to Print Solutions",
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Online Ordering Portal Services",
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${base}#breadcrumbs`,
       itemListElement: [
         {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/online-ordering-portals#custom-portal",
-          itemOffered: {
-            "@type": "Service",
-            name: "Custom Portal Development",
-            description:
-              "Build tailored online portals for efficient, secure ordering and management of business materials.",
-          },
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.mseprinting.com/",
         },
         {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/online-ordering-portals#branding",
-          itemOffered: {
-            "@type": "Service",
-            name: "Brand Integration",
-            description:
-              "Ensure consistent branding and user experience across all ordering platforms.",
-          },
-        },
-        {
-          "@type": "Offer",
-          url: "https://www.mseprinting.com/online-ordering-portals#support",
-          itemOffered: {
-            "@type": "Service",
-            name: "Support & Maintenance",
-            description:
-              "Ongoing portal support, updates, and training for your business needs.",
-          },
+          "@type": "ListItem",
+          position: 2,
+          name: "Online Ordering Portals",
+          item: base,
         },
       ],
     },
-    offers: {
-      "@type": "Offer",
-      url: "https://www.mseprinting.com/online-ordering-portals",
-      availability: "https://schema.org/InStock",
-      itemOffered: { "@type": "Service", name: "Online Ordering Portals" },
-    },
-  };
+  ];
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": graph,
+        }),
+      }}
     />
   );
 };
