@@ -8,7 +8,7 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const revalidate = 86400;
 
-/* ───────── SEO & Social Metadata (Fix 2) ───────── */
+/* ───────── SEO & Social Metadata ───────── */
 export const metadata: Metadata = {
   title: "Printing Products & Services in Minneapolis | MSE Printing",
   description:
@@ -31,9 +31,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // Site verification + LocalBusiness/geo should live once in app/layout.tsx (site-wide), not per page.
   openGraph: {
-    title: "Printing Products & Services in Minneapolis ",
+    title: "Printing Products & Services in Minneapolis | MSE Printing",
     description:
       "From offset and digital printing to direct mail, labels, packaging, and creative services—MSE Printing delivers full-service support for your brand.",
     url: "https://www.mseprinting.com/products-services",
@@ -41,11 +40,19 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
     images: [
+      // რეკომენდებული 1200x630 (მართკუთხედი)
       {
-        url: "https://www.mseprinting.com/images/products-services-images/additional/products_services_right.webp",
+        url: "/images/products-services-images/og/products-services-1200x630.jpg",
         width: 1200,
         height: 630,
-        alt: "Products and services offered by MSE Printing in Minneapolis",
+        alt: "MSE Printing Products & Services in Minneapolis – Printing, Signs, Direct Mail",
+      },
+      // სურვილისამებრ კვადრატული fallback პლატფორმებისთვის
+      {
+        url: "/images/products-services-images/og/products-services-1200x1200.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "MSE Printing – Products & Services (square preview)",
       },
     ],
   },
@@ -53,13 +60,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Products & Services | MSE Printing",
     description:
-      "Discover all printing, signage, and marketing solutions with MSE Printing.",
+      "Discover all printing, signage, mailing, labels, packaging, and marketing solutions with MSE Printing.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
+      // რეკომენდებული 1200x675 (Twitter large)
       {
-        url: "https://www.mseprinting.com/images/products-services-images/additional/products_services_right.webp",
-        alt: "MSE Printing - Products & Services, Minneapolis",
+        url: "/images/products-services-images/og/products-services-1200x675.jpg",
+        alt: "MSE Printing Products & Services – Twitter Card",
       },
     ],
   },
@@ -162,6 +170,93 @@ const ServiceSchema = () => {
   );
 };
 
+/* ───────── BreadcrumbList (Structured Data) ───────── */
+const BreadcrumbSchema = () => {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.mseprinting.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Products & Services",
+        item: "https://www.mseprinting.com/products-services",
+      },
+    ],
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+};
+
+/* ───────── CollectionPage + ItemList (Structured Data) ───────── */
+const CollectionSchema = () => {
+  // გამოიყენე რეალური, არსებულ გვერდებზე მიმაგრებული URL-ები
+  const items = [
+    {
+      name: "Printing & Copying",
+      url: "https://www.mseprinting.com/printing-copying",
+    },
+    {
+      name: "Signs, Banners & Posters",
+      url: "https://www.mseprinting.com/signs",
+    },
+    {
+      name: "Direct Mail & Mailing Services",
+      url: "https://www.mseprinting.com/direct-mail",
+    },
+    {
+      name: "Labels & Packaging",
+      url: "https://www.mseprinting.com/labels-packaging",
+    },
+    {
+      name: "Tradeshows & Events",
+      url: "https://www.mseprinting.com/tradeshows-events",
+    },
+    {
+      name: "Marketing Services",
+      url: "https://www.mseprinting.com/marketing-services",
+    },
+    {
+      name: "Fulfillment Services",
+      url: "https://www.mseprinting.com/fulfillment",
+    },
+    { name: "Industry Specific", url: "https://www.mseprinting.com/industry" },
+  ];
+
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://www.mseprinting.com/products-services#collection",
+    url: "https://www.mseprinting.com/products-services",
+    name: "Products & Services",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((it, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: { "@type": "Service", name: it.name, url: it.url },
+      })),
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+};
+
 /* ───────── Main Page Component ───────── */
 export default async function ProductsServices() {
   const data = await getCategoryPagesData("/products-services");
@@ -174,13 +269,14 @@ export default async function ProductsServices() {
   );
 
   if (!pageData) {
-    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
     notFound();
   }
 
   return (
     <>
       <ServiceSchema />
+      <BreadcrumbSchema />
+      <CollectionSchema />
       <PageStructure
         pageData={pageData}
         breadcrumbs={breadcrumbs}
