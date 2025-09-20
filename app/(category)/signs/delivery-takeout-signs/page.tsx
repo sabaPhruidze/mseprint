@@ -224,66 +224,6 @@ const ServiceSchema = () => {
   );
 };
 
-const FAQSchema = () => {
-  const url = "https://www.mseprinting.com/signs/delivery-takeout-signs";
-  const faqs = [
-    {
-      q: "What materials do you use for outdoor delivery signs?",
-      a: "Aluminum/ACM for long-term durability, coroplast for lightweight installs, and PVC for a rigid look—printed with UV-resistant inks and protected by laminates. Reflective and anti-graffiti options available.",
-    },
-    {
-      q: "Can I customize signs for specific promotions or meal deals?",
-      a: "Yes—snap-in A-frame panels, magnetic menus, dry-erase boards, and removable overlays let you update offers quickly while staying on brand.",
-    },
-    {
-      q: "Are there local regulations for placing delivery and takeout signs?",
-      a: "Rules vary by city. We provide scaled renderings and specs for permit applications and design within common Minneapolis guidelines.",
-    },
-    {
-      q: "Can I incorporate QR codes for quick menu access?",
-      a: "Definitely—on curbside panels, tabletop signs, window decals, and banners. We size and test codes for easy scanning and can provide trackable links.",
-    },
-    {
-      q: "What sizes and letter heights work best for drive-by readability?",
-      a: "Roughly 1″ letter height per 10′ of viewing distance. For 25–35′, use 3–4″; road-facing pieces often need 6–10″.",
-    },
-    {
-      q: "Do you offer illuminated or reflective options for night visibility?",
-      a: "Yes—engineer-grade or high-intensity reflective films, edge-lit acrylic, LED cabinets, and solar-assisted lighting options.",
-    },
-    {
-      q: "What mounting and hardware options are available?",
-      a: "U-channel posts, stanchions, weighted bases, wall/fence mounts, suction cups, grommets, and pole pockets. Windy sites benefit from spring-loaded posts or mesh banners.",
-    },
-    {
-      q: "How fast is turnaround, and do you offer rush service?",
-      a: "Common formats ship in 2–4 business days after proof; illuminated or complex programs take longer. Rush and partial shipments available.",
-    },
-    {
-      q: "Can you match my exact brand colors and fonts?",
-      a: "Yes—Pantone® or calibrated CMYK across aluminum, coroplast, PVC, vinyl, and acrylic. We maintain templates for repeat accuracy.",
-    },
-  ];
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqs.map(({ q, a }) => ({
-            "@type": "Question",
-            name: q,
-            acceptedAnswer: { "@type": "Answer", text: a },
-          })),
-          url,
-        }),
-      }}
-    />
-  );
-};
-
 export default async function DeliveryTakeoutSigns() {
   const data = await getPageDataCached();
   const pageData = data?.DeliveryTakeoutSignsPageData?.[0];
@@ -298,7 +238,6 @@ export default async function DeliveryTakeoutSigns() {
     return (
       <>
         <ServiceSchema />
-        <FAQSchema />
         <PageStructure
           pageData={pageData}
           breadcrumbs={breadcrumbs}
