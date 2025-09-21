@@ -6,28 +6,65 @@ import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 // Fully corrected Metadata for SEO & Social Sharing
+// Fully corrected Metadata for SEO & Social Sharing
 export const metadata: Metadata = {
-  title: "Standard Direct Mail | MSE Printing",
+  title: "Standard Direct Mail in Minneapolis | MSE Printing",
   description:
-    "Deliver high-impact marketing directly to your audience with MSE Printing’s professional direct mail services. Targeted postcards, letters, and mailers—delivered with postal precision.",
+    "Direct mail services in Minneapolis–Saint Paul: targeted postcards & letters, list sourcing, variable data, presort/USPS compliance, IMb tracking, and postage optimization by MSE Printing.",
   keywords: [
+    // ძირითადი თემები + ლოკალი
     "direct mail Minneapolis",
+    "direct mail services Minneapolis",
     "standard direct mail",
+    "mail house Minneapolis",
+    "lettershop Minneapolis",
+    "bulk mailing services Minneapolis",
+    "USPS Marketing Mail Minneapolis",
+    "first-class mail Minneapolis",
+    "saturation mail Minneapolis",
+    "presort standard mail Minneapolis",
+
+    // კამპანია/ამოცანები
     "targeted mailing services",
     "direct mail marketing",
+    "postcard mailing Minneapolis",
+    "letter mailing services Minnesota",
+    "envelope addressing Minneapolis",
+    "inserting and tabbing services",
+    "permit imprint indicia Minneapolis",
+    "nonprofit postage mailings",
+    "political direct mail Minnesota",
+    "fundraising direct mail Minneapolis",
+    "real estate postcards Minneapolis",
+    "healthcare patient mailings Minneapolis",
+
+    // მონაცემები/ოპტიმიზაცია
+    "mailing lists Minneapolis",
+    "audience list sourcing",
+    "data cleansing CASS NCOA",
+    "NCOA processing Minneapolis",
+    "CASS certification Minneapolis",
+    "variable data printing direct mail",
+    "personalized direct mail Minneapolis",
+    "IMb tracking Minneapolis",
+    "USPS drop shipping SCF NDC",
+    "postage optimization Minneapolis",
+    "address verification Minneapolis",
+    "postal logistics Minnesota",
+
+    // დაკავშირებული ძიებები
     "custom postcards Minneapolis",
     "letter mailers Minnesota",
-    "bulk mailing services",
+    "bulk mail Minneapolis",
     "mail marketing Minneapolis",
     "postal mail solutions",
     "MSE Printing direct mail",
+    "EDDM planning Minneapolis", // (გაქვს ცალკე გვერდი, მაგრამ ხშირად ეძებენ ერთად)
   ],
   applicationName: "MSE Printing",
   category: "Direct Mail Services",
   metadataBase: new URL("https://www.mseprinting.com"),
-  alternates: {
-    canonical: "https://www.mseprinting.com/standard-direct-mail",
-  },
+  alternates: { canonical: "https://www.mseprinting.com/standard-direct-mail" },
   robots: {
     index: true,
     follow: true,
@@ -44,9 +81,9 @@ export const metadata: Metadata = {
     google: "ABCD1234xyz", // Replace with your Search Console verification string
   },
   openGraph: {
-    title: "Standard Direct Mail | MSE Printing",
+    title: "Standard Direct Mail in Minneapolis | MSE Printing",
     description:
-      "Targeted mailing solutions from MSE Printing—design, print, and deliver postcards, letters, and more with postal precision. Effective direct mail marketing for Minneapolis and beyond.",
+      "Design, print, and deliver postcards & letters with list sourcing, variable data, presort/USPS compliance, and IMb tracking.",
     url: "https://www.mseprinting.com/standard-direct-mail",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -62,9 +99,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Standard Direct Mail | MSE Printing",
+    title: "Standard Direct Mail in Minneapolis | MSE Printing",
     description:
-      "Deliver marketing that works—custom direct mail, postcards, and letters sent with professional precision by MSE Printing.",
+      "Targeted direct mail with list sourcing, VDP, USPS compliance, and IMb tracking for Minneapolis–Saint Paul.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
@@ -88,10 +125,7 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",

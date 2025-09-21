@@ -42,9 +42,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+
   openGraph: {
     title: "Business & Annual Reports | MSE Printing",
     description:

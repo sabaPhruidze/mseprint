@@ -6,10 +6,11 @@ import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 // ---------- SEO & Social Metadata ----------
+// ---------- SEO & Social Metadata ----------
 export const metadata: Metadata = {
-  title: "Marketing Campaigns & Consultation Minneapolis |  MSE Printing",
+  title: "Marketing Campaigns & Consultation Minneapolis | MSE Printing",
   description:
-    "Strategic marketing consultation and campaign support tailored to your business goals. Plan, launch, and optimize high-impact campaigns with MSE Printing.",
+    "Strategic marketing consultation and campaign support in Minneapolis–Saint Paul. Plan, launch, and optimize high-impact print & digital campaigns with MSE Printing.",
   keywords: [
     "marketing campaigns Minneapolis",
     "marketing consultation Minnesota",
@@ -21,6 +22,41 @@ export const metadata: Metadata = {
     "marketing advice Minneapolis",
     "business growth campaigns",
     "marketing services Minneapolis",
+
+    "marketing consultant Minneapolis",
+    "marketing agency Minneapolis",
+    "campaign management Minneapolis",
+    "marketing campaigns Twin Cities",
+    "marketing consultation Minneapolis–Saint Paul",
+    "brand strategy Twin Cities",
+    "go to market strategy Minneapolis",
+    "marketing audit Minneapolis",
+    "fractional CMO Minneapolis",
+
+    "direct mail marketing Minneapolis",
+    "EDDM campaign planning Minneapolis",
+    "print and digital campaigns Minneapolis",
+    "omnichannel marketing campaigns",
+    "trade show marketing Minneapolis",
+    "event marketing campaigns Minneapolis",
+
+    "B2B lead generation Minneapolis",
+    "real estate marketing consultation Minneapolis",
+    "healthcare marketing Minneapolis",
+    "nonprofit fundraising campaigns Minneapolis",
+    "political campaign marketing Minnesota",
+
+    "campaign analytics and reporting",
+    "A/B testing consulting",
+    "conversion rate optimization Minneapolis",
+    "landing page optimization Minneapolis",
+    "marketing automation consulting",
+    "email marketing campaigns Minneapolis",
+    "geo targeted campaigns Minneapolis",
+    "retention and loyalty campaigns Minneapolis",
+    "content strategy consulting Minneapolis",
+    "paid social campaign consulting Minneapolis",
+    "PPC campaign consulting Minneapolis",
   ],
   applicationName: "MSE Printing",
   category: "Campaigns & Consultation",
@@ -41,13 +77,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // ← replace with your Search Console verification code
-  },
+
   openGraph: {
-    title: "Marketing Campaigns & Consultation Minneapolis |  MSE Printing",
+    title: "Marketing Campaigns & Consultation Minneapolis | MSE Printing",
     description:
-      "Get expert advice and support to plan, launch, and manage high-impact marketing campaigns that generate measurable results.",
+      "Get expert advice to plan, launch, and optimize print & digital campaigns in Minneapolis–Saint Paul. Strategy, management, analytics.",
     url: "https://www.mseprinting.com/marketing-services/campaigns-consultation",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -63,9 +97,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marketing Campaigns & Consultation Minneapolis |  MSE Printing",
+    title: "Marketing Campaigns & Consultation Minneapolis | MSE Printing",
     description:
-      "Expert marketing consultation and campaign management. Launch successful, measurable campaigns with MSE Printing.",
+      "Expert marketing consultation and campaign management for Minneapolis–Saint Paul. Plan, launch, and measure results with MSE Printing.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [

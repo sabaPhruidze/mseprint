@@ -6,26 +6,39 @@ export const metadata: Metadata = {
   description:
     "Securely sign in to your MSE Printing account to track orders, request quotes, and manage your projects online.",
   metadataBase: new URL("https://www.mseprinting.com"),
-  alternates: {
-    canonical: "https://www.mseprinting.com/login",
-  },
+  alternates: { canonical: "https://www.mseprinting.com/login" },
   keywords: [
+    // ბრენდული/ნავიგაციური
     "MSE Printing login",
+    "MSE Printing sign in",
+    "MSE Printing account",
+    "MSE Printing customer portal",
+    "MSE Printing client portal",
+    "MSE Printing dashboard",
+
+    // ქმედებები (რა უნდა ქნას მომხმარებელმა)
     "print order tracking",
+    "track print orders",
     "manage printing projects",
-    "printing services account",
+    "request a printing quote",
+    "upload print files",
+    "send a file MSE Printing",
+    "order history MSE Printing",
+    "reorder prints online",
+
+    // ლოკალი და სერვისი
+    "printing services account Minneapolis",
+    "printing portal Minneapolis",
+    "print file upload Minneapolis",
+    "print quotes Minneapolis MN",
   ],
   applicationName: "MSE Printing",
   category: "Printing Services",
   robots: {
-    index: true,
+    index: true, // სურვილის შემთხვევაში შეგიძლია აქ დადგა false (login გვერდები ხშირად noindex-დება)
     follow: true,
     "max-image-preview": "large",
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-    },
+    googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
   openGraph: {
     title: "Sign In | MSE Printing",
@@ -38,7 +51,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://www.mseprinting.com/images/header-images/login.webp",
-        width: 800,
+        width: 1200, // ← 1200×630 სჯობს
         height: 630,
         alt: "MSE Printing – Sign In preview",
       },
@@ -72,10 +85,7 @@ export const metadata: Metadata = {
     "og:email": "info@mseprinting.com",
     "og:phone_number": "763-542-8812",
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
   authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
