@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/home-images/labels-packaging.webp",
+        url: "https://www.mseprinting.com/images/home-images/additional/card_labels_packaging_right.webp",
         alt: "High quality labels and packaging by MSE Printing, Minneapolis",
       },
     ],

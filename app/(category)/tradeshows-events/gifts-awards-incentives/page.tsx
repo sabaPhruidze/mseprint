@@ -21,6 +21,29 @@ export const metadata: Metadata = {
     "branded corporate gifts",
     "employee rewards",
     "MSE Printing awards",
+    "employee recognition awards Minneapolis",
+    "custom awards Minneapolis",
+    "acrylic awards Minneapolis",
+    "crystal awards Minneapolis",
+    "trophy engraving Minneapolis",
+    "plaque engraving Minneapolis",
+    "personalized award plaques Minneapolis",
+    "custom medals Minneapolis",
+    "years of service awards",
+    "retirement awards",
+    "sales awards",
+    "branded gift sets Minneapolis",
+    "company swag boxes Minneapolis",
+    "onboarding kits Minneapolis",
+    "corporate holiday gifts Minneapolis",
+    "eco-friendly corporate gifts Minneapolis",
+    "rush trophies Minneapolis",
+    "same day trophies Minneapolis",
+    "name badges Minneapolis",
+    "donor recognition plaques",
+    "school sports trophies Minneapolis",
+    "coach plaques",
+    "gift kitting and fulfillment Minneapolis",
   ],
   applicationName: "MSE Printing",
   category: "Gifts, Awards & Incentives",
@@ -134,54 +157,99 @@ const ServiceSchema = () => {
     },
     areaServed: [
       { "@type": "City", name: "Minneapolis" },
+      { "@type": "City", name: "Saint Paul" },
+      { "@type": "City", name: "Bloomington" },
+      { "@type": "City", name: "Edina" },
+      { "@type": "City", name: "Maple Grove" },
+      { "@type": "City", name: "Plymouth" },
+      { "@type": "City", name: "Brooklyn Park" },
+      { "@type": "City", name: "Minnetonka" },
+      { "@type": "City", name: "Eagan" },
+      { "@type": "City", name: "Burnsville" },
       { "@type": "State", name: "Minnesota" },
       { "@type": "Country", name: "United States" },
     ],
-    serviceType: "Custom Gifts and Awards",
+    serviceType: [
+      "Custom Gifts and Awards",
+      "Corporate Recognition",
+      "Employee Incentives",
+      "Gift Kitting & Fulfillment",
+    ],
     category: "Recognition & Incentives",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Gifts & Awards",
       itemListElement: [
+        // არსებული 3 დატოვე და დაამატე ქვე-ელემენტები როგორც Offer/Service
         {
           "@type": "Offer",
           url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#trophies",
-          itemOffered: {
-            "@type": "Service",
-            name: "Custom Trophies",
-            description:
-              "Personalized trophies for corporate events and competitions.",
-          },
+          itemOffered: { "@type": "Service", name: "Custom Trophies" },
         },
         {
           "@type": "Offer",
           url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#awards",
-          itemOffered: {
-            "@type": "Service",
-            name: "Branded Awards",
-            description:
-              "Plaques, medals, and recognition awards with your logo.",
-          },
+          itemOffered: { "@type": "Service", name: "Branded Awards" },
         },
         {
           "@type": "Offer",
           url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#incentive-kits",
+          itemOffered: { "@type": "Service", name: "Incentive Kits" },
+        },
+        // ახალი თემური სერვისები (Top queries-ს ასახვა)
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#award-plaques",
           itemOffered: {
             "@type": "Service",
-            name: "Incentive Kits",
-            description: "Employee appreciation kits and branded gift sets.",
+            name: "Award Plaques & Engraving",
           },
         },
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#acrylic-crystal",
+          itemOffered: { "@type": "Service", name: "Acrylic & Crystal Awards" },
+        },
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#medals",
+          itemOffered: { "@type": "Service", name: "Custom Medals" },
+        },
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#name-badges",
+          itemOffered: { "@type": "Service", name: "Name Badges" },
+        },
+        {
+          "@type": "Offer",
+          url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives#swag-boxes",
+          itemOffered: {
+            "@type": "Service",
+            name: "Branded Swag Boxes / Gift Sets",
+          },
+        },
+      ],
+    },
+    // დამატებითი სემანტიკა Google-სთვის
+    hasPart: {
+      "@type": "ItemList",
+      itemListElement: [
+        { "@type": "Service", name: "Employee recognition awards Minneapolis" },
+        { "@type": "Service", name: "Trophy engraving Minneapolis" },
+        { "@type": "Service", name: "Plaque engraving Minneapolis" },
+        { "@type": "Service", name: "Onboarding kits Minneapolis" },
+        {
+          "@type": "Service",
+          name: "Eco-friendly corporate gifts Minneapolis",
+        },
+        { "@type": "Service", name: "Rush trophies Minneapolis" },
       ],
     },
     offers: {
       "@type": "Offer",
       url: "https://www.mseprinting.com/tradeshows-events/gifts-awards-incentives",
       availability: "https://schema.org/InStock",
-      itemOffered: {
-        "@type": "Service",
-        name: "Gifts, Awards & Incentives",
-      },
+      itemOffered: { "@type": "Service", name: "Gifts, Awards & Incentives" },
     },
   };
 
