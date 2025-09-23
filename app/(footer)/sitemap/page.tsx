@@ -35,9 +35,7 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console code
-  },
+
   openGraph: {
     title: "Sitemap | MSE Graphics",
     description:

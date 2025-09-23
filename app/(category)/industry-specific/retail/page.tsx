@@ -40,9 +40,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with actual verification token
-  },
 
   openGraph: {
     title: "Retail Printing | MSE Print",

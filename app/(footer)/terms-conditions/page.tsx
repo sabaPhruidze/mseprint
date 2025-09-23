@@ -13,15 +13,16 @@ export const metadata = {
     "Read the terms and conditions that govern your use of the MSE Printing website, including limitations of liability, copyright, and dispute resolution.",
   keywords: [
     "terms and conditions",
-    "website use terms",
+    "terms of service",
+    "website terms",
     "user agreement",
-    "copyright policy",
-    "dispute resolution",
-    "privacy rights",
+    "site usage terms",
     "legal terms",
     "liability limitations",
+    "copyright policy",
+    "dispute resolution",
+    "privacy policy reference",
     "MSE Printing terms",
-    "user responsibilities",
   ],
   applicationName: "MSE Printing",
   category: "Terms & Conditions",
@@ -39,9 +40,7 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console code
-  },
+
   openGraph: {
     title: "Terms & Conditions | MSE Printing",
     description:

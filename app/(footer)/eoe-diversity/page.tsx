@@ -37,9 +37,7 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console code
-  },
+
   openGraph: {
     title: "Equal Opportunity & Diversity | MSE Printing",
     description:

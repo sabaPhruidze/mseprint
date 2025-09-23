@@ -40,9 +40,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Google Search Console verification string
-  },
+ 
   openGraph: {
     title: "Tradeshow & Event Signs | MSE Printing",
     description:

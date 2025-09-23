@@ -41,9 +41,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your actual Google Search Console string
-  },
+
   openGraph: {
     title: "Table, Counter & Kiosk Display Solutions | MSE Printing",
     description:

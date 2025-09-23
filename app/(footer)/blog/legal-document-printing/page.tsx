@@ -40,9 +40,7 @@ export const metadata: Metadata = {
     },
   },
   // keep only if you actually verify this token at the site level
-  verification: {
-    google: "ABCD1234xyz",
-  },
+
   openGraph: {
     title: "Legal Document Printing in Minneapolis, MN | MSE Printing",
     description:

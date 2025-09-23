@@ -37,9 +37,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your actual Google Search Console code
-  },
+
   openGraph: {
     title: "Environmental Commitment | MSE Printing",
     description:

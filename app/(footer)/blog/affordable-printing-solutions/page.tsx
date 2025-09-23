@@ -38,9 +38,7 @@ export const metadata: Metadata = {
     },
   },
   // Tip: put site verification in app/layout.tsx to apply sitewide.
-  verification: {
-    google: "ABCD1234xyz",
-  },
+
   openGraph: {
     title: "Affordable Printing Solutions | MSE Printing",
     description:

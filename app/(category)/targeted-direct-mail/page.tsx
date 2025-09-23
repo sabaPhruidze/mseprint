@@ -36,9 +36,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz",
-  },
+
   openGraph: {
     title: "Targeted Direct Mail Services in Minneapolis MN | MSE Printing",
     description:

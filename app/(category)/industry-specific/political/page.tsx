@@ -40,9 +40,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console verification string
-  },
 
   openGraph: {
     title: "Political Printing | MSE Print",

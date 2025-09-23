@@ -40,9 +40,7 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your actual Google Search Console string
-  },
+
   openGraph: {
     title: "Accessibility Statement | MSE Printing",
     description:

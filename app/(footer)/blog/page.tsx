@@ -46,9 +46,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console code
-  },
+
   openGraph: {
     type: "website",
     url: "https://www.mseprinting.com/blog",

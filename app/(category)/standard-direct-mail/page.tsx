@@ -5,14 +5,11 @@ import PageStructure from "components/common/PageStructure";
 import { getFooterData } from "db/GetFooterData";
 import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
-// Fully corrected Metadata for SEO & Social Sharing
-// Fully corrected Metadata for SEO & Social Sharing
 export const metadata: Metadata = {
   title: "Standard Direct Mail in Minneapolis | MSE Printing",
   description:
     "Direct mail services in Minneapolis–Saint Paul: targeted postcards & letters, list sourcing, variable data, presort/USPS compliance, IMb tracking, and postage optimization by MSE Printing.",
   keywords: [
-    // ძირითადი თემები + ლოკალი
     "direct mail Minneapolis",
     "direct mail services Minneapolis",
     "standard direct mail",
@@ -24,7 +21,6 @@ export const metadata: Metadata = {
     "saturation mail Minneapolis",
     "presort standard mail Minneapolis",
 
-    // კამპანია/ამოცანები
     "targeted mailing services",
     "direct mail marketing",
     "postcard mailing Minneapolis",
@@ -38,7 +34,6 @@ export const metadata: Metadata = {
     "real estate postcards Minneapolis",
     "healthcare patient mailings Minneapolis",
 
-    // მონაცემები/ოპტიმიზაცია
     "mailing lists Minneapolis",
     "audience list sourcing",
     "data cleansing CASS NCOA",
@@ -52,14 +47,13 @@ export const metadata: Metadata = {
     "address verification Minneapolis",
     "postal logistics Minnesota",
 
-    // დაკავშირებული ძიებები
     "custom postcards Minneapolis",
     "letter mailers Minnesota",
     "bulk mail Minneapolis",
     "mail marketing Minneapolis",
     "postal mail solutions",
     "MSE Printing direct mail",
-    "EDDM planning Minneapolis", // (გაქვს ცალკე გვერდი, მაგრამ ხშირად ეძებენ ერთად)
+    "EDDM planning Minneapolis",
   ],
   applicationName: "MSE Printing",
   category: "Direct Mail Services",
@@ -76,9 +70,6 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your Search Console verification string
   },
   openGraph: {
     title: "Standard Direct Mail in Minneapolis | MSE Printing",

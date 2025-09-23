@@ -46,9 +46,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with real Google Search Console verification
-  },
 
   openGraph: {
     title: "Cards & Invitations | MSE Printing",

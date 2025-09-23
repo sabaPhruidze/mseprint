@@ -41,9 +41,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "ABCD1234xyz", // Replace with your actual verification string
-  },
 
   openGraph: {
     title: "Direct Mail & Mailing Services | MSE Printing",
