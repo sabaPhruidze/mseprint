@@ -14,7 +14,7 @@ const interBold = localFont({
   src: "../public/fonts/Inter_18pt-Bold.woff2",
   variable: "--font-inter-bold",
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
 const interExtraBold = localFont({
@@ -28,7 +28,7 @@ const interMedium = localFont({
   src: "../public/fonts/Inter_18pt-Medium.woff2",
   variable: "--font-inter-medium",
   display: "swap",
-  preload: false,
+  preload: true,
 });
 
 function SiteGraphSchema() {
@@ -212,11 +212,11 @@ export default async function RootLayout({
             />
             <Script id="ga4-init" strategy="afterInteractive">
               {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_ID}', { page_path: window.location.pathname });
-              `}
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${GA_ID}', { page_path: window.location.pathname });
+  `}
             </Script>
           </>
         ) : null}

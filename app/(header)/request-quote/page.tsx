@@ -8,20 +8,52 @@ import { getCurrentUser } from "lib/getCurrentUser";
 
 /* — SEO Metadata matching your site standards — */
 export const metadata: Metadata = {
-  title: "Request a Quote | MSE Printing",
+  title: "Request a Quote (Free Estimate) | MSE Printing, Minneapolis MN",
   description:
-    "Submit a quote request for custom printing and marketing services with MSE Printing. Our team will provide a tailored solution for your business needs.",
+    "Get a fast, free printing quote—signs, direct mail/EDDM, labels, packaging, large format & more. Local Minneapolis, MN service with nationwide delivery.",
   keywords: [
+    // CORE
     "printing quote",
-    "custom print estimate",
+    "print estimate",
     "request a quote",
-    "MSE Printing quote",
-    "business print pricing",
-    "custom marketing materials",
-    "get a print estimate",
     "online print quote",
-    "order printing",
     "Minneapolis print quote",
+    "print pricing Minneapolis",
+    "printing estimate MN",
+    "rush print quote",
+
+    // HIGH-INTENT SERVICE CLUSTERS
+    "signs and graphics quote",
+    "banner printing quote",
+    "window wall floor graphics quote",
+    "vehicle wraps quote Minneapolis",
+    "exterior signage quote Minneapolis",
+    "ADA signs quote Minneapolis",
+
+    // DIRECT MAIL
+    "EDDM quote",
+    "every door direct mail quote",
+    "direct mail printing quote",
+    "mailing services estimate",
+
+    // PRINT PRODUCTS
+    "business cards quote Minneapolis",
+    "postcards printing quote",
+    "poster printing quote",
+    "brochure printing quote",
+    "annual report printing quote",
+    "legal printing quote Minneapolis",
+
+    // LABELS & PACKAGING
+    "labels printing quote",
+    "sticker printing quote",
+    "custom decals quote",
+    "short run packaging quote",
+    "custom boxes quote",
+
+    // NEAR-ME VARIANTS
+    "printing quote near me",
+    "custom print estimate near me",
   ],
   applicationName: "MSE Printing",
   category: "Request a Quote",
@@ -101,21 +133,28 @@ const WebPageSchema = () => {
     "@type": "WebPage",
     "@id": "https://www.mseprinting.com/request-quote#webpage",
     url: "https://www.mseprinting.com/request-quote",
-    name: "Request a Quote",
+    name: "Request a Quote (Free Estimate)",
     description:
-      "Request a custom quote for printing or marketing services from MSE Printing. Fast, expert Minneapolis print estimates.",
-    publisher: {
-      "@type": "Organization",
-      name: "MSE Printing",
-      url: "https://www.mseprinting.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.mseprinting.com/favicon.ico",
-      },
+      "Fast, free printing estimates for signs, direct mail/EDDM, labels, packaging, large format, and marketing materials. Minneapolis, MN & nationwide.",
+    datePublished: "2024-01-01",
+    dateModified: "2025-09-26",
+    about: [
+      "printing quote",
+      "direct mail EDDM quote",
+      "signs and graphics quote",
+      "labels and stickers quote",
+      "short-run packaging quote",
+      "vehicle wraps quote",
+      "large format printing quote",
+      "business cards and brochures quote",
+      "annual report printing quote",
+      "legal printing quote",
+    ],
+    potentialAction: {
+      "@type": "Action",
+      name: "Submit Quote Request",
+      target: "https://www.mseprinting.com/request-quote",
     },
-    inLanguage: "en-US",
-    datePublished: "2024-01-01", // Update as appropriate
-    dateModified: "2025-05-24", // Update dynamically if possible
     image: [
       "https://www.mseprinting.com/images/header-images/request_quote.webp",
     ],
@@ -129,7 +168,6 @@ const WebPageSchema = () => {
   );
 };
 
-/* --- Page component --- */
 export default async function RequestQuotePage() {
   const { requestQuoteContent } = await getRQSFData("/request-quote");
   const userDefaults = await getCurrentUser();

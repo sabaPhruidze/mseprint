@@ -4,20 +4,21 @@ import { getSpecialPagesData } from "db/GetSpecialPagesData"; // same helper you
 
 /* ──────────────────────────  SEO  ────────────────────────── */
 export const metadata = {
-  title: "Equal Opportunity & Diversity | MSE Printing",
+  title:
+    "Equal Opportunity (EEO), Non-Discrimination & Diversity | MSE Printing",
   description:
-    "Explore MSE Printing’s commitment to equal employment opportunity, inclusive hiring, and our diverse workplace culture.",
+    "MSE Printing is an Equal Opportunity Employer. We prohibit discrimination and harassment, support DEI, and provide reasonable ADA accommodations in Minneapolis, MN.",
   keywords: [
-    "equal employment opportunity",
-    "diversity and inclusion",
-    "inclusive hiring",
-    "fair workplace",
-    "diverse workforce",
-    "employment equity",
-    "MSE Printing careers",
-    "franchise diversity",
+    "equal employment opportunity policy",
+    "EEO statement",
+    "non-discrimination policy",
+    "anti-harassment policy",
+    "DEI diversity equity inclusion",
+    "inclusive hiring Minneapolis",
+    "reasonable accommodation ADA",
     "accessibility accommodations",
-    "respectful workplace",
+    "equal opportunity employer Minnesota",
+    "MSE Printing careers",
   ],
   applicationName: "MSE Printing",
   category: "Equal Opportunity & Diversity",
@@ -39,9 +40,10 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "Equal Opportunity & Diversity | MSE Printing",
+    title:
+      "Equal Opportunity (EEO), Non-Discrimination & Diversity | MSE Printing",
     description:
-      "Learn how MSE Printing champions fair hiring, accessibility accommodations, and a culture of respect for all employees and applicants.",
+      "Our EEO statement outlines zero-tolerance for discrimination/harassment, DEI commitments, and ADA accommodations for applicants and employees in Minneapolis, MN.",
     url: "https://www.mseprinting.com/eoe-diversity",
     siteName: "MSE Printing",
     locale: "en_US",
@@ -57,9 +59,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Equal Opportunity & Diversity | MSE Printing",
+    title:
+      "Equal Opportunity (EEO), Non-Discrimination & Diversity | MSE Printing",
     description:
-      "Learn how MSE Printing fosters a respectful, inclusive, and diverse workplace culture.",
+      "We’re an Equal Opportunity Employer committed to DEI and ADA accommodations. Read our policy for applicants and employees in Minneapolis, MN.",
     site: "@MSEPrinting",
     creator: "@MSEPrinting",
     images: [
@@ -92,7 +95,6 @@ export const metadata = {
   publisher: "MSE Printing",
 } as const;
 
-/* — Schema.org Article structured data — */
 const ArticleSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -104,7 +106,24 @@ const ArticleSchema = () => {
     },
     headline: "Equal Opportunity & Diversity",
     description:
-      "Explore MSE Printing’s commitment to equal employment opportunity, inclusive hiring, and our diverse workplace culture.",
+      "MSE Printing’s Equal Employment Opportunity (EEO) statement: non-discrimination, anti-harassment, DEI commitments, and ADA reasonable accommodations in Minneapolis, MN.",
+    datePublished: "2024-01-01",
+    dateModified: "2025-09-26",
+    about: [
+      "Equal Employment Opportunity (EEO)",
+      "Non-discrimination",
+      "Anti-harassment",
+      "Diversity, Equity, and Inclusion (DEI)",
+      "ADA reasonable accommodations",
+      "Inclusive hiring",
+    ],
+    articleSection: [
+      "EEO Policy",
+      "Non-Discrimination & Anti-Harassment",
+      "Reasonable Accommodation (ADA)",
+      "Inclusive Hiring & DEI",
+      "Reporting & Resolution",
+    ],
     author: {
       "@type": "Organization",
       name: "MSE Printing",
@@ -118,8 +137,6 @@ const ArticleSchema = () => {
         url: "https://www.mseprinting.com/favicon.ico",
       },
     },
-    datePublished: "2024-01-01", // Update as appropriate
-    dateModified: "2025-05-24", // Update dynamically if possible
     image: [
       "https://www.mseprinting.com/images/footer-images/eoe_diversity.webp",
     ],

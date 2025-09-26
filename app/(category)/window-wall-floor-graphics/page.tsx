@@ -11,16 +11,43 @@ export const metadata: Metadata = {
   description:
     "Transform your space with custom window, wall, and floor graphics from MSE Printing. Durable, vibrant, and professional designs to elevate your brand.",
   keywords: [
+    // CORE LOCAL INTENT
     "window graphics Minneapolis",
+    "wall graphics Minneapolis",
+    "floor graphics Minneapolis",
+    "storefront window decals Minneapolis",
+    "office wall graphics Minneapolis",
+    "retail window signage Minneapolis",
+    "floor decals Minneapolis",
+    "window graphics near me",
+
+    // PRODUCT/FEATURE VARIANTS
+    "perforated window film Minneapolis",
+    "one-way vision window graphics",
+    "frosted window graphics Minneapolis",
+    "etched glass vinyl Minneapolis",
+    "privacy window film Minneapolis",
+    "window perf Minneapolis",
+    "removable window decals",
+    "static cling window graphics",
+
+    // WALL SOLUTIONS
+    "custom wall murals Minneapolis",
+    "wall wraps Minneapolis",
+    "textured wall vinyl brick concrete",
+    "3M wall graphics Minneapolis",
+    "interior branded wall graphics",
+
+    // FLOOR SOLUTIONS
+    "slip-resistant floor graphics",
+    "laminated floor decals",
+    "wayfinding floor decals",
+    "indoor floor signs Minneapolis",
+
+    // GENERAL/STATE
     "wall graphics Minnesota",
-    "floor decals",
-    "business window decals",
-    "custom wall murals",
-    "branded floor graphics",
-    "storefront graphics",
+    "storefront graphics Minnesota",
     "indoor graphics printing",
-    "MSE Printing wall art",
-    "retail window signage",
   ],
   applicationName: "MSE Printing",
   category: "Window, Wall & Floor Graphics",
@@ -133,7 +160,31 @@ const ServiceSchema = () => {
       { "@type": "State", name: "Minnesota" },
       { "@type": "Country", name: "United States" },
     ],
-    serviceType: "Window, Wall & Floor Graphics",
+    serviceType: [
+      "Window Graphics",
+      "Storefront Window Decals",
+      "Perforated Window Film",
+      "Frosted / Etched Glass Vinyl",
+      "Privacy Window Film",
+      "Wall Murals",
+      "Wall Wraps",
+      "Textured Wall Vinyl (Brick/Concrete)",
+      "Floor Graphics",
+      "Slip-Resistant Floor Decals",
+      "Wayfinding Floor Decals",
+    ],
+    knowsAbout: [
+      "perforated window film Minneapolis",
+      "frosted window graphics Minneapolis",
+      "etched glass vinyl Minneapolis",
+      "privacy window film Minneapolis",
+      "one-way vision window graphics",
+      "custom wall murals Minneapolis",
+      "wall wraps Minneapolis",
+      "3M wall graphics",
+      "slip-resistant laminated floor decals",
+      "wayfinding floor graphics",
+    ],
     category: "Graphics & Signage",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
