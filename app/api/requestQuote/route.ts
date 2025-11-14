@@ -1,44 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-/* ------------------------------------------------------------------ */
-/* 1. Types                                                            */
-/* ------------------------------------------------------------------ */
+
 interface QuoteRequestPayload {
   firstname: string;
   lastname: string;
   email: string;
-  phone?: string;                 // keep as string → can hold “+1‑800…”
+  phone?: string; 
   company?: string;
   jobTitle?: string;
   extension?: string;
   representative?: string;
   projectName: string;
-  quantity: number | string;      // change to number if you coerce later
+  quantity: number | string; 
   description: string;
-  dueDate: string;                // ISO‑8601 date string
+  dueDate: string; 
   fileLink?: string | null;
 }
 
 type RequiredField = keyof QuoteRequestPayload;
 
-/* ------------------------------------------------------------------ */
-/* 2. Resend client                                                    */
-/* ------------------------------------------------------------------ */
+
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
-/* ------------------------------------------------------------------ */
-/* 3. Helpers                                                          */
-/* ------------------------------------------------------------------ */
 function isMissing(value: unknown): boolean {
   return value === undefined || value === null || value === "";
 }
 
-/* ------------------------------------------------------------------ */
-/* 4. POST /api/sendEmail                                              */
-/* ------------------------------------------------------------------ */
 export async function POST(req: NextRequest) {
-  /* ---------- 4.1  Parse JSON safely ---------- */
+ 
   let body: QuoteRequestPayload;
   try {
     body = (await req.json()) as QuoteRequestPayload;
@@ -51,9 +41,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  console.log("🔎  Received payload:", body);
+  console.log("🔎  Received payload (quote):", JSON.stringify(body, null, 2));
+  console.log("🔎  fileLink value (quote):", JSON.stringify(body.fileLink));
 
-  /* ---------- 4.2  Validate required fields ---------- */
   const requiredFields: RequiredField[] = [
     "firstname",
     "lastname",
@@ -73,7 +63,6 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  /* ---------- 4.3  Build the e‑mail body ---------- */
   const html = `
 <pre>
 📬  New Quote Request : ${body.representative || "No preference"}
@@ -91,19 +80,32 @@ export async function POST(req: NextRequest) {
 📎 File: ${body.fileLink || "None"}
 </pre>`;
 
-  /* ---------- 4.4  Send via Resend ---------- */
-  try {
-    const result = await resend.emails.send({
-      from: process.env.RESEND_FROM!, // e.g. "MSE Printing <info@mseprinting.com>"
-      to: process.env.RESEND_TO!,     // e.g. "info@mseprinting.com"
-      subject: `New Quote Request: ${body.representative || "No preference"}`,
-      html,
-    });
 
+  const emailPayload = {
+    from: process.env.RESEND_FROM!, 
+    to: process.env.RESEND_TO!,     
+    subject: `New Quote Request: ${body.representative || "No preference"}`,
+    html,
+  };
+
+  console.log(
+    "📤 About to send QUOTE email via Resend:",
+    JSON.stringify(
+      {
+        ...emailPayload,
+        htmlPreview: html.slice(0, 400), 
+      },
+      null,
+      2
+    )
+  );
+  try {
+    const result = await resend.emails.send(emailPayload);
+    console.log("✅ Resend response (quote):", result);
     return NextResponse.json({ ok: true, result }, { status: 200 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
-    console.error("❌  Resend error:", message);
+    console.error("❌  Resend error (quote):", message);
     return NextResponse.json(
       { error: "Resend failed – check RESEND_API_KEY & domain verification" },
       { status: 500 }
@@ -111,9 +113,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-/* ------------------------------------------------------------------ */
-/* 5. OPTIONS  (CORS pre‑flight)                                       */
-/* ------------------------------------------------------------------ */
+
 export async function OPTIONS() {
   return new NextResponse(null, {
     headers: {
