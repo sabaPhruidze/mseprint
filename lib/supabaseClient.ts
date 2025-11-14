@@ -11,14 +11,12 @@ export const sql = neon(process.env.DATABASE_URL!);
  * A generic, cached function to fetch data from any table.
  */
 export const getDataPattern = cache(
-  async <T extends Record<string, any>>(
+  async <T extends Record<string, unknown>>(
     tableName: string,
     limit: number = 1000
   ): Promise<T[]> => {
     try {
-      // 2. Use the 'sql' template tag.
-      //    - Use `sql.unsafe(tableName)` to safely insert the table name.
-      //    - `${limit}` is automatically parameterized by neon, so it's safe.
+     
       const rows = await sql`
         SELECT * FROM ${sql.unsafe(tableName)}
         ORDER BY id

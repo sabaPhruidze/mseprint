@@ -55,6 +55,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             <li
               key={`${result.id}-${index}`}
               role="option"
+              aria-selected={false}
               className={`
                 transition-colors duration-200
                 hover:bg-purple text-gray-800 hover:text-white

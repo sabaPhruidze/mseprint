@@ -85,9 +85,6 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
         role="search"
         onSubmit={handleSubmit}
         className="flex items-center border border-gray-300 rounded-md p-4 bg-white screen-size-23:h-16 h-14"
-        aria-controls={listId}
-        aria-expanded={open}
-        aria-haspopup="listbox"
       >
         <label htmlFor="site-search" className="sr-only">
           Search the site
