@@ -8,7 +8,7 @@ import { getHomeData } from "db/getHomeData";
 import { getHeaderData } from "db/getHeaderData";
 
 export const revalidate = 3600;
-
+// change
 import { SEOImageProps, PagePathTypes } from "../types/commonTypes";
 
 export const metadata: Metadata = {
