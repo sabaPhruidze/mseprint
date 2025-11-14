@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ServicesPathTypes } from "../../types/commonTypes";
 import { normalizeHref } from "src/helpers/urls";
-
 interface SearchResultsProps {
   results: ServicesPathTypes[];
   onReset: () => void;
