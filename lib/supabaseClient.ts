@@ -11,7 +11,7 @@ export const sql = neon(process.env.DATABASE_URL!);
  * A generic, cached function to fetch data from any table.
  */
 export const getDataPattern = cache(
-  async <T extends Record<string, unknown>>(
+  async <T extends object>(
     tableName: string,
     limit: number = 1000
   ): Promise<T[]> => {
