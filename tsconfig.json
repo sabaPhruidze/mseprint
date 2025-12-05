@@ -8,7 +8,7 @@
     "allowJs": true,
     "strict": true,
     "noEmit": true,
-    "skipLibCheck": true,      // stop crawling broken .d.ts files
+    "skipLibCheck": true,
     "esModuleInterop": true,
 
     /* module resolution --------------------------------------------------- */
@@ -20,13 +20,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",
-    "paths": {
-      "@types/*": ["types/*"],
-      "types/*": ["types/*"],
-      "src/*": ["src/*"]
-    },
+    
+    /* 1. წაიშალა "baseUrl": ".", */
 
+    /* 2. განახლდა paths (დაემატა ./ დასაწყისში) */
+    "paths": {
+      "@types/*": ["./types/*"],
+      "types/*": ["./types/*"],
+      "src/*": ["./src/*"],
+      "*": ["./*"]
+    },
 
     /* Next.js TS plugin --------------------------------------------------- */
     "plugins": [{ "name": "next" }]
