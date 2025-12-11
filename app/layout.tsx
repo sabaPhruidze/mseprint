@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import SkipLink from "../components/common/skipLink";
 
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -221,8 +222,11 @@ export default async function RootLayout({
           </>
         ) : null}
         <SiteGraphSchema />
+        <SkipLink />
         <Header {...headerData} servicesData={footerData.footerContentData} />
-        <div className="flex-grow">{children}</div>
+        <div className="flex-grow" id="main-content">
+          {children}
+        </div>
         <Footer {...footerData} />
         <SpeedInsights />
       </body>
