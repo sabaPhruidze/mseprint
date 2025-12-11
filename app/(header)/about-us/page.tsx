@@ -4,7 +4,6 @@ import React, { ElementType } from "react";
 import type { Metadata } from "next";
 import { getSpecialPagesData } from "db/GetSpecialPagesData";
 import { AboutUsSection } from "types/commonTypes";
-import ContactUs from "components/common/ContactUs";
 
 /* ---------- SEO Metadata (all fields as per site standard) ---------- */
 export const metadata: Metadata = {
@@ -200,7 +199,6 @@ export default async function AboutUsPage() {
         </h1>
         {aboutUsData.map(renderSection)}
       </main>
-      <ContactUs />
     </div>
   );
 }

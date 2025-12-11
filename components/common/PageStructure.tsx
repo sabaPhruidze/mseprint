@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { PageStructureTypes } from "types/commonTypes";
-import ContactUs from "./ContactUs";
 import { normalizeHref, absUrl } from "src/helpers/urls";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
@@ -992,7 +991,6 @@ export default function PageStructure({
           </p>
         </div>
       </main>
-      <ContactUs />
     </>
   );
 }

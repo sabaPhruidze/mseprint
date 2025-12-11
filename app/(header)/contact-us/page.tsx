@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
-import ContactUs from "components/common/ContactUs";
 
 export const metadata: Metadata = {
   title: "Contact Us | MSE Printing",
@@ -139,7 +138,6 @@ const ContactUsPage = () => {
           </div>
         </section>
       </main>
-      <ContactUs />
     </div>
   );
 };
