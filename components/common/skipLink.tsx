@@ -4,7 +4,7 @@ export const SkipLink = () => {
       href="#main-content"
       className="
         hidden screen-size-13:inline-flex items-center
-        absolute top-[158px] left-6 z-50
+        absolute top-[158px] screen-size-18:top-[206px] left-6 z-50
         text-white border border-white rounded-lg
         no-underline
         px-2 py-3 screen-size-5:px-4 screen-size-5:py-2
