@@ -13,12 +13,6 @@ export const SkipLink = () => {
         transition-all
         duration-500
         font-inter-extrabold text-[12px] screen-size-5:text-[18px]
-        
-        /* აუცილებელია, რომ ღილაკი მხოლოდ ფოკუსირებისას (Tab-ის დაჭერისას) გამოჩნდეს, 
-           სხვა დროს კი ეკრანს მიღმა იყოს ან დამალული, თუმცა შენი კლასებიდან ჩანს, 
-           რომ hidden გაქვს და screen-size-ზე აჩენ. 
-           სტანდარტულად ხშირად იყენებენ 'sr-only focus:not-sr-only' მიდგომას, 
-           მაგრამ თუ შენი დიზაინით ასეა საჭირო, დატოვე. */
       "
     >
       Skip to content

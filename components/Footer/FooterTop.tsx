@@ -1,78 +1,51 @@
-import React from "react";
-import { footerTopTypes } from "../../types/Footer/footerTypes";
 import SEOImage from "../common/SEOImage";
+import { footerTopTypes } from "../../types/Footer/footerTypes";
 
-interface FooterTopProps {
-  footerTopData: footerTopTypes;
-}
+type Props = { footerTopData: footerTopTypes };
 
-const FooterTop: React.FC<FooterTopProps> = ({ footerTopData }) => {
+const GEO = {
+  latitude: 45.0229,
+  longitude: -93.2793,
+  location: "3839 Washington Ave N Ste. 103",
+  addressRegion: "Minneapolis",
+};
+
+export default function FooterTop({ footerTopData }: Props) {
   const { first, second } = footerTopData;
 
   return (
-    <div
-      className="
-        w-full
-        bg-black
-        text-white
-        text-center
-        flex
-        flex-col
-        h-auto
-        px-[60px]
-        py-5
-        items-center
-        lg:flex-row
-        lg:h-[50px]
-        lg:py-0
-        lg:pl-[80px]
-        lg:pr-[60px]
-        lg:items-center
-        lg:justify-between
-      "
-    >
-      <h2 className="font-bold text-lg m-0 lg:text-xl">{first}</h2>
+    <div className="w-full bg-black text-white px-[60px] py-5 flex flex-col items-center text-center lg:flex-row lg:justify-between lg:py-0 lg:h-[50px] lg:pl-[80px] lg:pr-[60px]">
+      <p className="font-bold text-lg m-0 lg:text-xl">{first}</p>
 
-      <div className="flex flex-row items-center mt-4 lg:mt-0">
-        {second.map((icon) => (
-          <a
-            key={icon.id}
-            href={icon.path}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="
-              mx-[10px]
-              transition-transform
-              duration-300
-              hover:scale-110
-            "
-            style={{
-              filter:
-                "invert(100%) sepia(7%) saturate(7500%) hue-rotate(165deg) brightness(120%) contrast(106%)",
-            }}
-          >
-            <SEOImage
-              src={`${process.env.PUBLIC_URL || ""}/images/footer-images/${
-                icon.src
-              }`}
-              alt={icon.alt}
-              name={icon.alt}
-              geoData={{
-                latitude: 45.0229,
-                longitude: -93.2793,
-                location: "3839 Washington Ave N Ste. 103",
-                addressRegion: "Minneapolis",
+      {second?.length ? (
+        <div className="flex items-center mt-4 lg:mt-0">
+          {second.map((icon) => (
+            <a
+              key={icon.id}
+              href={icon.path}
+              target="_blank"
+              rel="nofollow noopener noreferrer"
+              aria-label={icon.alt}
+              className="mx-[10px] transition-transform duration-300 hover:scale-110"
+              style={{
+                filter:
+                  "invert(100%) sepia(7%) saturate(7500%) hue-rotate(165deg) brightness(120%) contrast(106%)",
               }}
-              priority={icon.priority}
-              loading={icon.priority ? undefined : "lazy"}
-              width={icon.width}
-              height={icon.height}
-            />
-          </a>
-        ))}
-      </div>
+            >
+              <SEOImage
+                src={`${process.env.PUBLIC_URL || ""}/images/footer-images/${icon.src}`}
+                alt={icon.alt}
+                name={icon.alt}
+                geoData={GEO}
+                priority={icon.priority}
+                loading={icon.priority ? undefined : "lazy"}
+                width={icon.width}
+                height={icon.height}
+              />
+            </a>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
-};
-
-export default FooterTop;
+}

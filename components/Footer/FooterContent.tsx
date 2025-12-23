@@ -8,10 +8,12 @@ import FooterNavDesktop from "./FooterNavDesktop";
 type Props = { footerContentData: ServicesPathTypes[] };
 
 export default function FooterContent({ footerContentData }: Props) {
-  if (!footerContentData?.length) return null;
+  const safeData = footerContentData ?? [];
 
   const { topLevelCategories, subcategoriesMap, expanded, toggleCategory } =
-    useFooterNav(footerContentData);
+    useFooterNav(safeData);
+
+  if (!safeData.length) return null;
 
   return (
     <section
