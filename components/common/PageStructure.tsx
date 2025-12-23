@@ -11,6 +11,7 @@ import OfferingsSection from "./page-structure/OfferingsSection";
 import FaqSection from "./page-structure/FaqSection";
 import GetStartedSection from "./page-structure/GetStartedSection";
 import AdvancedFeaturesSection from "./page-structure/AdvancedFeaturesSection";
+import HowToGetStartedSection from "./page-structure/HowToGetStartedSection";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -119,53 +120,7 @@ export default function PageStructure({
           </div>
           <AdvancedFeaturesSection pageData={pageData} />
 
-          {pageData.howtogetstarted?.heading && (
-            <>
-              <h2
-                id="how-to-get-started"
-                className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6 screen-size-10:text-left"
-              >
-                {pageData.howtogetstarted.heading}
-              </h2>
-              {pageData.howtogetstarted?.list?.length ? (
-                <>
-                  {/* mobile accordion */}
-                  <details className="w-full md:hidden group mt-2" role="group">
-                    <summary className="cursor-pointer marker:hidden">
-                      <strong>{pageData.howtogetstarted.list[0].page}: </strong>
-                      <span>{pageData.howtogetstarted.list[0].content}</span>
-                      <span className="ml-1 text-blue-600 group-open:hidden">
-                        see more&nbsp;…
-                      </span>
-                      <span className="ml-1 text-blue-600 hidden group-open:inline">
-                        see less
-                      </span>
-                    </summary>
-                    <ol className="list-decimal list-inside mt-2 space-y-2 px-4">
-                      {pageData.howtogetstarted.list.slice(1).map((step) => (
-                        <li key={step.id}>
-                          <strong>{step.page}: </strong>
-                          <span>{step.content}</span>
-                        </li>
-                      ))}
-                    </ol>
-                  </details>
-
-                  {/* desktop list */}
-                  <ol className="hidden md:block list-decimal list-inside mt-2 space-y-2">
-                    {pageData.howtogetstarted.list.map((step) => (
-                      <li key={step.id}>
-                        <strong>{step.page}: </strong>
-                        <span>{step.content}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </>
-              ) : (
-                "pageData.howToGetStarted.list not written"
-              )}
-            </>
-          )}
+          <HowToGetStartedSection pageData={pageData} />
           {/* ── Why Trust Us ── */}
           {pageData.whytrustus?.heading && (
             <>
