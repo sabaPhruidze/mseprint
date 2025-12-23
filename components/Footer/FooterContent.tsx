@@ -15,7 +15,6 @@ export default function FooterContent({
     new Set()
   );
 
-  // Memoized filtered data for better performance
   const topLevelCategories = useMemo(() => {
     return (
       footerContentData?.filter(
@@ -27,7 +26,6 @@ export default function FooterContent({
     );
   }, [footerContentData]);
 
-  // Memoized subcategories map for performance
   const subcategoriesMap = useMemo(() => {
     const map = new Map<number, ServicesPathTypes[]>();
     topLevelCategories.forEach((category) => {
@@ -43,33 +41,27 @@ export default function FooterContent({
     return map;
   }, [footerContentData, topLevelCategories]);
 
-  // Optimized toggle function
   const toggleCategory = useCallback((categoryId: number) => {
     setExpandedCategories((prev) => {
       const newSet = new Set(prev);
-      if (newSet.has(categoryId)) {
-        newSet.delete(categoryId);
-      } else {
-        newSet.add(categoryId);
-      }
+      if (newSet.has(categoryId)) newSet.delete(categoryId);
+      else newSet.add(categoryId);
       return newSet;
     });
   }, []);
 
-  // Early return for better performance
   if (!footerContentData || footerContentData.length === 0) {
     return (
-      <div role="contentinfo" aria-label="Footer content unavailable">
+      <div aria-label="Footer content unavailable">
         <p>No footer content available.</p>
       </div>
     );
   }
 
   return (
-    <footer
+    <section
       className="border-t border-gray-300 screen-size-5:max-h-[800px] screen-size-5:overflow-hidden overflow-y-auto max-h-[500px]"
-      role="contentinfo"
-      aria-label="Site navigation footer"
+      aria-label="Footer navigation sections"
     >
       {/* Mobile/Small Screen Layout (screen-size-5 and below) */}
       <nav
@@ -224,6 +216,6 @@ export default function FooterContent({
           })}
         </div>
       </nav>
-    </footer>
+    </section>
   );
 }
