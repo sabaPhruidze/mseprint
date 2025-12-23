@@ -41,21 +41,11 @@ interface PageStructureProps {
   breadcrumbs?: BreadcrumbItem[];
 }
 
-function slugify(s: string) {
-  return (s || "")
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
-}
-
 export default function PageStructure({
   pageData,
   tokens,
   breadcrumbs,
 }: PageStructureProps) {
-  type FAQListItem = { question: string; answer: string };
-
   return (
     <>
       <main className="text-lg" role="main">
