@@ -1,65 +1,46 @@
-import React from "react";
 import Link from "next/link";
 import { footerBottomTypes } from "../../types/Footer/footerTypes";
 
-interface FooterBottomProps {
-  footerBottomData: footerBottomTypes[];
-}
+type Props = { footerBottomData: footerBottomTypes[] };
 
-const FooterBottom: React.FC<FooterBottomProps> = ({ footerBottomData }) => {
-  if (!footerBottomData.length) return null;
+export default function FooterBottom({ footerBottomData }: Props) {
+  const bottom = footerBottomData?.[0]?.data?.footer_bottom;
+  if (!bottom) return null;
 
-  const { address, pages } = footerBottomData[0].data.footer_bottom;
+  const { address, pages } = bottom;
 
   return (
-    <div
-      className="
-        w-full
-        bg-black
-        text-white
-        text-center
-        flex
-        flex-col
-        h-auto
-        px-[60px]
-        py-5
-        items-center
-        screen-size-15:flex-row
-        screen-size-15:h-[50px]
-        screen-size-15:py-0
-        screen-size-15:pl-[80px]
-        screen-size-15:pr-[60px]
-        screen-size-15:items-center
-        screen-size-15:justify-between
-      "
-    >
+    <div className="w-full bg-black text-white px-[60px] py-5 flex flex-col items-center text-center screen-size-15:flex-row screen-size-15:justify-between screen-size-15:py-0 screen-size-15:h-[50px] screen-size-15:pl-[80px] screen-size-15:pr-[60px]">
       <address className="not-italic">
         <a
-          href={address.path}
+          href={address?.path || "#"}
           target="_blank"
           rel="noopener noreferrer"
           className="text-white hover:underline text-lg font-semibold"
         >
-          {address.page}
+          {address?.page || "Our Location"}
         </a>
       </address>
 
-      <nav className="mt-3 screen-size-15:mt-0">
-        <ul className="flex flex-wrap justify-center screen-size-15:justify-start items-center space-x-4">
-          {pages.map((page) => (
-            <li key={page.id}>
-              <Link
-                href={page.path || "/"}
-                className="hover:underline text-sm text-gray-300"
-              >
-                {page.page}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      {pages?.length ? (
+        <nav
+          className="mt-3 screen-size-15:mt-0"
+          aria-label="Footer legal pages"
+        >
+          <ul className="flex flex-wrap justify-center screen-size-15:justify-start items-center gap-x-4 gap-y-2">
+            {pages.map((p) => (
+              <li key={p.id}>
+                <Link
+                  href={p.path || "/"}
+                  className="hover:underline text-sm text-gray-300"
+                >
+                  {p.page}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
     </div>
   );
-};
-
-export default FooterBottom;
+}
