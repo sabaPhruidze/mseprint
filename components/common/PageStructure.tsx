@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { PageStructureTypes } from "types/commonTypes";
-import { normalizeHref, absUrl } from "src/helpers/urls";
+import { normalizeHref } from "src/helpers/urls";
 import Breadcrumbs from "./page-structure/Breadcrumbs";
 import type { BreadcrumbItem } from "./page-structure/Breadcrumbs";
 
