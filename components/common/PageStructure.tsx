@@ -8,6 +8,7 @@ import OnThisPageNav from "./page-structure/OnThisPageNav";
 import WhyChooseSection from "./page-structure/WhyChooseSection";
 import ServicesSection from "./page-structure/ServicesSection";
 import OfferingsSection from "./page-structure/OfferingsSection";
+import FaqSection from "./page-structure/FaqSection";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -34,27 +35,6 @@ function applyTokens(input?: string, t?: LocationTokens) {
   );
 }
 
-type FAQListItem = { question: string; answer: string };
-
-function stripTags(s: string) {
-  return (s || "").replace(/<[^>]*>/g, "").trim();
-}
-
-function buildFaqJsonLd(list: FAQListItem[]) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: list.map((it) => ({
-      "@type": "Question",
-      name: stripTags(it.question).slice(0, 200),
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: stripTags(it.answer).slice(0, 5000),
-      },
-    })),
-  };
-}
-
 interface PageStructureProps {
   pageData: PageStructureTypes;
   tokens?: LocationTokens;
@@ -75,26 +55,6 @@ export default function PageStructure({
   breadcrumbs,
 }: PageStructureProps) {
   type FAQListItem = { question: string; answer: string };
-
-  const rawFaqs = (pageData.faqs?.list ?? []) as Array<Partial<FAQListItem>>;
-
-  const faqListForSchema: FAQListItem[] = rawFaqs
-    .map(({ question, answer }) => {
-      const q = stripTags(typeof question === "string" ? question : "").slice(
-        0,
-        200
-      );
-      const a = stripTags(typeof answer === "string" ? answer : "").slice(
-        0,
-        5000
-      );
-      return { question: q, answer: a };
-    })
-    .filter((f) => f.question.length > 0 && f.answer.length > 0);
-
-  const faqJsonLd = faqListForSchema.length
-    ? buildFaqJsonLd(faqListForSchema)
-    : null;
 
   return (
     <>
@@ -502,76 +462,7 @@ export default function PageStructure({
             </>
           )}
           {/* FAQs */}
-          {/* FAQs + synced JSON-LD */}
-          {faqJsonLd && (
-            <script
-              type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-            />
-          )}
-          <section className="text-left">
-            {/* heading */}
-            <h2
-              id="faqs"
-              className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6"
-            >
-              {applyTokens(pageData.faqs?.heading, tokens) ??
-                "pageData.faqs?.heading not written"}
-            </h2>
-
-            {pageData.faqs?.list?.length ? (
-              <>
-                {/* ─── mobile: show first FAQ, toggle the rest ─── */}
-                <details className="w-full md:hidden group mt-2" role="group">
-                  <summary className="cursor-pointer marker:hidden list-none p-0">
-                    <span className="block font-inter-bold">
-                      Q:&nbsp;{pageData.faqs.list[0].question}
-                    </span>
-                    <span className="block">
-                      A:&nbsp;{pageData.faqs.list[0].answer}
-                    </span>
-
-                    <span className="ml-1 text-blue-600 group-open:hidden">
-                      see more&nbsp;…
-                    </span>
-                    <span className="ml-1 text-blue-600 hidden group-open:inline">
-                      see less
-                    </span>
-                  </summary>
-
-                  {/* remaining FAQs */}
-                  {pageData.faqs.list.slice(1).map((faqItem, idx) => (
-                    <div className="mt-4" key={idx}>
-                      <h3
-                        id={`faq-${slugify(faqItem.question)}`}
-                        className="scroll-mt-24 text-xl lg:text-2xl font-inter-bold text-black dark:text-white"
-                      >
-                        Q:&nbsp;{faqItem.question}
-                      </h3>
-                      <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
-                    </div>
-                  ))}
-                </details>
-
-                {/* ─── desktop: all FAQs visible ─── */}
-                <div className="hidden md:block">
-                  {pageData.faqs.list.map((faqItem, idx) => (
-                    <div className="mt-4" key={idx}>
-                      <h3
-                        id={`faq-${slugify(faqItem.question)}`}
-                        className="scroll-mt-24 text-xl lg:text-2xl font-inter-bold text-black dark:text-white"
-                      >
-                        Q:&nbsp;{faqItem.question}
-                      </h3>
-                      <p className="mt-2">A:&nbsp;{faqItem.answer}</p>
-                    </div>
-                  ))}
-                </div>
-              </>
-            ) : (
-              "pageData.faqs?.list not written"
-            )}
-          </section>
+          <FaqSection pageData={pageData} tokens={tokens} />
           {/* FAQ */}
           {/* Get Started Section */}
           <h2
