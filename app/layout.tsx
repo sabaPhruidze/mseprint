@@ -231,6 +231,7 @@ export default async function RootLayout({
         <ContactUs />
         <Footer {...footerData} />
         <SpeedInsights />
+        {/*fewffewfwe  */}
       </body>
     </html>
   );

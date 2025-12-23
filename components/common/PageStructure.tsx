@@ -3,6 +3,8 @@ import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { PageStructureTypes } from "types/commonTypes";
 import { normalizeHref, absUrl } from "src/helpers/urls";
+import Breadcrumbs from "./page-structure/Breadcrumbs";
+import type { BreadcrumbItem } from "./page-structure/Breadcrumbs";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -49,8 +51,6 @@ function buildFaqJsonLd(list: FAQListItem[]) {
     })),
   };
 }
-
-type BreadcrumbItem = { href: string; label: string };
 
 interface PageStructureProps {
   pageData: PageStructureTypes;
@@ -128,57 +128,7 @@ export default function PageStructure({
 
             <div className="absolute inset-0 bg-black/60 p-6 flex flex-col justify-center items-start text-white screen-size-15:text-left text-center">
               <div className="screen-size-15:w-[1200px] max-w-[1500px] screen-size-15:ml-20 ml-0">
-                {/* Breadcrumbs (UI + JSON-LD) */}
-                {breadcrumbs?.length ? (
-                  <nav
-                    aria-label="Breadcrumb"
-                    className="absolute top-[0px] left-[2px] z-20 px-2 py-1 rounded bg-black/30 backdrop-blur-sm"
-                  >
-                    <script
-                      type="application/ld+json"
-                      dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                          "@context": "https://schema.org",
-                          "@type": "BreadcrumbList",
-                          itemListElement: breadcrumbs.map((bc, i) => ({
-                            "@type": "ListItem",
-                            position: i + 1,
-                            name: bc.label,
-                            // ⬇⬇ HERE
-                            item: bc.href.startsWith("http")
-                              ? bc.href.trim()
-                              : absUrl("https://www.mseprinting.com/", bc.href),
-                          })),
-                        }),
-                      }}
-                    />
-                    <ol className="flex flex-wrap gap-1 text-[12px] sm:text-sm text-white/90">
-                      {breadcrumbs.map((bc, i) => {
-                        const isLast = i === breadcrumbs.length - 1;
-                        return (
-                          <li key={bc.href} className="flex items-center">
-                            {i > 0 && <span className="mx-1">›</span>}
-                            {isLast ? (
-                              <span
-                                aria-current="page"
-                                className="font-semibold"
-                              >
-                                {bc.label}
-                              </span>
-                            ) : (
-                              <Link
-                                href={normalizeHref(bc.href)}
-                                className="underline-offset-2 hover:underline"
-                              >
-                                {bc.label}
-                              </Link>
-                            )}
-                          </li>
-                        );
-                      })}
-                    </ol>
-                  </nav>
-                ) : null}
+                <Breadcrumbs breadcrumbs={breadcrumbs} />
 
                 <h1 className="screen-size-10:text-[50px] text-[30px] font-extrabold leading-tight text-white max-w-full">
                   {applyTokens(pageData.introsection.heading, tokens) ||
