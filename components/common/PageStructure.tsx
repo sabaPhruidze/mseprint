@@ -2,11 +2,12 @@ import React from "react";
 import Link from "next/link";
 import SEOImage from "./SEOImage";
 import { PageStructureTypes } from "types/commonTypes";
-import { normalizeHref } from "src/helpers/urls";
 import Breadcrumbs from "./page-structure/Breadcrumbs";
 import type { BreadcrumbItem } from "./page-structure/Breadcrumbs";
 import OnThisPageNav from "./page-structure/OnThisPageNav";
 import WhyChooseSection from "./page-structure/WhyChooseSection";
+import ServicesSection from "./page-structure/ServicesSection";
+import OfferingsSection from "./page-structure/OfferingsSection";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -160,112 +161,9 @@ export default function PageStructure({
           <div className="container py-8 max-w-[1500px]">
             <WhyChooseSection pageData={pageData} />
             {/* SERVICES SECTION - No collapse */}
-            <h2
-              id="services"
-              className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6"
-            >
-              {applyTokens(pageData.servicessection?.heading, tokens) ||
-                "pageData.servicesSection.heading not written"}
-            </h2>
-            <p className="mt-4 text-left">
-              {pageData.servicessection?.paragraph1 ||
-                "pageData.servicesSection.paragraph1 not written"}
-            </p>
-
+            <ServicesSection pageData={pageData} tokens={tokens} />
             {/* OFFERINGS SECTION - No collapse */}
-            {/* ── Offerings section ─────────────────────────────────────── */}
-            <div className="text-left">
-              {/* heading */}
-              <h2 id="offerings" className="font-semibold">
-                Related services in{" "}
-                {applyTokens("{{city}}, {{state_abbr}}", tokens)}
-              </h2>
-
-              {/* paragraph */}
-              {pageData.offeringssection?.paragraph1 && (
-                <p className="mt-2">{pageData.offeringssection.paragraph1}</p>
-              )}
-
-              {/* OFFERINGS list ------------------------------------------- */}
-              {pageData.offeringssection?.list?.length ? (
-                <>
-                  {/* mobile accordion */}
-                  <details className="w-full md:hidden group mt-2" role="group">
-                    <summary className="cursor-pointer marker:hidden list-none p-0">
-                      <span className="font-bold">
-                        {pageData.offeringssection.list[0].page}
-                      </span>
-                      {" – "}
-                      <span>{pageData.offeringssection.list[0].content}</span>
-                      <span className="ml-1 text-blue-600 group-open:hidden">
-                        see more&nbsp;…
-                      </span>
-                      <span className="ml-1 text-blue-600 hidden group-open:inline">
-                        see less
-                      </span>
-                    </summary>
-
-                    <div className="mt-2">
-                      <p className="mb-2">
-                        <Link
-                          href={normalizeHref(
-                            pageData.offeringssection.list[0].path
-                          )}
-                          className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                          aria-label={`Learn more about ${pageData.offeringssection.list[0].page}`}
-                        >
-                          {pageData.offeringssection.list[0].page}
-                        </Link>
-                        {" – "}
-                        {pageData.offeringssection.list[0].content}
-                      </p>
-
-                      <ul className="mt-2 space-y-2 pl-0 list-none">
-                        {pageData.offeringssection.list.slice(1).map((item) => (
-                          <li key={item.id}>
-                            <Link
-                              href={normalizeHref(item.path)}
-                              className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                              aria-label={`Learn more about ${item.page}`}
-                            >
-                              {item.page}
-                            </Link>
-                            {" – "}
-                            {item.content}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </details>
-
-                  {/* desktop – always expanded */}
-                  <ul className="hidden md:block mt-2 space-y-2 pl-0 list-none">
-                    {pageData.offeringssection.list.map((item) => {
-                      const anchorId = slugify(item.page);
-                      return (
-                        <li
-                          id={anchorId}
-                          key={item.id}
-                          className="scroll-mt-24"
-                        >
-                          <Link
-                            href={normalizeHref(item.path)}
-                            className="font-bold text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                            aria-label={`Learn more about ${item.page}`}
-                          >
-                            {item.page}
-                          </Link>
-                          {" – "}
-                          {item.content}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </>
-              ) : (
-                <p>No offerings available</p>
-              )}
-            </div>
+            <OfferingsSection pageData={pageData} tokens={tokens} />
           </div>
           {pageData.advancedfeatures?.heading && (
             <>
