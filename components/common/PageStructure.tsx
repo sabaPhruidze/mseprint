@@ -12,6 +12,7 @@ import FaqSection from "./page-structure/FaqSection";
 import GetStartedSection from "./page-structure/GetStartedSection";
 import AdvancedFeaturesSection from "./page-structure/AdvancedFeaturesSection";
 import HowToGetStartedSection from "./page-structure/HowToGetStartedSection";
+import WhyTrustUsSection from "./page-structure/WhyTrustUsSection";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -122,53 +123,7 @@ export default function PageStructure({
 
           <HowToGetStartedSection pageData={pageData} />
           {/* ── Why Trust Us ── */}
-          {pageData.whytrustus?.heading && (
-            <>
-              <h2
-                id="why-trust-us"
-                className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6 screen-size-10:text-left"
-              >
-                {pageData.whytrustus.heading}
-              </h2>
-              {pageData.whytrustus?.list?.length ? (
-                <>
-                  {/* mobile accordion */}
-                  <details className="w-full md:hidden group mt-2" role="group">
-                    <summary className="cursor-pointer marker:hidden">
-                      <strong>✅ {pageData.whytrustus.list[0].page}: </strong>
-                      <span>{pageData.whytrustus.list[0].content}</span>
-                      <span className="ml-1 text-blue-600 group-open:hidden">
-                        see more&nbsp;…
-                      </span>
-                      <span className="ml-1 text-blue-600 hidden group-open:inline">
-                        see less
-                      </span>
-                    </summary>
-                    <ul className="list-disc list-inside mt-2 space-y-2 px-4">
-                      {pageData.whytrustus.list.slice(1).map((item) => (
-                        <li key={item.id}>
-                          <strong>✅ {item.page}: </strong>
-                          <span>{item.content}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-
-                  {/* desktop list */}
-                  <ul className="hidden md:block list-disc list-inside mt-2 space-y-2">
-                    {pageData.whytrustus.list.map((item) => (
-                      <li key={item.id}>
-                        <strong>✅ {item.page}: </strong>
-                        <span>{item.content}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                "pageData.whyTrustUs.list not written"
-              )}
-            </>
-          )}
+          <WhyTrustUsSection pageData={pageData} />
           {/* FAQs */}
           <FaqSection pageData={pageData} tokens={tokens} />
           {/* FAQ */}
