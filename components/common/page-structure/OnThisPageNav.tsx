@@ -1,13 +1,21 @@
-import { PageStructureTypes } from "types/commonTypes";
+type NavData = {
+  whychoosesection?: { heading?: string };
+  servicessection?: { heading?: string };
+  offeringssection?: { list?: unknown[] };
+  advancedfeatures?: {
+    heading?: string;
+    customizationFinishing?: { heading?: string };
+    bulkPrinting?: { heading?: string };
+    convenientPrinting?: { heading?: string };
+  };
+  howtogetstarted?: { heading?: string };
+  whytrustus?: { heading?: string };
+  faqs?: { list?: unknown[] };
+  getstartedsection?: { heading?: string };
+};
 
-type Item = { id: string; label: string; exists: boolean };
-
-export default function OnThisPageNav({
-  pageData,
-}: {
-  pageData: PageStructureTypes;
-}) {
-  const items: Item[] = [
+export default function OnThisPageNav({ pageData }: { pageData: NavData }) {
+  const items = [
     {
       id: "why-choose",
       label: "Why choose",

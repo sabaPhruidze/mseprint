@@ -4,10 +4,10 @@ import { normalizeHref } from "src/helpers/urls";
 import { LocationTokens, applyTokens, slugify } from "./utils";
 
 type OfferingItem = {
-  id: string | number;
-  page: string;
-  content: string;
-  path: string;
+  id?: string | number;
+  page?: string;
+  content?: string;
+  path?: string;
 };
 
 export default function OfferingsSection({

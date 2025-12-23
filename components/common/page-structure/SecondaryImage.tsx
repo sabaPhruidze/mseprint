@@ -1,10 +1,14 @@
 import SEOImage from "../SEOImage";
-import { PageStructureTypes } from "types/commonTypes";
+
+type SecondaryImageData = {
+  introsection?: { heading?: string };
+  secondaryimage?: { src?: string; alt?: string; priority?: boolean };
+};
 
 export default function SecondaryImage({
   pageData,
 }: {
-  pageData: PageStructureTypes;
+  pageData: SecondaryImageData;
 }) {
   const src = pageData.secondaryimage?.src
     ? `/images/${pageData.secondaryimage.src}`
@@ -12,7 +16,7 @@ export default function SecondaryImage({
 
   const alt =
     pageData.secondaryimage?.alt ||
-    `${pageData.introsection.heading} - MSE Printing`;
+    `${pageData.introsection?.heading || ""} - MSE Printing`;
 
   return (
     <div className="w-full screen-size-5:w-[400px] screen-size-10:w-[500px] h-[400px] mx-auto md:float-right md:ml-2 md:mr-0">
@@ -29,8 +33,8 @@ export default function SecondaryImage({
           location: "3839 Washington Ave N Ste. 103",
           addressRegion: "Minneapolis",
         }}
-        priority={pageData.secondaryimage?.priority || false}
-        fetchPriority="high"
+        priority={Boolean(pageData.secondaryimage?.priority)}
+        fetchPriority="auto"
         decoding="async"
         loading={pageData.secondaryimage?.priority ? undefined : "lazy"}
         sizes="(min-width: 768px) 500px, 100vw"

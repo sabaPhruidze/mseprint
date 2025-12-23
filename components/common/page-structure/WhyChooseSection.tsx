@@ -1,12 +1,22 @@
-import { PageStructureTypes } from "types/commonTypes";
 import SecondaryImage from "./SecondaryImage";
 import CollapsibleText from "./CollapsibleText";
 import CollapsibleList from "./CollapsibleList";
 
+type WhyChooseData = {
+  introsection?: { heading?: string };
+  secondaryimage?: { src?: string; alt?: string; priority?: boolean };
+  whychoosesection: {
+    heading?: string;
+    paragraph1?: string;
+    paragraph2?: string;
+    list?: Array<{ id: string | number; page?: string; content?: string }>;
+  };
+};
+
 export default function WhyChooseSection({
   pageData,
 }: {
-  pageData: PageStructureTypes;
+  pageData: WhyChooseData;
 }) {
   const h =
     pageData.whychoosesection?.heading ||
@@ -27,7 +37,9 @@ export default function WhyChooseSection({
         {h}
       </h2>
 
-      <SecondaryImage pageData={pageData} />
+      {pageData.secondaryimage?.src ? (
+        <SecondaryImage pageData={pageData} />
+      ) : null}
 
       <div className="mt-4 text-left">
         <CollapsibleText text={full} />

@@ -1,15 +1,19 @@
 import Link from "next/link";
 import SEOImage from "../SEOImage";
-import { PageStructureTypes } from "types/commonTypes";
 import Breadcrumbs, { BreadcrumbItem } from "./Breadcrumbs";
 import { LocationTokens, applyTokens } from "./utils";
+
+type HeroData = {
+  introsection: { heading?: string; paragraph?: string };
+  mainimage?: { src?: string; alt?: string };
+};
 
 export default function HeroSection({
   pageData,
   tokens,
   breadcrumbs,
 }: {
-  pageData: PageStructureTypes;
+  pageData: HeroData;
   tokens?: LocationTokens;
   breadcrumbs?: BreadcrumbItem[];
 }) {
