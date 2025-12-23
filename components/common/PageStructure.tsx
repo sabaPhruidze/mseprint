@@ -9,6 +9,7 @@ import WhyChooseSection from "./page-structure/WhyChooseSection";
 import ServicesSection from "./page-structure/ServicesSection";
 import OfferingsSection from "./page-structure/OfferingsSection";
 import FaqSection from "./page-structure/FaqSection";
+import GetStartedSection from "./page-structure/GetStartedSection";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -454,60 +455,7 @@ export default function PageStructure({
           {/* FAQs */}
           <FaqSection pageData={pageData} tokens={tokens} />
           {/* FAQ */}
-          {/* Get Started Section */}
-          <h2
-            id="get-started"
-            className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white mt-6 text-left"
-          >
-            {pageData.getstartedsection?.heading ??
-              "pageData.getStartedSection?.heading not written"}
-          </h2>
-          <p className="mt-4">
-            {pageData.getstartedsection?.steps?.map((item) => {
-              // Normalise whitespace for cleaner matching
-              const content = item.content?.trim() ?? "";
-
-              // Decide how to render the “content” part
-              let renderedContent: React.ReactNode = null;
-
-              if (content.includes("@")) {
-                // E‑mail
-                renderedContent = (
-                  <a
-                    href={`mailto:${content}`}
-                    className="text-blue-600 font-semibold "
-                  >
-                    {content}
-                  </a>
-                );
-              } else if (/^\d{3}-\d{3}-\d{4}$/.test(content)) {
-                // Phone in 763‑542‑8812 format
-                renderedContent = (
-                  <a
-                    href={`tel:${content.replace(/-/g, "")}`}
-                    className="text-blue-600 font-semibold "
-                  >
-                    {content}
-                  </a>
-                );
-              } else {
-                // Anything else, including the “MSE Printing” text
-                renderedContent = (
-                  <span className="text-blue-600 font-semibold">{content}</span>
-                );
-              }
-              return (
-                <span key={item.id}>
-                  {item.page && <span>{` ${item.page} `}</span>}
-                  {renderedContent}
-                </span>
-              );
-            }) ?? "pageData.getStartedSection?.steps not written"}
-          </p>
-          <p className="mt-2">
-            {pageData.getstartedsection?.finalParagraph ??
-              "pageData.getStartedSection?.finalParagraph not written"}
-          </p>
+          <GetStartedSection pageData={pageData} />
         </div>
       </main>
     </>
