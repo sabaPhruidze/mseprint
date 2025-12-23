@@ -6,6 +6,7 @@ import { normalizeHref } from "src/helpers/urls";
 import Breadcrumbs from "./page-structure/Breadcrumbs";
 import type { BreadcrumbItem } from "./page-structure/Breadcrumbs";
 import OnThisPageNav from "./page-structure/OnThisPageNav";
+import WhyChooseSection from "./page-structure/WhyChooseSection";
 
 const TOKEN_KEYS = ["city", "state", "state_abbr", "brand", "phone"] as const;
 type TokenKey = (typeof TOKEN_KEYS)[number];
@@ -157,138 +158,7 @@ export default function PageStructure({
         <OnThisPageNav pageData={pageData} />
         <div className="container mx-auto p-8 max-w-[1500px] text-left">
           <div className="container py-8 max-w-[1500px]">
-            <h2
-              id="why-choose"
-              className="text-2xl sm:text-3xl lg:text-4xl font-inter-bold text-black dark:text-white my-6"
-            >
-              {pageData.whychoosesection.heading ||
-                "pageData.whyChooseSection.heading not written"}
-            </h2>
-            <div className="w-full screen-size-5:w-[400px] screen-size-10:w-[500px] h-[400px] mx-auto md:float-right md:ml-2 md:mr-0">
-              <SEOImage
-                src={
-                  pageData.secondaryimage?.src
-                    ? `/images/${pageData.secondaryimage.src}`
-                    : "/images/home-images/additional/offset_printing_right.webp"
-                }
-                alt={
-                  pageData.secondaryimage?.alt ||
-                  `${pageData.introsection.heading} - MSE Printing`
-                }
-                name={
-                  pageData.secondaryimage?.alt ||
-                  "MSE Printing | print your product here"
-                }
-                geoData={{
-                  latitude: 45.0229,
-                  longitude: -93.2793,
-                  location: "3839 Washington Ave N Ste. 103",
-                  addressRegion: "Minneapolis",
-                }}
-                priority={pageData.secondaryimage?.priority || false}
-                fetchPriority="high"
-                decoding="async"
-                loading={pageData.secondaryimage?.priority ? undefined : "lazy"}
-                sizes="(min-width: 768px) 500px, 100vw"
-                className="w-full h-full"
-                fill
-                objectFit="cover"
-              />
-            </div>
-            <div className="mt-4 text-left">
-              {(() => {
-                const p1 =
-                  pageData.whychoosesection.paragraph1 ??
-                  "pageData.whyChooseSection.paragraph1 not written";
-                const p2 = pageData.whychoosesection.paragraph2 ?? "";
-                const full = `${p1}${p2 ? " " + p2 : ""}`;
-                const sentences = full.split(/(?<=[.!?])\s+/);
-                const preview = sentences.slice(0, 3).join(" ");
-                const rest = sentences.slice(3).join(" ");
-
-                return (
-                  <>
-                    {/* mobile accordion */}
-                    <details
-                      className="w-full md:hidden group text-left"
-                      role="group"
-                    >
-                      <summary className="cursor-pointer marker:hidden list-none text-left">
-                        <span>{preview}</span>
-                        {rest && (
-                          <>
-                            <span className="ml-1 text-blue-600 group-open:hidden">
-                              see more&nbsp;…
-                            </span>
-                            <span className="ml-1 text-blue-600 hidden group-open:inline">
-                              see less
-                            </span>
-                          </>
-                        )}
-                      </summary>
-                      {rest && <div className="mt-2 text-left">{rest}</div>}
-                    </details>
-
-                    {/* desktop – always expanded */}
-                    <div className="hidden md:block text-left">
-                      <p className="text-left">{p1}</p>
-                      {p2 && <p className="mt-2 text-left">{p2}</p>}
-                    </div>
-                  </>
-                );
-              })()}
-
-              {/* WHY-CHOOSE list with mobile toggle ---------------------------------- */}
-              {pageData.whychoosesection.list?.length ? (
-                <>
-                  {/* mobile accordion */}
-                  <details
-                    className="w-full md:hidden group mt-2 text-left"
-                    role="group"
-                  >
-                    <summary className="cursor-pointer marker:hidden list-none text-left">
-                      <div className="text-left">
-                        <strong>
-                          {pageData.whychoosesection.list[0].page}
-                        </strong>
-                        <span>
-                          {" "}
-                          - {pageData.whychoosesection.list[0].content}
-                        </span>
-                        <span className="ml-1 text-blue-600 group-open:hidden">
-                          see more&nbsp;…
-                        </span>
-                        <span className="ml-1 text-blue-600 hidden group-open:inline">
-                          see less
-                        </span>
-                      </div>
-                    </summary>
-
-                    <ul className="list-disc list-inside mt-2 space-y-2 text-left">
-                      {pageData.whychoosesection.list.slice(1).map((item) => (
-                        <li key={item.id} className="text-left">
-                          <strong>{item.page}</strong>
-                          <span> - {item.content}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-
-                  {/* desktop – always expanded */}
-                  <ul className="hidden md:block list-disc list-inside mt-2 space-y-2 text-left">
-                    {pageData.whychoosesection.list.map((item) => (
-                      <li key={item.id} className="text-left">
-                        <strong>{item.page}</strong>
-                        <span> - {item.content}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              ) : (
-                ""
-              )}
-            </div>
-
+            <WhyChooseSection pageData={pageData} />
             {/* SERVICES SECTION - No collapse */}
             <h2
               id="services"
