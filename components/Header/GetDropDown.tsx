@@ -139,7 +139,8 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
 
         setMobileExpandedCategories((prev) => {
           const next = new Set(prev);
-          next.has(item.id) ? next.delete(item.id) : next.add(item.id);
+          if (next.has(item.id)) next.delete(item.id);
+          else next.add(item.id);
           return next;
         });
 
@@ -209,7 +210,9 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
             return (
               <React.Fragment key={item.id}>
                 <li
-                  onMouseEnter={() => !isMobile && setActiveCategory(item.id)}
+                  onMouseEnter={() => {
+                    if (!isMobile) setActiveCategory(item.id);
+                  }}
                   role="none"
                 >
                   <Link
