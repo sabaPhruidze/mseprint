@@ -10,11 +10,14 @@ const GEO = {
   addressRegion: "Minneapolis",
 };
 
+const WRAP =
+  "w-full bg-black text-white px-[60px] py-5 flex flex-col items-center text-center lg:flex-row lg:justify-between lg:py-0 lg:h-[50px] lg:pl-[80px] lg:pr-[60px]";
+
 export default function FooterTop({ footerTopData }: Props) {
   const { first, second } = footerTopData;
 
   return (
-    <div className="w-full bg-black text-white px-[60px] py-5 flex flex-col items-center text-center lg:flex-row lg:justify-between lg:py-0 lg:h-[50px] lg:pl-[80px] lg:pr-[60px]">
+    <div className={WRAP}>
       <p className="font-bold text-lg m-0 lg:text-xl">{first}</p>
 
       {second?.length ? (

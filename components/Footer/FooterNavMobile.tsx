@@ -51,14 +51,13 @@ export default function FooterNavMobile({
                 id={`footer-sub-${cat.id}`}
                 className="mt-3 pl-4 border-l-2 border-gray-200 space-y-2"
               >
-                {subs.map((sub) => {
-                  const subHref = sub.path ? `/${sub.path}` : "/";
-                  return (
-                    <li key={sub.id} className="text-gray-700 hover:underline">
-                      <Link href={subHref}>{sub.title}</Link>
-                    </li>
-                  );
-                })}
+                {subs.map((sub) => (
+                  <li key={sub.id} className="text-gray-700 hover:underline">
+                    <Link href={sub.path ? `/${sub.path}` : "/"}>
+                      {sub.title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             ) : null}
           </section>
