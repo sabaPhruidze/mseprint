@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { PagePathTypes, ServicesPathTypes } from "../../types/commonTypes";
 import GetDropDown from "./GetDropDown";
 
@@ -36,12 +36,10 @@ export default function GetHeaderMenu({
   }, [measure]);
 
   const onProductsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // 1st tap/click opens dropdown; 2nd click follows the link
+    // 1st tap opens dropdown; 2nd tap navigates normally
     if (!open) {
       e.preventDefault();
       openDropdown();
-    } else {
-      closeDropdown();
     }
   };
 
@@ -70,8 +68,6 @@ export default function GetHeaderMenu({
               className="relative flex h-full items-center"
               onMouseEnter={isProducts ? openDropdown : undefined}
               onMouseLeave={isProducts ? closeDropdown : undefined}
-              onFocus={isProducts ? openDropdown : undefined}
-              onBlur={isProducts ? closeDropdown : undefined}
             >
               <Link
                 ref={isProducts ? linkRef : null}
