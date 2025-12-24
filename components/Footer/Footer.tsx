@@ -1,6 +1,7 @@
 import FooterTop from "./FooterTop";
 import FooterContent from "./FooterContent";
 import FooterBottom from "./FooterBottom";
+import FooterCTA from "./FooterCTA";
 import {
   footerBottomTypes,
   footerTopTypes,
@@ -27,6 +28,7 @@ export default function Footer({
   return (
     <footer role="contentinfo" aria-label="Site footer">
       {top ? <FooterTop footerTopData={top} /> : null}
+      <FooterCTA />
       {hasContent ? (
         <FooterContent footerContentData={footerContentData} />
       ) : null}
