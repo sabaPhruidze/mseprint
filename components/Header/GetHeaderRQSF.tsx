@@ -1,6 +1,6 @@
 import React, { FC } from "react";
-import { PagePathTypes } from "../../types/commonTypes";
 import Link from "next/link";
+import { PagePathTypes } from "../../types/commonTypes";
 
 interface GetRequestQuoteSendAFileProps {
   rqsafData: PagePathTypes[];
@@ -9,8 +9,7 @@ interface GetRequestQuoteSendAFileProps {
 const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
   return (
     <nav
-      className=" w-full h-[60px]  bg-[#3B0D6B]  flex items-center screen-size-13:justify-end justify-center screen-size-5:px-4 screen-size-4:px-2 px-0
-+  "
+      className="w-full h-[60px] bg-[#3B0D6B] flex items-center screen-size-13:justify-end justify-center screen-size-5:px-4 screen-size-4:px-2 px-0"
       role="navigation"
       aria-label="Request a Quote and Order Navigation"
     >
@@ -20,26 +19,12 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
           href={item.path || "/"}
           prefetch
           className="
-            text-white
-            border
-            border-white
-            rounded-lg
-            screen-size-4:px-4
-             screen-size-5:mx-2
-             mx-1
-            screen-size-5:py-2
-            py-3
-            px-2
-            no-underline
-            hover:bg-white
-            hover:text-black
-            hover:border-0
-            focus:scale-95
-            transition-all
-            duration-500
-            font-inter-extrabold
-            text-[12px]
-            screen-size-5:text-[18px]
+            text-white border border-white rounded-lg
+            screen-size-4:px-4 screen-size-5:mx-2 mx-1
+            screen-size-5:py-2 py-3 px-2
+            no-underline hover:bg-white hover:text-black hover:border-0
+            focus:scale-95 transition-all duration-500
+            font-inter-extrabold text-[12px] screen-size-5:text-[18px]
           "
           aria-label={`Navigate to ${item.page}`}
         >
@@ -47,31 +32,15 @@ const GetHeaderRQSF: FC<GetRequestQuoteSendAFileProps> = ({ rqsafData }) => {
         </Link>
       ))}
 
-      {/* Phone Call Button */}
       <a
         href="tel:7635428812"
         className="
-          text-white
-          border
-          border-white
-          rounded-lg
-          screen-size-4:px-4
-          screen-size-5:py-2
-          py-3
-          px-2
-           screen-size-5:mx-2
-          mx-1
-          no-underline
-          hover:bg-white
-          hover:text-black
-          hover:border-0
-          focus:scale-95
-          transition-all
-          duration-500
-          font-inter-extrabold
-           text-[12px]
-           
-            screen-size-5:text-[18px]
+          text-white border border-white rounded-lg
+          screen-size-4:px-4 screen-size-5:py-2 py-3 px-2
+          screen-size-5:mx-2 mx-1
+          no-underline hover:bg-white hover:text-black hover:border-0
+          focus:scale-95 transition-all duration-500
+          font-inter-extrabold text-[12px] screen-size-5:text-[18px]
         "
         aria-label="Call 763-542-8812"
       >

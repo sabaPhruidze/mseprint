@@ -340,7 +340,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
                               role="menuitem"
                               tabIndex={0}
                               title={`Navigate to ${sub.title}`}
-                              className="block px-3 py-2.5 text-sm text-gray-700 bg-white rounded-md border border-gray-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[44px] flex items-center"
+                              className="block px-3 py-2.5 text-sm text-gray-700 bg-white rounded-md border border-gray-200 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[44px] items-center"
                             >
                               <span className="truncate" title={sub.title}>
                                 {sub.title}
