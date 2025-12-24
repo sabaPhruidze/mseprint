@@ -1,9 +1,16 @@
 "use client";
 
-import { useState, useCallback, useMemo, useEffect, useRef } from "react";
+import {
+  useCallback,
+  useDeferredValue,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { Search, X } from "lucide-react";
 import SearchResults from "./SearchResults";
 import { ServicesPathTypes } from "../../types/commonTypes";
-import { Search, X } from "lucide-react";
 
 interface GetSearchEngineProps {
   searchEngineData: ServicesPathTypes[];
@@ -11,70 +18,38 @@ interface GetSearchEngineProps {
 
 const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<ServicesPathTypes[]>([]);
-  const [open, setOpen] = useState(false);
-  const listId = useMemo(() => "site-search-results", []);
+  const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const deferredQuery = useDeferredValue(query);
 
-  const runSearch = useCallback(
-    (q: string) => {
-      const needle = q.trim().toLowerCase();
-      if (!needle) {
-        setResults([]);
-        setOpen(false);
-        return;
-      }
-      const filtered = searchEngineData.filter((item) =>
-        item.title.toLowerCase().includes(needle)
-      );
-      setResults(filtered);
-      setOpen(filtered.length > 0);
-    },
-    [searchEngineData]
-  );
+  const results = useMemo(() => {
+    const needle = deferredQuery.trim().toLowerCase();
+    if (!needle) return [];
+    return searchEngineData.filter((x) =>
+      x.title.toLowerCase().includes(needle)
+    );
+  }, [deferredQuery, searchEngineData]);
 
-  const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      runSearch(query);
-    },
-    [runSearch, query]
-  );
-
-  const handleClear = useCallback(() => {
+  const clear = useCallback(() => {
     setQuery("");
-    setResults([]);
-    setOpen(false);
+    setIsOpen(false);
   }, []);
 
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const val = e.target.value;
-      setQuery(val);
-      runSearch(val);
-    },
-    [runSearch]
-  );
-
-  // Close results on click outside
   useEffect(() => {
     const onDocClick = (e: MouseEvent) => {
-      if (!wrapperRef.current?.contains(e.target as Node)) {
-        setOpen(false);
-      }
+      if (!wrapperRef.current?.contains(e.target as Node)) setIsOpen(false);
     };
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
-  // Clear/hide on Escape
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClear();
-    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && clear();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [handleClear]);
+  }, [clear]);
+
+  const showResults = isOpen && deferredQuery.trim() && results.length > 0;
 
   return (
     <div
@@ -83,7 +58,7 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
     >
       <form
         role="search"
-        onSubmit={handleSubmit}
+        onSubmit={(e) => e.preventDefault()}
         className="flex items-center border border-gray-300 rounded-md p-4 bg-white screen-size-23:h-16 h-14"
       >
         <label htmlFor="site-search" className="sr-only">
@@ -95,7 +70,11 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
           name="q"
           type="search"
           value={query}
-          onChange={handleChange}
+          onFocus={() => setIsOpen(true)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setIsOpen(true);
+          }}
           placeholder="Search…"
           className="w-full h-full outline-none text-black p-3 text-xl"
           autoComplete="off"
@@ -105,11 +84,10 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
           enterKeyHint="search"
         />
 
-        {/* SINGLE clear button with cursor-pointer */}
         {query && (
           <button
             type="button"
-            onClick={handleClear}
+            onClick={clear}
             className="p-3 mr-1 cursor-pointer"
             aria-label="Clear search"
             title="Clear"
@@ -128,11 +106,11 @@ const SearchEngine: React.FC<GetSearchEngineProps> = ({ searchEngineData }) => {
         </button>
       </form>
 
-      {open && results.length > 0 && (
+      {showResults && (
         <SearchResults
           results={results}
-          onReset={handleClear}
-          listId={listId}
+          onReset={clear}
+          listId="site-search-results"
         />
       )}
     </div>
