@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef, useEffect } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { PagePathTypes, ServicesPathTypes } from "../../types/commonTypes";
 import GetDropDown from "./GetDropDown";
 
@@ -14,34 +14,43 @@ export default function GetHeaderMenu({
   menuData,
   servicesData,
 }: GetHeaderMenuProps) {
-  const [hovered, setHovered] = useState(false);
+  const [open, setOpen] = useState(false);
   const [buttonWidth, setButtonWidth] = useState<number>(0);
-
-  // This ref is only for the "Products & Services" link
   const linkRef = useRef<HTMLAnchorElement | null>(null);
 
-  // Whenever we hover on the "Products & Services" link, recalc width
-  const handleMouseEnterProducts = () => {
-    setHovered(true);
-    if (linkRef.current) {
-      setButtonWidth(linkRef.current.offsetWidth);
+  const measure = useCallback(() => {
+    if (linkRef.current) setButtonWidth(linkRef.current.offsetWidth);
+  }, []);
+
+  const openDropdown = useCallback(() => {
+    setOpen(true);
+    measure();
+  }, [measure]);
+
+  const closeDropdown = useCallback(() => setOpen(false), []);
+
+  useEffect(() => {
+    const onResize = () => measure();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [measure]);
+
+  const onProductsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // 1st tap/click opens dropdown; 2nd click follows the link
+    if (!open) {
+      e.preventDefault();
+      openDropdown();
+    } else {
+      closeDropdown();
     }
   };
 
-  // If you wish to update width on window resize as well, you can do so:
-  useEffect(() => {
-    const handleResize = () => {
-      if (linkRef.current) {
-        setButtonWidth(linkRef.current.offsetWidth);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Called by the child dropdown whenever a link is clicked
-  const closeDropdown = () => {
-    setHovered(false);
+  const onProductsKeyDown = (e: React.KeyboardEvent<HTMLAnchorElement>) => {
+    if (e.key === "Escape") closeDropdown();
+    if ((e.key === "Enter" || e.key === " ") && !open) {
+      e.preventDefault();
+      openDropdown();
+    }
   };
 
   return (
@@ -50,60 +59,54 @@ export default function GetHeaderMenu({
       aria-label="Main navigation"
       className="relative h-full"
     >
-      <ul className="flex h-full items-center  screen-size-5:gap-6 gap-3">
+      <ul className="flex h-full items-center screen-size-5:gap-6 gap-3">
         {menuData.map((item) => {
           const isProducts = item.page === "Products & Services";
+          const dropdownId = "services-dropdown";
 
           return (
             <li
               key={item.id}
               className="relative flex h-full items-center"
-              onMouseEnter={isProducts ? handleMouseEnterProducts : undefined}
-              onMouseLeave={() => isProducts && setHovered(false)}
+              onMouseEnter={isProducts ? openDropdown : undefined}
+              onMouseLeave={isProducts ? closeDropdown : undefined}
+              onFocus={isProducts ? openDropdown : undefined}
+              onBlur={isProducts ? closeDropdown : undefined}
             >
               <Link
                 ref={isProducts ? linkRef : null}
                 href={item.path || "/"}
                 aria-label={`Go to ${item.page}`}
+                aria-haspopup={isProducts ? "menu" : undefined}
+                aria-expanded={isProducts ? open : undefined}
+                aria-controls={isProducts ? dropdownId : undefined}
+                onClick={isProducts ? onProductsClick : undefined}
+                onKeyDown={isProducts ? onProductsKeyDown : undefined}
                 className={`
-                  font-inter-extrabold
-                  font-bold
-                  screen-size-26:text-3xl
-                  screen-size-20:text-2xl
-                  screen-size-18:text-[26px]
-                  screen-size-15:text-[22px]
-                  screen-size-13.5:text-2xl
-                  screen-size-13:text-[22px]
-                  screen-size-5:text-2xl
-                  text-md
-                  flex
-                  h-full
-                  items-center
-                  screen-size-10:px-3
-                  screen-size-5:px-1
-                  px-0
-                  transition-all
-                  duration-700
-                  ${
-                    isProducts && hovered
-                      ? "bg-white text-black"
-                      : "hover:bg-white hover:text-black"
-                  }
+                  font-inter-extrabold font-bold
+                  screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-[26px]
+                  screen-size-15:text-[22px] screen-size-13.5:text-2xl screen-size-13:text-[22px]
+                  screen-size-5:text-2xl text-md
+                  flex h-full items-center
+                  screen-size-10:px-3 screen-size-5:px-1 px-0
+                  transition-all duration-700
+                  ${isProducts && open ? "bg-white text-black" : "hover:bg-white hover:text-black"}
                 `}
                 style={{
                   color:
-                    isProducts && hovered ? undefined : getMenuColor(item.page),
+                    isProducts && open ? undefined : getMenuColor(item.page),
                 }}
               >
                 {item.page}
               </Link>
 
-              {hovered && isProducts && (
+              {isProducts && open && (
                 <div className="absolute left-0 top-full z-50 flex bg-white shadow-xl rounded-md">
                   <GetDropDown
                     data={servicesData}
                     buttonWidth={buttonWidth || undefined}
                     onCloseDropdown={closeDropdown}
+                    dropdownId={dropdownId}
                   />
                 </div>
               )}
