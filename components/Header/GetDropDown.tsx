@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ServicesPathTypes } from "../../types/commonTypes";
 import GetDropDownLeftColumn from "./GetDropDownLeftColumn";
 import GetDropDownRightColumn from "./GetDropDownRightColumn";
@@ -27,14 +27,15 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
   ariaLabel = "Services navigation menu",
   dropdownId = "services-dropdown",
 }) => {
+  const router = useRouter();
+  const currentPath = usePathname();
+
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
-  const [isDropdownVisible, setIsDropdownVisible] = useState(true);
   const [mobileExpandedCategories, setMobileExpandedCategories] = useState<
     Set<number>
   >(new Set());
   const [isMobile, setIsMobile] = useState(false);
 
-  const currentPath = usePathname();
   const leftSideRef = useRef<HTMLUListElement>(null);
   const dropdownRef = useRef<HTMLElement>(null);
   const [leftSideHeight, setLeftSideHeight] = useState(0);
@@ -104,14 +105,12 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
   /* ------------------------ handlers ------------------------ */
 
   const handleMouseLeave = useCallback(() => {
-    if (!isMobile) {
-      setTimeout(() => setActiveCategory(null), 150);
-    }
+    if (!isMobile) setTimeout(() => setActiveCategory(null), 150);
   }, [isMobile]);
 
   const handleLinkClick = useCallback(() => {
+    // IMPORTANT: არ ვაუნმაუნთებთ dropdown-ს კლიკის წამში — უბრალოდ ვხურავთ
     setActiveCategory(null);
-    setIsDropdownVisible(false);
     setMobileExpandedCategories(new Set());
     onCloseDropdown?.();
   }, [onCloseDropdown]);
@@ -124,6 +123,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
       item: ServicesPathTypes
     ) => {
       const hasSub = rightItems.some((s) => s.parent_id === item.id);
+      const href = item.path?.startsWith("/") ? item.path : `/${item.path}`;
 
       if (isMobile && hasSub) {
         e.preventDefault();
@@ -132,10 +132,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         if (clickTimeoutRef.current[item.id]) {
           clearTimeout(clickTimeoutRef.current[item.id]);
           delete clickTimeoutRef.current[item.id];
-
-          window.location.href = item.path?.startsWith("/")
-            ? item.path
-            : `/${item.path}`;
+          router.push(href);
           handleLinkClick();
           return;
         }
@@ -155,9 +152,11 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         return;
       }
 
+      // Desktop ან mobile item without subs: ნავიგაცია ჩვეულებრივად (Link-ით) მოხდება,
+      // აქ მხოლოდ dropdown-ს ვხურავთ.
       handleLinkClick();
     },
-    [isMobile, rightItems, handleLinkClick]
+    [isMobile, rightItems, router, handleLinkClick]
   );
 
   const handleKeyDown = useCallback(
@@ -183,8 +182,6 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     return buttonWidth ? `${buttonWidth}px` : "18rem";
   };
 
-  if (!isDropdownVisible) return null;
-
   /* --------------------------- render --------------------------- */
 
   return (
@@ -197,7 +194,6 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
       role="navigation"
       style={{ maxHeight: "80vh" }}
     >
-      {/* LEFT COLUMN */}
       <div
         className="bg-white flex-shrink-0"
         style={{ width: getLeftColumnWidth() }}
@@ -216,7 +212,6 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         />
       </div>
 
-      {/* RIGHT COLUMN (desktop) */}
       {showRightColumn && activeItem && (
         <GetDropDownRightColumn
           activeItem={activeItem}
