@@ -5,23 +5,33 @@ export interface headerEffectiveTextTypes {
   text: string;
   circle?: string;
 }
-const GetHeaderEffectiveText = ({
+
+const TEXT_CLASS =
+  "font-inter-extrabold font-bold text-white items-center justify-center text-center " +
+  "text-2xl screen-size-26:text-3xl";
+
+export default function GetHeaderEffectiveText({
   effectiveTextData,
 }: {
   effectiveTextData: headerEffectiveTextTypes[];
-}) => {
+}) {
+  if (!effectiveTextData?.length) return null;
+
   return (
-    <div className="font-inter-extrabold hidden screen-size-20:flex text-white font-bold items-center justify-center text-center screen-size-26:text-3xl text-2xl">
+    <div
+      className={`hidden screen-size-20:flex ${TEXT_CLASS}`}
+      aria-label="Key messages"
+    >
       {effectiveTextData.map((item, index) => (
         <React.Fragment key={item.id}>
           <span className="skew-x-[-15deg] italic">{item.text}</span>
           {index < effectiveTextData.length - 1 && (
-            <span className="px-2 not-italic">{item.circle}</span>
+            <span className="px-2 not-italic" aria-hidden="true">
+              {item.circle}
+            </span>
           )}
         </React.Fragment>
       ))}
     </div>
   );
-};
-
-export default GetHeaderEffectiveText;
+}

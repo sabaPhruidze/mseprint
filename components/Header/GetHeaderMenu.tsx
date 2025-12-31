@@ -10,6 +10,12 @@ interface GetHeaderMenuProps {
   servicesData: ServicesPathTypes[];
 }
 
+const MENU_LINK_CLASS =
+  "font-inter-extrabold font-bold flex h-full items-center transition-all duration-700 " +
+  "text-md screen-size-5:text-2xl screen-size-13:text-[22px] screen-size-15:text-[22px] " +
+  "screen-size-18:text-[26px] screen-size-20:text-2xl screen-size-26:text-3xl " +
+  "px-0 screen-size-5:px-1 screen-size-10:px-3";
+
 export default function GetHeaderMenu({
   menuData,
   servicesData,
@@ -36,7 +42,6 @@ export default function GetHeaderMenu({
   }, [measure]);
 
   const onProductsClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // 1st tap opens dropdown; 2nd tap navigates normally
     if (!open) {
       e.preventDefault();
       openDropdown();
@@ -61,6 +66,7 @@ export default function GetHeaderMenu({
         {menuData.map((item) => {
           const isProducts = item.page === "Products & Services";
           const dropdownId = "services-dropdown";
+          const isActive = isProducts && open;
 
           return (
             <li
@@ -78,25 +84,19 @@ export default function GetHeaderMenu({
                 aria-controls={isProducts ? dropdownId : undefined}
                 onClick={isProducts ? onProductsClick : undefined}
                 onKeyDown={isProducts ? onProductsKeyDown : undefined}
-                className={`
-                  font-inter-extrabold font-bold
-                  screen-size-26:text-3xl screen-size-20:text-2xl screen-size-18:text-[26px]
-                  screen-size-15:text-[22px] screen-size-13.5:text-2xl screen-size-13:text-[22px]
-                  screen-size-5:text-2xl text-md
-                  flex h-full items-center
-                  screen-size-10:px-3 screen-size-5:px-1 px-0
-                  transition-all duration-700
-                  ${isProducts && open ? "bg-white text-black" : "hover:bg-white hover:text-black"}
-                `}
+                className={`${MENU_LINK_CLASS} ${
+                  isActive
+                    ? "bg-white text-black"
+                    : "hover:bg-white hover:text-black"
+                }`}
                 style={{
-                  color:
-                    isProducts && open ? undefined : getMenuColor(item.page),
+                  color: isActive ? undefined : getMenuColor(item.page),
                 }}
               >
                 {item.page}
               </Link>
 
-              {isProducts && open && (
+              {isActive && (
                 <div className="absolute left-0 top-full z-50 flex bg-white shadow-xl rounded-md">
                   <GetDropDown
                     data={servicesData}
