@@ -12,6 +12,11 @@ import { ServicesPathTypes } from "../../types/commonTypes";
 import GetDropDownLeftColumn from "./GetDropDownLeftColumn";
 import GetDropDownRightColumn from "./GetDropDownRightColumn";
 
+import useIsMobile from "../hooks/useIsMobile";
+import useOutsideClick from "../hooks/useOutsideClick";
+import useDropdownData from "../hooks/useDropdownData";
+import useElementHeight from "../hooks/useElementHeight";
+
 interface GetDropDownProps {
   data: ServicesPathTypes[];
   buttonWidth?: number;
@@ -29,89 +34,53 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
 }) => {
   const router = useRouter();
   const currentPath = usePathname();
+  const isMobile = useIsMobile(768);
 
   const [activeCategory, setActiveCategory] = useState<number | null>(null);
-  const [mobileExpandedCategories, setMobileExpandedCategories] = useState<
-    Set<number>
-  >(new Set());
-  const [isMobile, setIsMobile] = useState(false);
+  const [expanded, setExpanded] = useState<Set<number>>(() => new Set());
 
-  const leftSideRef = useRef<HTMLUListElement>(null);
-  const dropdownRef = useRef<HTMLElement>(null);
-  const [leftSideHeight, setLeftSideHeight] = useState(0);
+  const leftSideRef = useRef<HTMLUListElement | null>(null);
+  const dropdownRef = useRef<HTMLElement | null>(null);
   const clickTimeoutRef = useRef<Record<number, ReturnType<typeof setTimeout>>>(
     {}
   );
 
-  /* --------------------------- data --------------------------- */
+  const {
+    leftItems,
+    rightItems,
+    activeItem,
+    filteredRightItems,
+    showRightColumn,
+  } = useDropdownData(data, activeCategory, isMobile);
 
-  const leftItems = useMemo(() => data.filter((x) => !x.parent_id), [data]);
-  const rightItems = useMemo(() => data.filter((x) => x.parent_id), [data]);
+  const leftSideHeight = useElementHeight(leftSideRef, [leftItems]);
 
-  const filteredRightItems = useMemo(() => {
-    return rightItems
-      .filter((x) => x.parent_id === activeCategory)
-      .sort((a, b) => a.title.localeCompare(b.title));
-  }, [rightItems, activeCategory]);
+  const closeAll = useCallback(() => {
+    setActiveCategory(null);
+    setExpanded(new Set());
+    onCloseDropdown?.();
+  }, [onCloseDropdown]);
 
-  const activeItem = useMemo(
-    () => leftItems.find((x) => x.id === activeCategory) || null,
-    [leftItems, activeCategory]
-  );
-
-  const showRightColumn = useMemo(() => {
-    if (!activeItem || isMobile) return false;
-    return filteredRightItems.length > 0;
-  }, [activeItem, filteredRightItems, isMobile]);
-
-  /* -------------------------- lifecycle -------------------------- */
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  useOutsideClick(dropdownRef, closeAll, true);
 
   useEffect(() => {
     setActiveCategory(null);
-    setMobileExpandedCategories(new Set());
+    setExpanded(new Set());
   }, [currentPath]);
-
-  useEffect(() => {
-    if (leftSideRef.current)
-      setLeftSideHeight(leftSideRef.current.offsetHeight);
-  }, [leftItems]);
 
   useEffect(() => {
     const timeouts = clickTimeoutRef.current;
     return () => Object.values(timeouts).forEach(clearTimeout);
   }, []);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setActiveCategory(null);
-        onCloseDropdown?.();
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [onCloseDropdown]);
-
-  /* ------------------------ handlers ------------------------ */
-
   const handleMouseLeave = useCallback(() => {
     if (!isMobile) setTimeout(() => setActiveCategory(null), 150);
   }, [isMobile]);
 
   const handleLinkClick = useCallback(() => {
-    // IMPORTANT: არ ვაუნმაუნთებთ dropdown-ს კლიკის წამში — უბრალოდ ვხურავთ
+    // IMPORTANT: არ ვაუნმაუნთებთ dropdown-ს კლიკის წამში — მხოლოდ ვხურავთ.
     setActiveCategory(null);
-    setMobileExpandedCategories(new Set());
+    setExpanded(new Set());
     onCloseDropdown?.();
   }, [onCloseDropdown]);
 
@@ -123,7 +92,7 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
       item: ServicesPathTypes
     ) => {
       const hasSub = rightItems.some((s) => s.parent_id === item.id);
-      const href = item.path?.startsWith("/") ? item.path : `/${item.path}`;
+      const href = item.path.startsWith("/") ? item.path : `/${item.path}`;
 
       if (isMobile && hasSub) {
         e.preventDefault();
@@ -137,8 +106,8 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
           return;
         }
 
-        // expand/collapse
-        setMobileExpandedCategories((prev) => {
+        // expand / collapse
+        setExpanded((prev) => {
           const next = new Set(prev);
           if (next.has(item.id)) next.delete(item.id);
           else next.add(item.id);
@@ -152,8 +121,8 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         return;
       }
 
-      // Desktop ან mobile item without subs: ნავიგაცია ჩვეულებრივად (Link-ით) მოხდება,
-      // აქ მხოლოდ dropdown-ს ვხურავთ.
+      // desktop ან mobile item without subs: Link თვითონ გადაიყვანს,
+      // ჩვენ უბრალოდ dropdown-ს ვხურავთ.
       handleLinkClick();
     },
     [isMobile, rightItems, router, handleLinkClick]
@@ -167,22 +136,15 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
         else handleCategoryClick(e, item);
         return;
       }
-      if (e.key === "Escape") {
-        setActiveCategory(null);
-        onCloseDropdown?.();
-      }
+      if (e.key === "Escape") closeAll();
     },
-    [isMobile, onCloseDropdown, handleCategoryClick]
+    [isMobile, handleCategoryClick, closeAll]
   );
 
-  /* --------------------- visual helpers --------------------- */
-
-  const getLeftColumnWidth = () => {
+  const leftColumnWidth = useMemo(() => {
     if (isMobile) return showRightColumn ? "16rem" : "100%";
     return buttonWidth ? `${buttonWidth}px` : "18rem";
-  };
-
-  /* --------------------------- render --------------------------- */
+  }, [isMobile, showRightColumn, buttonWidth]);
 
   return (
     <nav
@@ -196,14 +158,14 @@ const GetDropDown: React.FC<GetDropDownProps> = ({
     >
       <div
         className="bg-white flex-shrink-0"
-        style={{ width: getLeftColumnWidth() }}
+        style={{ width: leftColumnWidth }}
       >
         <GetDropDownLeftColumn
           leftItems={leftItems}
           rightItems={rightItems}
           isMobile={isMobile}
           activeCategory={activeCategory}
-          expanded={mobileExpandedCategories}
+          expanded={expanded}
           leftSideRef={leftSideRef}
           setActiveCategory={setActiveCategory}
           onCategoryClick={handleCategoryClick}
