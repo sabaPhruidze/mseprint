@@ -7,19 +7,30 @@ type Props = {
   name?: string;
 };
 
+const uniqBy = <T,>(arr: T[], keyFn: (x: T) => string) => {
+  const m = new Map<string, T>();
+  for (const x of arr) m.set(keyFn(x), x);
+  return Array.from(m.values());
+};
+
 export default function SiteNavigationSchema({
   servicesData,
   baseUrl = "https://www.mseprinting.com",
   name = "MSE Printing site navigation",
 }: Props) {
-  const parents = servicesData
+  const cleaned = uniqBy(
+    servicesData.filter((x) => String(x?.path ?? "").trim().length > 0),
+    (x) => `${x.title}|${x.path}`
+  );
+
+  const parents = cleaned
     .filter((x) => !x.parent_id)
     .sort((a, b) => a.title.localeCompare(b.title));
 
-  const children = servicesData.filter((x) => x.parent_id);
+  const children = cleaned.filter((x) => x.parent_id);
 
   const hasPart = parents.map((p) => {
-    const sub = children
+    const subs = children
       .filter((c) => c.parent_id === p.id)
       .sort((a, b) => a.title.localeCompare(b.title))
       .map((c) => ({
@@ -32,7 +43,7 @@ export default function SiteNavigationSchema({
       "@type": "SiteNavigationElement",
       name: p.title,
       url: absUrl(baseUrl, normalizeHref(p.path)),
-      ...(sub.length ? { hasPart: sub } : {}),
+      ...(subs.length ? { hasPart: subs } : {}),
     };
   });
 

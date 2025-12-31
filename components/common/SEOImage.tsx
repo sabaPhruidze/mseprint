@@ -42,7 +42,7 @@ const SEOImage: React.FC<ComponentProps> = ({
   fetchPriority,
   decoding,
   loading,
-  withJsonLd = true,
+  withJsonLd = false,
   placeholder,
   blurDataURL,
   quality,
