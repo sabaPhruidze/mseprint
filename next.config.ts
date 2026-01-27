@@ -43,7 +43,6 @@ const nextConfig: NextConfig = {
               "style-src 'self' 'unsafe-inline' https:",
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
               "connect-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net",
-              "upgrade-insecure-requests",
               "report-to csp-endpoint",
             ].join("; "),
           },
