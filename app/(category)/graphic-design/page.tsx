@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Metadata, Viewport } from "next";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
 import PageStructure from "components/common/PageStructure";
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     url: "https://www.mseprinting.com/graphic-design",
     siteName: "MSE Printing",
     locale: "en_US",
-    type: "article",
+    type: "website", // ✅ was "article"
     images: [
       {
         url: "https://www.mseprinting.com/images/graphic-design-images/additional/graphic_design_right.webp",
@@ -100,7 +101,6 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  // Valid values per Next types: 'light', 'dark', 'only light', 'only dark' or a space-separated list.
   colorScheme: "light dark",
 };
 
@@ -131,7 +131,6 @@ const ServiceSchema = () => {
         addressCountry: "US",
       },
       sameAs: [
-        // Add/keep only profiles you actually own:
         "https://www.facebook.com/mseprinting",
         "https://www.instagram.com/mseprinting",
         "https://www.linkedin.com/company/mse-printing",
@@ -194,14 +193,57 @@ const ServiceSchema = () => {
 const GraphicDesign = async () => {
   const data = await getCategoryPagesData("/graphic-design");
   const pageData = data.GraphicDesignPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
-    "graphic-design", // must match the DB `path`
+    "graphic-design",
     footerContentData
   );
-
   if (!pageData) {
-    return <div>Data not available.</div>;
+    return (
+      <>
+        <ServiceSchema />
+        <main className="max-w-6xl mx-auto px-4 py-10">
+          <h1 className="text-3xl sm:text-4xl font-bold">
+            Graphic Design in Minneapolis
+          </h1>
+
+          <p className="mt-4 text-gray-700 dark:text-gray-300">
+            MSE Printing provides professional graphic design for branding,
+            print materials, and marketing campaigns. From logos to brochures,
+            we help your business look consistent and credible across every
+            touchpoint.
+          </p>
+
+          <div className="mt-6 rounded-2xl border border-gray-200 dark:border-gray-800 p-5 bg-white dark:bg-gray-950/30">
+            <h2 className="text-xl font-semibold">
+              Popular design requests
+            </h2>
+            <ul className="mt-3 list-disc pl-5 text-gray-700 dark:text-gray-300 space-y-1">
+              <li>Logo & brand identity</li>
+              <li>Brochures, flyers, rack cards</li>
+              <li>Business cards & stationery</li>
+              <li>Trade show graphics & signage layouts</li>
+            </ul>
+          </div>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/request-quote"
+              className="px-4 py-2 rounded-xl bg-black text-white hover:opacity-90"
+            >
+              Request a Quote
+            </Link>
+            <Link
+              href="/contact-us"
+              className="px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </main>
+      </>
+    );
   }
 
   return (
