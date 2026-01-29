@@ -1,5 +1,4 @@
 // app/marketing-services/video-production/page.tsx
-import React from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
@@ -9,17 +8,34 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const revalidate = 86400;
 
-/* ───────── SEO & Social Metadata (Fix 2) ───────── */
+const BASE_URL = "https://www.mseprinting.com";
+const PAGE_PATH = "/marketing-services/video-production";
+const PAGE_URL = `${BASE_URL}${PAGE_PATH}`;
+const OG_IMAGE_MAIN = `${BASE_URL}/images/marketing-services-images/additional/video_production_right.webp`;
+const OG_IMAGE_SAMPLE = `${BASE_URL}/images/marketing-services-images/additional/video_production_sample.webp`;
+
+/* ───────── SEO & Social Metadata ───────── */
 export const metadata: Metadata = {
   title: "Video Production in Minneapolis | MSE Printing",
   description:
     "Engage your audience with high-quality video content tailored to your brand and message. Scriptwriting, filming, editing, and animation for Minneapolis & nationwide.",
+  keywords: [
+    "video production Minneapolis",
+    "business video production",
+    "commercial video production",
+    "promotional video production",
+    "corporate video services",
+    "scriptwriting and storyboarding",
+    "video filming and editing",
+    "motion graphics animation",
+    "marketing video content",
+    "MSE Printing video production",
+  ],
   applicationName: "MSE Printing",
   category: "Video Production",
-  metadataBase: new URL("https://www.mseprinting.com"),
+  metadataBase: new URL(BASE_URL),
   alternates: {
-    canonical:
-      "https://www.mseprinting.com/marketing-services/video-production",
+    canonical: PAGE_URL,
   },
   robots: {
     index: true,
@@ -33,24 +49,23 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // Site verification & LocalBusiness/geo go in app/layout.tsx (site-wide), not per page.
   openGraph: {
     title: "Video Production in Minneapolis | MSE Printing",
     description:
       "From concept to final cut, our video production services help you tell your story and drive results through compelling visuals.",
-    url: "https://www.mseprinting.com/marketing-services/video-production",
+    url: PAGE_URL,
     siteName: "MSE Printing",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/marketing-services-images/additional/video_production_right.webp",
+        url: OG_IMAGE_MAIN,
         width: 1200,
         height: 630,
         alt: "Professional video production services by MSE Printing in Minneapolis",
       },
       {
-        url: "https://www.mseprinting.com/images/marketing-services-images/additional/video_production_sample.webp",
+        url: OG_IMAGE_SAMPLE,
         width: 800,
         height: 600,
         alt: "Branded video content sample produced by MSE Printing, Minnesota",
@@ -66,13 +81,27 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/marketing-services-images/additional/video_production_right.webp",
+        url: OG_IMAGE_MAIN,
         alt: "Video production for business by MSE Printing, Minneapolis",
       },
     ],
   },
+  other: {
+    "geo.region": "US-MN",
+    "geo.placename": "Minneapolis",
+    "geo.position": "45.0230;-93.2790",
+    ICBM: "45.0230, -93.2790",
+    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
+    "business:contact_data:locality": "Minneapolis",
+    "business:contact_data:region": "MN",
+    "business:contact_data:postal_code": "55412",
+    "business:contact_data:country_name": "USA",
+    "business:contact_data:phone_number": "763-542-8812",
+    "og:email": "info@mseprinting.com",
+    "og:phone_number": "763-542-8812",
+  },
   icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
+  authors: [{ name: "MSE Printing", url: BASE_URL }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
@@ -91,16 +120,15 @@ const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id":
-      "https://www.mseprinting.com/marketing-services/video-production#service",
+    "@id": `${PAGE_URL}#service`,
     name: "Video Production",
     description:
       "Professional video production by MSE Printing. Scriptwriting, filming, editing, and animation services for businesses in Minneapolis and nationwide.",
     provider: {
       "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+      "@id": `${BASE_URL}/#business`,
       name: "MSE Printing",
-      url: "https://www.mseprinting.com",
+      url: BASE_URL,
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
       address: {
@@ -125,7 +153,7 @@ const ServiceSchema = () => {
       itemListElement: [
         {
           "@type": "Offer",
-          url: "https://www.mseprinting.com/marketing-services/video-production#scriptwriting",
+          url: `${PAGE_URL}#scriptwriting`,
           itemOffered: {
             "@type": "Service",
             name: "Scriptwriting & Storyboarding",
@@ -135,7 +163,7 @@ const ServiceSchema = () => {
         },
         {
           "@type": "Offer",
-          url: "https://www.mseprinting.com/marketing-services/video-production#filming",
+          url: `${PAGE_URL}#filming`,
           itemOffered: {
             "@type": "Service",
             name: "Filming & Production",
@@ -145,7 +173,7 @@ const ServiceSchema = () => {
         },
         {
           "@type": "Offer",
-          url: "https://www.mseprinting.com/marketing-services/video-production#editing",
+          url: `${PAGE_URL}#editing`,
           itemOffered: {
             "@type": "Service",
             name: "Video Editing & Animation",
@@ -157,7 +185,7 @@ const ServiceSchema = () => {
     },
     offers: {
       "@type": "Offer",
-      url: "https://www.mseprinting.com/marketing-services/video-production",
+      url: PAGE_URL,
       availability: "https://schema.org/InStock",
       itemOffered: { "@type": "Service", name: "Video Production" },
     },
@@ -173,9 +201,7 @@ const ServiceSchema = () => {
 
 /* ───────── Main Page Component ───────── */
 export default async function VideoProduction() {
-  const data = await getCategoryPagesData(
-    "/marketing-services/video-production"
-  );
+  const data = await getCategoryPagesData(PAGE_PATH);
   const pageData = data.VideoProductionPageData?.[0];
 
   const { footerContentData } = await getFooterData();
@@ -184,10 +210,7 @@ export default async function VideoProduction() {
     footerContentData
   );
 
-  if (!pageData) {
-    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
-    notFound();
-  }
+  if (!pageData) notFound();
 
   return (
     <>
