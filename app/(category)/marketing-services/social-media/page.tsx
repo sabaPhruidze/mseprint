@@ -1,5 +1,4 @@
 // app/marketing-services/social-media/page.tsx
-import React from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
@@ -9,16 +8,33 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const revalidate = 86400;
 
-/* ───────── SEO & Social Metadata (lean) ───────── */
+const BASE_URL = "https://www.mseprinting.com";
+const PAGE_PATH = "/marketing-services/social-media";
+const PAGE_URL = `${BASE_URL}${PAGE_PATH}`;
+const OG_IMAGE = `${BASE_URL}/images/marketing-services-images/additional/social_media_right.webp`;
+
+/* ───────── SEO & Social Metadata ───────── */
 export const metadata: Metadata = {
   title: "Social Media Marketing in Minneapolis | MSE Printing",
   description:
     "Boost your online presence with expert social media marketing and management from MSE Printing. Content, ads, and community growth for Minneapolis & nationwide.",
+  keywords: [
+    "social media marketing Minneapolis",
+    "social media management Minneapolis",
+    "content creation services",
+    "social media advertising",
+    "Facebook Instagram marketing",
+    "LinkedIn marketing services",
+    "community management",
+    "digital marketing Minneapolis",
+    "brand awareness campaigns",
+    "MSE Printing social media",
+  ],
   applicationName: "MSE Printing",
   category: "Social Media Marketing",
-  metadataBase: new URL("https://www.mseprinting.com"),
+  metadataBase: new URL(BASE_URL),
   alternates: {
-    canonical: "https://www.mseprinting.com/marketing-services/social-media",
+    canonical: PAGE_URL,
   },
   robots: {
     index: true,
@@ -32,18 +48,17 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
   openGraph: {
     title: "Social Media Marketing in Minneapolis | MSE Printing",
     description:
       "From content creation to ad campaigns, we help your business grow with strategic social media solutions tailored for success.",
-    url: "https://www.mseprinting.com/marketing-services/social-media",
+    url: PAGE_URL,
     siteName: "MSE Printing",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://www.mseprinting.com/images/marketing-services-images/additional/social_media_right.webp",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Social media marketing and management by MSE Printing in Minneapolis",
@@ -59,13 +74,27 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        url: "https://www.mseprinting.com/images/marketing-services-images/additional/social_media_right.webp",
+        url: OG_IMAGE,
         alt: "Social media management services by MSE Printing, Minneapolis",
       },
     ],
   },
+  other: {
+    "geo.region": "US-MN",
+    "geo.placename": "Minneapolis",
+    "geo.position": "45.0230;-93.2790",
+    ICBM: "45.0230, -93.2790",
+    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
+    "business:contact_data:locality": "Minneapolis",
+    "business:contact_data:region": "MN",
+    "business:contact_data:postal_code": "55412",
+    "business:contact_data:country_name": "USA",
+    "business:contact_data:phone_number": "763-542-8812",
+    "og:email": "info@mseprinting.com",
+    "og:phone_number": "763-542-8812",
+  },
   icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
+  authors: [{ name: "MSE Printing", url: BASE_URL }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
@@ -84,16 +113,15 @@ const ServiceSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id":
-      "https://www.mseprinting.com/marketing-services/social-media#service",
+    "@id": `${PAGE_URL}#service`,
     name: "Social Media Marketing & Management",
     description:
       "Expert social media marketing and management services by MSE Printing, including content creation, ad campaigns, and audience engagement for Minneapolis businesses and beyond.",
     provider: {
       "@type": "LocalBusiness",
-      "@id": "https://www.mseprinting.com/#business",
+      "@id": `${BASE_URL}/#business`,
       name: "MSE Printing",
-      url: "https://www.mseprinting.com",
+      url: BASE_URL,
       telephone: "763-542-8812",
       email: "info@mseprinting.com",
       address: {
@@ -118,7 +146,7 @@ const ServiceSchema = () => {
       itemListElement: [
         {
           "@type": "Offer",
-          url: "https://www.mseprinting.com/marketing-services/social-media#content-creation",
+          url: `${PAGE_URL}#content-creation`,
           itemOffered: {
             "@type": "Service",
             name: "Content Creation",
@@ -128,7 +156,7 @@ const ServiceSchema = () => {
         },
         {
           "@type": "Offer",
-          url: "https://www.mseprinting.com/marketing-services/social-media#ad-campaigns",
+          url: `${PAGE_URL}#ad-campaigns`,
           itemOffered: {
             "@type": "Service",
             name: "Social Media Advertising",
@@ -138,7 +166,7 @@ const ServiceSchema = () => {
         },
         {
           "@type": "Offer",
-          url: "https://www.mseprinting.com/marketing-services/social-media#community-management",
+          url: `${PAGE_URL}#community-management`,
           itemOffered: {
             "@type": "Service",
             name: "Community Management",
@@ -150,7 +178,7 @@ const ServiceSchema = () => {
     },
     offers: {
       "@type": "Offer",
-      url: "https://www.mseprinting.com/marketing-services/social-media",
+      url: PAGE_URL,
       availability: "https://schema.org/InStock",
       itemOffered: {
         "@type": "Service",
@@ -169,18 +197,16 @@ const ServiceSchema = () => {
 
 /* ───────── Main Page Component ───────── */
 export default async function SocialMedia() {
-  const data = await getCategoryPagesData("/marketing-services/social-media");
+  const data = await getCategoryPagesData(PAGE_PATH);
   const pageData = data.SocialMediaPageData?.[0];
+
   const { footerContentData } = await getFooterData();
   const breadcrumbs = buildServiceBreadcrumbs(
     "marketing-services/social-media",
     footerContentData
   );
 
-  if (!pageData) {
-    // Avoid thin 200 → real 404 prevents soft-404
-    notFound();
-  }
+  if (!pageData) notFound();
 
   return (
     <>
