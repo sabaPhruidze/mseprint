@@ -1,18 +1,32 @@
-import React from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { getBlogPagesData } from "db/getBlogPagesData";
 import PageStructure from "components/common/PageStructure";
+
+const BASE_URL = "https://www.mseprinting.com";
+const PAGE_PATH = "/blog/notepad-printing-services";
+const PAGE_URL = `${BASE_URL}${PAGE_PATH}`;
+const OG_IMAGE = `${BASE_URL}/images/blog/pages/additional/notepad-printing-services.webp`;
 
 /* ─────────────── SEO METADATA ─────────────── */
 export const metadata: Metadata = {
   title: "Custom Notepad Printing Guide — in Minneapolis | MSE Printing",
   description:
     "A practical guide to custom notepad printing: pad types (glue/tear, spiral, sticky), sheet counts, paper weights, and branding tips from our Minneapolis production team.",
-  metadataBase: new URL("https://www.mseprinting.com"),
-  alternates: {
-    canonical: "https://www.mseprinting.com/blog/notepad-printing-services",
-  },
+  keywords: [
+    "notepad printing Minneapolis",
+    "custom notepad printing",
+    "branded notepads",
+    "sticky note printing",
+    "legal pad printing",
+    "glue bound notepads",
+    "spiral notepad printing",
+    "paper weights for notepads",
+    "notepad design and printing",
+    "MSE Printing notepad guide",
+  ],
+  metadataBase: new URL(BASE_URL),
+  alternates: { canonical: PAGE_URL },
   robots: {
     index: true,
     follow: true,
@@ -26,8 +40,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "article", // important: blog article, not website
-    url: "https://www.mseprinting.com/blog/notepad-printing-services",
+    type: "article",
+    url: PAGE_URL,
     siteName: "MSE Printing",
     title: "Custom Notepad Printing Guide — in Minneapolis | MSE Printing",
     description:
@@ -35,7 +49,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Examples of branded notepads, sticky notes, and legal pads",
@@ -47,15 +61,16 @@ export const metadata: Metadata = {
     title: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
     description:
       "Binding styles, sheet counts, paper choices, and file prep for brand-ready notepads printed in Minneapolis.",
+    site: "@MSEPrinting",
+    creator: "@MSEPrinting",
     images: [
-      "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
+      {
+        url: OG_IMAGE,
+        alt: "Notepad printing guide cover image",
+      },
     ],
   },
-  icons: {
-    icon: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
-  // Removed: keywords, page-level verification, and LocalBusiness/geo meta (keep those site-wide or on the LocalBusiness page)
+  icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
 };
 
 /* ─────────────── VIEWPORT COLOR MODE ─────────────── */
@@ -64,55 +79,65 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  colorScheme: "normal",
+  colorScheme: "light dark",
 };
 
-function StructuredData({ hasVisibleFAQ = false }) {
+/* ─────────────── STRUCTURED DATA / SCHEMA.ORG ─────────────── */
+function StructuredData({ hasVisibleFAQ = false }: { hasVisibleFAQ?: boolean }) {
+  const articleId = `${PAGE_URL}#article`;
+  const breadcrumbsId = `${PAGE_URL}#breadcrumbs`;
+  const websiteId = `${BASE_URL}/#website`;
+  const businessId = `${BASE_URL}/#business`;
+
   const graph: Record<string, unknown>[] = [
     {
       "@type": "Article",
-      "@id":
-        "https://www.mseprinting.com/blog/notepad-printing-services#article",
-      headline:
-        "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
-      mainEntityOfPage: {
-        "@type": "WebPage",
-        "@id": "https://www.mseprinting.com/blog/notepad-printing-services",
-      },
+      "@id": articleId,
+      headline: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
+      mainEntityOfPage: { "@type": "WebPage", "@id": PAGE_URL },
       datePublished: "2025-07-15",
-      dateModified: "2025-09-04", // keep this a stable YYYY-MM-DD string
+      dateModified: "2025-09-04",
       inLanguage: "en-US",
-      author: { "@type": "Organization", name: "MSE Printing" },
-      publisher: { "@type": "Organization", name: "MSE Printing" },
-      image: [
-        "https://www.mseprinting.com/images/blog/pages/additional/notepad-printing-services.webp",
-      ],
+      image: [OG_IMAGE],
+      isPartOf: { "@type": "WebSite", "@id": websiteId },
+      author: { "@type": "Organization", name: "MSE Printing", url: BASE_URL },
+      publisher: {
+        "@type": "Organization",
+        name: "MSE Printing",
+        url: BASE_URL,
+        logo: { "@type": "ImageObject", url: `${BASE_URL}/favicon.ico` },
+      },
     },
     {
       "@type": "BreadcrumbList",
-      "@id":
-        "https://www.mseprinting.com/blog/notepad-printing-services#breadcrumbs",
+      "@id": breadcrumbsId,
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Blog",
-          item: "https://www.mseprinting.com/blog",
-        },
+        { "@type": "ListItem", position: 1, name: "Blog", item: `${BASE_URL}/blog` },
         {
           "@type": "ListItem",
           position: 2,
           name: "Custom Notepad Printing Guide — Pads, Sticky Notes & Legal Pads",
-          item: "https://www.mseprinting.com/blog/notepad-printing-services",
+          item: PAGE_URL,
         },
       ],
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${PAGE_URL}#webpage`,
+      url: PAGE_URL,
+      name: "Custom Notepad Printing Guide — in Minneapolis | MSE Printing",
+      isPartOf: { "@type": "WebSite", "@id": websiteId },
+      about: { "@type": "LocalBusiness", "@id": businessId },
+      breadcrumb: { "@id": breadcrumbsId },
+      primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE },
+      inLanguage: "en-US",
     },
   ];
 
   if (hasVisibleFAQ) {
     graph.push({
       "@type": "FAQPage",
-      "@id": "https://www.mseprinting.com/blog/notepad-printing-services#faq",
+      "@id": `${PAGE_URL}#faq`,
       inLanguage: "en-US",
       mainEntity: [
         {
@@ -139,22 +164,18 @@ function StructuredData({ hasVisibleFAQ = false }) {
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@graph": graph,
-        }),
+        __html: JSON.stringify({ "@context": "https://schema.org", "@graph": graph }),
       }}
     />
   );
 }
 
 /* ─────────────── MAIN PAGE COMPONENT ─────────────── */
-const NotepadPrintingServices = async () => {
-  const data = await getBlogPagesData("/blog/notepad-printing-services");
+export default async function NotepadPrintingServices() {
+  const data = await getBlogPagesData(PAGE_PATH);
   const pageData = data?.BlogNotepadPrintingServicesPageData?.[0];
 
-  // Important: return 404 when no content to avoid thin 200 / soft-404
-  if (!pageData) return notFound();
+  if (!pageData) notFound();
 
   return (
     <>
@@ -171,6 +192,4 @@ const NotepadPrintingServices = async () => {
       />
     </>
   );
-};
-
-export default NotepadPrintingServices;
+}
