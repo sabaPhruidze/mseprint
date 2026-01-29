@@ -1,5 +1,4 @@
 // app/online-ordering-portals/page.tsx
-import React from "react";
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { getCategoryPagesData } from "db/getCategoryPagesData";
@@ -9,16 +8,33 @@ import { buildServiceBreadcrumbs } from "lib/breadcrumbs";
 
 export const revalidate = 86400;
 
+const BASE_URL = "https://www.mseprinting.com";
+const PAGE_PATH = "/online-ordering-portals";
+const PAGE_URL = `${BASE_URL}${PAGE_PATH}`;
+const OG_IMAGE = `${BASE_URL}/images/home-images/online_ordering.webp`;
+
 /* ───────── SEO & Social Metadata ───────── */
 export const metadata: Metadata = {
   title: "Online Ordering Portals in Minneapolis | MSE Printing",
   description:
     "Streamline printing and marketing with custom online ordering portals from MSE Printing. Simplify ordering, boost productivity, and keep brand consistency in Minneapolis & nationwide.",
+  keywords: [
+    "online ordering portals Minneapolis",
+    "online ordering portal printing",
+    "web to print portal",
+    "custom ordering portal",
+    "branded ordering portal",
+    "marketing materials ordering portal",
+    "print procurement portal",
+    "online print ordering system",
+    "MSE Printing online ordering",
+    "Minneapolis printing portal",
+  ],
   applicationName: "MSE Printing",
   category: "Online Ordering Portals",
-  metadataBase: new URL("https://www.mseprinting.com"),
+  metadataBase: new URL(BASE_URL),
   alternates: {
-    canonical: "https://www.mseprinting.com/online-ordering-portals",
+    canonical: PAGE_URL,
   },
   robots: {
     index: true,
@@ -36,14 +52,13 @@ export const metadata: Metadata = {
     title: "Online Ordering Portals in Minneapolis | MSE Printing",
     description:
       "Customized online ordering solutions designed to enhance operations, productivity, and brand consistency.",
-    url: "https://www.mseprinting.com/online-ordering-portals",
+    url: PAGE_URL,
     siteName: "MSE Printing",
     locale: "en_US",
     type: "website",
     images: [
       {
-        // ← keeps your original link
-        url: "https://www.mseprinting.com/images/home-images/online_ordering.webp",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Online ordering portal interface by MSE Printing in Minneapolis",
@@ -59,14 +74,27 @@ export const metadata: Metadata = {
     creator: "@MSEPrinting",
     images: [
       {
-        // ← keeps your original link
-        url: "https://www.mseprinting.com/images/home-images/online_ordering.webp",
+        url: OG_IMAGE,
         alt: "Custom online ordering portal by MSE Printing, Minneapolis",
       },
     ],
   },
+  other: {
+    "geo.region": "US-MN",
+    "geo.placename": "Minneapolis",
+    "geo.position": "45.0230;-93.2790",
+    ICBM: "45.0230, -93.2790",
+    "business:contact_data:street_address": "3839 Washington Ave N Ste. 103",
+    "business:contact_data:locality": "Minneapolis",
+    "business:contact_data:region": "MN",
+    "business:contact_data:postal_code": "55412",
+    "business:contact_data:country_name": "USA",
+    "business:contact_data:phone_number": "763-542-8812",
+    "og:email": "info@mseprinting.com",
+    "og:phone_number": "763-542-8812",
+  },
   icons: { icon: "/favicon.ico", apple: "/favicon.ico" },
-  authors: [{ name: "MSE Printing", url: "https://www.mseprinting.com" }],
+  authors: [{ name: "MSE Printing", url: BASE_URL }],
   creator: "MSE Printing",
   publisher: "MSE Printing",
 };
@@ -82,33 +110,27 @@ export const viewport: Viewport = {
 
 /* ───────── Structured Data (WebPage + Service + Breadcrumb) ───────── */
 const ServiceSchema = () => {
-  const base = "https://www.mseprinting.com/online-ordering-portals";
-  const businessId = "https://www.mseprinting.com/#business";
-  const image =
-    // ← keeps your original link
-    "https://www.mseprinting.com/images/home-images/online_ordering.webp";
+  const businessId = `${BASE_URL}/#business`;
+  const websiteId = `${BASE_URL}/#website`;
 
   const graph = [
     {
       "@type": "WebPage",
-      "@id": `${base}#webpage`,
-      url: base,
+      "@id": `${PAGE_URL}#webpage`,
+      url: PAGE_URL,
       name: "Online Ordering Portals in Minneapolis | MSE Printing",
       description:
         "Streamline printing and marketing with custom online ordering portals from MSE Printing. Simplify ordering, boost productivity, and keep brand consistency in Minneapolis & nationwide.",
-      isPartOf: {
-        "@type": "WebSite",
-        "@id": "https://www.mseprinting.com/#website",
-      },
-      primaryImageOfPage: { "@type": "ImageObject", url: image },
+      isPartOf: { "@type": "WebSite", "@id": websiteId },
+      primaryImageOfPage: { "@type": "ImageObject", url: OG_IMAGE },
       inLanguage: "en-US",
-      breadcrumb: { "@id": `${base}#breadcrumbs` },
+      breadcrumb: { "@id": `${PAGE_URL}#breadcrumbs` },
     },
     {
       "@type": "Service",
-      "@id": `${base}#service`,
+      "@id": `${PAGE_URL}#service`,
       name: "Online Ordering Portals",
-      image,
+      image: OG_IMAGE,
       description:
         "Custom online ordering portals by MSE Printing. Streamline print and marketing processes, maintain brand consistency, and simplify business ordering in Minneapolis and nationwide.",
       provider: { "@type": "LocalBusiness", "@id": businessId },
@@ -125,7 +147,7 @@ const ServiceSchema = () => {
         itemListElement: [
           {
             "@type": "Offer",
-            url: base,
+            url: PAGE_URL,
             itemOffered: {
               "@type": "Service",
               name: "Custom Portal Development",
@@ -135,7 +157,7 @@ const ServiceSchema = () => {
           },
           {
             "@type": "Offer",
-            url: base,
+            url: PAGE_URL,
             itemOffered: {
               "@type": "Service",
               name: "Brand Integration",
@@ -145,7 +167,7 @@ const ServiceSchema = () => {
           },
           {
             "@type": "Offer",
-            url: base,
+            url: PAGE_URL,
             itemOffered: {
               "@type": "Service",
               name: "Support & Maintenance",
@@ -157,27 +179,17 @@ const ServiceSchema = () => {
       },
       offers: {
         "@type": "Offer",
-        url: base,
+        url: PAGE_URL,
         availability: "https://schema.org/InStock",
         itemOffered: { "@type": "Service", name: "Online Ordering Portals" },
       },
     },
     {
       "@type": "BreadcrumbList",
-      "@id": `${base}#breadcrumbs`,
+      "@id": `${PAGE_URL}#breadcrumbs`,
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://www.mseprinting.com/",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Online Ordering Portals",
-          item: base,
-        },
+        { "@type": "ListItem", position: 1, name: "Home", item: `${BASE_URL}/` },
+        { "@type": "ListItem", position: 2, name: "Online Ordering Portals", item: PAGE_URL },
       ],
     },
   ];
@@ -197,7 +209,7 @@ const ServiceSchema = () => {
 
 /* ───────── Main Page Component ───────── */
 export default async function OnlineOrderingPortals() {
-  const data = await getCategoryPagesData("/online-ordering-portals");
+  const data = await getCategoryPagesData(PAGE_PATH);
   const pageData = data.OnlineOrderingPortalsPageData?.[0];
 
   const { footerContentData } = await getFooterData();
@@ -206,10 +218,7 @@ export default async function OnlineOrderingPortals() {
     footerContentData
   );
 
-  if (!pageData) {
-    // Avoid thin 200 → return a real 404 to prevent soft-404 signals
-    notFound();
-  }
+  if (!pageData) notFound();
 
   return (
     <>

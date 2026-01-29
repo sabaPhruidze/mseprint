@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     url: "https://www.mseprinting.com/graphic-design",
     siteName: "MSE Printing",
     locale: "en_US",
-    type: "website", // ✅ was "article"
+    type: "website",
     images: [
       {
         url: "https://www.mseprinting.com/images/graphic-design-images/additional/graphic_design_right.webp",
