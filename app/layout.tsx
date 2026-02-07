@@ -46,7 +46,7 @@ function SiteGraphSchema() {
       "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
       "@id": "https://www.mseprinting.com/#org",
       additionalType: "https://www.productontology.org/id/Printing",
-      name: "MSE Printing",
+      name: "MSE Printing ",
       legalName: "MSE Printing LLC",
       alternateName: ["MSE Print", "MSE Printing Services", "MSEPrinting"],
       url: "https://www.mseprinting.com",
